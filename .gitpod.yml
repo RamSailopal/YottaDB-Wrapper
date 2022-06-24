@@ -1,7 +1,4 @@
 tasks:
-  - init: |
-      echo 'TODO: build project'
-
   - name "Run docker container"
     command: docker run --rm --name yottadb -it -v "$PWD/code:/home/yottadb" --entrypoint /home/yottadb/entrypoint.sh -it docker.io/yottadb/yottadb-base && sleep 60 && gp sync-done prev
 

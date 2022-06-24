@@ -1,0 +1,16 @@
+#!/bin/bash
+dialog --exit-label Continue --textbox /opt/yottadb/current/splash.txt 14 100
+clear
+resp=$(dialog --menu "Select an option:" 10 100 2 1 "Access YottaDB" 2 "Access Website" 2>&1 >/dev/tty)
+if [[ "$resp" == "1" ]]
+then
+	source /opt/yottadb/current/ydb_env_set
+        /opt/yottadb/current/ydb
+fi
+
+if [[ "$resp" == "2" ]]
+then
+        lynx "https://yottadb.com"
+fi
+clear
+

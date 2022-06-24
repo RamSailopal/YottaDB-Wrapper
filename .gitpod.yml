@@ -1,0 +1,6 @@
+tasks:
+  - init: |
+      echo 'TODO: build project'
+    command: |
+      docker run --rm -it -v "$PWD/code:/home/yottadb" --entrypoint /home/yottadb/entrypoint.sh -it docker.io/yottadb/yottadb-base 
+

@@ -1,16 +1,53 @@
 #!/bin/bash
+while getopts "n h " o; do
+    case "${o}" in
+        n)
+            /opt/yottadb/current/ydb
+            exit
+            ;;
+        h)
+            echo -e "\nEnter -n to bypass the YottaDB banner\n"
+            exit
+            ;;
+        *)
+            dialog --exit-label Continue --textbox /opt/yottadb/current/splash.txt 14 100
+            clear
+            resp=$(dialog --menu "Select an option:" 10 100 2 1 "Access YottaDB" 2 "Access Website" 2>&1 >/dev/tty)
+            if [[ "$resp" == "1" ]]
+            then
+                  source /opt/yottadb/current/ydb_env_set
+                  clear
+                  echo -e "**************************************************************************************************************************\n"
+                  echo -e "Welcome to YottaDB!\n"
+                  echo -e 'To exit enter "H"\n'
+                  echo -e "For more information on YottaDB, refer to the YottaDB website either from a browser or from another terminal window\n"
+                  echo -e "**************************************************************************************************************************\n"
+                  /opt/yottadb/current/ydb
+            fi
+            if [[ "$resp" == "2" ]]
+            then
+                lynx "https://yottadb.com"
+            fi
+            clear
+            exit
+    esac
+done
 dialog --exit-label Continue --textbox /opt/yottadb/current/splash.txt 14 100
 clear
 resp=$(dialog --menu "Select an option:" 10 100 2 1 "Access YottaDB" 2 "Access Website" 2>&1 >/dev/tty)
 if [[ "$resp" == "1" ]]
 then
-	source /opt/yottadb/current/ydb_env_set
-        /opt/yottadb/current/ydb
+    source /opt/yottadb/current/ydb_env_set
+    clear
+    echo -e "**************************************************************************************************************************\n"
+    echo -e "Welcome to YottaDB!\n"
+    echo -e 'To exit enter "H"\n'
+    echo -e "For more information on YottaDB, refer to the YottaDB website either from a browser or from another terminal window\n"
+    echo -e "**************************************************************************************************************************\n"
+    /opt/yottadb/current/ydb
 fi
-
 if [[ "$resp" == "2" ]]
 then
-        lynx "https://yottadb.com"
+    lynx "https://yottadb.com"
 fi
 clear
-

@@ -1,9 +1,9 @@
 tasks:
   - name: "Run docker container"
-    command: docker run --rm --name yottadb -it -v "$PWD/code:/home/yottadb" --entrypoint /home/yottadb/entrypoint.sh -it docker.io/yottadb/yottadb-base && sleep 60 && gp sync-done prev
+    command: docker run --rm --name yottadb -it -v "$PWD/code:/home/yottadb" --entrypoint /home/yottadb/entrypoint.sh -it docker.io/yottadb/yottadb-base 
 
   - name: "Run YottaDB container terminal"
-    command:  gp sync-await prev && docker exec -it yottadb /bin/bash
+    command:  sleep 90 && docker exec -it yottadb /bin/bash
     openMode: split-right
 
      

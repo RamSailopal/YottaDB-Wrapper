@@ -12,7 +12,7 @@ while getopts "n h " o; do
         *)
             dialog --exit-label Continue --textbox /opt/yottadb/current/splash.txt 14 100
             clear
-            resp=$(dialog --menu "Select an option:" 10 100 2 1 "Access YottaDB" 2 "Access Website" 2>&1 >/dev/tty)
+            resp=$(dialog --menu "Select an option:" 10 100 4 1 "Access YottaDB" 2 "Access Website" 3 "View a global" 4 "Edit routine" 2>&1 >/dev/tty)
             if [[ "$resp" == "1" ]]
             then
                   source /opt/yottadb/current/ydb_env_set
@@ -23,18 +23,37 @@ while getopts "n h " o; do
                   echo -e "For more information on YottaDB, refer to the YottaDB website either from a browser or from another terminal window\n"
                   echo -e "**************************************************************************************************************************\n"
                   /opt/yottadb/current/ydb
+                  clear
             fi
             if [[ "$resp" == "2" ]]
             then
                 lynx "https://yottadb.com"
+                clear
             fi
-            clear
-            exit
+            if [[ "$resp" == "3" ]]
+            then
+                glbcnt="$((echo "D ^%GD";echo "*";echo "H")|/opt/yottadb/current/ydb|awk '/^\^/ { for(i=1;i<=NF;i++) { cnt++ } } END { print cnt }')"
+                glbs="$((echo "D ^%GD";echo "*";echo "H")|/opt/yottadb/current/ydb|awk '/^\^/ { for(i=1;i<=NF;i++) { cnt++;print cnt" "$i } } ')"
+                resp1=$(dialog --menu "Select Global:" 10 100 $glbcnt $glbs  2>&1 >/dev/tty)
+                glbal=$(awk -v resp=$resp1 '$1==resp { print $2 }' <<< "$glbs")
+                (echo "D ^%G";echo "";echo "$glbal";) | ydb
+                
+            fi    
+            if [[ "$resp" == "4" ]]
+            then
+                routcnt=$((echo "D ^%RD";echo "*";echo "";echo "H") | /opt/yottadb/current/ydb | awk '!/^Routine/&&!/^YDB>/&&!/^$/&&!/^Total of/ { for (i=1;i<=NF;i++) { cnt++ } } END { print cnt }')
+                routs=$((echo "D ^%RD";echo "*";echo "";echo "H") | /opt/yottadb/current/ydb | awk '!/^Routine/&&!/^YDB>/&&!/^$/&&!/^Total of/ { for (i=1;i<=NF;i++) { cnt++;print cnt" "$i } }')
+                resp1=$(dialog --menu "Select Global:" 10 100 $routcnt $routs  2>&1 >/dev/tty)
+                routine=$(awk -v resp=$resp1 '$1==resp { sub("%","_",$2);print $2 }' <<< "$routs")
+                source /usr/local/yottadb/ydb_env_set
+                find $(sed -n 's/[)]//;s/[(]//;s/[*]/ /p;' <<< $ydb_routines) -name "$routine.m" -exec vi '{}' \;
+            fi
+
     esac
 done
 dialog --exit-label Continue --textbox /opt/yottadb/current/splash.txt 14 100
 clear
-resp=$(dialog --menu "Select an option:" 10 100 2 1 "Access YottaDB" 2 "Access Website" 2>&1 >/dev/tty)
+resp=$(dialog --menu "Select an option:" 10 100 4 1 "Access YottaDB" 2 "Access Website" 3 "View a global" 4 "Edit routine" 2>&1 >/dev/tty)
 if [[ "$resp" == "1" ]]
 then
     source /opt/yottadb/current/ydb_env_set
@@ -45,9 +64,27 @@ then
     echo -e "For more information on YottaDB, refer to the YottaDB website either from a browser or from another terminal window\n"
     echo -e "**************************************************************************************************************************\n"
     /opt/yottadb/current/ydb
+    clear
 fi
 if [[ "$resp" == "2" ]]
 then
     lynx "https://yottadb.com"
+    clear
 fi
-clear
+if [[ "$resp" == "3" ]]
+then
+    glbcnt="$((echo "D ^%GD";echo "*";echo "H") | /opt/yottadb/current/ydb | awk '/^\^/ { for(i=1;i<=NF;i++) { cnt++ } } END { print cnt }')"
+    glbs="$((echo "D ^%GD";echo "*";echo "H") | ydb | awk '/^\^/ { for(i=1;i<=NF;i++) { cnt++;print cnt" "$i } } ')"
+    resp1=$(dialog --menu "Select Global:" 10 100 $glbcnt $glbs  2>&1 >/dev/tty)
+    glbal=$(awk -v resp=$resp1 '$1==resp { print $2 }' <<< "$glbs")
+    (echo "D ^%G";echo "";echo "$glbal";) | ydb
+fi
+if [[ "$resp" == "4" ]]
+then
+   routcnt=$((echo "D ^%RD";echo "*";echo "";echo "H") | /opt/yottadb/current/ydb | awk '!/^Routine/&&!/^YDB>/&&!/^$/&&!/^Total of/ { for (i=1;i<=NF;i++) { cnt++ } } END { print cnt }')
+   routs=$((echo "D ^%RD";echo "*";echo "";echo "H") | /opt/yottadb/current/ydb | awk '!/^Routine/&&!/^YDB>/&&!/^$/&&!/^Total of/ { for (i=1;i<=NF;i++) { cnt++;print cnt" "$i } }')
+   resp1=$(dialog --menu "Select Global:" 10 100 $routcnt $routs  2>&1 >/dev/tty)
+   routine=$(awk -v resp=$resp1 '$1==resp { sub("%","_",$2);print $2 }' <<< "$routs")
+   source /usr/local/yottadb/ydb_env_set 
+   find $(sed -n 's/[)]//;s/[(]//;s/[*]/ /p;' <<< $ydb_routines) -name "$routine.m" -exec vi '{}' \;
+fi

@@ -32,20 +32,31 @@ while getopts "n h " o; do
             fi
             if [[ "$resp" == "3" ]]
             then
-                glbcnt="$((echo "D ^%GD";echo "*";echo "H")|/opt/yottadb/current/ydb|awk '/^\^/ { for(i=1;i<=NF;i++) { cnt++ } } END { print cnt }')"
-                glbs="$((echo "D ^%GD";echo "*";echo "H")|/opt/yottadb/current/ydb|awk '/^\^/ { for(i=1;i<=NF;i++) { cnt++;print cnt" "$i } } ')"
+                glbcnt="$((echo "D ^%GD";echo "*";echo "H") | /opt/yottadb/current/ydb |awk '/^\^/ { for(i=1;i<=NF;i++) { cnt++ } } END { print cnt }')"
+                glbs="$((echo "D ^%GD";echo "*";echo "H") | /opt/yottadb/current/ydb |awk '/^\^/ { for(i=1;i<=NF;i++) { cnt++;print cnt" "$i } } ')"
+                if [[ "$glbs" == "" ]]
+                then
+                   dialog --infobox "No globals" 10 50
+                   exit
+                fi
                 resp1=$(dialog --menu "Select Global:" 10 100 $glbcnt $glbs  2>&1 >/dev/tty)
                 glbal=$(awk -v resp=$resp1 '$1==resp { print $2 }' <<< "$glbs")
-                (echo "D ^%G";echo "";echo "$glbal";) | ydb
+                clear
+                (echo "D ^%G";echo "";echo "$glbal";) | /opt/yottadb/current/ydb
                 
             fi    
             if [[ "$resp" == "4" ]]
             then
                 routcnt=$((echo "D ^%RD";echo "*";echo "";echo "H") | /opt/yottadb/current/ydb | awk '!/^Routine/&&!/^YDB>/&&!/^$/&&!/^Total of/ { for (i=1;i<=NF;i++) { cnt++ } } END { print cnt }')
                 routs=$((echo "D ^%RD";echo "*";echo "";echo "H") | /opt/yottadb/current/ydb | awk '!/^Routine/&&!/^YDB>/&&!/^$/&&!/^Total of/ { for (i=1;i<=NF;i++) { cnt++;print cnt" "$i } }')
+                if [[ "$routs" == "" ]]
+                then
+                   dialog --infobox "No routines" 10 50
+                   exit
+                fi
                 resp1=$(dialog --menu "Select Global:" 10 100 $routcnt $routs  2>&1 >/dev/tty)
                 routine=$(awk -v resp=$resp1 '$1==resp { sub("%","_",$2);print $2 }' <<< "$routs")
-                source /usr/local/yottadb/ydb_env_set
+                source /opt/yottadb/current/ydb_env_set
                 find $(sed -n 's/[)]//;s/[(]//;s/[*]/ /p;' <<< $ydb_routines) -name "$routine.m" -exec vi '{}' \;
             fi
 
@@ -74,17 +85,28 @@ fi
 if [[ "$resp" == "3" ]]
 then
     glbcnt="$((echo "D ^%GD";echo "*";echo "H") | /opt/yottadb/current/ydb | awk '/^\^/ { for(i=1;i<=NF;i++) { cnt++ } } END { print cnt }')"
-    glbs="$((echo "D ^%GD";echo "*";echo "H") | ydb | awk '/^\^/ { for(i=1;i<=NF;i++) { cnt++;print cnt" "$i } } ')"
+    glbs="$((echo "D ^%GD";echo "*";echo "H") | /opt/yottadb/current/ydb | awk '/^\^/ { for(i=1;i<=NF;i++) { cnt++;print cnt" "$i } } ')"
+    if [[ "$glbs" == "" ]]
+    then
+        dialog --infobox "No Globals" 10 50
+        exit
+    fi
     resp1=$(dialog --menu "Select Global:" 10 100 $glbcnt $glbs  2>&1 >/dev/tty)
     glbal=$(awk -v resp=$resp1 '$1==resp { print $2 }' <<< "$glbs")
-    (echo "D ^%G";echo "";echo "$glbal";) | ydb
+    clear
+    (echo "D ^%G";echo "";echo "$glbal";) | /opt/yottadb/current/ydb
 fi
 if [[ "$resp" == "4" ]]
 then
    routcnt=$((echo "D ^%RD";echo "*";echo "";echo "H") | /opt/yottadb/current/ydb | awk '!/^Routine/&&!/^YDB>/&&!/^$/&&!/^Total of/ { for (i=1;i<=NF;i++) { cnt++ } } END { print cnt }')
    routs=$((echo "D ^%RD";echo "*";echo "";echo "H") | /opt/yottadb/current/ydb | awk '!/^Routine/&&!/^YDB>/&&!/^$/&&!/^Total of/ { for (i=1;i<=NF;i++) { cnt++;print cnt" "$i } }')
+   if [[ "$routs" == "" ]]
+   then
+        dialog --infobox "No routines" 10 50
+        exit
+   fi
    resp1=$(dialog --menu "Select Global:" 10 100 $routcnt $routs  2>&1 >/dev/tty)
    routine=$(awk -v resp=$resp1 '$1==resp { sub("%","_",$2);print $2 }' <<< "$routs")
-   source /usr/local/yottadb/ydb_env_set 
+   source /opt/yottadb/current/ydb_env_set 
    find $(sed -n 's/[)]//;s/[(]//;s/[*]/ /p;' <<< $ydb_routines) -name "$routine.m" -exec vi '{}' \;
 fi

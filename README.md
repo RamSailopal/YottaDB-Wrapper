@@ -1,12 +1,10 @@
 # YottaDB-Wrapper
 
-A bash wrapper for the native ydb command, allowing access to YottaDB information and documentation.
+A bash wrapper for the native ydb command, allowing access to YottaDB information and documentation as command line, global views and routine edits.
 
 ![Alt text](yottadb-wrapper.webp?raw=true "Gitpod View")
 
 As well as the existing functionality of allowing access to the YottaDB environment, this wrapper displays the YottaDB version and web address of YottaDB on execution of the **ydb** command.
-
-Utilising Lynx (https://lynx.invisible-island.net/), it also allows browsing of the YottaDB website via the terminal
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/RamSailopal/YottaDB-Wrapper)
 

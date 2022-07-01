@@ -1,4 +1,132 @@
 #!/bin/bash
+mens() {
+	dialog --exit-label Continue --textbox /opt/yottadb/current/splash.txt 14 100
+	clear
+	resp=$(dialog --menu "Select an option:" 10 100 4 1 "Access YottaDB" 2 "View a global" 3 "Edit routine" 4 "Offline Documentation" 2>&1 >/dev/tty)
+	if [[ "$resp" == "1" ]]
+	then
+	    source /opt/yottadb/current/ydb_env_set
+            export ydb_gbldir="/data/r1.34_x86_64/g/yottadb.gld"
+	    clear
+	    echo -e "**************************************************************************************************************************\n"
+	    echo -e "Welcome to YottaDB!\n"
+	    echo -e 'To exit enter "H"\n'
+	    echo -e "For more information on YottaDB, refer to the YottaDB website either from a browser or from another terminal window\n"
+	    echo -e "**************************************************************************************************************************\n"
+	    /opt/yottadb/current/ydb
+	    clear
+	fi
+	if [[ "$resp" == "2" ]]
+	then
+            source /opt/yottadb/current/ydb_env_set
+            export ydb_gbldir="/data/r1.34_x86_64/g/yottadb.gld"
+	    glbcnt="$((echo "D ^%GD";echo "*";echo "H") | /opt/yottadb/current/ydb | awk '/^\^/ { for(i=1;i<=NF;i++) { cnt++ } } END { print cnt }')"
+	    glbs="$((echo "D ^%GD";echo "*";echo "H") | /opt/yottadb/current/ydb | awk '/^\^/ { for(i=1;i<=NF;i++) { cnt++;print cnt" "$i } } ')"
+	    if [[ "$glbs" == "" ]]
+	    then
+	        dialog --infobox "No Globals" 10 50
+	        exit
+	    fi
+	    resp1=$(dialog --menu "Select Global:" 10 100 $glbcnt $glbs  2>&1 >/dev/tty)
+	    glbal=$(awk -v resp=$resp1 '$1==resp { print $2 }' <<< "$glbs")
+	    clear
+	    (echo "D ^%G";echo "";echo "$glbal";) | /opt/yottadb/current/ydb
+	fi
+	if [[ "$resp" == "3" ]]
+	then
+           export ydb_gbldir="/root/.yottadb/r1.30_x86_64/g/yottadb.gld"
+	   routcnt=$((echo "D ^%RD";echo "*";echo "";echo "H") | /opt/yottadb/current/ydb | awk '!/^Routine/&&!/^YDB>/&&!/^$/&&!/^Total of/ { for (i=1;i<=NF;i++) { cnt++ } } END { print cnt }')
+	   routs=$((echo "D ^%RD";echo "*";echo "";echo "H") | /opt/yottadb/current/ydb | awk '!/^Routine/&&!/^YDB>/&&!/^$/&&!/^Total of/ { for (i=1;i<=NF;i++) { cnt++;print cnt" "$i } }')
+	   if [[ "$routs" == "" ]]
+	   then
+	        dialog --infobox "No routines" 10 50
+	        exit
+	   fi
+	   resp1=$(dialog --menu "Select Global:" 10 100 $routcnt $routs  2>&1 >/dev/tty)
+	   routine=$(awk -v resp=$resp1 '$1==resp { sub("%","_",$2);print $2 }' <<< "$routs")
+	   source /opt/yottadb/current/ydb_env_set
+	   find $(sed -n 's/[)]//;s/[(]//;s/[*]/ /p;' <<< $ydb_routines) -name "$routine.m" -exec vi '{}' \;
+	fi
+	if [[ "$resp" == "4" ]]
+	then
+	   export ydb_gbldir="/opt/yottadb/current/gtmhelp.gld"
+	   menu=$(/opt/yottadb/current/ydb <<< 'D PROCENTRY^HELPPROC' |  awk '!/^YDB>/&&!/^$/ { print }')
+	   menucnt=$(/opt/yottadb/current/ydb <<< 'D PROCENTRY^HELPPROC' |  awk '!/^YDB>/&&!/^$/ { print }' | wc -l)
+           if [[ "$menu" == "" ]]
+           then
+                exit
+           fi
+
+	   resp1=$(dialog --menu "Select a topic:" 10 100 $menucnt $menu  2>&1 >/dev/tty)
+	   helpsel=$(awk -v resp=$resp1 '$1==resp { sub("%","_",$2);print $2 }' <<< "$menu")
+	   info=$(/opt/yottadb/current/ydb <<< "D PROCINFO^HELPPROC(\"$helpsel\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\")" |  awk '!/^YDB>/ { print }')
+	   if [[ "$info" == "" ]]
+	   then
+	        exit
+	   fi
+	   dialog --exit-label Continue --msgbox "$info" 50 100
+	   menu1=$(/opt/yottadb/current/ydb <<< "D PROCMENU^HELPPROC(\"$helpsel\",\"\",\"\",\"\")" |  awk '!/^YDB>/&&!/^$/ { print }')
+	   menucnt1=$(/opt/yottadb/current/ydb <<< "D PROCMENU^HELPPROC(\"$helpsel\",\"\",\"\",\"\")" |  awk '!/^YDB>/&&!/^$/ { print }' | wc -l)
+           if [[ "$menu1" == "" ]]
+           then
+                exit
+           fi
+
+	   resp2=$(dialog --menu "Select a topic:" 10 100 $menucnt1 $menu1  2>&1 >/dev/tty)
+	   helpsel1=$(awk -v resp=$resp2 '$1==resp { sub("%","_",$2);print $2 }' <<< "$menu1")
+	   info=$(/opt/yottadb/current/ydb <<< "D PROCINFO^HELPPROC(\"$helpsel\",\"s\",\"$helpsel1\",\"\",\"\",\"\",\"\",\"\",\"\")" |  awk '!/^YDB>/ { print }')
+	   if [[ "$info" == "" ]]
+	   then
+	        exit
+	   fi
+	   dialog --exit-label Continue --msgbox "$info" 50 100
+	   menu2=$(/opt/yottadb/current/ydb <<< "D PROCMENU^HELPPROC(\"$helpsel\",\"$helpsel1\",\"\",\"\")" |  awk '!/^YDB>/&&!/^$/ { print }')
+	   menucnt2=$(/opt/yottadb/current/ydb <<< "D PROCMENU^HELPPROC(\"$helpsel\",\"$helpsel1\",\"\",\"\")" |  awk '!/^YDB>/&&!/^$/ { print }' | wc -l)
+           if [[ "$menu2" == "" ]]
+           then
+                exit
+           fi
+
+	   resp3=$(dialog --menu "Select a topic:" 10 100 $menucnt2 $menu2  2>&1 >/dev/tty)
+	   helpsel2=$(awk -v resp=$resp3 '$1==resp { sub("%","_",$2);print $2 }' <<< "$menu2")
+	   info=$(/opt/yottadb/current/ydb <<< "D PROCINFO^HELPPROC(\"$helpsel\",\"s\",\"$helpsel1\",\"s\",\"$helpsel2\",\"\",\"\",\"\",\"\")" |  awk '!/^YDB>/ { print }')
+	   if [[ "$info" == "" ]]
+	   then
+	        exit
+	   fi
+	   dialog --exit-label Continue --msgbox "$info" 50 100
+	   menu3=$(/opt/yottadb/current/ydb <<< "D PROCMENU^HELPPROC(\"$helpsel\",\"$helpsel1\",\"$helpsel2\",\"\")" |  awk '!/^YDB>/&&!/^$/ { print }')
+	   menucnt3=$(/opt/yottadb/current/ydb <<< "D PROCMENU^HELPPROC(\"$helpsel\",\"$helpsel1\",\"$helpsel2\",\"\")" |  awk '!/^YDB>/&&!/^$/ { print }' | wc -l)
+           if [[ "$menu3" == "" ]]
+           then
+                exit
+           fi
+
+	   resp4=$(dialog --menu "Select a topic:" 10 100 $menucnt3 $menu3  2>&1 >/dev/tty)
+	   helpsel3=$(awk -v resp=$resp4 '$1==resp { sub("%","_",$2);print $2 }' <<< "$menu3")
+	   info=$(/opt/yottadb/current/ydb <<< "D PROCINFO^HELPPROC(\"$helpsel\",\"s\",\"$helpsel1\",\"s\",\"$helpsel2\",\"s\",\"$helpsel3\",\"\",\"\")" |  awk '!/^YDB>/ { print }')
+	   if [[ "$info" == "" ]]
+	   then
+        	exit
+	   fi
+	   dialog --exit-label Continue --msgbox "$info" 50 100
+	   menu4=$(/opt/yottadb/current/ydb <<< "D PROCMENU^HELPPROC(\"$helpsel\",\"$helpsel1\",\"$helpsel2\",\"$helpsel3\")" |  awk '!/^YDB>/&&!/^$/ { print }')
+	   menucnt4=$(/opt/yottadb/current/ydb <<< "D PROCMENU^HELPPROC(\"$helpsel\",\"$helpsel1\",\"$helpsel2\",\"$helpsel3\")" |  awk '!/^YDB>/&&!/^$/ { print }' | wc -l)
+           if [[ "$menu4" == "" ]]
+           then
+		exit
+           fi
+	   resp5=$(dialog --menu "Select a topic:" 10 100 $menucnt4 $menu4  2>&1 >/dev/tty)
+	   helpsel4=$(awk -v resp=$resp5 '$1==resp { sub("%","_",$2);print $2 }' <<< "$menu4")
+	   info=$(/opt/yottadb/current/ydb <<< "D PROCINFO^HELPPROC(\"$helpsel\",\"s\",\"$helpsel1\",\"s\",\"$helpsel2\",\"s\",\"$helpsel3\",\"s\",\"$helpsel4\")" |  awk '!/^YDB>/ { print }')
+	   if [[ "$info" == "" ]]
+	   then
+	        exit
+	   fi
+	   dialog --exit-label Continue --msgbox "$info" 50 100
+
+	fi
+}
 while getopts "n h " o; do
     case "${o}" in
         n)
@@ -10,103 +138,7 @@ while getopts "n h " o; do
             exit
             ;;
         *)
-            dialog --exit-label Continue --textbox /opt/yottadb/current/splash.txt 14 100
-            clear
-            resp=$(dialog --menu "Select an option:" 10 100 4 1 "Access YottaDB" 2 "Access Website" 3 "View a global" 4 "Edit routine" 2>&1 >/dev/tty)
-            if [[ "$resp" == "1" ]]
-            then
-                  source /opt/yottadb/current/ydb_env_set
-                  clear
-                  echo -e "**************************************************************************************************************************\n"
-                  echo -e "Welcome to YottaDB!\n"
-                  echo -e 'To exit enter "H"\n'
-                  echo -e "For more information on YottaDB, refer to the YottaDB website either from a browser or from another terminal window\n"
-                  echo -e "**************************************************************************************************************************\n"
-                  /opt/yottadb/current/ydb
-                  clear
-            fi
-            if [[ "$resp" == "2" ]]
-            then
-                lynx "https://yottadb.com"
-                clear
-            fi
-            if [[ "$resp" == "3" ]]
-            then
-                glbcnt="$((echo "D ^%GD";echo "*";echo "H") | /opt/yottadb/current/ydb |awk '/^\^/ { for(i=1;i<=NF;i++) { cnt++ } } END { print cnt }')"
-                glbs="$((echo "D ^%GD";echo "*";echo "H") | /opt/yottadb/current/ydb |awk '/^\^/ { for(i=1;i<=NF;i++) { cnt++;print cnt" "$i } } ')"
-                if [[ "$glbs" == "" ]]
-                then
-                   dialog --infobox "No globals" 10 50
-                   exit
-                fi
-                resp1=$(dialog --menu "Select Global:" 10 100 $glbcnt $glbs  2>&1 >/dev/tty)
-                glbal=$(awk -v resp=$resp1 '$1==resp { print $2 }' <<< "$glbs")
-                clear
-                (echo "D ^%G";echo "";echo "$glbal";) | /opt/yottadb/current/ydb
-                
-            fi    
-            if [[ "$resp" == "4" ]]
-            then
-                routcnt=$((echo "D ^%RD";echo "*";echo "";echo "H") | /opt/yottadb/current/ydb | awk '!/^Routine/&&!/^YDB>/&&!/^$/&&!/^Total of/ { for (i=1;i<=NF;i++) { cnt++ } } END { print cnt }')
-                routs=$((echo "D ^%RD";echo "*";echo "";echo "H") | /opt/yottadb/current/ydb | awk '!/^Routine/&&!/^YDB>/&&!/^$/&&!/^Total of/ { for (i=1;i<=NF;i++) { cnt++;print cnt" "$i } }')
-                if [[ "$routs" == "" ]]
-                then
-                   dialog --infobox "No routines" 10 50
-                   exit
-                fi
-                resp1=$(dialog --menu "Select Global:" 10 100 $routcnt $routs  2>&1 >/dev/tty)
-                routine=$(awk -v resp=$resp1 '$1==resp { sub("%","_",$2);print $2 }' <<< "$routs")
-                source /opt/yottadb/current/ydb_env_set
-                find $(sed -n 's/[)]//;s/[(]//;s/[*]/ /p;' <<< $ydb_routines) -name "$routine.m" -exec vi '{}' \;
-            fi
-
+            mens
     esac
 done
-dialog --exit-label Continue --textbox /opt/yottadb/current/splash.txt 14 100
-clear
-resp=$(dialog --menu "Select an option:" 10 100 4 1 "Access YottaDB" 2 "Access Website" 3 "View a global" 4 "Edit routine" 2>&1 >/dev/tty)
-if [[ "$resp" == "1" ]]
-then
-    source /opt/yottadb/current/ydb_env_set
-    clear
-    echo -e "**************************************************************************************************************************\n"
-    echo -e "Welcome to YottaDB!\n"
-    echo -e 'To exit enter "H"\n'
-    echo -e "For more information on YottaDB, refer to the YottaDB website either from a browser or from another terminal window\n"
-    echo -e "**************************************************************************************************************************\n"
-    /opt/yottadb/current/ydb
-    clear
-fi
-if [[ "$resp" == "2" ]]
-then
-    lynx "https://yottadb.com"
-    clear
-fi
-if [[ "$resp" == "3" ]]
-then
-    glbcnt="$((echo "D ^%GD";echo "*";echo "H") | /opt/yottadb/current/ydb | awk '/^\^/ { for(i=1;i<=NF;i++) { cnt++ } } END { print cnt }')"
-    glbs="$((echo "D ^%GD";echo "*";echo "H") | /opt/yottadb/current/ydb | awk '/^\^/ { for(i=1;i<=NF;i++) { cnt++;print cnt" "$i } } ')"
-    if [[ "$glbs" == "" ]]
-    then
-        dialog --infobox "No Globals" 10 50
-        exit
-    fi
-    resp1=$(dialog --menu "Select Global:" 10 100 $glbcnt $glbs  2>&1 >/dev/tty)
-    glbal=$(awk -v resp=$resp1 '$1==resp { print $2 }' <<< "$glbs")
-    clear
-    (echo "D ^%G";echo "";echo "$glbal";) | /opt/yottadb/current/ydb
-fi
-if [[ "$resp" == "4" ]]
-then
-   routcnt=$((echo "D ^%RD";echo "*";echo "";echo "H") | /opt/yottadb/current/ydb | awk '!/^Routine/&&!/^YDB>/&&!/^$/&&!/^Total of/ { for (i=1;i<=NF;i++) { cnt++ } } END { print cnt }')
-   routs=$((echo "D ^%RD";echo "*";echo "";echo "H") | /opt/yottadb/current/ydb | awk '!/^Routine/&&!/^YDB>/&&!/^$/&&!/^Total of/ { for (i=1;i<=NF;i++) { cnt++;print cnt" "$i } }')
-   if [[ "$routs" == "" ]]
-   then
-        dialog --infobox "No routines" 10 50
-        exit
-   fi
-   resp1=$(dialog --menu "Select Global:" 10 100 $routcnt $routs  2>&1 >/dev/tty)
-   routine=$(awk -v resp=$resp1 '$1==resp { sub("%","_",$2);print $2 }' <<< "$routs")
-   source /opt/yottadb/current/ydb_env_set 
-   find $(sed -n 's/[)]//;s/[(]//;s/[*]/ /p;' <<< $ydb_routines) -name "$routine.m" -exec vi '{}' \;
-fi
+mens

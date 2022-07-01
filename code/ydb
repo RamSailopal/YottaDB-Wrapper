@@ -156,6 +156,7 @@ mens() {
         then
                 export ydb_gbldir="/opt/yottadb/current/gtmhelp.gld"
  		resp=$(dialog --inputbox "Enter search item" 50 100 2>&1 >/dev/tty)	
+                dialog --infobox "Searching..." 50 100
                 srch=$(/opt/yottadb/current/ydb <<< "D SEARCH^HELPPROC(\"$resp\")" |  awk '!/^YDB>/&&!/^$/ { print }')
                 srchcnt=$(/opt/yottadb/current/ydb <<< "D SEARCH^HELPPROC(\"$resp\")" |  awk '!/^YDB>/&&!/^$/ { print }' | wc -l)
                 resp1="1"

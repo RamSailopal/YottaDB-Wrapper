@@ -5,7 +5,7 @@ mens() {
 		dialog --exit-label Continue --textbox /opt/yottadb/current/splash.txt 14 100
 		clear
 	fi
-	resp=$(dialog --menu "Select an option:" 10 100 5 1 "Access YottaDB" 2 "View a global" 3 "Edit routine" 4 "Offline Documentation" 5 "Exit" 2>&1 >/dev/tty)
+	resp=$(dialog --menu "Select an option:" 10 100 6 1 "Access YottaDB" 2 "View a global" 3 "Edit routine" 4 "Offline Documentation" 5 "Search documentation" 6 "Exit" 2>&1 >/dev/tty)
 	if [[ "$resp" == "" ]]
 	then
 	    exit
@@ -152,7 +152,47 @@ mens() {
 	   dialog --exit-label Continue --msgbox "$info" 50 100
 
 	fi
-	if [[ "$resp" == "5" ]]
+        if [[ "$resp" == "5" ]]
+        then
+                export ydb_gbldir="/opt/yottadb/current/gtmhelp.gld"
+ 		resp=$(dialog --inputbox "Enter search item" 50 100 2>&1 >/dev/tty)	
+                srch=$(/opt/yottadb/current/ydb <<< "D SEARCH^HELPPROC(\"$resp\")" |  awk '!/^YDB>/&&!/^$/ { print }')
+                srchcnt=$(/opt/yottadb/current/ydb <<< "D SEARCH^HELPPROC(\"$resp\")" |  awk '!/^YDB>/&&!/^$/ { print }' | wc -l)
+                resp1="1"
+                while [[ $resp1 != "" ]]
+                do
+	                resp1=$(dialog --menu "Select a topic:" 10 100 $srchcnt $srch  2>&1 >/dev/tty)
+	                srchsel=$(awk -v resp=$resp1 '$1==resp { sub("%","_",$2);print $2 }' <<< "$srch")
+	                srchsel1=$(awk -F "->" '{ print $1 }' <<< "$srchsel")
+			srchsel2=$(awk -F "->" '{ print $2 }' <<< "$srchsel")
+			srchsel3=$(awk -F "->" '{ print $3 }' <<< "$srchsel")
+			srchsel4=$(awk -F "->" '{ print $4 }' <<< "$srchsel")
+	                srchsel5=$(awk -F "->" '{ print $5 }' <<< "$srchsel")
+	      	        if [[ "$srchsel2" == "" ]]
+      	                then
+		  		info=$(/opt/yottadb/current/ydb <<< "D PROCINFO^HELPPROC(\"$srchsel1\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\")" |  awk '!/^YDB>/ { print }')
+                	elif [[ "$srchsel3" == "" ]]
+                	then
+                  		info=$(/opt/yottadb/current/ydb <<< "D PROCINFO^HELPPROC(\"$srchsel1\",\"s\",\"$srchsel2\",\"\",\"\",\"\",\"\",\"\",\"\")" |  awk '!/^YDB>/ { print }')
+                	elif [[ "$srchsel4" == "" ]]
+                	then
+                  		info=$(/opt/yottadb/current/ydb <<< "D PROCINFO^HELPPROC(\"$srchsel1\",\"s\",\"$srchsel2\",\"s\",\"$srchsel3\",\"\",\"\",\"\",\"\")" |  awk '!/^YDB>/ { print }')
+                	elif [[ "$srchsel5" == "" ]]
+                	then
+                  		info=$(/opt/yottadb/current/ydb <<< "D PROCINFO^HELPPROC(\"$srchsel1\",\"s\",\"$srchsel2\",\"s\",\"$srchsel3\",\"s\",\"$srchsel4\",\"\",\"\")" |  awk '!/^YDB>/ { print }')
+                	else
+                  		info=$(/opt/yottadb/current/ydb <<< "D PROCINFO^HELPPROC(\"$srchsel1\",\"s\",\"$srchsel2\",\"s\",\"$srchsel3\",\"s\",\"$srchsel4\",\"s\",\"$srchsel5\")" |  awk '!/^YDB>/ { print }')
+                	fi
+                        if [[ "$info" != "" ]]
+		        then
+           			dialog --exit-label Continue --msgbox "$info" 50 100
+			fi
+ 		done
+                mens 1
+
+                
+        fi
+	if [[ "$resp" == "6" ]]
 	then
 		exit
 	fi

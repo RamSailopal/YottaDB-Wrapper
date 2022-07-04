@@ -51,6 +51,7 @@ mens() {
 	   resp1=$(dialog --menu "Select Global:" 10 100 $routcnt $routs  2>&1 >/dev/tty)
 	   routine=$(awk -v resp=$resp1 '$1==resp { sub("%","_",$2);print $2 }' <<< "$routs")
 	   find $(sed -n 's/[)]//;s/[(]//;s/[*]/ /p;' <<< $ydb_routines) -name "$routine.m" -exec vi '{}' \;
+           /opt/yottadb/current/ydb <<< 'ZL "$routine.m"'
 	   mens 1
 	fi
 	if [[ "$resp" == "4" ]]

@@ -59,53 +59,14 @@ SEARCH(TERM)
  S STERM=%S
  S MENU=""
  S CNT=0
- F  S MENU=$O(^HELP("s",MENU)) Q:MENU=""  D
- .I MENU'="s"&(MENU[STERM) S CNT=CNT+1 W !,CNT_" "_MENU
- .E  D
- ..S TXT=$$PROCINFO1(MENU,"","","","","","","","")
- ..S %S=TXT
- ..D ^%UCASE
- ..I %S[TXT S CNT=CNT+1 W !,CNT_" "_MENU 
- .S MENU1=""
- .F  S MENU1=$O(^HELP("s",MENU,MENU1)) Q:MENU1=""  D
+ F  S MENU=$O(^HELPINDX(MENU)) Q:MENU=""  D
+ .S %S=MENU
+ .D ^%UCASE
+ .S MENU1=%S
+ .I MENU1[STERM D
  ..S MENU2=""
- ..F  S MENU2=$O(^HELP("s",MENU,MENU1,MENU2)) Q:MENU2=""  D
- ...I MENU2'="s"&(MENU2[STERM) S CNT=CNT+1 W !,CNT_" "_MENU_"->"_MENU2
- ...E  D
- ....S TXT=$$PROCINFO1(MENU,"s",MENU2,"","","","","","")
- ....S %S=TXT
- ....D ^%UCASE
- ....I %S[TXT S CNT=CNT+1 W !,CNT_" "_MENU
- ...S MENU3=""
- ...F  S MENU3=$O(^HELP("s",MENU,MENU1,MENU2,MENU3)) Q:MENU3=""  D
- ....S MENU4=""
- ....F  S MENU4=$O(^HELP("s",MENU,MENU1,MENU2,MENU3,MENU4)) Q:MENU4=""  D
- .....I MENU4'="s"&(MENU4[STERM) S CNT=CNT+1 W !,CNT_" "_MENU_"->"_MENU2_"->"_MENU4
- .....E  D
- ......S TXT=$$PROCINFO1(MENU,"s",MENU2,"s",MENU4,"","","","")
- ......S %S=TXT
- ......D ^%UCASE
- ......I %S[TXT S CNT=CNT+1 W !,CNT_" "_MENU
- .....S MENU5=""
- .....F  S MENU5=$O(^HELP("s",MENU,MENU1,MENU2,MENU3,MENU4,MENU5)) Q:MENU5=""  D
- ......S MENU6=""
- ......F  S MENU6=$O(^HELP("s",MENU,MENU1,MENU2,MENU3,MENU4,MENU5,MENU6)) Q:MENU6=""  D
- .......I MENU6'="s"&(MENU6[STERM) S CNT=CNT+1 W !,CNT_" "_MENU_"->"_MENU2_"->"_MENU4_"->"_MENU6
- .......E  D
- ........S TXT=$$PROCINFO1(MENU,"s",MENU2,"s",MENU4,"s",MENU6,"","")
- ........S %S=TXT
- ........D ^%UCASE
- ........I %S[TXT S CNT=CNT+1 W !,CNT_" "_MENU
- .......S MENU7=""
- .......F  S MENU7=$O(^HELP("s",MENU,MENU1,MENU2,MENU3,MENU4,MENU5,MENU6,MENU7)) Q:MENU7=""  D
- ........S MENU8=""
- ........F  S MENU8=$O(^HELP("s",MENU,MENU1,MENU2,MENU3,MENU4,MENU5,MENU6,MENU7,MENU8)) Q:MENU8=""  D
- .........I MENU8'="s"&(MENU8[STERM) S CNT=CNT+1 W !,CNT_" "_MENU_"->"_MENU2_"->"_MENU4_"->"_MENU6_"->"_MENU8
- .........E  D
- ..........S TXT=$$PROCINFO1(MENU,"s",MENU2,"s",MENU4,"s",MENU6,"s",MENU8)
- ..........S %S=TXT
- ..........D ^%UCASE
- ..........I %S[TXT S CNT=CNT+1 W !,CNT_" "_MENU
+ ..F  S MENU2=$O(^HELPINDX(MENU,MENU2)) Q:MENU2=""  D  
+ ...S CNT=CNT+1 W !,CNT_" "_MENU2
  Q
 PROCINFO1(LABEL,LABEL1,LABEL2,LABEL3,LABEL4,LABEL5,LABEL6,LABEL7,LABEL8)
  S TXT=""
@@ -139,4 +100,56 @@ PROCINFO1(LABEL,LABEL1,LABEL2,LABEL3,LABEL4,LABEL5,LABEL6,LABEL7,LABEL8)
  .........F  S MEN9=$O(^HELP("s",MEN,MEN1,MEN2,MEN3,MEN4,MEN5,MEN6,MEN7,MEN8,MEN9)) Q:MEN9=""  D
  ..........I MEN8=LABEL8&(MEN7=LABEL7)&(MEN6=LABEL6)&(MEN5=LABEL5)&(MEN4=LABEL4)&(MEN3=LABEL3)&(MEN2=LABEL2)&(MEN1=LABEL1)&(MEN=LABEL)&(MEN9'="s") S TXT=TXT_" "_^HELP("s",MEN,MEN1,MEN2,MEN3,MEN4,MEN5,MEN6,MEN7,MEN8,MEN9)
  Q TXT
+SEARCHGEN
+ K ^HELPINDX
+ S MENU=""
+ S CNT=0
+ F  S MENU=$O(^HELP("s",MENU)) Q:MENU=""  D
+ .I MENU'="s" F I=1:1:$L(MENU)  I $P(MENU,"_",I)'=" "&($P(MENU,"_",I)'="") S ^HELPINDX($P(MENU,"_",I),MENU)=""
+ .E  D
+ ..S TXT=$$PROCINFO1(MENU,"","","","","","","","")
+ ..S %S=TXT
+ ..D ^%UCASE
+ ..F I=1:1:$L(TXT)  I $P(TXT," ",I)'="" S ^HELPINDX($P(TXT," ",I),MENU)=""
+ .S MENU1=""
+ .F  S MENU1=$O(^HELP("s",MENU,MENU1)) Q:MENU1=""  D
+ ..S MENU2=""
+ ..F  S MENU2=$O(^HELP("s",MENU,MENU1,MENU2)) Q:MENU2=""  D
+ ...I MENU2'="s" F I=1:1:$L(MENU)  I $P(MENU2,"_",I)'=" "&($P(MENU2,"_",I)'="") S ^HELPINDX($P(MENU2,"_",I),MENU_"->"_MENU2)=""
+ ...E  D
+ ....S TXT=$$PROCINFO1(MENU,"s",MENU2,"","","","","","")
+ ....S %S=TXT
+ ....D ^%UCASE
+ ....F I=1:1:$L(TXT)  I $P(TXT," ",I)'="" S ^HELPINDX($P(TXT," ",I),MENU_"->"_MENU2)=""
+ ...S MENU3=""
+ ...F  S MENU3=$O(^HELP("s",MENU,MENU1,MENU2,MENU3)) Q:MENU3=""  D
+ ....S MENU4=""
+ ....F  S MENU4=$O(^HELP("s",MENU,MENU1,MENU2,MENU3,MENU4)) Q:MENU4=""  D
+ .....I MENU4'="s" F I=1:1:$L(MENU4)  I $P(MENU4,"_",I)'=" "&($P(MENU4,"_",I)'="") S ^HELPINDX($P(MENU4,"_",I),MENU_"->"_MENU2_"->"_MENU4)=""
+ .....E  D
+ ......S TXT=$$PROCINFO1(MENU,"s",MENU2,"s",MENU4,"","","","")
+ ......S %S=TXT
+ ......D ^%UCASE
+ ......F I=1:1:$L(TXT)  I $P(TXT," ",I)'="" S ^HELPINDX($P(TXT," ",I),MENU_"->"_MENU2_"->"_MENU4)=""
+ .....S MENU5=""
+ .....F  S MENU5=$O(^HELP("s",MENU,MENU1,MENU2,MENU3,MENU4,MENU5)) Q:MENU5=""  D
+ ......S MENU6=""
+ ......F  S MENU6=$O(^HELP("s",MENU,MENU1,MENU2,MENU3,MENU4,MENU5,MENU6)) Q:MENU6=""  D
+ .......I MENU6'="s" F I=1:1:$L(MENU6)  I $P(MENU6,"_",I)'=" "&($P(MENU6,"_",I)'="") S ^HELPINDX($P(MENU6,"_",I),MENU_"->"_MENU2_"->"_MENU4_"->"_MENU6)=""
+ .......E  D
+ ........S TXT=$$PROCINFO1(MENU,"s",MENU2,"s",MENU4,"s",MENU6,"","")
+ ........S %S=TXT
+ ........D ^%UCASE
+ ........F I=1:1:$L(TXT)  I $P(TXT," ",I)'="" S ^HELPINDX($P(TXT," ",I),MENU_"->"_MENU2_"->"_MENU4_"->"_MENU6)=""
+ .......S MENU7=""
+ .......F  S MENU7=$O(^HELP("s",MENU,MENU1,MENU2,MENU3,MENU4,MENU5,MENU6,MENU7)) Q:MENU7=""  D
+ ........S MENU8=""
+ ........F  S MENU8=$O(^HELP("s",MENU,MENU1,MENU2,MENU3,MENU4,MENU5,MENU6,MENU7,MENU8)) Q:MENU8=""  D
+ .........I MENU8'="s" F I=1:1:$L(MENU8)  I $P(MENU8,"_",I)'=" "&($P(MENU8,"_",I)'="") S ^HELPINDX($P(MENU8,"_",I),MENU_"->"_MENU2_"->"_MENU4_"->"_MENU6_"->"_MENU8)=""
+ .........E  D
+ ..........S TXT=$$PROCINFO1(MENU,"s",MENU2,"s",MENU4,"s",MENU6,"s",MENU8)
+ ..........S %S=TXT
+ ..........D ^%UCASE
+ ..........F I=1:1:$L(TXT)  I $P(TXT," ",I)'="" S ^HELPINDX($P(TXT," ",I),MENU_"->"_MENU2_"->"_MENU4_"->"_MENU6_"->"_MENU8)=""
+ Q
  

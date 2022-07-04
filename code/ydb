@@ -41,18 +41,38 @@ mens() {
 	if [[ "$resp" == "3" ]]
 	then
        export ydb_gbldir="/data/r1.34_x86_64/g/yottadb.gld"
-	   routcnt=$((echo "D ^%RD";echo "*";echo "";echo "H") | /opt/yottadb/current/ydb | awk '!/^Routine/&&!/^YDB>/&&!/^$/&&!/^Total of/ { for (i=1;i<=NF;i++) { cnt++ } } END { print cnt }')
-	   routs=$((echo "D ^%RD";echo "*";echo "";echo "H") | /opt/yottadb/current/ydb | awk '!/^Routine/&&!/^YDB>/&&!/^$/&&!/^Total of/ { for (i=1;i<=NF;i++) { cnt++;print cnt" "$i } }')
+	   source /opt/yottadb/current/ydb_env_set
+	   routcnt=$((echo "D ^%RD";echo "*";echo "";echo "H") | /opt/yottadb/current/ydb | awk '!/^Routine/&&!/^YDB>/&&!/^$/&&!/^Total of/ { for (i=1;i<=NF;i++) { cnt++ } } END { print cnt+1 }')
+	   routs=$((echo "D ^%RD";echo "*";echo "";echo "H") | /opt/yottadb/current/ydb | awk 'BEGIN { cnt=1 } !/^Routine/&&!/^YDB>/&&!/^$/&&!/^Total of/ { for (i=1;i<=NF;i++) { cnt++;print cnt" "$i } }')
+	   routs=$(echo "1 New_Routine";echo "$routs")
 	   if [[ "$routs" == "" ]]
 	   then
 	        dialog --infobox "No routines" 10 50
 	        mens 1
 	   fi
-	   resp1=$(dialog --menu "Select Global:" 10 100 $routcnt $routs  2>&1 >/dev/tty)
-	   routine=$(awk -v resp=$resp1 '$1==resp { sub("%","_",$2);print $2 }' <<< "$routs")
-	   find $(sed -n 's/[)]//;s/[(]//;s/[*]/ /p;' <<< $ydb_routines) -name "$routine.m" -exec vi '{}' \;
-           /opt/yottadb/current/ydb <<< 'ZL "$routine.m"'
-	   mens 1
+	   resp1=$(dialog --menu "Select Routine:" 10 100 $routcnt $routs  2>&1 >/dev/tty)
+	   echo $resp1
+	   if [[ "$resp1" == "1" ]]
+	   then
+	        resp2=$(dialog --inputbox "Enter a routine name i.e TESTROUTINE (no .m not spaces):" 50 100 2>&1 >/dev/tty)
+			if [[ "$resp2" != "" ]]
+			then
+				vi "/data/r1.34_x86_64/r/$resp2.m"
+				clear
+            	/opt/yottadb/current/ydb <<< "ZL \"$resp2.m\""
+				read -p "Press Enter to continue" resp
+	   			mens 1
+			else
+				mens 1
+			fi
+	   else
+	   		routine=$(awk -v resp=$resp1 '$1==resp { sub("%","_",$2);print $2 }' <<< "$routs")
+	   		find $(sed -n 's/[)]//;s/[(]//;s/[*]/ /p;' <<< $ydb_routines) -name "$routine.m" -exec vi '{}' \;
+	   		clear
+       		/opt/yottadb/current/ydb <<< "ZL \"$routine.m\""
+	   		read -p "Press Enter to continue" resp
+	   		mens 1
+	   fi
 	fi
 	if [[ "$resp" == "4" ]]
 	then

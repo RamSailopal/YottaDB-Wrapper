@@ -37,6 +37,9 @@ mens() {
 	    glbal=$(awk -v resp=$resp1 '$1==resp { print $2 }' <<< "$glbs")
 	    clear
 	    (echo "D ^%G";echo "";echo "$glbal";) | /opt/yottadb/current/ydb
+	    echo ""
+	    read -p "Press Enter to continue" resp
+	    mens 1
 	fi
 	if [[ "$resp" == "3" ]]
 	then

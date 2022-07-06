@@ -24,6 +24,6 @@ https://7681-gitpodaddress
 
 Enter the following credentials:
 
-username:**test**
+username:  **test**
 
-password:**test**
+password:  **test**

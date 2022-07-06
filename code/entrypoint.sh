@@ -1,6 +1,11 @@
 #!/bin/bash
 apt-get update 
-apt-get install -y make gcc libncurses-dev dialog sysvbanner
+apt-get install -y build-essential gcc cmake git wget libjson-c-dev libwebsockets-dev git libncurses-dev dialog sysvbanner
+cd /usr/local
+git clone https://github.com/tsl0922/ttyd.git
+cd /usr/local/ttyd && mkdir build && cd build
+cmake ..
+make && make install
 cd /home/yottadb
 /opt/yottadb/current/ydb <<< 'H'
 cp /home/yottadb/*.m /data/r1.34_x86_64/r
@@ -13,5 +18,5 @@ echo "Version: $vers" >> splash.txt
 echo "Website: https://yottadb.com" >> splash.txt
 cp splash.txt /opt/yottadb/current/
 cp /home/yottadb/ydb /usr/local/bin
-tail -f /dev/null
+ttyd -c "test:test" ydb
 

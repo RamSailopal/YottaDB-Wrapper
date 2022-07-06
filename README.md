@@ -13,3 +13,17 @@ Once the Gitpod environment opens, wait 60 seconds for the YottaDB container to 
 To run ydb without a the banner, run:
 
     ydb -n
+    
+# Browser access
+
+Access to the terminal is also available via ttyd and a web browser.
+
+To access ydb via this method, open a browser tab and navigate to:
+
+https://7681-gitpodaddress
+
+Enter the following credentials:
+
+username:  **test**
+
+password:  **test**

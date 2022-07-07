@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4. Operating and Debugging in Direct Mode &mdash; Programmer&#39;s Guide  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="5. General Language Features of M" href="langfeat.html" />
+    <link rel="prev" title="3. Development Cycle" href="devcycle.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html">
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+	  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+		      <input type="text" name="q" placeholder="Search" />
+		          <input type="hidden" name="check_keywords" value="yes" />
+			      <input type="hidden" name="area" value="default" />
+			        </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://yottadb.com/resources/documentation">Main YottaDB Documentation Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="man.html">About this Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">1. About YottaDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="langext.html">2. YottaDB Language Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devcycle.html">3. Development Cycle</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="opdebug.html#">4. Operating and Debugging in Direct Mode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="opdebug.html#operating-in-direct-mode">Operating in Direct Mode</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#entering-direct-mode">Entering Direct Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#functionality-available-in-direct-mode">Functionality Available in Direct Mode</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opdebug.html#command-recall">Command Recall</a></li>
+<li class="toctree-l4"><a class="reference internal" href="opdebug.html#line-editing">Line Editing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="opdebug.html#the-m-invocation-stack">The M Invocation Stack</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#exiting-direct-mode">Exiting Direct Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opdebug.html#debugging-a-routine-in-direct-mode">Debugging a Routine in Direct Mode</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#creating-and-displaying-m-routines">Creating and Displaying M Routines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#executing-m-routines-interactively">Executing M Routines Interactively</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#processing-with-run-time-and-syntax-errors">Processing with Run Time and Syntax Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#correcting-errors">Correcting Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#stepping-through-a-routine">Stepping through a Routine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#continuing-execution-from-a-breakpoint">Continuing Execution from a Breakpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#interrupting-execution">Interrupting Execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#using-the-invocation-stack-in-debugging">Using the Invocation Stack in Debugging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opdebug.html#determining-levels-of-nesting">Determining Levels of Nesting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="opdebug.html#looking-at-the-invocation-stack">Looking at the Invocation Stack</a></li>
+<li class="toctree-l4"><a class="reference internal" href="opdebug.html#using-zshow-to-examine-context-information">Using ZSHOW to examine Context Information</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#transferring-routine-control">Transferring Routine Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#displaying-source-code">Displaying Source Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#correcting-errors-in-an-m-routine">Correcting Errors in an M Routine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#relinking-the-edited-routine">Relinking the Edited Routine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#reexecuting-the-routine">Reexecuting the Routine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#using-forked-processes">Using Forked Processes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opdebug.html#summary-of-debugging-tools">Summary of Debugging Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="langfeat.html">5. General Language Features of M</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">6. Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">7. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isv.html">8. Intrinsic Special Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioproc.html">9. Input/Output Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utility.html">10. Utility Routines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extrout.html">11. Integrating External Routines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internatn.html">12. Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errproc.html">13. Error Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">14. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encrypt.html">15. Database Encryption Extensions to the YottaDB External Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix A: M Coding Standards - Do’s and Don’ts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">LICENSE</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Programmer's Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>4. Operating and Debugging in Direct Mode</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="devcycle.html" class="btn btn-neutral float-left" title="3. Development Cycle" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="langfeat.html" class="btn btn-neutral float-right" title="5. General Language Features of M" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="operating-and-debugging-in-direct-mode">
+<span id="index-0"></span><h1><a class="toc-backref" href="opdebug.html#id4">4. Operating and Debugging in Direct Mode</a><a class="headerlink" href="opdebug.html#operating-and-debugging-in-direct-mode" title="Permalink to this heading">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="opdebug.html#operating-and-debugging-in-direct-mode" id="id4">4. Operating and Debugging in Direct Mode</a></p>
+<ul>
+<li><p><a class="reference internal" href="opdebug.html#operating-in-direct-mode" id="id5">Operating in Direct Mode</a></p>
+<ul>
+<li><p><a class="reference internal" href="opdebug.html#entering-direct-mode" id="id6">Entering Direct Mode</a></p></li>
+<li><p><a class="reference internal" href="opdebug.html#functionality-available-in-direct-mode" id="id7">Functionality Available in Direct Mode</a></p>
+<ul>
+<li><p><a class="reference internal" href="opdebug.html#command-recall" id="id8">Command Recall</a></p></li>
+<li><p><a class="reference internal" href="opdebug.html#line-editing" id="id9">Line Editing</a></p></li>
+<li><p><a class="reference internal" href="opdebug.html#the-m-invocation-stack" id="id10">The M Invocation Stack</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="opdebug.html#exiting-direct-mode" id="id11">Exiting Direct Mode</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="opdebug.html#debugging-a-routine-in-direct-mode" id="id12">Debugging a Routine in Direct Mode</a></p>
+<ul>
+<li><p><a class="reference internal" href="opdebug.html#creating-and-displaying-m-routines" id="id13">Creating and Displaying M Routines</a></p></li>
+<li><p><a class="reference internal" href="opdebug.html#executing-m-routines-interactively" id="id14">Executing M Routines Interactively</a></p></li>
+<li><p><a class="reference internal" href="opdebug.html#processing-with-run-time-and-syntax-errors" id="id15">Processing with Run Time and Syntax Errors</a></p></li>
+<li><p><a class="reference internal" href="opdebug.html#correcting-errors" id="id16">Correcting Errors</a></p></li>
+<li><p><a class="reference internal" href="opdebug.html#stepping-through-a-routine" id="id17">Stepping through a Routine</a></p></li>
+<li><p><a class="reference internal" href="opdebug.html#continuing-execution-from-a-breakpoint" id="id18">Continuing Execution from a Breakpoint</a></p></li>
+<li><p><a class="reference internal" href="opdebug.html#interrupting-execution" id="id19">Interrupting Execution</a></p></li>
+<li><p><a class="reference internal" href="opdebug.html#using-the-invocation-stack-in-debugging" id="id20">Using the Invocation Stack in Debugging</a></p>
+<ul>
+<li><p><a class="reference internal" href="opdebug.html#determining-levels-of-nesting" id="id21">Determining Levels of Nesting</a></p></li>
+<li><p><a class="reference internal" href="opdebug.html#looking-at-the-invocation-stack" id="id22">Looking at the Invocation Stack</a></p></li>
+<li><p><a class="reference internal" href="opdebug.html#using-zshow-to-examine-context-information" id="id23">Using ZSHOW to examine Context Information</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="opdebug.html#transferring-routine-control" id="id24">Transferring Routine Control</a></p></li>
+<li><p><a class="reference internal" href="opdebug.html#displaying-source-code" id="id25">Displaying Source Code</a></p></li>
+<li><p><a class="reference internal" href="opdebug.html#correcting-errors-in-an-m-routine" id="id26">Correcting Errors in an M Routine</a></p></li>
+<li><p><a class="reference internal" href="opdebug.html#relinking-the-edited-routine" id="id27">Relinking the Edited Routine</a></p></li>
+<li><p><a class="reference internal" href="opdebug.html#reexecuting-the-routine" id="id28">Reexecuting the Routine</a></p></li>
+<li><p><a class="reference internal" href="opdebug.html#using-forked-processes" id="id29">Using Forked Processes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="opdebug.html#summary-of-debugging-tools" id="id30">Summary of Debugging Tools</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Direct Mode is an important tool in YottaDB because it allows you to interactively debug, modify, and execute M routines. Direct Mode is a shell that immediately compiles and executes YottaDB commands providing an interpretive-like interface. M simplifies debugging by using the same commands for debugging that are used for programming.</p>
+<p>The focus of this chapter is to describe the debugging process in Direct Mode, and to illustrate the YottaDB language extensions that enhance the process. Command functionality is described only in enough detail to illustrate why a particular command is useful for a debugging activity being described. If you have specific functionality questions about a command or variable, see the <a class="reference external" href="commands.html">“Commands”</a>, <a class="reference external" href="functions.html">“Functions”</a>, or <a class="reference external" href="isv.html">“Intrinsic Special Variables”</a> chapter.</p>
+<p>It is also from Direct Mode that you activate YottaDB tools used to create M source code. The interaction of M commands used for editing and compiling is described in greater detail within <a class="reference external" href="devcycle.html">Chapter 3: “Development Cycle”</a>.</p>
+<section id="operating-in-direct-mode">
+<h2><a class="toc-backref" href="opdebug.html#id5">Operating in Direct Mode</a><a class="headerlink" href="opdebug.html#operating-in-direct-mode" title="Permalink to this heading">¶</a></h2>
+<p>This section provides an overview of the following basic operational issues in Direct Mode:</p>
+<ul class="simple">
+<li><p>Entering Direct Mode</p></li>
+<li><p>Available functionality</p></li>
+<li><p>Exiting Direct Mode</p></li>
+</ul>
+<section id="entering-direct-mode">
+<h3><a class="toc-backref" href="opdebug.html#id6">Entering Direct Mode</a><a class="headerlink" href="opdebug.html#entering-direct-mode" title="Permalink to this heading">¶</a></h3>
+<p>To enter Direct Mode, type $ydb_dist/yottadb -direct at the shell prompt.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nv">$ydb_dist</span>/yottadb -direct
+YDB&gt;
+</pre></div>
+</div>
+<p>This shows using $ydb_dist/yottadb -direct at the prompt to enter Direct Mode.</p>
+<p>Another way to enter Direct Mode for an editing or debugging session is by simply typing ydb at the shell prompt.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ydb
+YDB&gt;
+</pre></div>
+</div>
+</section>
+<section id="functionality-available-in-direct-mode">
+<h3><a class="toc-backref" href="opdebug.html#id7">Functionality Available in Direct Mode</a><a class="headerlink" href="opdebug.html#functionality-available-in-direct-mode" title="Permalink to this heading">¶</a></h3>
+<p>This section provides an overview of basic functionality and concepts that enhance your use of Direct Mode.</p>
+<section id="command-recall">
+<h4><a class="toc-backref" href="opdebug.html#id8">Command Recall</a><a class="headerlink" href="opdebug.html#command-recall" title="Permalink to this heading">¶</a></h4>
+<p>Direct Mode includes a line command recall function to display previously entered command lines. Use &lt;CTRL-B&gt; or the Up Arrow key at the YDB&gt; prompt to scroll back through command lines. Use the Down Arrow key to scroll forward through the command lines. YottaDB displays one command line at a time. You may delete and reenter characters starting at the end of a recalled line.</p>
+<p>The RECALL command is another way to access previously entered Direct Mode command lines. RECALL is only valid in Direct Mode and causes an error if it appears in other M code.</p>
+<p>The format of the RECALL command is:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REC[ALL] [intlit|strlit]
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The optional integer literal specifies a previously entered command by counting back from the present.</p></li>
+<li><p>The optional string literal specifies the most recently entered command line that starts with characters matching the (case-sensitive) literal.</p></li>
+<li><p>When the RECALL command has no argument, it displays up to a maximum of 99 available previous Direct Mode entries.</p></li>
+</ul>
+<p>If the session in Direct Mode has just started, you may not have entered 99 lines for YottaDB to save and therefore you will not have 99 lines to look at. The most recently entered YottaDB command line has the number one (1), older lines have higher numbers. YottaDB does not include the RECALL command in the listing. If the RECALL command is issued from a location other than the Direct Mode prompt, YottaDB issues a run-time error.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;write <span class="nv">$zgbldir</span>
+/usr/lib/yottadb/r120/yottadb.gld
+YDB&gt;set <span class="nv">$zgbldir</span><span class="o">=</span><span class="s2">&quot;test.gld&quot;</span>
+YDB&gt;set <span class="nv">a</span><span class="o">=</span><span class="m">10</span>
+YDB&gt;set <span class="nv">b</span><span class="o">=</span>a
+YDB&gt;recall
+<span class="m">1</span> <span class="nb">set</span> <span class="nv">b</span><span class="o">=</span>a
+<span class="m">2</span> <span class="nb">set</span> <span class="nv">a</span><span class="o">=</span><span class="m">10</span>
+<span class="m">3</span> <span class="nb">set</span> <span class="nv">$zgbldir</span><span class="o">=</span><span class="s2">&quot;test.gld&quot;</span>
+<span class="m">4</span> write <span class="nv">$zgbldir</span>
+YDB&gt;
+</pre></div>
+</div>
+<p>This REC[ALL] command displays the previously entered commands.</p>
+<p>You can also display a selected command by entering RECALL and the line number of the command you want to retrieve.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;recall <span class="m">2</span>
+YDB&gt;set <span class="nv">a</span><span class="o">=</span><span class="m">10</span>
+</pre></div>
+</div>
+<p>This RECALLs the line number two (2).</p>
+<p>If the REC[ALL] command includes a text parameter, YottaDB displays the most recent command matching the text after the REC[ALL] command.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;recall write
+YDB&gt;write <span class="nv">$zgbldir</span>
+</pre></div>
+</div>
+<p>This RECALLs “WRITE”, the command most recently beginning with this text. Note that the RECALL command text is case sensitive. The RECALL command with a text argument treats WRITE and write differently, that is, it treats them case sensitively. If you first type the WRITE command in lower-case and then type WRITE in upper-case to recall it, the RECALL command does not find a match.</p>
+</section>
+<section id="line-editing">
+<h4><a class="toc-backref" href="opdebug.html#id9">Line Editing</a><a class="headerlink" href="opdebug.html#line-editing" title="Permalink to this heading">¶</a></h4>
+<p>YottaDB permits the use of the YottaDB command line editor at the Direct Mode prompt and during M READs from a terminal. The YottaDB line editor allows cursor positioning using the &lt;CTRL&gt; key, edit keypad and function keys.</p>
+<p>The Direct Mode line editing keys are as follows:</p>
+<ul class="simple">
+<li><p><strong>Backspace</strong>: Deletes the character to the left of the cursor</p></li>
+<li><p><strong>Delete</strong>: Deletes the character under the cursor</p></li>
+<li><p><strong>Up-arrow</strong>: Moves to a less recent item in the RECALL list</p></li>
+<li><p><strong>Down-arrow</strong>: Moves to a more recent item in the RECALL list</p></li>
+<li><p><strong>Left-arrow</strong>: Moves the cursor one character to the left</p></li>
+<li><p><strong>Right-arrow</strong>: Moves the cursor one character to the right</p></li>
+<li><p><strong>&lt;CTRL-A&gt;</strong> / <strong>HOME</strong>: Moves the cursor to the beginning of the line</p></li>
+<li><p><strong>&lt;CTRL-B&gt;</strong>: Moves the cursor one character towards the beginning of the line</p></li>
+<li><p><strong>&lt;CTRL-D&gt;</strong>: On an empty line, terminates YottaDB and returns control to the shell.</p></li>
+<li><p><strong>&lt;CTRL-E&gt;</strong> / <strong>END</strong> : Moves the cursor to the end of the line</p></li>
+<li><p><strong>&lt;CTRL-F&gt;</strong>: Moves the cursor one character towards the end of the line</p></li>
+<li><p><strong>&lt;CTRL-K&gt;</strong>: Deletes all characters from the cursor to the end of the line</p></li>
+<li><p><strong>&lt;CTRL-U&gt;</strong>: Deletes the entire line</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When entering commands at the direct mode prompt, the insert mode can be toggled for that line by using the insert key. When YottaDB starts, insert mode is enabled unless the value of the ydb_principal_editing environment variable includes the string NOINSERT. If insert mode is disabled or enabled for the $PRINCIPAL device by a USE statement before returning to Direct Mode, it will remain disabled or enabled in Direct Mode. The insert mode can be toggled within a Direct Mode line using the terminal’s INSERT key.</p>
+</div>
+<p>YottaDB deletes the character under the cursor when you press the key on the keyboard that sends the escape sequence which maps to the kdch1 capability in your current terminfo entry (by convention, the Delete key). If the current terminfo entry is missing the kdch1 capability, YottaDB uses a default value derived from members of the DEC VT terminal family, as it does for selected other missing terminfo capabilities. If you wish the Backspace and Delete keys to have the same behavior, the simplest way is to configure your terminal emulator to send the same character sequences for the Delete key that it does for the Backspace key. You can alternatively modify your terminfo setting: for example, create an editable version of your terminfo entry in a temporary file with a command such as: infocmp &gt; /tmp/$$_$TERM and edit the temporary file to replace the entry for the kbs capability with the one in the kdch1 capability. Save your changes, and compile the edited file into a usable terminfo entry, for example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">TERMINFO</span><span class="o">=</span><span class="nv">$HOME</span>/.terminfo <span class="c1"># You may need to add this to your login profile</span>
+profilemkdir -p <span class="nv">$TERMINFO</span>
+tic /tmp/<span class="nv">$$</span>_<span class="nv">$TERM</span> <span class="c1"># or whatever your temporary file name was</span>
+</pre></div>
+</div>
+<p>When modifying terminfo capabilities, always look for unintended changes in the behavior of other applications, for example, text editors, that also rely on those capabilities. In the worst case, you may need to toggle between alternate terminfo entries for YottaDB and other applications while you evaluate different options. Also, for terminfo entries without the cud1 capability, YottaDB uses a linefeed when moving to the next line in direct mode.</p>
+</section>
+<section id="the-m-invocation-stack">
+<h4><a class="toc-backref" href="opdebug.html#id10">The M Invocation Stack</a><a class="headerlink" href="opdebug.html#the-m-invocation-stack" title="Permalink to this heading">¶</a></h4>
+<p>The ANSI M Standard describes certain M operations in terms of how a stack-based virtual machine would operate. A stack is a repository for tracking temporary information on a “last-in/first-out” (LIFO) basis. M program behavior can be understood using a stack-based model. However, the standard is not explicit in defining how an implementation must maintain a stack or even whether it must use one at all.</p>
+<p>The stack model provides a trail of routines currently in progress that shows the location of all the M operations that performed the invocations leading to the current point.</p>
+<p>The ZSHOW command makes this stack information available within YottaDB. For more information, see <a class="reference internal" href="opdebug.html#use-invocatn-stack-debug"><span class="std std-ref">Using the Invocation Stack in Debugging</span></a> in this chapter, and the command description at <a class="reference internal" href="commands.html#zshow-command"><span class="std std-ref">ZSHow</span></a>.</p>
+</section>
+</section>
+<section id="exiting-direct-mode">
+<h3><a class="toc-backref" href="opdebug.html#id11">Exiting Direct Mode</a><a class="headerlink" href="opdebug.html#exiting-direct-mode" title="Permalink to this heading">¶</a></h3>
+<p>Five M commands can terminate a Direct Mode session:</p>
+<ul class="simple">
+<li><p>HALT</p></li>
+<li><p>ZHALT</p></li>
+<li><p>ZCONTINUE</p></li>
+<li><p>GOTO</p></li>
+<li><p>ZGOTO</p></li>
+</ul>
+<p>The HALT command exits Direct Mode and terminates the M process.</p>
+<p>The ZHALT command exits Direct Mode and returns the exit status to the calling environment.</p>
+<p>The ZCONTINUE command instructs YottaDB to exit Direct Mode and resume routine execution at the current point in the M invocation stack. This may be the point where YottaDB interrupted execution and entered Direct Mode. However, when the Direct Mode interaction includes a QUIT command, it modifies the invocation stack and causes ZCONTINUE to resume execution at another point.</p>
+<p>The GOTO and ZGOTO commands instruct YottaDB to leave Direct Mode, and transfer control to a specified entry reference.</p>
+</section>
+</section>
+<section id="debugging-a-routine-in-direct-mode">
+<h2><a class="toc-backref" href="opdebug.html#id12">Debugging a Routine in Direct Mode</a><a class="headerlink" href="opdebug.html#debugging-a-routine-in-direct-mode" title="Permalink to this heading">¶</a></h2>
+<p>To begin a debugging session on a specific routine, type the following command at the YottaDB prompt:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;DO ^routinename
+</pre></div>
+</div>
+<p>You can also begin a debugging session by pressing &lt;CTRL-C&gt; after running an M application at the shell. To invoke Direct Mode by pressing &lt;CTRL-C&gt;, process must have the Principal Device in the CENABLE state and not have the device set to CTRAP=$C(3).</p>
+<p>When YottaDB receives a &lt;CTRL-C&gt; command from the principal device, it invokes Direct Mode at the next opportunity, (usually at a point corresponding to the beginning of the next source line). YottaDB can also interrupt at a FOR loop iteration or during a command of indeterminate duration such as LOCK, OPEN or READ. The YottaDB USE command enables/disables the &lt;CTRL-C&gt; interrupt with the [NO]CENABLE deviceparameter. By default, YottaDB starts &lt;CTRL-C&gt; enabled. The default setting for &lt;CTRL-C&gt; is controlled by $ydb_nocenable which controls whether &lt;CTRL-C&gt; is enabled at process startup. If $ydb_nocenable has a value of 1, “TRUE” or “YES” (case-insensitive), and the process principal device is a terminal, $PRINCIPAL is initialized to a NOCENABLE state where the process does not recognize &lt;CTRL-C&gt; as a signal to enter direct mode. No value, or other values of $ydb_nocenable initialize $PRINCIPAL with the CENABLE state. The [NO]CENABLE deviceparameter on a USE command can still control this characteristic from within the process.</p>
+<p>YottaDB displays the YDB&gt; prompt on the principal device. Direct Mode accepts commands from, and reports errors to, the principal device. YottaDB uses the current device for all other I/O. If the current device does not match the principal device when YottaDB enters Direct Mode, YottaDB issues a warning message on the principal device. A USE command changes the current device. For more information on the USE command, see <a class="reference external" href="ioproc.html">Chapter 9: “Input/Output Processing”</a>.</p>
+<p>The default “compile-as-written” mode of the YottaDB compiler lets you run a program with errors as part of the debugging cycle. The object code produced includes all lines that are correct and all commands on a line with an error, up to the error. When YottaDB encounters an error, it XECUTEs non empty values of $ETRAP or $ZTRAP. By default $ZTRAP contains a BREAK command, so YottaDB enters Direct Mode.</p>
+<p>The rest of the chapter illustrates the debugging capabilities of YottaDB by taking a sample routine, dmex, through the debugging process. dmex is intended to read and edit a name, print the last and first name, and terminate if the name is an upper-case or lower-case “Q”.</p>
+<p>Each of the remaining sections of the chapter uses dmex to illustrate an aspect of the debugging process in YottaDB.</p>
+<section id="creating-and-displaying-m-routines">
+<h3><a class="toc-backref" href="opdebug.html#id13">Creating and Displaying M Routines</a><a class="headerlink" href="opdebug.html#creating-and-displaying-m-routines" title="Permalink to this heading">¶</a></h3>
+<p>To create or edit a routine, use the ZEDIT command. ZEDIT invokes the editor specified by the EDITOR environment variable, and opens the specified file. dmex.m, for editing.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;ZEDIT <span class="s2">&quot;dmex&quot;</span>
+</pre></div>
+</div>
+<p>Once in the editor, use the standard editing commands to enter and edit text. When you finish editing, save the changes, which returns you to Direct Mode.</p>
+<p>To display M source code for dmex, use the ZPRINT command.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;ZPRINT ^dmex
+dmex<span class="p">;</span>dmex - Direct Mode example
+<span class="p">;</span>
+beg  <span class="k">for</span> <span class="nb">read</span> !,<span class="s2">&quot;Name: &quot;</span>,name <span class="k">do</span> name
+   quit
+name
+<span class="nb">set</span> <span class="nv">ln</span><span class="o">=</span><span class="nv">$l</span><span class="o">(</span>name<span class="o">)</span>
+  <span class="k">if</span> ln,<span class="nv">$extract</span><span class="o">(</span><span class="s2">&quot;QUIT&quot;</span>,1,ln<span class="o">)=</span><span class="nv">$tr</span><span class="o">(</span>name,<span class="s2">&quot;quit&quot;</span>,<span class="s2">&quot;QUIT&quot;</span><span class="o">)</span> <span class="k">do</span>
+  . s <span class="nv">name</span><span class="o">=</span><span class="s2">&quot;Q&quot;</span>
+  . quit
+  <span class="k">if</span> ln&lt;<span class="m">30</span>,bame?1.a.1<span class="s2">&quot;-&quot;</span>.a1<span class="s2">&quot;,&quot;</span><span class="m">1</span><span class="s2">&quot; &quot;</span>1a.ap <span class="k">do</span> print quit
+  write !,<span class="s2">&quot;Please use last-name, &quot;</span>
+  write <span class="s2">&quot;first-name middle-initial or &#39;Q&#39; to Quit.&quot;</span>
+  quit
+print
+  write !,<span class="nv">$piece</span><span class="o">(</span>name,<span class="s2">&quot;, &quot;</span>,2<span class="o">)</span>,<span class="s2">&quot; &quot;</span>,<span class="nv">$piece</span><span class="o">(</span>name,<span class="s2">&quot;, &quot;</span><span class="o">)</span>
+  quit
+YDB&gt;
+</pre></div>
+</div>
+<p>This uses the ZPRINT command to display the routine dmex.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The example misspells the variable name as bame.</p>
+</div>
+</section>
+<section id="executing-m-routines-interactively">
+<h3><a class="toc-backref" href="opdebug.html#id14">Executing M Routines Interactively</a><a class="headerlink" href="opdebug.html#executing-m-routines-interactively" title="Permalink to this heading">¶</a></h3>
+<p>To execute an M routine interactively, it is not necessary to explicitly compile and link your program. When you refer to an M routine that is not part of the current image, YottaDB automatically attempts to compile and ZLINK the program.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;DO ^dmex
+Name: Revere, Paul
+%YDB-E-UNDEF, Undefined <span class="nb">local</span> variable: bame
+At M <span class="nb">source</span> location name+3^dmex
+YDB&gt;
+</pre></div>
+</div>
+<p>In this example YottaDB places you in Direct Mode, but also cites an error found in the program with a run-time error message. In this example, it was a reference to “bame”, which is undefined.</p>
+<p>To see additional information about the error message, examine the $ECODE or $ZSTATUS special variables.</p>
+<p>$ECODE is read-write intrinsic special variable that maintains a list of comma delimited codes that describe a history of past errors - the most recent ones appear at the end of the list. In $ECODE, standard errors are prefixed with an “M”, user defined errors with a “U”, and YottaDB errors with a “Z”. A YottaDB code always follows a standard code.</p>
+<p>$ZSTATUS is a read-write intrinsic special variable that maintains a string containing the error condition code and location of the last exception condition occurring during routine execution. YottaDB updates $ZSTATUS only for errors found in routines and not for errors entered at the Direct Mode prompt.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For more information on $ECODE and $STATUS see <a class="reference external" href="isv.html">Chapter 8: “Intrinsic Special Variables”</a>.</p>
+</div>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;WRITE <span class="nv">$ECODE</span>
+,M6,Z150373850
+</pre></div>
+</div>
+<p>This example uses a WRITE command to display $ECODE.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;WRITE <span class="nv">$ZS</span>
+<span class="m">150373850</span>,name+3^dmex,%YDB-E-UNDEF, Undefined
+<span class="nb">local</span> variable: bame
+</pre></div>
+</div>
+<p>This example uses a WRITE command to display $ZSTATUS. Note that the $ZSTATUS code is the same as the “Z” code in $ECODE.</p>
+<p>You can record the error message number, and use the $ZMESSAGE function later to re-display the error message text.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;WRITE <span class="nv">$ZM</span><span class="o">(</span><span class="m">150373850</span><span class="o">)</span>
+%YDB-E-UNDEF, Undefined <span class="nb">local</span> variable: !AD
+</pre></div>
+</div>
+<p>This example uses a WRITE command and the $ZMESSAGE function to display the error message generated in the previous example. $ZMESSAGE() is useful when you have a routine that produces several error messages that you may want to examine later. The error message reprinted using $ZMESSAGE() is generic; therefore, the code !AD appears instead of the specific undefined local variable displayed with the original message.</p>
+</section>
+<section id="processing-with-run-time-and-syntax-errors">
+<h3><a class="toc-backref" href="opdebug.html#id15">Processing with Run Time and Syntax Errors</a><a class="headerlink" href="opdebug.html#processing-with-run-time-and-syntax-errors" title="Permalink to this heading">¶</a></h3>
+<p>When YottaDB encounters a run-time or syntax error, it stops executing and displays an error message. YottaDB reports the error in the message. In this case, YottaDB reports an undefined local variable and the line in error, name+3^dmex. Note that YottaDB re-displays the YDB&gt; prompt so that debugging may continue.</p>
+<p>To re-display the line and identify the error, use the ZPRINT command.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;ZPRINT, name+3
+%YDB-E-SPOREOL, Either a space or an end-of-line was expected but not found
+ZP, name+3
+^_____
+YDB&gt;
+</pre></div>
+</div>
+<p>This example shows the result of incorrectly entering a ZPRINT command in Direct Mode. YottaDB reports the location of the syntax error in the command line with an arrow. $ECODE and $ZSTATUS do not maintain this error message because YottaDB did not produce the message during routine execution. Enter the correct syntax, (i.e., remove the comma) to re-display the routine line in error.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;WRITE <span class="nv">$ZPOS</span>
+name+3^dmex
+</pre></div>
+</div>
+<p>This example writes the current line position.</p>
+<p>$ZPOSITION is a read-only YottaDB special variable that provides another tool for locating and displaying the current line. It contains the current entry reference as a character string in the format label+offset^routine, where the label is the closest preceding label. The current entry reference appears at the top of the M invocation stack, which can also be displayed with a ZSHOW “S” command.</p>
+<p>To display the current value of every local variable defined, use the ZWRITE command with no arguments.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;ZWRITE
+<span class="nv">ln</span><span class="o">=</span><span class="m">12</span>
+<span class="nv">name</span><span class="o">=</span><span class="s2">&quot;Revere, Paul&quot;</span>
+</pre></div>
+</div>
+<p>This ZWRITE displays a listing of all the local variables currently defined.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ZWRITE displays the variable name. ZWRITE does not display a value for bame, confirming that it is not defined.</p>
+</div>
+</section>
+<section id="correcting-errors">
+<h3><a class="toc-backref" href="opdebug.html#id16">Correcting Errors</a><a class="headerlink" href="opdebug.html#correcting-errors" title="Permalink to this heading">¶</a></h3>
+<p>Use the ZBREAK command to establish a temporary breakpoint and specify an action. ZBREAK sets or clears routine-transparent breakpoints during debugging. This command simplifies debugging by interrupting execution at a specific point to examine variables, execute commands, or to start using ZSTEP to execute the routine line by line.</p>
+<p>YottaDB suspends execution during execution when the entry reference specified by ZBREAK is encountered. If the ZBREAK does not specify an expression “action”, the process uses the default (BREAK) and puts YottaDB into Direct Mode. If the ZBREAK does specify an expression “action”, the process XECUTEs the value of “action”, and does not enter Direct Mode unless the action includes a BREAK. The action serves as a “trace-point”. The trace-point is silent unless the action specifies terminal output.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;ZBREAK name+3^dmex:<span class="s2">&quot;set bame=name&quot;</span>
+</pre></div>
+</div>
+<p>This uses a ZBREAK with an action that SETs the variable bame equal to name.</p>
+</section>
+<section id="stepping-through-a-routine">
+<h3><a class="toc-backref" href="opdebug.html#id17">Stepping through a Routine</a><a class="headerlink" href="opdebug.html#stepping-through-a-routine" title="Permalink to this heading">¶</a></h3>
+<p>The ZSTEP command provides a powerful tool to direct YottaDB execution. When you issue a ZSTEP from Direct Mode, YottaDB executes the program to the beginning of the next target line and performs the ZSTEP action.</p>
+<p>The optional keyword portion of the argument specifies the class of lines where ZSTEP pauses its execution, and XECUTEs the ZSTEP action specified by the optional action portion of the ZSTEP argument. If the action is specified, it must be an expression that evaluates to valid YottaDB code. If no action is specified, ZSTEP XECUTEs the code specified by the $ZSTEP intrinsic special variable; by default $ZSTEP has the value “B”, which causes YottaDB to enter Direct Mode.</p>
+<p>ZSTEP actions, that include commands followed by a BREAK, perform the specified action, then enter Direct Mode. ZSTEP actions that do not include a BREAK perform the command action and continue execution. Use ZSTEP actions that issue conditional BREAKs and subsequent ZSTEPs to perform tasks such as testing for changes in the value of a variable.</p>
+<p>Use ZSTEP to incrementally execute a routine or a series of routines. Execute any YottaDB command from Direct Mode at any ZSTEP pause. To resume normal execution, use ZCONTINUE. Note that ZSTEP arguments are keywords rather than expressions, and they do not allow indirection.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;ZSTEP INTO
+Break instruction encountered during ZSTEP action
+At M <span class="nb">source</span> location print^dmex
+YDB&gt;ZSTEP OUTOF
+Paul Revere
+Name: Q
+%YDB-I-BREAKZST, Break instruction encountered during ZSTEP action
+At M <span class="nb">source</span> location name^dmex
+YDB&gt;ZSTEP OVER
+Break instruction encountered during ZSTEP action
+At M <span class="nb">source</span> location name+1^dmex
+</pre></div>
+</div>
+<p>This example shows using the ZSTEP command to step through the routine dmex, starting where the execution was interrupted by the undefined variable error. The ZSTEP INTO command executes line name+3 and interrupts execution at the beginning of line print.</p>
+<p>The ZSTEP OUTOF continues execution until line name. The ZSTEP OVER, which is the default, executes until it encounters the next line at this level on the M invocation stack. In this case, the next line is name+1. The ZSTEP OVER could be replaced with a ZSTEP with no argument because they do the same thing.</p>
+</section>
+<section id="continuing-execution-from-a-breakpoint">
+<h3><a class="toc-backref" href="opdebug.html#id18">Continuing Execution from a Breakpoint</a><a class="headerlink" href="opdebug.html#continuing-execution-from-a-breakpoint" title="Permalink to this heading">¶</a></h3>
+<p>Use the ZCONTINUE command to continue execution from the breakpoint.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;ZCONTINUE
+Paul Revere
+Name: q
+Name: QUIT
+Name: ?
+Please use last-name, first name middle-initial
+or <span class="s1">&#39;Q&#39;</span> to Quit.
+Name:
+</pre></div>
+</div>
+<p>This uses a ZCONTINUE command to resume execution from the point where it was interrupted. As a result of the ZBREAK action, bame is defined and the error does not occur again. Because the process does not terminate as intended when the name read has q as a value, we need to continue debugging.</p>
+</section>
+<section id="interrupting-execution">
+<h3><a class="toc-backref" href="opdebug.html#id19">Interrupting Execution</a><a class="headerlink" href="opdebug.html#interrupting-execution" title="Permalink to this heading">¶</a></h3>
+<p>Press &lt;CTRL-C&gt; to interrupt execution, and return to the YottaDB prompt to continue debugging the program.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>%YDB-I-CTRLC, CTRLC_C encountered.
+YDB&gt;
+</pre></div>
+</div>
+<p>This invokes direct mode with a &lt;CTRL-C&gt;.</p>
+</section>
+<section id="using-the-invocation-stack-in-debugging">
+<span id="use-invocatn-stack-debug"></span><h3><a class="toc-backref" href="opdebug.html#id20">Using the Invocation Stack in Debugging</a><a class="headerlink" href="opdebug.html#using-the-invocation-stack-in-debugging" title="Permalink to this heading">¶</a></h3>
+<p>M DOs, XECUTEs, and extrinsics add a level to the invocation stack. Matching QUITs take a level off the stack. When YottaDB executes either of these commands, an extrinsic function or an extrinsic special variable, it “pushes” information about the new environment on the stack. When YottaDB executes the QUIT, it “pops” the information about the discarded environment off the stack. It then reinstates the invoking routine information using the entries that have now arrived at the active end of the stack.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the M stack model, a FOR command does not add a stack frame, and a QUIT that terminates a FOR loop does not remove a stack frame.</p>
+</div>
+<section id="determining-levels-of-nesting">
+<h4><a class="toc-backref" href="opdebug.html#id21">Determining Levels of Nesting</a><a class="headerlink" href="opdebug.html#determining-levels-of-nesting" title="Permalink to this heading">¶</a></h4>
+<p>$STACK contains an integer value indicating the “level of nesting” caused by DO commands, XECUTE commands, and extrinsic functions in the M virtual stack.</p>
+<p>$STACK has an initial value of zero (0), and increments by one with each DO, XECUTE, or extrinsic function. Any QUIT that does not terminate a FOR loop or any ZGOTO command decrements $STACK. In accordance with the M standard, a FOR command does not increase $STACK. M routines cannot modify $STACK with the SET or KILL commands.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;WRITE <span class="nv">$STACK</span>
+<span class="m">2</span>
+YDB&gt;WRITE <span class="nv">$ZLEVEL</span>
+<span class="m">3</span>
+YDB&gt;
+</pre></div>
+</div>
+<p>This example shows the current values for $STACK and $ZLEVEL. $ZLEVEL is like $STACK except that uses one (1) as the starting level for the M stack, which $STACK uses zero (0), which means that $ZLEVEL is always one more than $STACK. Using $ZLEVEL with “Z” commands and functions, and $STACK with standard functions avoids the need to calculate the adjustment.</p>
+</section>
+<section id="looking-at-the-invocation-stack">
+<h4><a class="toc-backref" href="opdebug.html#id22">Looking at the Invocation Stack</a><a class="headerlink" href="opdebug.html#looking-at-the-invocation-stack" title="Permalink to this heading">¶</a></h4>
+<p>The $STACK intrinsic special variable and the $STACK() function provide a mechanism to access M stack context information.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;WRITE <span class="nv">$STACK</span>
+<span class="m">2</span>
+YDB&gt;WRITE <span class="nv">$STACK</span><span class="o">(</span><span class="m">2</span>,<span class="s2">&quot;ecode&quot;</span><span class="o">)</span>
+,M6,Z150373850,
+YDB&gt;WRITE <span class="nv">$STACK</span><span class="o">(</span><span class="m">2</span>,<span class="s2">&quot;place&quot;</span><span class="o">)</span>
+name+3^dmex
+YDB&gt;WRITE <span class="nv">$STACK</span><span class="o">(</span><span class="m">2</span>,<span class="s2">&quot;mcode&quot;</span><span class="o">)</span>
+<span class="k">if</span> ln&lt;<span class="m">30</span>,bame?1.a.1<span class="s2">&quot;-&quot;</span>.a1<span class="s2">&quot;,&quot;</span><span class="m">1</span><span class="s2">&quot; &quot;</span>1a.ap <span class="k">do</span> print q
+YDB&gt;
+</pre></div>
+</div>
+<p>This example gets the value of $STACK and then uses that value to get various types of information about that stack level using the $STACK() function. The “ecode” value of the error information for level two, “place” is similar to $ZPOSITION, “mcode” is the code for the level.</p>
+<p>In addition to the $STACK intrinsic special variable, which provides the current stack level, $STACK(-1) gives the highest level for which $STACK() can return valid information. Until there is an error, $STACK and $STACK(-1) are the same, but once $ECODE shows that there is an “current” error, the information returned by $STACK() is frozen to capture the state at the time of the error; it unfreezes after a SET $ECODE=””.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;WRITE <span class="nv">$STACK</span>
+<span class="m">2</span>
+YDB&gt;WRITE <span class="nv">$STACK</span><span class="o">(</span>-1<span class="o">)</span>
+<span class="m">2</span>
+YDB&gt;
+</pre></div>
+</div>
+<p>This example shows that under the conditions created (in the above example), $STACK and $STACK(-1) have the same value.</p>
+<p>The $STACK() can return information about lower levels.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>+1^GTM<span class="nv">$DMOD</span>
+YDB&gt;WRITE <span class="nv">$STACK</span><span class="o">(</span><span class="m">1</span>,<span class="s2">&quot;ecode&quot;</span><span class="o">)</span>
+YDB&gt;WRITE <span class="nv">$STACK</span><span class="o">(</span><span class="m">1</span>,<span class="s2">&quot;place&quot;</span><span class="o">)</span>
+beg^dmex
+YDB&gt;WRITE <span class="nv">$STACK</span><span class="o">(</span><span class="m">1</span>,<span class="s2">&quot;mcode&quot;</span><span class="o">)</span>
+beg <span class="k">for</span> <span class="nb">read</span> !,<span class="s2">&quot;Name:&quot;</span>,namde <span class="k">do</span> name
+YDB&gt;
+</pre></div>
+</div>
+<p>This example shows that there was no error at $STACK level one, as well as the “place” and “mcode” information for that level.</p>
+</section>
+<section id="using-zshow-to-examine-context-information">
+<h4><a class="toc-backref" href="opdebug.html#id23">Using ZSHOW to examine Context Information</a><a class="headerlink" href="opdebug.html#using-zshow-to-examine-context-information" title="Permalink to this heading">¶</a></h4>
+<p>The ZSHOW command displays information about the M environment.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;zshow <span class="s2">&quot;*&quot;</span>
+<span class="nv">$DEVICE</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">$ECODE</span><span class="o">=</span><span class="s2">&quot;,M6,Z150373850,&quot;</span>
+<span class="nv">$ESTACK</span><span class="o">=</span><span class="m">2</span>
+<span class="nv">$ETRAP</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">$HOROLOG</span><span class="o">=</span><span class="s2">&quot;64813,21971&quot;</span>
+<span class="nv">$IO</span><span class="o">=</span><span class="s2">&quot;/dev/pts/0&quot;</span>
+<span class="nv">$JOB</span><span class="o">=</span><span class="m">14550</span>
+<span class="nv">$KEY</span><span class="o">=</span><span class="nv">$C</span><span class="o">(</span><span class="m">13</span><span class="o">)</span>
+<span class="nv">$PRINCIPAL</span><span class="o">=</span><span class="s2">&quot;/dev/pts/0&quot;</span>
+<span class="nv">$QUIT</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">$REFERENCE</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">$STACK</span><span class="o">=</span><span class="m">2</span>
+<span class="nv">$STORAGE</span><span class="o">=</span><span class="m">2147483647</span>
+<span class="nv">$SYSTEM</span><span class="o">=</span><span class="s2">&quot;47,ydb_sysid&quot;</span>
+<span class="nv">$TEST</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">$TLEVEL</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">$TRESTART</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">$X</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">$Y</span><span class="o">=</span><span class="m">26</span>
+<span class="nv">$ZA</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">$ZALLOCSTOR</span><span class="o">=</span><span class="m">680360</span>
+<span class="nv">$ZAUDIT</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">$ZB</span><span class="o">=</span><span class="nv">$C</span><span class="o">(</span><span class="m">13</span><span class="o">)</span>
+<span class="nv">$ZCHSET</span><span class="o">=</span><span class="s2">&quot;M&quot;</span>
+<span class="nv">$ZCLOSE</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">$ZCMDLINE</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">$ZCOMPILE</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">$ZCSTATUS</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">$ZDATEFORM</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">$ZDIRECTORY</span><span class="o">=</span><span class="s2">&quot;/path/to/the/current/directory&quot;</span>
+<span class="nv">$ZEDITOR</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">$ZEOF</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">$ZERROR</span><span class="o">=</span><span class="s2">&quot;Unprocessed </span><span class="nv">$ZERROR</span><span class="s2">, see </span><span class="nv">$ZSTATUS</span><span class="s2">&quot;</span>
+<span class="nv">$ZGBLDIR</span><span class="o">=</span><span class="s2">&quot;/path/to/the/global/directory&quot;</span>
+<span class="nv">$ZHOROLOG</span><span class="o">=</span><span class="s2">&quot;64813,21971,720675,14400&quot;</span>
+<span class="nv">$ZININTERRUPT</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">$ZINTERRUPT</span><span class="o">=</span><span class="s2">&quot;IF </span><span class="nv">$ZJOBEXAM</span><span class="s2">()&quot;</span>
+<span class="nv">$ZIO</span><span class="o">=</span><span class="s2">&quot;/dev/pts/0&quot;</span>
+<span class="nv">$ZJOB</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">$ZKEY</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">$ZLEVEL</span><span class="o">=</span><span class="m">3</span>
+<span class="nv">$ZMAXTPTIME</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">$ZMODE</span><span class="o">=</span><span class="s2">&quot;INTERACTIVE&quot;</span>
+<span class="nv">$ZONLNRLBK</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">$ZPATNUMERIC</span><span class="o">=</span><span class="s2">&quot;M&quot;</span>
+<span class="nv">$ZPIN</span><span class="o">=</span><span class="s2">&quot;/dev/pts/0&quot;</span>
+<span class="nv">$ZPOSITION</span><span class="o">=</span><span class="s2">&quot;name+5^dmex&quot;</span>
+<span class="nv">$ZPOUT</span><span class="o">=</span><span class="s2">&quot;/dev/pts/0&quot;</span>
+<span class="nv">$ZPROMPT</span><span class="o">=</span><span class="s2">&quot;YDB&gt;&quot;</span>
+<span class="nv">$ZQUIT</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">$ZREALSTOR</span><span class="o">=</span><span class="m">697936</span>
+<span class="nv">$ZRELDATE</span><span class="o">=</span><span class="s2">&quot;20180614 00:33&quot;</span>
+<span class="nv">$ZROUTINES</span><span class="o">=</span><span class="s2">&quot;. /usr/local/lib/yottadb/r132 /usr/local/lib/yottadb/r132/plugin/o(/usr/local/lib/yottadb/r132/plugin/r)&quot;</span>
+<span class="nv">$ZSOURCE</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">$ZSTATUS</span><span class="o">=</span><span class="s2">&quot;150373850,name+5^dmex,%YDB-E-UNDEF, Undefined local variable: bame&quot;</span>
+<span class="nv">$ZSTEP</span><span class="o">=</span><span class="s2">&quot;B&quot;</span>
+<span class="nv">$ZSTRPLLIM</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">$ZSYSTEM</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">$ZTIMEOUT</span><span class="o">=</span>-1
+<span class="nv">$ZTDATA</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">$ZTDELIM</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">$ZTEXIT</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">$ZTLEVEL</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">$ZTNAME</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">$ZTOLDVAL</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">$ZTRAP</span><span class="o">=</span><span class="s2">&quot;B&quot;</span>
+<span class="nv">$ZTRIGGEROP</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">$ZTSLATE</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">$ZTUPDATE</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">$ZTVALUE</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">$ZTWORMHOLE</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">$ZUSEDSTOR</span><span class="o">=</span><span class="m">671689</span>
+<span class="nv">$ZUT</span><span class="o">=</span><span class="m">1528970771720738</span>
+<span class="nv">$ZVERSION</span><span class="o">=</span><span class="s2">&quot;YottaDB r1.32 Linux x86_64&quot;</span>
+<span class="nv">$ZYERROR</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">ln</span><span class="o">=</span><span class="m">8</span>
+<span class="nv">name</span><span class="o">=</span><span class="s2">&quot;John Doe&quot;</span>
+/dev/pts/0 OPEN TERMINAL NOPAST NOESCA NOREADS TYPE <span class="nv">WIDTH</span><span class="o">=</span><span class="m">165</span> <span class="nv">LENG</span><span class="o">=</span><span class="m">48</span>
+MLG:0,MLT:0
+GLD:*,REG:*,SET:0,KIL:0,GET:0,DTA:0,ORD:0,ZPR:0,QRY:0,LKS:0,LKF:0,CTN:0,DRD:0
+DWT:0,NTW:0,NTR:0,NBW:0,NBR:0,NR0:0,NR1:0,NR2:0,NR3:0,TTW:0,TTR:0,TRB:0,TBW:0,
+TBR:0,TR0:0,TR1:0,TR2:0,TR3:0,TR4:0,TC0:0,TC1:0,TC2:0,TC3:0,TC4:0,ZTR:0,DFL:0,
+DFS:0,JFL:0,JFS:0,JBB:0,JFB:0,JFW:0,JRL:0,JRP:0,JRE:0,JRI:0,JRO:0,JEX:0,DEX:0,
+CAT:0,CFE:0,CFS:0,CFT:0,CQS:0,CQT:0,CYS:0,CYT:0,BTD:0
+name+5^dmex    <span class="o">(</span><span class="nv">$ZTRAP</span><span class="o">)</span>
+    <span class="o">(</span>Direct mode<span class="o">)</span>
+beg+1^dmex:51a6a6c4739b004094c4545246ce4d68
++1^GTM<span class="nv">$DMOD</span>    <span class="o">(</span>Direct mode<span class="o">)</span>
+YDB&gt;
+</pre></div>
+</div>
+<p>This example uses the asterisk (*) argument to show all information that ZSHOW offers in this context. First are the Intrinsic Special Variables ($DEVICE-$ZYERROR, also available with ZSHOW “I”), then the local variables (bame, ln and name, also available with ZSHOW “V”), then the ZBREAK locations (name+3^dmex, also available with ZSHOW “B”), then the device information (also available with ZSHOW “D”), then the M stack (also available with ZSHOW “S”). ZSHOW “S” is the default for ZSHOW with no arguments.</p>
+<p>Context information that does not exist in this example includes M LOCKs of this process (ZSHOW “L”).</p>
+<p>In addition to directing its output to the current device, ZSHOW can place its output in a local or global variable array. For more information, see the command description <a class="reference internal" href="commands.html#zshow-command"><span class="std std-ref">ZSHow</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ZSHOW “V” produces the same output as ZWRITE with no arguments, but ZSHOW “V” can be directed to a variable as well as a device.</p>
+</div>
+</section>
+</section>
+<section id="transferring-routine-control">
+<h3><a class="toc-backref" href="opdebug.html#id24">Transferring Routine Control</a><a class="headerlink" href="opdebug.html#transferring-routine-control" title="Permalink to this heading">¶</a></h3>
+<p>The ZGOTO command transfers control from one part of the routine to another, or from one routine to another, using the specified entry reference. The ZGOTO command takes an optional integer expression that indicates the M stack level reached by performing the ZGOTO, and an optional entry reference specifying the location to where ZGOTO transfers control. A ZGOTO command, with an entry reference, performs a function similar to the GOTO command with the additional capability of reducing the M stack level. In a single operation, the process executes $ZLEVEL-intexpr, implicit QUITs from DO or extrinsic operations, and a GOTO operation transferring control to the named entry reference.</p>
+<p>The ZGOTO command leaves the invocation stack at the level of the value of the integer expression. YottaDB implicitly terminates any intervening FOR loops and unstacks variables stacked with NEW commands, as appropriate.</p>
+<p>ZGOTO $ZLEVEL:LABEL^ROUTINE takes the same action as GO LABEL^ROUTINE.</p>
+<p>ZGOTO $ZLEVEL-1 produces the same result as QUIT (followed by ZCONTINUE, if in Direct Mode).</p>
+<p>If the integer expression evaluates to a value greater than the current value of $ZLEVEL, or less than zero (0), YottaDB issues a run-time error.</p>
+<p>If ZGOTO has no entry reference, it performs some number of implicit QUITs and transfers control to the next command at the specified level. When no argument is specified, ZGOTO 1 is the result, and operation resumes at the lowest level M routine as displayed by ZSHOW “S”. In the image invoked by yottadb -direct, or a similar image, a ZGOTO without arguments returns the process to Direct Mode.</p>
+</section>
+<section id="displaying-source-code">
+<h3><a class="toc-backref" href="opdebug.html#id25">Displaying Source Code</a><a class="headerlink" href="opdebug.html#displaying-source-code" title="Permalink to this heading">¶</a></h3>
+<p>Use the ZPRINT command to display source code lines selected by its argument. ZPRINT allows you to display the source for the current routine and any other related routines. Use the ZPRINT command to display the last call level.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;ZPRINT beg
+beg <span class="k">for</span> <span class="nb">read</span> !,<span class="s2">&quot;Name: &quot;</span>,name <span class="k">do</span> name
+</pre></div>
+</div>
+<p>This example uses a ZPRINT command to print the line indicated as the call at the top of the stack. Notice that the routine has an error in logic. The line starting with the label beg has a FOR loop with no control variable, no QUIT, and no GOTO. There is no way out of the FOR loop.</p>
+</section>
+<section id="correcting-errors-in-an-m-routine">
+<h3><a class="toc-backref" href="opdebug.html#id26">Correcting Errors in an M Routine</a><a class="headerlink" href="opdebug.html#correcting-errors-in-an-m-routine" title="Permalink to this heading">¶</a></h3>
+<p>Now that the routine errors have been identified, correct them in the M source file. Use ZEDIT to invoke the editor and open the file for editing. Correct the errors previously identified and enter to exit the editor.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;ZEDIT <span class="s2">&quot;dmex.m&quot;</span>
+dmex<span class="p">;</span>dmex - Direct Mode example
+<span class="p">;</span>
+beg
+  <span class="k">for</span> <span class="nb">read</span> !,<span class="s2">&quot;Name: &quot;</span>,name <span class="k">do</span> name
+  quit
+name
+  <span class="nb">set</span> <span class="nv">ln</span><span class="o">=</span><span class="nv">$l</span><span class="o">(</span>name<span class="o">)</span>
+  <span class="k">if</span> ln,<span class="nv">$extract</span><span class="o">(</span><span class="s2">&quot;QUIT&quot;</span>,1,ln<span class="o">)=</span><span class="nv">$tr</span><span class="o">(</span>name,<span class="s2">&quot;quit&quot;</span>,<span class="s2">&quot;QUIT&quot;</span><span class="o">)</span> <span class="k">do</span>
+  . <span class="nb">set</span> <span class="nv">name</span><span class="o">=</span><span class="s2">&quot;Q&quot;</span>
+  <span class="k">if</span> ln&lt;<span class="m">30</span>,name?1.a.1<span class="s2">&quot;-&quot;</span>.a1<span class="s2">&quot;,&quot;</span><span class="m">1</span><span class="s2">&quot; &quot;</span>1a.ap <span class="k">do</span> print q
+  write !,<span class="s2">&quot;Please use last-name, &quot;</span>
+  write <span class="s2">&quot;first-name middle-initial or &#39;Q&#39; to Quit.&quot;</span>
+  quit
+print
+  write !,<span class="nv">$piece</span><span class="o">(</span>name,<span class="s2">&quot;, &quot;</span>,2<span class="o">)</span>,<span class="s2">&quot; &quot;</span>,<span class="nv">$piece</span><span class="o">(</span>name,<span class="s2">&quot;, &quot;</span><span class="o">)</span>
+  quit
+YDB&gt;
+</pre></div>
+</div>
+<p>This example shows the final state of a ZEDIT session of dmex.m. Note that the infinite FOR loop at line beg is corrected.</p>
+</section>
+<section id="relinking-the-edited-routine">
+<h3><a class="toc-backref" href="opdebug.html#id27">Relinking the Edited Routine</a><a class="headerlink" href="opdebug.html#relinking-the-edited-routine" title="Permalink to this heading">¶</a></h3>
+<p>Use the ZLINK command to add the edited routine to the current image. ZLINK automatically recompiles and relinks the routine. If the routine was the most recent one ZEDITed or ZLINKed, you do not have to specify the routine name with the ZLINK command.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When you issue a DO command, YottaDB determines whether the routine is part of the current image, and whether compiling or linking is necessary. Because this routine is already part of the current image, YottaDB does not recompile or relink the edited version of the routine if you run the routine again without ZLINKing it first. Therefore, YottaDB executes the previous routine image and not the edited routine.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You may have to issue a ZGOTO or a QUIT command to remove the unedited version of the routine from the M invocation stack before ZLINKing the edited version.</p>
+</div>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;ZLINK
+Cannot ZLINK an active routine
+</pre></div>
+</div>
+<p>This illustrates a YottaDB error report caused by an attempt to ZLINK a routine that is part of the current invocation stack.</p>
+<p>To ZLINK the routine, remove any invocation levels for the routine off of the call stack. You may use the ZSHOW “S” command to display the current state of the call stack. Use the QUIT command to remove one level at a time from the call stack. Use the ZGOTO command to remove multiple levels off of the call stack.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;ZSHOW <span class="s2">&quot;S&quot;</span>
+name+3^dmex <span class="o">(</span><span class="nv">$ZTRAP</span><span class="o">)</span> <span class="o">(</span>Direct mode<span class="o">)</span>
+beg^dmex <span class="o">(</span>Direct mode<span class="o">)</span>
+^GTM<span class="nv">$DMOD</span> <span class="o">(</span>Direct mode<span class="o">)</span>
+YDB&gt;ZGOTO
+YDB&gt;ZSHOW <span class="s2">&quot;S&quot;</span>
+^GTM<span class="nv">$DMOD</span> <span class="o">(</span>Direct mode<span class="o">)</span>
+YDB&gt;ZLINK
+</pre></div>
+</div>
+<p>This example uses a ZSHOW “S” command to display the current state of the call stack. A ZGOTO command without an argument removes all the calling levels above the first from the stack. The ZLINK automatically recompiles and relinks the routine, thereby adding the edited routine to the current image.</p>
+</section>
+<section id="reexecuting-the-routine">
+<h3><a class="toc-backref" href="opdebug.html#id28">Reexecuting the Routine</a><a class="headerlink" href="opdebug.html#reexecuting-the-routine" title="Permalink to this heading">¶</a></h3>
+<p>Re-display the DO command using the RECALL command.</p>
+<p>Execute the routine using the DO command.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;D ^dmex
+Name: Revere, Paul
+Paul Revere
+Name: q
+</pre></div>
+</div>
+<p>This example illustrates a successful execution of dmex.</p>
+</section>
+<section id="using-forked-processes">
+<h3><a class="toc-backref" href="opdebug.html#id29">Using Forked Processes</a><a class="headerlink" href="opdebug.html#using-forked-processes" title="Permalink to this heading">¶</a></h3>
+<p>The ZSYSTEM command creates a new process called the child process, and passes its argument to the shell for execution. The new process executes in the same directory as the initiating process. The new process has the same operating system environment, such as environment variables and input/output devices, as the initiating process. The initiating process pauses until the new process completes before continuing execution.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;ZSYSTEM
+$ ls dmex.*
+dmex.m dmex.o
+$ ps
+PID TTY TIME COMMAND
+<span class="m">7946</span> ttyp0 <span class="m">0</span>:01 sh
+<span class="m">7953</span> ttyp0 <span class="m">0</span>:00 ydb
+<span class="m">7955</span> ttyp0 <span class="m">0</span>:00 ps
+$ <span class="nb">exit</span>
+YDB&gt;
+</pre></div>
+</div>
+<p>This example uses ZSYSTEM to create a child process, perform some shell actions, and return to YottaDB.</p>
+</section>
+</section>
+<section id="summary-of-debugging-tools">
+<h2><a class="toc-backref" href="opdebug.html#id30">Summary of Debugging Tools</a><a class="headerlink" href="opdebug.html#summary-of-debugging-tools" title="Permalink to this heading">¶</a></h2>
+<p>The following table summarizes YottaDB commands, functions, and intrinsic special variables available for debugging. For more information on these commands, functions, and special variables, see the <a class="reference external" href="commands.html">“Commands”</a>, <a class="reference external" href="functions.html">“Functions”</a>, and <a class="reference external" href="isv.html">“Intrinsic Special Variables”</a> chapters.</p>
+<p>For more information on syntax and run-time errors during Direct Mode, see <a class="reference external" href="errproc.html">Chapter 13: “Error Processing”</a>.</p>
+<p><strong>Debugging Tools</strong></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 82%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Extension</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="isv.html#ecode-isv"><span class="std std-ref">$ECODE</span></a></p></td>
+<td><p>Contains a list of errors since it was last cleared</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="isv.html#stack-isv"><span class="std std-ref">$STACK</span></a></p></td>
+<td><p>Contains the current level of DO/XECUTE nesting from a base of zero (0).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="functions.html#stack-function"><span class="std std-ref">$STACK()</span></a></p></td>
+<td><p>Returns information about the M virtual stack context, most of which freezes when an error changes $ECODE from the empty
+string to a list value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="commands.html#zbreak-command"><span class="std std-ref">ZBREAK</span></a></p></td>
+<td><p>Establishes a temporary breakpoint, with optional count and M action.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="commands.html#zcompile-command"><span class="std std-ref">ZCOMpile</span></a></p></td>
+<td><p>Invokes the YottaDB compiler without a corresponding ZLINK.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="commands.html#zcontinue-command"><span class="std std-ref">ZContinue</span></a></p></td>
+<td><p>Continues routine execution from a break.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="commands.html#zedit-command"><span class="std std-ref">ZEdit</span></a></p></td>
+<td><p>Invokes the UNIX text editor specified by the EDITOR environment variable.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="commands.html#zgoto-command"><span class="std std-ref">ZGoto</span></a></p></td>
+<td><p>Removes zero or more levels from the M invocation stack and transfers control.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="commands.html#zlink-command"><span class="std std-ref">ZLink</span></a></p></td>
+<td><p>Includes a new or modified M routine in the current M image; automatically recompiles if necessary.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="commands.html#zmessage-command"><span class="std std-ref">ZMessage</span></a></p></td>
+<td><p>Signals a specified condition.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="commands.html#zprint-command"><span class="std std-ref">ZPrint</span></a></p></td>
+<td><p>Displays lines of source code.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="commands.html#zshow-command"><span class="std std-ref">ZSHow</span></a></p></td>
+<td><p>Displays information about the M environment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="commands.html#zstep-command"><span class="std std-ref">ZSTep</span></a></p></td>
+<td><p>Incrementally executes a routine to the beginning of the next line of the specified type.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="commands.html#zsystem-command"><span class="std std-ref">ZSYstem</span></a></p></td>
+<td><p>Invokes the shell, creating a forked process.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="commands.html#zwrite-command"><span class="std std-ref">ZWRite</span></a></p></td>
+<td><p>Displays all or some local or global variables.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="isv.html#zcstatus-isv"><span class="std std-ref">$ZCSTATUS</span></a></p></td>
+<td><p>Contains the value of the status code for the last compile performed by a ZCOMPILE command.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="commands.html#zedit-command"><span class="std std-ref">ZEdit</span></a></p></td>
+<td><p>Contains the status code for the last ZEDit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="isv.html#zlevel-isv"><span class="std std-ref">$ZLEVEL</span></a></p></td>
+<td><p>Contains the current level of DO/EXECUTE nesting.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="functions.html#zmessage-function"><span class="std std-ref">$ZMESSAGE()</span></a></p></td>
+<td><p>Returns the text associated with an error condition code.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="isv.html#zposition-isv"><span class="std std-ref">$ZPOSITION</span></a></p></td>
+<td><p>Contains a string indicating the current execution location.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="isv.html#zprompt-isv"><span class="std std-ref">$ZPROMPT</span></a></p></td>
+<td><p>Controls the symbol displayed as the direct mode prompt.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="isv.html#zroutines-isv"><span class="std std-ref">$ZROUTINES</span></a></p></td>
+<td><p>Contains a string specifying a directory list containing the object, and optionally, the source files.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="isv.html#zsource-isv"><span class="std std-ref">$ZSOURCE</span></a></p></td>
+<td><p>Contains the name of the M source program most recently ZLINKed or ZEDITed; default name for next ZEDIT or ZLINK.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="isv.html#zstatus-isv"><span class="std std-ref">$ZSTATUS</span></a></p></td>
+<td><p>Contains error condition code and location of the last exception condition occurring during routine execution.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="isv.html#zstep-isv"><span class="std std-ref">$ZSTEP</span></a></p></td>
+<td><p>Controls the default ZSTep action.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="isv.html#zsystem-isv"><span class="std std-ref">$ZSYSTEM</span></a></p></td>
+<td><p>Contains the status code of the last ZSYSTEM.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="devcycle.html" class="btn btn-neutral float-left" title="3. Development Cycle" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="langfeat.html" class="btn btn-neutral float-right" title="5. General Language Features of M" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017-2021, YottaDB LLC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+<hr/>
+<!-- DDG search widget,@author Juri Wornowitski,@version 2.0,@link https://www.plainlight.com/ddg --><div id="widdget" style="width:100%;margin:10px 0;"><style type="text/css">#widdget input {display:block;height:30px;padding:4px;outline:none;border:1px solid #8d8d8d;border-right:0;box-sizing:border-box;border-radius:3px 0 0 3px;width:calc(100% - 41px);font-size:15px;} #widdget button {float:left;cursor:pointer;width:43px;height:30px;color:#fff;background-image:linear-gradient(#7f72ca,#554492);border:0;border-radius:0 3px 3px 0;} #widdget button:active {background-image:linear-gradient(#002387,#002357);} #widdget button:focus {outline:none;}</style><form style="position:relative" onsubmit="this.elements[0].click();return false;"><div style="float:right;position:absolute;top:0;right:-2px;z-index:3"><button type="button" onclick="var v=this.parentElement.parentElement.elements[1].value;window.open('https://duckduckgo.com?q='+encodeURIComponent(v)+'+site%3Adocs.yottadb.com&kj=p');">&#128269;</button></div><input type="text" name="que" placeholder="Search documents with DuckDuckGo" /></form></div>
+ 
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

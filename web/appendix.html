@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Appendix A: M Coding Standards - Do’s and Don’ts &mdash; Programmer&#39;s Guide  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="LICENSE" href="LICENSE.html" />
+    <link rel="prev" title="15. Database Encryption Extensions to the YottaDB External Interface" href="encrypt.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html">
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+	  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+		      <input type="text" name="q" placeholder="Search" />
+		          <input type="hidden" name="check_keywords" value="yes" />
+			      <input type="hidden" name="area" value="default" />
+			        </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://yottadb.com/resources/documentation">Main YottaDB Documentation Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="man.html">About this Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">1. About YottaDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="langext.html">2. YottaDB Language Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devcycle.html">3. Development Cycle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opdebug.html">4. Operating and Debugging in Direct Mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="langfeat.html">5. General Language Features of M</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">6. Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">7. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isv.html">8. Intrinsic Special Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioproc.html">9. Input/Output Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utility.html">10. Utility Routines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extrout.html">11. Integrating External Routines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internatn.html">12. Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errproc.html">13. Error Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">14. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encrypt.html">15. Database Encryption Extensions to the YottaDB External Interface</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="appendix.html#">Appendix A: M Coding Standards - Do’s and Don’ts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendix.html#m-coding-standards-do-s-and-don-ts">M Coding Standards - Do’s and Don’ts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="appendix.html#do-s">Do’s</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#character-set">Character Set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#internationalization">Internationalization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#alias-variables-and-containers">Alias Variables and Containers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#parameter-passing">Parameter Passing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#naked-references">Naked References</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#entryrefs">Entryrefs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#lines-with-multiple-commands">Lines with Multiple Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#lines-width">Lines Width</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#error-handling">Error Handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#transaction-processing">Transaction Processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#break">BREAK</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#argumentless-do">Argumentless DO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#goto-and-zgoto">GOTO and ZGOTO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#halt-quit-and-halt">HALT,QUIT and HALT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#lock-zallocate-and-zdeallocate">LOCK, ZALLOCATE, and ZDEALLOCATE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#new">NEW</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#read">READ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#set">SET</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#xecute-indirection-zsystem-and-pipe-device-commands">XECUTE, Indirection, $ZSYSTEM and PIPE device commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#else">ELSE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#post-conditionals">Post Conditionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#zdata-and-data">$ZDATA() and $DATA()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#increment">$INCREMENT()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#next">$NEXT()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#piece">$PIECE()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#random">$RANDOM()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#zprevious">$ZPREVIOUS()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#etrap-vs-ztrap">$ETRAP vs. $ZTRAP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#key-vs-zb">$KEY vs. $ZB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#stack-vs-zlevel">$STACK vs. $ZLEVEL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#zcmdline">$ZCMDLINE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#extrinsic-functions-and-special-variables">Extrinsic Functions and Special Variables ($$)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#triggers">Triggers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#call-in-call-outs">Call-in/Call-outs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#autorelink">Autorelink</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="appendix.html#don-ts">Don’ts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#source-and-object-files">Source and Object Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#kill-9">kill -9</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#operate-as-root">Operate as Root</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#id1">Triggers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#local-variables">Local Variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">LICENSE</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Programmer's Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Appendix A: M Coding Standards - Do’s and Don’ts</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="encrypt.html" class="btn btn-neutral float-left" title="15. Database Encryption Extensions to the YottaDB External Interface" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="LICENSE.html" class="btn btn-neutral float-right" title="LICENSE" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="appendix-a-m-coding-standards-do-s-and-don-ts">
+<span id="index-0"></span><h1><a class="toc-backref" href="appendix.html#id2">Appendix A: M Coding Standards - Do’s and Don’ts</a><a class="headerlink" href="appendix.html#appendix-a-m-coding-standards-do-s-and-don-ts" title="Permalink to this heading">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="appendix.html#appendix-a-m-coding-standards-do-s-and-don-ts" id="id2">Appendix A: M Coding Standards - Do’s and Don’ts</a></p>
+<ul>
+<li><p><a class="reference internal" href="appendix.html#m-coding-standards-do-s-and-don-ts" id="id3">M Coding Standards - Do’s and Don’ts</a></p>
+<ul>
+<li><p><a class="reference internal" href="appendix.html#do-s" id="id4">Do’s</a></p></li>
+<li><p><a class="reference internal" href="appendix.html#don-ts" id="id5">Don’ts</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="m-coding-standards-do-s-and-don-ts">
+<h2><a class="toc-backref" href="appendix.html#id3">M Coding Standards - Do’s and Don’ts</a><a class="headerlink" href="appendix.html#m-coding-standards-do-s-and-don-ts" title="Permalink to this heading">¶</a></h2>
+<p>M coding standards:</p>
+<ul class="simple">
+<li><p>Improve quality and maintainability by producing uniform standardized code.</p></li>
+<li><p>Aid in readability and comprehension of developed source code by providing an unambiguous, easy to read standard to follow.</p></li>
+<li><p>Help avoid common errors that would not be picked up by a compiler by using these as a framework for good coding practices.</p></li>
+<li><p>Provide an objective reference point for the code authors, maintainers, and reviewers.</p></li>
+</ul>
+<section id="do-s">
+<h3><a class="toc-backref" href="appendix.html#id4">Do’s</a><a class="headerlink" href="appendix.html#do-s" title="Permalink to this heading">¶</a></h3>
+<section id="character-set">
+<h4>Character Set<a class="headerlink" href="appendix.html#character-set" title="Permalink to this heading">¶</a></h4>
+<p>Construct literal strings using only graphic ASCII characters. For non-graphic characters, use the <code class="code docutils literal notranslate"><span class="pre">$CHAR()</span></code> or <code class="code docutils literal notranslate"><span class="pre">$ZCHAR()</span></code> functions to build strings, use a resource file, or build them from comments in the source code using <code class="code docutils literal notranslate"><span class="pre">$TEXT()</span></code>.</p>
+<p>Use VIEW “BADCHAR” in production environments.</p>
+</section>
+<section id="internationalization">
+<h4>Internationalization<a class="headerlink" href="appendix.html#internationalization" title="Permalink to this heading">¶</a></h4>
+<p>Use standard M functions - <code class="code docutils literal notranslate"><span class="pre">$ASCII()</span></code>, <code class="code docutils literal notranslate"><span class="pre">$CHAR()</span></code>, <code class="code docutils literal notranslate"><span class="pre">$EXTRACT()</span></code>, <code class="code docutils literal notranslate"><span class="pre">$FIND()</span></code>, <code class="code docutils literal notranslate"><span class="pre">$JUSTIFY()</span></code>, <code class="code docutils literal notranslate"><span class="pre">$LENGTH()</span></code>, <code class="code docutils literal notranslate"><span class="pre">$PIECE()</span></code>, and <code class="code docutils literal notranslate"><span class="pre">$TRANSLATE()</span></code> - for character-oriented operations. Use analogous byte-oriented functions - <code class="code docutils literal notranslate"><span class="pre">$ZASCII()</span></code>, <code class="code docutils literal notranslate"><span class="pre">$ZCHAR()</span></code>, <code class="code docutils literal notranslate"><span class="pre">$ZEXTRACT()/$ZSUBSTR()</span></code>, <code class="code docutils literal notranslate"><span class="pre">$ZFIND()</span></code>, <code class="code docutils literal notranslate"><span class="pre">$ZJUSTIFY()</span></code>, <code class="code docutils literal notranslate"><span class="pre">$ZLENGTH()</span></code>, <code class="code docutils literal notranslate"><span class="pre">$ZPIECE()</span></code>, and <code class="code docutils literal notranslate"><span class="pre">$ZTRANSLATE()</span></code> when the logic calls for byte, rather than character operations. Use <code class="code docutils literal notranslate"><span class="pre">$ZSUBSTR()</span></code> to ensure the byte-oriented operation produces a valid character result and <code class="code docutils literal notranslate"><span class="pre">$ZEXTRACT()</span></code> when the operation is strictly byte-oriented, with no character implications.</p>
+<p>Use <code class="code docutils literal notranslate"><span class="pre">$ZCONVERT()</span></code> rather than <code class="code docutils literal notranslate"><span class="pre">$TRANSLATE()/$ZTRANSLATE()</span></code> for case conversion.</p>
+</section>
+<section id="alias-variables-and-containers">
+<h4>Alias Variables and Containers<a class="headerlink" href="appendix.html#alias-variables-and-containers" title="Permalink to this heading">¶</a></h4>
+<p>Use Alias Variables and Containers where they promote modularity and an appropriate object-like approach.</p>
+</section>
+<section id="parameter-passing">
+<h4>Parameter Passing<a class="headerlink" href="appendix.html#parameter-passing" title="Permalink to this heading">¶</a></h4>
+<p>Use parameter passing to minimize scoping risk and to implicitly document [sub]routine interfaces. Place variables that are optionally passed at the end of the parameter list. Choose pass-by-reference variable names for clarity and to avoid side effects. Note that using the same name in the actuallist and the formallist may have implications.</p>
+</section>
+<section id="naked-references">
+<h4>Naked References<a class="headerlink" href="appendix.html#naked-references" title="Permalink to this heading">¶</a></h4>
+<p>Avoid naked references except when they reduce the width of the line and materially improve readability. In such cases, ensure any naked references follows the full reference, on the same line with no intervening invocation of other code.</p>
+</section>
+<section id="entryrefs">
+<h4>Entryrefs<a class="headerlink" href="appendix.html#entryrefs" title="Permalink to this heading">¶</a></h4>
+<p>Use the top entryref for invocation from the shell rather than from another routine. Where there is a risk of inadvertent execution from the shell of a routine intended only to be called from M code, protect the top entryref with code that uses <code class="code docutils literal notranslate"><span class="pre">$STACK</span></code> to validate whether or not it is invoked from the shell. Existing utility routines with interfaces documented as not requiring a label are exempt from this requirement.</p>
+</section>
+<section id="lines-with-multiple-commands">
+<h4>Lines with Multiple Commands<a class="headerlink" href="appendix.html#lines-with-multiple-commands" title="Permalink to this heading">¶</a></h4>
+<p>Use lines with multiple, related commands to improve readability as long as they are not too long. Avoid lines with multiple, unrelated commands.</p>
+</section>
+<section id="lines-width">
+<h4>Lines Width<a class="headerlink" href="appendix.html#lines-width" title="Permalink to this heading">¶</a></h4>
+<p>Limit lines to no wider than 132 columns.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The line oriented nature of M means that sometimes a single long line can be more readable than a block of code. Such occasional long lines are permissible where justified.</p>
+</div>
+</section>
+<section id="error-handling">
+<h4>Error Handling<a class="headerlink" href="appendix.html#error-handling" title="Permalink to this heading">¶</a></h4>
+<p>All product code must have an error trap. Unless the intent of the code is to invoke Direct Mode, the error handler must never use a BREAK explicitly or implicitly to do so. The base error handler in a program suite, and possibly some other error handlers, must provide a way to appropriately preserve the context of unpredictable errors.</p>
+<p>New code should generally use <code class="code docutils literal notranslate"><span class="pre">$ETRAP</span></code> error handling rather than <code class="code docutils literal notranslate"><span class="pre">$ZTRAP</span></code> error handling. As changing error handling can be risky (for example, indirect references in databases), retain error handling in existing code unless you have tested and verified the safety of the change.</p>
+</section>
+<section id="transaction-processing">
+<h4>Transaction Processing<a class="headerlink" href="appendix.html#transaction-processing" title="Permalink to this heading">¶</a></h4>
+<p>Except for tests, code transactions as restartable, avoid non-Isolated actions (BREAK, JOB, LOCK ZSYSTEM or I/O) within transactions; minimize transaction size, use TRANSACTION=”BATCH” for better performance where the solution doesn’t require strong Durability or provides Durability with application logic. When LOCKs are appropriate, place them outside the transaction.</p>
+</section>
+<section id="break">
+<h4>BREAK<a class="headerlink" href="appendix.html#break" title="Permalink to this heading">¶</a></h4>
+<p>To prevent applications from inadvertently falling into direct mode, only use the BREAK command when there is a specific requirement for its use. When circumstances require BREAK commands more persistent than those placed with ZBREAK, or in places within lines, conditionalize them on a debug setting, for example <code class="code docutils literal notranslate"><span class="pre">BREAK:($get(debug)&amp;(&lt;condition&gt;))</span></code>.</p>
+</section>
+<section id="argumentless-do">
+<h4>Argumentless DO<a class="headerlink" href="appendix.html#argumentless-do" title="Permalink to this heading">¶</a></h4>
+<p>This language construct provides a way to code an embedded subroutine, which stacks $TEST - something extrinsic functions ($$) also do, but DO with an entryref argument does not. It also provides some relief from the line-oriented structure of the language, albeit at some cost.</p>
+<p>When the logic calls for multiple invocations of a subroutine avoid using multiple copies of the same argumentless DO body.</p>
+<p>Leave a space between the last level indicator (li) and the first command or a comment delimiter.</p>
+<p>Be careful with level indicators, as any reduction in number, even for a comment, terminates one or more levels.</p>
+</section>
+<section id="goto-and-zgoto">
+<h4>GOTO and ZGOTO<a class="headerlink" href="appendix.html#goto-and-zgoto" title="Permalink to this heading">¶</a></h4>
+<p>Except for handling logic to effect an exit from nested logic and nested function calls or where appropriate in test code, avoid the use of GOTO and ZGOTO commands. When using these commands outside of test code, you must include a comment explaining why such use works better than any refactoring that would eliminate the [Z]GOTO.</p>
+</section>
+<section id="halt-quit-and-halt">
+<h4>HALT,QUIT and HALT<a class="headerlink" href="appendix.html#halt-quit-and-halt" title="Permalink to this heading">¶</a></h4>
+<p>Choose QUIT, rather than HALT, to terminate a routine, unless there is a clear requirement to the contrary.</p>
+<p>Account for the difference in QUIT from a FOR, which does not change the stack level of the M virtual machine and QUIT from a [sub]routine which does change the stack level. This may require the use of a state flag to terminate a FOR that invokes a subroutine.</p>
+<p>Choose the argumentless (which requires a following double space) or value form of QUIT as appropriate. When a subroutine can be invoked with either a DO or extrinsic ($$), explicitly code the alternative exits, rather than relying on a setting of $ZQUIT_ANYWAY.</p>
+<p>QUIT at the end of a [sub]routine is required unless the [sub]routine ends in a HALT. QUIT at the end of an argumentless DO level is optional.</p>
+<p>Use ZHALT to return an invocation to the shell that the termination is abnormal.</p>
+</section>
+<section id="lock-zallocate-and-zdeallocate">
+<h4>LOCK, ZALLOCATE, and ZDEALLOCATE<a class="headerlink" href="appendix.html#lock-zallocate-and-zdeallocate" title="Permalink to this heading">¶</a></h4>
+<p>Always specify a timeout on LOCK or LOCK+ commands.</p>
+<p>Use a protocol for resource name order to minimize deadlocks. Use the standard incremental LOCK (+/-), rather than ZALLOCATE and ZDEALLOCATE.</p>
+</section>
+<section id="new">
+<h4>NEW<a class="headerlink" href="appendix.html#new" title="Permalink to this heading">¶</a></h4>
+<p>Minimize use of argumentless and exclusive NEW except to satisfy requirements. These variants may be appropriate at the beginning of the base routine of an application.</p>
+</section>
+<section id="read">
+<h4>READ<a class="headerlink" href="appendix.html#read" title="Permalink to this heading">¶</a></h4>
+<p>Always use a timeout, except when READing from a file in NOFOLLOW mode. Except when collecting raw or externally validated data, READ into a local variable and validate that the value is appropriate - check for length, range, delimiters and any value restrictions. Always validate input before using it in ways that assume it meets expectations; this is critical when using it in indirection or XECUTE, or storing it durably in a global variable.</p>
+</section>
+<section id="set">
+<h4>SET<a class="headerlink" href="appendix.html#set" title="Permalink to this heading">¶</a></h4>
+<p>When setting several nodes to the same value, specify a list of names within parentheses, rather than separately, e.g., SET (A,B,C)=0 vs. SET A=0,B=0,C=0.</p>
+</section>
+<section id="xecute-indirection-zsystem-and-pipe-device-commands">
+<h4>XECUTE, Indirection, $ZSYSTEM and PIPE device commands<a class="headerlink" href="appendix.html#xecute-indirection-zsystem-and-pipe-device-commands" title="Permalink to this heading">¶</a></h4>
+<p>To minimize run-time errors and prevent out-of-design user induced outcomes, ensure strings for use by the indirection operator, the XECUTE command, the ZSYSTEM command and PIPE device commands are valid, either by program design and implementation, or by validating the value prior to use.</p>
+</section>
+<section id="else">
+<h4>ELSE<a class="headerlink" href="appendix.html#else" title="Permalink to this heading">¶</a></h4>
+<p>Use ELSE with care. Because YottaDB stacks $TEST only at the execution of an extrinsic or an argumentless DO command, any XECUTE or DO with an argument has the potential side effect of altering $TEST.</p>
+</section>
+<section id="post-conditionals">
+<h4>Post Conditionals<a class="headerlink" href="appendix.html#post-conditionals" title="Permalink to this heading">¶</a></h4>
+<p>When conditionalizing a single command or transfer of control argument, and there is no need to set $TEST, use postconditionals, as they provide a slight performance advantage and tend to improve readability by tying the condition closely to the action. For example, choose SET:&lt;condition&gt; over IF &lt;condition&gt; SET.</p>
+</section>
+<section id="zdata-and-data">
+<h4>$ZDATA() and $DATA()<a class="headerlink" href="appendix.html#zdata-and-data" title="Permalink to this heading">¶</a></h4>
+<p>Use $ZDATA() rather than $DATA() unless the logic needs to ignore alias implications.</p>
+</section>
+<section id="increment">
+<h4>$INCREMENT()<a class="headerlink" href="appendix.html#increment" title="Permalink to this heading">¶</a></h4>
+<p>You may use an IF to discard the result of INCREMENT() in order to take advantage of the INCREMENT() side-effect.</p>
+</section>
+<section id="next">
+<h4>$NEXT()<a class="headerlink" href="appendix.html#next" title="Permalink to this heading">¶</a></h4>
+<p>Use $ORDER() rather than $NEXT(), which is deprecated.</p>
+</section>
+<section id="piece">
+<h4>$PIECE()<a class="headerlink" href="appendix.html#piece" title="Permalink to this heading">¶</a></h4>
+<p>If using a piece of data more than once, extract the data to a local variable for reuse, rather than using repeated invocations of $PIECE() to extract the same piece of data.</p>
+</section>
+<section id="random">
+<h4>$RANDOM()<a class="headerlink" href="appendix.html#random" title="Permalink to this heading">¶</a></h4>
+<p>$RANDOM(1) always returns 0 and so is never appropriate. Adjust $RANDOM() results with appropriate arithmetic to achieve the desired range.</p>
+</section>
+<section id="zprevious">
+<h4>$ZPREVIOUS()<a class="headerlink" href="appendix.html#zprevious" title="Permalink to this heading">¶</a></h4>
+<p>Use the standard $ORDER(x,-1), rather than $ZPREVIOUS(x).</p>
+</section>
+<section id="etrap-vs-ztrap">
+<h4>$ETRAP vs. $ZTRAP<a class="headerlink" href="appendix.html#etrap-vs-ztrap" title="Permalink to this heading">¶</a></h4>
+<p>Use $ETRAP rather than $ZTRAP unless there are good reasons not to.</p>
+</section>
+<section id="key-vs-zb">
+<h4>$KEY vs. $ZB<a class="headerlink" href="appendix.html#key-vs-zb" title="Permalink to this heading">¶</a></h4>
+<p>Use $KEY rather than $ZB, unless code must run on old versions of YottaDB which do not maintain $KEY for the target device.</p>
+</section>
+<section id="stack-vs-zlevel">
+<h4>$STACK vs. $ZLEVEL<a class="headerlink" href="appendix.html#stack-vs-zlevel" title="Permalink to this heading">¶</a></h4>
+<p>Use $STACK rather than $ZLEVEL, unless it eliminated arithmetic or existing uses of $ZLEVEL are so numerous as to make a change high risk.</p>
+</section>
+<section id="zcmdline">
+<h4>$ZCMDLINE<a class="headerlink" href="appendix.html#zcmdline" title="Permalink to this heading">¶</a></h4>
+<p>Validate all input from $ZCMDLINE as if it were from a READ for user input.</p>
+</section>
+<section id="extrinsic-functions-and-special-variables">
+<h4>Extrinsic Functions and Special Variables ($$)<a class="headerlink" href="appendix.html#extrinsic-functions-and-special-variables" title="Permalink to this heading">¶</a></h4>
+<p>When a subroutine needs to return a single value or an array of values, choose an Extrinsic invocation over a DO in order to minimize scoping risks.</p>
+</section>
+<section id="triggers">
+<h4>Triggers<a class="headerlink" href="appendix.html#triggers" title="Permalink to this heading">¶</a></h4>
+<p>While YottaDB does not restrict trigger code from performing I/O operations, avoid using OPEN, USE, READ, WRITE and CLOSE within trigger application code. Such operations may be useful for development and diagnostic purposes. Triggers implicitly run as TP transactions and I/O violates the ACID property of Isolation , as do JOB, LOCK, ZSYSTEM and external calls.</p>
+<p>Use comprehensive and strong coding conventions for trigger code or rely on user-specified names in managing the deletion and replacement of triggers.</p>
+<p>Except when using triggers for debugging, use journaling on any region that uses triggers.</p>
+</section>
+<section id="call-in-call-outs">
+<h4>Call-in/Call-outs<a class="headerlink" href="appendix.html#call-in-call-outs" title="Permalink to this heading">¶</a></h4>
+<p>Use ydb_malloc()/ydb_free() in the external functions for enhanced performance and better debugging capability in case memory management problems occur with external calls.</p>
+<p>Use ydb *t types defined in libyottadb.h instead of the native types (int, float, char, etc) to avoid potential size mismatches with the parameter types.</p>
+</section>
+<section id="autorelink">
+<h4>Autorelink<a class="headerlink" href="appendix.html#autorelink" title="Permalink to this heading">¶</a></h4>
+<p>Either auto-relink-enable or auto-relink-disable the directory in $zroutines for the life of the process.</p>
+<p>Use the same value of $ydb_linktmpdir for all processes. All processes that share a directory whose contents are subject to ZRUPDATE use the same value for $ydb_linktmpdir so that all processes see update notifications - with different values of $ydb_linktmpdir, a ZRUPDATE by a process with one value of $ydb_linktmpdir would not be observed by a process with a different value of that environment variable.</p>
+</section>
+</section>
+<section id="don-ts">
+<h3><a class="toc-backref" href="appendix.html#id5">Don’ts</a><a class="headerlink" href="appendix.html#don-ts" title="Permalink to this heading">¶</a></h3>
+<section id="source-and-object-files">
+<h4>Source and Object Files<a class="headerlink" href="appendix.html#source-and-object-files" title="Permalink to this heading">¶</a></h4>
+<p>Never change the name of an object file.</p>
+<p>When forming routine names, the compiler truncates object filenames to a maximum length of 31 characters. For example, for a source file called Adatabaseenginewithscalabilityproven.m the compiler generates an object file called Adatabaseenginewithscalabilityp.o. Never let YottaDB routines file names exceed 31 characters.</p>
+</section>
+<section id="kill-9">
+<h4>kill -9<a class="headerlink" href="appendix.html#kill-9" title="Permalink to this heading">¶</a></h4>
+<p>Killing a process with kill -9 may cause database damage. Use MUPIP STOP or MUPIP INTRPT instead. Use kill -9 as the last resort if the process does not respond to MUPIP STOP. kill -9 terminates the process abruptly and may leave database files improperly closed and require a MUPIP RUNDOWN. Because kill -9 may cause database damage, perform a MUPIP INTEG immediately after a kill -9.</p>
+</section>
+<section id="operate-as-root">
+<h4>Operate as Root<a class="headerlink" href="appendix.html#operate-as-root" title="Permalink to this heading">¶</a></h4>
+<p>Never run a routine as root.</p>
+<p>Other than YottaDB installation, never perform any YottaDB operation as root.</p>
+</section>
+<section id="id1">
+<h4>Triggers<a class="headerlink" href="appendix.html#id1" title="Permalink to this heading">¶</a></h4>
+<p>Never use chained and nested triggers that potentially update the same piece of a global variable. You should always assess the significance of having chained triggers for a database update especially because of the arbitrary trigger execution order.</p>
+<p>Never access ^#t with DSE, except with guidance from your YottaDB support channel. Manage trigger definitions with MUPIP TRIGGER and $ZTRIGGER().</p>
+</section>
+<section id="local-variables">
+<h4>Local Variables<a class="headerlink" href="appendix.html#local-variables" title="Permalink to this heading">¶</a></h4>
+<p>Never use exponential numeric form in the subscripts. It may lead to ambiguities. Because numeric subscripts collate ahead of string subscripts, the string subscript “01E5” is not the same as the numeric subscript 01E5.</p>
+<p>Never SET $ZWRTACn “variables”. They are used by YottaDB to make ZWRITE output more useful but are not supported for any other purpose. They are only mentioned here because you may see them in the output of ZWRITE and ZSHOW “V”.</p>
+<p>You can use SET &#64; to process ZWRITE or ZSHOW “V” output containing $ZWRTACn variables for restoring an alias container variable to a prior state. While processing the output, never attempt to inject or manipulate $ZWRTACn lines as it may lead to unintended consequences or undermine the benefit you might achieve from using alias containers. Lines containing SET $ZWRTACn=&lt;value&gt; are no-ops unless they have a preceding SET $ZWRTAC=”” and an alias container variable association. In the ZWRITE or ZSHOW “V” output of an alias container, SET $ZWRTAC lines appear in the order that YottaDB expects for restoration. YottaDB can change the use of $ZWRTAC in YottaDB at any time.</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="encrypt.html" class="btn btn-neutral float-left" title="15. Database Encryption Extensions to the YottaDB External Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="LICENSE.html" class="btn btn-neutral float-right" title="LICENSE" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017-2021, YottaDB LLC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+<hr/>
+<!-- DDG search widget,@author Juri Wornowitski,@version 2.0,@link https://www.plainlight.com/ddg --><div id="widdget" style="width:100%;margin:10px 0;"><style type="text/css">#widdget input {display:block;height:30px;padding:4px;outline:none;border:1px solid #8d8d8d;border-right:0;box-sizing:border-box;border-radius:3px 0 0 3px;width:calc(100% - 41px);font-size:15px;} #widdget button {float:left;cursor:pointer;width:43px;height:30px;color:#fff;background-image:linear-gradient(#7f72ca,#554492);border:0;border-radius:0 3px 3px 0;} #widdget button:active {background-image:linear-gradient(#002387,#002357);} #widdget button:focus {outline:none;}</style><form style="position:relative" onsubmit="this.elements[0].click();return false;"><div style="float:right;position:absolute;top:0;right:-2px;z-index:3"><button type="button" onclick="var v=this.parentElement.parentElement.elements[1].value;window.open('https://duckduckgo.com?q='+encodeURIComponent(v)+'+site%3Adocs.yottadb.com&kj=p');">&#128269;</button></div><input type="text" name="que" placeholder="Search documents with DuckDuckGo" /></form></div>
+ 
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

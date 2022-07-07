@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. About YottaDB &mdash; Programmer&#39;s Guide  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html#" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. YottaDB Language Extensions" href="langext.html" />
+    <link rel="prev" title="About this Manual" href="man.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html">
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+	  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+		      <input type="text" name="q" placeholder="Search" />
+		          <input type="hidden" name="check_keywords" value="yes" />
+			      <input type="hidden" name="area" value="default" />
+			        </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://yottadb.com/resources/documentation">Main YottaDB Documentation Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="man.html">About this Manual</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="about.html#">1. About YottaDB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#programming-environment">Programming Environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="about.html#managing-data">Managing Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="about.html#database-management-utilities">Database Management Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="about.html#managing-source-code">Managing Source Code</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="about.html#source-file-management">Source File Management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="about.html#programming-and-debugging-facilities">Programming and Debugging Facilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="about.html#the-compiler">The Compiler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="about.html#the-run-time-system">The Run-Time System</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="about.html#automatic-and-incremental-linking">Automatic and Incremental Linking</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="about.html#error-processing">Error Processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="about.html#input-output-processing">Input-Output Processing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="about.html#integrating-yottadb-with-other-languages">Integrating YottaDB with Other Languages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="about.html#access-to-non-m-routines">Access to non- M routines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="about.html#internationalization">Internationalization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="langext.html">2. YottaDB Language Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devcycle.html">3. Development Cycle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opdebug.html">4. Operating and Debugging in Direct Mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="langfeat.html">5. General Language Features of M</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">6. Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">7. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isv.html">8. Intrinsic Special Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioproc.html">9. Input/Output Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utility.html">10. Utility Routines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extrout.html">11. Integrating External Routines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internatn.html">12. Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errproc.html">13. Error Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">14. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encrypt.html">15. Database Encryption Extensions to the YottaDB External Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix A: M Coding Standards - Do’s and Don’ts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">LICENSE</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Programmer's Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>1. About YottaDB</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="man.html" class="btn btn-neutral float-left" title="About this Manual" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="langext.html" class="btn btn-neutral float-right" title="2. YottaDB Language Extensions" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="about-yottadb">
+<span id="index-0"></span><h1><a class="toc-backref" href="about.html#id1">1. About YottaDB</a><a class="headerlink" href="about.html#about-yottadb" title="Permalink to this heading">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="about.html#about-yottadb" id="id1">1. About YottaDB</a></p>
+<ul>
+<li><p><a class="reference internal" href="about.html#programming-environment" id="id2">Programming Environment</a></p>
+<ul>
+<li><p><a class="reference internal" href="about.html#managing-data" id="id3">Managing Data</a></p></li>
+<li><p><a class="reference internal" href="about.html#managing-source-code" id="id4">Managing Source Code</a></p></li>
+<li><p><a class="reference internal" href="about.html#automatic-and-incremental-linking" id="id5">Automatic and Incremental Linking</a></p></li>
+<li><p><a class="reference internal" href="about.html#integrating-yottadb-with-other-languages" id="id6">Integrating YottaDB with Other Languages</a></p></li>
+<li><p><a class="reference internal" href="about.html#access-to-non-m-routines" id="id7">Access to non- M routines</a></p></li>
+<li><p><a class="reference internal" href="about.html#internationalization" id="id8">Internationalization</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>YottaDB runs on a wide variety of computer platforms. Consult YottaDB for the current list of supported platforms.</p>
+<p>In addition to preserving the traditional features of M, YottaDB also offers an optimized compiler that produces object code that does not require internal interpreters during execution.</p>
+<p>On all platforms, the YottaDB dynamic linking mechanism activates compiled objects. On some platforms, you can link the object modules into shared object libraries.</p>
+<p>In keeping with the focus on creating fully compiled code, YottaDB is tightly integrated with the operating system environment and permits the use of operating system utilities for program development.</p>
+<p>YottaDB also provides a full complement of M tools for creating, compiling, and debugging source code. Many of these tasks are accomplished from the facility called Direct Mode, which offers the look and feel of an interpreted language that is familiar to the traditional M programmer.</p>
+<section id="programming-environment">
+<h2><a class="toc-backref" href="about.html#id2">Programming Environment</a><a class="headerlink" href="about.html#programming-environment" title="Permalink to this heading">¶</a></h2>
+<p>The Programming Environment is described in the following sections.</p>
+<section id="managing-data">
+<h3><a class="toc-backref" href="about.html#id3">Managing Data</a><a class="headerlink" href="about.html#managing-data" title="Permalink to this heading">¶</a></h3>
+<p>The scope of M data is either process local or global.</p>
+<ul class="simple">
+<li><p>Local variables last only for the duration of the current session; YottaDB deletes them when the M process terminates.</p></li>
+<li><p>Global variables contain data that persists beyond the process. YottaDB stores global variables on disk. A Global Directory organizes global variables and describes the organization of a database. The YottaDB administrator uses the Global Directory Editor (GDE) to create and manage Global Directories. A Global Directory maps global names to a database file. YottaDB uses this mapping when it stores and retrieves globals from the database. Several Global Directories may refer to a single database file.</p></li>
+</ul>
+<section id="database-management-utilities">
+<h4>Database Management Utilities<a class="headerlink" href="about.html#database-management-utilities" title="Permalink to this heading">¶</a></h4>
+<p>The Global Directory Editor (GDE) creates, modifies, maintains, and displays the characteristics of Global Directories. GDE also maps LOCKs on resource names to the region of the database specified for the corresponding global variables.</p>
+<p>The M Peripheral Interchange Program (MUPIP) creates database files and provides tools for database management and database journaling.</p>
+<p>For more information regarding database utilities and the data management system, refer to the <a class="reference external" href="../AdminOpsGuide/gde.html">“Global Directory Editor”</a>, <a class="reference external" href="../AdminOpsGuide/dbmgmt.html">“MUPIP”</a> and <a class="reference external" href="../AdminOpsGuide/ydbjournal.html">“YottaDB Journaling”</a> chapters in the Administration and Operations Guide.</p>
+</section>
+</section>
+<section id="managing-source-code">
+<h3><a class="toc-backref" href="about.html#id4">Managing Source Code</a><a class="headerlink" href="about.html#managing-source-code" title="Permalink to this heading">¶</a></h3>
+<p>In the YottaDB programming environment, source routines are generated and stored as standard UNIX files. They are created and edited with standard UNIX text editors. YottaDB accepts source lines of up to 8192 bytes. When YottaDB encounters a line with a length greater than 8192 bytes in a source file, it emits a <code class="code docutils literal notranslate"><span class="pre">%YDB-W-LSEXPECTED</span></code> warning. This warning identifies cases where a line greater than 8192 bytes is split into multiple lines, which causes statements beyond the character prior to the limit to execute irrespective of any starting IF, ELSE or FOR commands. The 8192 byte limit applies to XECUTE command arguments and Direct Mode input as well.</p>
+<p>YottaDB is designed to work with the operating system utilities and enhances them when beneficial. The following sections describe the process of programming and debugging with YottaDB and from the operating system.</p>
+<section id="source-file-management">
+<h4>Source File Management<a class="headerlink" href="about.html#source-file-management" title="Permalink to this heading">¶</a></h4>
+<p>In addition to standard M “percent” utilities, YottaDB permits the use of the standard UNIX file manipulation tools, for example, the <code class="code docutils literal notranslate"><span class="pre">diff</span></code>, <code class="code docutils literal notranslate"><span class="pre">grep</span></code>, <code class="code docutils literal notranslate"><span class="pre">cp</span></code>, and <code class="code docutils literal notranslate"><span class="pre">mv</span></code> commands. The programmer can also use the powerful facilities provided by the UNIX directory structure, such as time and date information, tree-structured directories, and file protection codes.</p>
+<p>YottaDB programs are compatible with version control software. For example YottaDB version control is managed using <a class="reference external" href="https://git.kernel.org/pub/scm/git/git.git/">git</a>.</p>
+</section>
+<section id="programming-and-debugging-facilities">
+<h4>Programming and Debugging Facilities<a class="headerlink" href="about.html#programming-and-debugging-facilities" title="Permalink to this heading">¶</a></h4>
+<p>You can use any UNIX text editor to create M source files. If you generate a program from within the Direct Mode, it also accesses the UNIX text editor specified by the environment variable <code class="code docutils literal notranslate"><span class="pre">EDITOR</span></code> and provides additional capabilities to automate and enhance the process.</p>
+<p>You can also use the Direct Mode facility to interactively debug, modify, and execute M routines. In Direct Mode, YottaDB executes each M command immediately, as if it had been in-line at the point where YottaDB initiated Direct Mode.</p>
+<p>The following is a list of additional enhancements available from the Direct Mode:</p>
+<ul class="simple">
+<li><p>The capability to issue commands from Direct Mode to the shell</p></li>
+<li><p>A command recall function to display and reuse previously entered commands</p></li>
+<li><p>Many language extensions that specifically optimize the debugging environment</p></li>
+</ul>
+</section>
+<section id="the-compiler">
+<h4>The Compiler<a class="headerlink" href="about.html#the-compiler" title="Permalink to this heading">¶</a></h4>
+<p>The compiler operates on source files to produce object files consisting of position-independent, native object code, which on some platforms can be linked into shared object libraries. YottaDB provides syntax error checking at compile-time and allows you to enable or disable the compile-as-written mode. By default, YottaDB produces an object file even if the compiler detects errors in the source code. This compile-as-written mode facilitates a flexible approach to debugging.</p>
+</section>
+<section id="the-run-time-system">
+<h4>The Run-Time System<a class="headerlink" href="about.html#the-run-time-system" title="Permalink to this heading">¶</a></h4>
+<p>A YottaDB programmer can execute an M routine from the shell or interactively, using the M commands from Direct Mode.</p>
+<p>The run-time system executes compile-as-written code as long as it does not encounter the compile-time errors. If it detects an error, the run-time system suspends execution of a routine immediately and transfers control to Direct Mode or to a user-written error routine.</p>
+</section>
+</section>
+<section id="automatic-and-incremental-linking">
+<h3><a class="toc-backref" href="about.html#id5">Automatic and Incremental Linking</a><a class="headerlink" href="about.html#automatic-and-incremental-linking" title="Permalink to this heading">¶</a></h3>
+<p>The run-time system utilizes a YottaDB facility called ZLINK to link in an M routine. When a program or a Direct Mode command refers to an M routine that is not part of the current process, YottaDB automatically uses the ZLINK facility and attempts to link the referenced routine (auto-ZLINK). The ZLINK facility also determines whether recompilation of the routine is necessary. When compiling as a result of a ZLINK, YottaDB typically ignores errors in the source code.</p>
+<p>The run-time system also provides incremental linking. The ZLINK command adds an M routine to the current image. This feature facilitates the addition of code modifications during a debugging session. The programmer can also use the feature to add patches and generated code to a running M process.</p>
+<section id="error-processing">
+<h4>Error Processing<a class="headerlink" href="about.html#error-processing" title="Permalink to this heading">¶</a></h4>
+<p>The compiler detects and reports syntax errors at the following times:</p>
+<ul class="simple">
+<li><p>Compile-time - while producing the object module from a source file</p></li>
+<li><p>Run-time - while compiling code for M indirection and XECUTEs</p></li>
+<li><p>Run-time - when the user is working in Direct Mode.</p></li>
+</ul>
+<p>The compile-time error message format displays the line containing the error and the location of the error on the line. The error message also indicates what was incorrect about the M statement.</p>
+<p>YottaDB can not detect certain types of errors associated with indirection, the functioning of I/O devices, and program logic until run-time.</p>
+<p>The compile-as-written feature allows compilation to continue and produces an object module despite errors in the code. This permits testing of other pathways through the code. The errors are reported at run-time, when YottaDB encounters them in the execution path.</p>
+<p>The run-time system recognizes execution errors and reports them when they occur. It also reports errors flagged by the compiler when they occur in the execution path.</p>
+<p>For more information, see <a class="reference external" href="errproc.html">Chapter 13: “Error Processing”</a>.</p>
+</section>
+<section id="input-output-processing">
+<h4>Input-Output Processing<a class="headerlink" href="about.html#input-output-processing" title="Permalink to this heading">¶</a></h4>
+<p>YottaDB supports input and output processing with the following system components:</p>
+<ul class="simple">
+<li><p>Terminals</p></li>
+<li><p>Sequential disk files</p></li>
+<li><p>Mailboxes</p></li>
+<li><p>FIFOs</p></li>
+<li><p>Null devices</p></li>
+<li><p>Socket devices</p></li>
+</ul>
+<p>YottaDB input/output processing is device-independent. Copying information from one device to another is accomplished without reformatting.</p>
+<p>YottaDB has special terminal-handling facilities. YottaDB performs combined QIO operations to enhance terminal performance. The terminal control facilities that YottaDB provides include escape sequences, control character traps, and echo suppression.</p>
+<p>YottaDB supports RMS sequential disk files that are accessed using a variety of deviceparameters.</p>
+<p>YottaDB supports block I/O with fixed and variable length records for file-structured (FILES-11) tapes and non-file-structured unlabeled (FOREIGN) tapes. YottaDB supports the ASCII character set for unlabeled FOREIGN and FILES-11 tapes. YottaDB supports the EBCDIC character set for FOREIGN tapes only. YottaDB also supports FOREIGN DOS-11 and ANSI labelled tapes or stream format records. It also supports ASCII and EBCDIC character sets.</p>
+<p>YottaDB uses permanent or temporary mailboxes fifos for interprocess communication. YottaDB treats mailboxes as record-structured I/O devices.</p>
+<p>YottaDB provides the ability to direct output to a null device. This is an efficient way to discard unwanted output.</p>
+<p>YottaDB provides device-exception processing so that I/O exception handling need not be combined with process-related exception conditions. The OPEN, USE, and CLOSE EXCEPTION parameters define an XECUTE string as an error handler for an I/O device.</p>
+</section>
+</section>
+<section id="integrating-yottadb-with-other-languages">
+<h3><a class="toc-backref" href="about.html#id6">Integrating YottaDB with Other Languages</a><a class="headerlink" href="about.html#integrating-yottadb-with-other-languages" title="Permalink to this heading">¶</a></h3>
+<p>YottaDB offers capabilities that allow you to optimize your programming environment. These include allowing you to call into M routines from programs written in other programming languages, access your M databases with interfaces that provide functionality equivalent to M intrinsic database functions, and to alter your programming environment when working with languages other than American English. These include allowing you to call programs written in other programming languages that support C-like interfaces and to alter your programming environment when working with languages other than American English. This capability is described in more detail in chapters throughout this manual.</p>
+</section>
+<section id="access-to-non-m-routines">
+<h3><a class="toc-backref" href="about.html#id7">Access to non- M routines</a><a class="headerlink" href="about.html#access-to-non-m-routines" title="Permalink to this heading">¶</a></h3>
+<p>YottaDB routines can call external (non-M) routines using the external call function. This permits access to functions implemented in other programming languages. For more information, see <a class="reference external" href="extrout.html">Chapter 11: “Integrating External Routines”</a>.</p>
+</section>
+<section id="internationalization">
+<h3><a class="toc-backref" href="about.html#id8">Internationalization</a><a class="headerlink" href="about.html#internationalization" title="Permalink to this heading">¶</a></h3>
+<p>YottaDB allows the definition of alternative collation sequences and pattern matching codes for use with languages other than English. <a class="reference external" href="internatn.html">Chapter 12: “Internationalization”</a> describes the details and requirements of this functionality.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="man.html" class="btn btn-neutral float-left" title="About this Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="langext.html" class="btn btn-neutral float-right" title="2. YottaDB Language Extensions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017-2021, YottaDB LLC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+<hr/>
+<!-- DDG search widget,@author Juri Wornowitski,@version 2.0,@link https://www.plainlight.com/ddg --><div id="widdget" style="width:100%;margin:10px 0;"><style type="text/css">#widdget input {display:block;height:30px;padding:4px;outline:none;border:1px solid #8d8d8d;border-right:0;box-sizing:border-box;border-radius:3px 0 0 3px;width:calc(100% - 41px);font-size:15px;} #widdget button {float:left;cursor:pointer;width:43px;height:30px;color:#fff;background-image:linear-gradient(#7f72ca,#554492);border:0;border-radius:0 3px 3px 0;} #widdget button:active {background-image:linear-gradient(#002387,#002357);} #widdget button:focus {outline:none;}</style><form style="position:relative" onsubmit="this.elements[0].click();return false;"><div style="float:right;position:absolute;top:0;right:-2px;z-index:3"><button type="button" onclick="var v=this.parentElement.parentElement.elements[1].value;window.open('https://duckduckgo.com?q='+encodeURIComponent(v)+'+site%3Adocs.yottadb.com&kj=p');">&#128269;</button></div><input type="text" name="que" placeholder="Search documents with DuckDuckGo" /></form></div>
+ 
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

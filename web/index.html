@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to The M Programmer’s Guide! &mdash; Programmer&#39;s Guide  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script><script type="text/javascript" src="_static/searchtools.js"></script><script type="text/javascript" src="searchindex.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="About this Manual" href="man.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html#">
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+	  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+		      <input type="text" name="q" placeholder="Search" />
+		          <input type="hidden" name="check_keywords" value="yes" />
+			      <input type="hidden" name="area" value="default" />
+			        </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference external" href="https://yottadb.com/resources/documentation">Main YottaDB Documentation Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="man.html">About this Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">1. About YottaDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="langext.html">2. YottaDB Language Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devcycle.html">3. Development Cycle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opdebug.html">4. Operating and Debugging in Direct Mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="langfeat.html">5. General Language Features of M</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">6. Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">7. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isv.html">8. Intrinsic Special Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioproc.html">9. Input/Output Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utility.html">10. Utility Routines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extrout.html">11. Integrating External Routines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internatn.html">12. Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errproc.html">13. Error Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">14. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encrypt.html">15. Database Encryption Extensions to the YottaDB External Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix A: M Coding Standards - Do’s and Don’ts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">LICENSE</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html#">Programmer's Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html#" class="icon icon-home"></a> &raquo;</li>
+      <li>Welcome to The M Programmer’s Guide!</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="man.html" class="btn btn-neutral float-right" title="About this Manual" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-the-m-programmer-s-guide">
+<h1>Welcome to The M Programmer’s Guide!<a class="headerlink" href="index.html#welcome-to-the-m-programmer-s-guide" title="Permalink to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://yottadb.com/resources/documentation">Main YottaDB Documentation Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="man.html">About this Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="man.html#intended-audience">Intended Audience</a></li>
+<li class="toctree-l2"><a class="reference internal" href="man.html#purpose-of-the-manual">Purpose of the Manual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="man.html#how-to-use-this-manual">How to use this Manual</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">1. About YottaDB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#programming-environment">Programming Environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="about.html#managing-data">Managing Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="about.html#database-management-utilities">Database Management Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="about.html#managing-source-code">Managing Source Code</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="about.html#source-file-management">Source File Management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="about.html#programming-and-debugging-facilities">Programming and Debugging Facilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="about.html#the-compiler">The Compiler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="about.html#the-run-time-system">The Run-Time System</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="about.html#automatic-and-incremental-linking">Automatic and Incremental Linking</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="about.html#error-processing">Error Processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="about.html#input-output-processing">Input-Output Processing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="about.html#integrating-yottadb-with-other-languages">Integrating YottaDB with Other Languages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="about.html#access-to-non-m-routines">Access to non- M routines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="about.html#internationalization">Internationalization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="langext.html">2. YottaDB Language Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="langext.html#operating-system-interface-facilities">Operating System Interface Facilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langext.html#debugging-facilities">Debugging Facilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langext.html#exception-handling-facilities">Exception Handling Facilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langext.html#journaling-extensions">Journaling Extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langext.html#extensions-for-additional-capability">Extensions for Additional Capability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langext.html#device-handling-extensions">Device Handling Extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langext.html#alias-variable-extensions">Alias Variable Extensions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="langext.html#definitions">Definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langext.html#performance">Performance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langext.html#zwrite-zshow-v-format">ZWRITE/ZSHOW “V” Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langext.html#pass-by-reference">Pass By Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langext.html#set-and-quit-examples">SET* and QUIT* Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langext.html#kill-examples">KILL* Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langext.html#annotated-alias-examples">Annotated Alias Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="langext.html#extensions-for-unicode-standard-support">Extensions for Unicode® standard support</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="langext.html#philosophy-of-yottadb-s-support-for-the-unicode-standard">Philosophy of YottaDB’s support for the Unicode® standard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langext.html#icu">ICU</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langext.html#discussion-and-best-practices">Discussion and Best Practices</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="langext.html#data-interchange">Data Interchange</a></li>
+<li class="toctree-l4"><a class="reference internal" href="langext.html#limitations">Limitations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="langext.html#performance-and-capacity">Performance and Capacity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="langext.html#maximums">Maximums</a></li>
+<li class="toctree-l4"><a class="reference internal" href="langext.html#golden-rules">Golden Rules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="devcycle.html">3. Development Cycle</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="devcycle.html#overview-of-the-program-development-cycle">Overview of the Program Development Cycle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="devcycle.html#defining-environment-variables">Defining Environment Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devcycle.html#ydb-dist">ydb_dist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devcycle.html#ydb-gbldir">ydb_gbldir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devcycle.html#ydb-principal">ydb_principal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devcycle.html#ydb-routines">ydb_routines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devcycle.html#editor">Editor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devcycle.html#preparing-the-database">Preparing the Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="devcycle.html#creating-and-editing-a-source-program">Creating and Editing a Source Program</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devcycle.html#editing-from-yottadb">Editing from YottaDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devcycle.html#editing-from-the-shell">Editing from the Shell</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devcycle.html#compiling-a-source-program">Compiling a Source Program</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devcycle.html#compiling-from-yottadb">Compiling from YottaDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devcycle.html#compiling-from-the-shell">Compiling from the Shell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devcycle.html#qualifiers-for-the-yottadb-command">Qualifiers for the yottadb command</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="devcycle.html#di-rect-mode">-di[rect_mode]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="devcycle.html#dy-namic-literals">-dy[namic_literals]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="devcycle.html#no-embed-source">-[no]embed_source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="devcycle.html#no-i-gnore">-[no]i[gnore]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="devcycle.html#le-ngth-lines">-le[ngth]=lines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="devcycle.html#no-li-st-filename">-[no]li[st][=filename]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="devcycle.html#noin-line-literals">-noin[line_literals]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="devcycle.html#noline-entry">-noline_entry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="devcycle.html#no-o-bject-filename">-[no]o[bject][=filename]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="devcycle.html#n-ameofrtn-filename">-[n]ameofrtn=filename</a></li>
+<li class="toctree-l4"><a class="reference internal" href="devcycle.html#no-w-arning">-[no]w[arning]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="devcycle.html#r-un">-r[un]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="devcycle.html#s-pace-lines">-s[pace]=lines</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="devcycle.html#yottadb-command-qualifiers-summary">Yottadb Command Qualifiers Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devcycle.html#executing-a-source-program">Executing a Source Program</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="devcycle.html#executing-in-the-direct-mode">Executing in the Direct Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devcycle.html#locating-the-source-file-directory">Locating the Source File Directory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="devcycle.html#executing-from-the-shell">Executing from the Shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="devcycle.html#processing-errors-from-direct-mode-and-shell">Processing Errors from Direct Mode and Shell</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="opdebug.html">4. Operating and Debugging in Direct Mode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="opdebug.html#operating-in-direct-mode">Operating in Direct Mode</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#entering-direct-mode">Entering Direct Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#functionality-available-in-direct-mode">Functionality Available in Direct Mode</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opdebug.html#command-recall">Command Recall</a></li>
+<li class="toctree-l4"><a class="reference internal" href="opdebug.html#line-editing">Line Editing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="opdebug.html#the-m-invocation-stack">The M Invocation Stack</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#exiting-direct-mode">Exiting Direct Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opdebug.html#debugging-a-routine-in-direct-mode">Debugging a Routine in Direct Mode</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#creating-and-displaying-m-routines">Creating and Displaying M Routines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#executing-m-routines-interactively">Executing M Routines Interactively</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#processing-with-run-time-and-syntax-errors">Processing with Run Time and Syntax Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#correcting-errors">Correcting Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#stepping-through-a-routine">Stepping through a Routine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#continuing-execution-from-a-breakpoint">Continuing Execution from a Breakpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#interrupting-execution">Interrupting Execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#using-the-invocation-stack-in-debugging">Using the Invocation Stack in Debugging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="opdebug.html#determining-levels-of-nesting">Determining Levels of Nesting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="opdebug.html#looking-at-the-invocation-stack">Looking at the Invocation Stack</a></li>
+<li class="toctree-l4"><a class="reference internal" href="opdebug.html#using-zshow-to-examine-context-information">Using ZSHOW to examine Context Information</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#transferring-routine-control">Transferring Routine Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#displaying-source-code">Displaying Source Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#correcting-errors-in-an-m-routine">Correcting Errors in an M Routine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#relinking-the-edited-routine">Relinking the Edited Routine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#reexecuting-the-routine">Reexecuting the Routine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opdebug.html#using-forked-processes">Using Forked Processes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opdebug.html#summary-of-debugging-tools">Summary of Debugging Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="langfeat.html">5. General Language Features of M</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="langfeat.html#data-types">Data Types</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#numeric-expressions">Numeric Expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#numeric-accuracy">Numeric Accuracy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#integer-expressions">Integer Expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#truth-valued-expressions">Truth Valued Expressions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="langfeat.html#m-names">M Names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langfeat.html#variables">Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#arrays-and-subscripts">Arrays and Subscripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#m-collation-sequences">M Collation Sequences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#null-subscripts-and-collation">Null Subscripts and Collation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="langfeat.html#null-subscripts">Null Subscripts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="langfeat.html#null-subscript-collation">Null Subscript Collation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="langfeat.html#gde">GDE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="langfeat.html#dse">DSE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="langfeat.html#m-commands-functions">M Commands/Functions</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="langfeat.html#zwrite">ZWRITE</a></li>
+<li class="toctree-l5"><a class="reference internal" href="langfeat.html#order">$ORDER()</a></li>
+<li class="toctree-l5"><a class="reference internal" href="langfeat.html#zprevious">$ZPREVIOUS()</a></li>
+<li class="toctree-l5"><a class="reference internal" href="langfeat.html#query">$QUERY()</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="langfeat.html#mupip-binary-extract-and-load">MUPIP Binary Extract and Load</a></li>
+<li class="toctree-l4"><a class="reference internal" href="langfeat.html#replication">Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#local-variables">Local Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#global-variables-and-resource-name-environments">Global Variables and Resource Name Environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#naked-references">Naked References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#global-variable-name-environments">Global Variable Name Environments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="langfeat.html#optional-yottadb-environment-translation-facility">Optional YottaDB Environment Translation Facility</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="langfeat.html#ydb-env-xlate">ydb_env_xlate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="langfeat.html#literals">Literals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#string-literals">String Literals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#numeric-literals">Numeric Literals</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="langfeat.html#expressions">Expressions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langfeat.html#operators">Operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#precedence">Precedence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#arithmetic-operators">Arithmetic Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#logical-operators">Logical Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#string-operators">String Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#numeric-relational-operators">Numeric Relational Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#string-relational-operators">String Relational Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#pattern-match-operator">Pattern Match Operator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="langfeat.html#id3">Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#postconditionals">Postconditionals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#timeouts">Timeouts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="langfeat.html#m-locks">M Locks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langfeat.html#intrinsic-functions">Intrinsic Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langfeat.html#id5">Intrinsic Special Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langfeat.html#routines">Routines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#lines">Lines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#entry-references">Entry References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#label-references">Label References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="langfeat.html#indirection">Indirection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#argument-indirection">Argument Indirection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#atomic-indirection">Atomic Indirection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#entryref-indirection">Entryref Indirection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#pattern-code-indirection">Pattern Code Indirection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#name-indirection">Name Indirection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#indirection-concerns">Indirection Concerns</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="langfeat.html#parameter-passing">Parameter Passing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#actuallists">Actuallists</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#actualnames">Actualnames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#formallists">Formallists</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#formallabel">Formallabel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#parameter-passing-operation">Parameter Passing Operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#parameter-passing-mechanisms">Parameter Passing Mechanisms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#parameter-passing-extensions">Parameter Passing Extensions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="langfeat.html#external-calls">External Calls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langfeat.html#extrinsic-functions">Extrinsic Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langfeat.html#extrinsic-special-variables">Extrinsic Special Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langfeat.html#transaction-processing">Transaction Processing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#tp-definitions">TP Definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#key-considerations-writing-tp-code">Key Considerations - Writing TP Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#tp-performance">TP Performance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langfeat.html#tp-example">TP Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">6. Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#break">Break</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-break">Examples of BREAK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#close">Close</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#do">Do</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-do">Examples of DO</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#else">Else</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-else">Examples of ELSE</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#for">For</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-for">Examples of FOR</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#goto">Goto</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-goto">Examples of GOTO</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#halt">Halt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#hang">Hang</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-hang">Examples of HANG</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#if">If</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-if">Examples of IF</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#job">Job</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#the-job-environment">The JOB Environment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#job-implications-for-directories">JOB Implications for Directories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#job-processparameters">JOB processparameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#cmd-line-strlit">CMD[LINE]=”strlit”</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#def-ault-strlit">DEF[AULT]=strlit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#err-or-strlit">ERR[OR]=strlit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#gbl-dir-strlit">GBL[DIR]=strlit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#in-put-strlit">IN[PUT]=strlit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#out-put-strlit">OUT[PUT]=strlit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#pass-curlvn">PASS[CURLVN]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#sta-rtup-path-to-shell-script">STA[RTUP]=”/path/to/shell/script”</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#job-processparameter-summary-table">JOB Processparameter Summary Table</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-job">Examples of JOB</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#kill">Kill</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-kill">Examples of KILL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#lock">Lock</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#deadlock-situation">Deadlock Situation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#using-locks-within-transactions">Using Locks within Transactions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#lock-command-operation-summary">Lock Command Operation Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-lock">Examples of LOCK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#merge">Merge</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-merge">Examples of MERGE</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#new">New</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-new">Examples of NEW</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#open">Open</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#quit">Quit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-quit">Examples of Quit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#read">Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#set">Set</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-set">Examples of SET</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#tcommit">TCommit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#trestart">TREstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#trollback">TROllback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#tstart">TStart</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#s-erial">S[ERIAL]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#t-ransactionid-expr">T[RANSACTIONID]=expr</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#use">Use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#view">View</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#keywords-in-view-command">Keywords in VIEW Command</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#no-badchar">[NO]BADCHAR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#breakmsg-value">BREAKMSG:value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#dbflush-region-n">DBFLUSH[:REGION[:N]]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#dbsync-region">DBSYNC[:REGION]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#no-dmterm">[NO]DMTERM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#epoch-region">EPOCH[:REGION]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#flush-region">FLUSH[:REGION]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#no-full-bool-ean-warn">[NO]FULL_BOOL[EAN|WARN]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#gdscert-value">GDSCERT:value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#gvdupsetnoop-value">GVDUPSETNOOP:value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#gvsreset-region">GVSRESET:&lt;region&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#jnlflush-region">JNLFLUSH[:region]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#jnlwait">JNLWAIT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#jobpid-value">JOBPID:value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#labels-value">LABELS:value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#link-no-recursive">LINK:[NO]RECURSIVE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#no-logn-ontp-intexpr">[NO]LOGN[ONTP][:intexpr]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#no-logt-prestart-intexpr">[NO]LOGT[PRESTART][:intexpr]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#lv-gcol">LV_GCOL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#lv-rehash">LV_REHASH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#lvnullsubs-nolvnullsubs-neverlvnullsubs">LVNULLSUBS|NOLVNULLSUBS|NEVERLVNULLSUBS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#noisolation-expr">NOISOLATION:&lt;expr&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#patcode-tablename">PATCODE:tablename</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#patload-file-specification">PATLOAD:file-specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#poollimit-region-expr">POOLLIMIT:&lt;region&gt;:expr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#rctldump">RCTLDUMP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#resetgvstats">RESETGVSTATS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#un-setenv-expr-value">[UN]SETENV:&lt;expr&gt;[:value]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#no-statshare-region-list">[NO]STATSHARE[:&lt;region-list&gt;]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#stp-gcol">STP_GCOL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#trace-value-expr">TRACE:value:&lt;expr&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#no-undef">[NO]UNDEF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#zdate-form-value">ZDATE_FORM:value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#ztrigger-output-value">ZTRIGGER_OUTPUT:value</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-view">Examples of VIEW</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#write">Write</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#xecute">Xecute</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-xecute">Examples of XECUTE</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#zallocate">ZAllocate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-zallocate">Examples of ZALLOCATE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#id14">Deadlock Situation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#zallocate-operation-summary">ZAllocate Operation Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#zbreak">ZBREAK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-zbreak">Examples of ZBREAK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#zcompile">ZCOMpile</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-zcompile">Examples of ZCOMPILE</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#zcontinue">ZContinue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#zdeallocate">ZDeallocate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-zdeallocate">Examples of ZDEALLOCATE</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#zedit">ZEdit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-zedit">Examples of ZEDIT</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#zgoto">ZGoto</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-zgoto">Examples of ZGOTO</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#zhalt">ZHALT</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-zhalt">Examples of ZHALT</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#zhelp">ZHelp</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-zhelp">Examples of ZHELP</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#zkill">ZKill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#zlink">ZLink</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#zlink-operation-summary">ZLink Operation Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#zlink-compilation">ZLINK Compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-zlink">Examples of ZLINK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#auto-zlink">Auto ZLINK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#zlink-auto-zlink-and-routine-names">ZLINK, auto-ZLINK and Routine Names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#auto-relink-setup">Auto-Relink Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="commands.html#auto-relink-benefits-and-example">Auto-Relink Benefits and Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#zmessage">ZMessage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-zmessage">Examples of ZMESSAGE</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#zprint">ZPrint</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-zprint">Examples of ZPRINT</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#zrupdate">ZRUPdate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#zshow">ZSHow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#zshow-information-codes">ZSHOW Information Codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-zshow">Examples of ZSHOW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#zshow-destination-variables">ZSHOW Destination Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#use-of-zshow">Use of ZSHOW</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#zstep">ZSTep</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#zstep-into">ZSTEP INTO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#zstep-outof">ZSTEP OUtof</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#zstep-over">ZSTep OVer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#zstep-actions">ZStep Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#zstep-interactions">ZStep Interactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#use-of-zstep">Use of ZSTEP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-zstep">Examples of ZSTEP</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#zsystem">ZSYstem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-zsystem">Examples of ZSYSTEM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#ztcommit">ZTCommit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-ztcommit">Examples of ZTCOMMIT</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#ztrigger">ZTRigger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#ztstart">ZTStart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#zwithdraw">ZWIthdraw</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-zwithdraw">Examples of ZWITHDRAW</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#zwrite">ZWRite</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#zwrite-format-for-alias-variables">ZWRITE Format for Alias Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commands.html#examples-of-zwrite">Examples of ZWRITE</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">7. Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#ascii">$ASCII()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-ascii">Examples of $ASCII()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#char">$CHAR()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-char">Examples of $CHAR()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#data">$DATA()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#data-results">$DATA() Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-data">Examples of $DATA()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#extract">$EXTRACT()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-extract">Examples of $EXTRACT()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#find">$FIND()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-find">Examples of $FIND()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#fnumber">$FNUMBER()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-fnumber">Examples of $FNUMBER()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#get">$GET()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-get">Examples of $GET()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#increment">$INCREMENT()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-increment">Examples of $INCREMENT()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#justify">$JUSTIFY()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-justify">Examples of $JUSTIFY()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#length">$LENGTH()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-length">Examples of $LENGTH()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#name">$NAME()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-name">Examples of $NAME()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#next">$NEXT()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#order">$ORDER()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-order">Examples of $ORDER()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#piece">$PIECE()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-piece">Examples of $PIECE()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#qlength">$QLENGTH()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-qlength">Examples of $QLENGTH()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#qsubscript">$QSUBSCRIPT()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-qsubscript">Examples of $QSUBSCRIPT()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#query">$QUERY()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-query">Examples of $QUERY()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#random">$RANDOM()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-random">Examples of $RANDOM()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#reverse">$REVERSE()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-reverse">Examples of $REVERSE()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#select">$SELECT()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-select">Examples of $SELECT()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#stack">$STACK()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-stack">Examples of $STACK()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#text">$TEXT()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-text">Examples of $TEXT()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#translate">$TRANSLATE()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-translate">Examples of $TRANSLATE()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#view">$VIEW()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#argument-keywords-of-view">Argument Keywords of $VIEW()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-view">Examples of $VIEW()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zahandle">$ZAHANDLE()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zascii">$ZASCII()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zascii">Examples of $ZASCII()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zatransform">$ZATRANSFORM()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zatransform">Examples of $ZATRANSFORM()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zbit-functions">$ZBIT Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#zbitand">$ZBITAND()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#zbitcount">$ZBITCOUNT()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#zbitfind">$ZBITFIND()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#zbitget">$ZBITGET()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#zbitlen">$ZBITLEN()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#zbitnot">$ZBITNOT()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#zbitor">$ZBITOR()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#zbitset">$ZBITSET()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#zbitstr">$ZBITSTR()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#zbitxor">$ZBITXOR()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zbit-functions">Examples of $ZBIT Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zchar">$ZCHAR()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#example-of-zchar">Example of $ZCHAR()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zcollate">$ZCOLLATE()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zcollate">Examples of $ZCOLLATE()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zconvert">$ZCONVERT()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zconvert">Examples of $ZCONVERT()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zdata">$ZDATA()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-for-zdata">Examples for $ZDATA()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zdate">$ZDATE()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#zdate-format-specification-elements">$ZDATE() Format Specification Elements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zdate">Examples of $ZDATE()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zextract">$ZEXTRACT()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zextract">Examples of $ZEXTRACT()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zfind">$ZFIND()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zfind">Examples of $ZFIND()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zgetjpi">$ZGETJPI()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zgetjpi">Examples of $ZGETJPI()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zjobexam">$ZJOBEXAM()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zjobexam">Examples of $ZJOBEXAM()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zjustify">$ZJUSTIFY()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zjustify">Examples of $ZJUSTIFY()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zlength">$ZLENGTH()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zlength">Examples of $ZLENGTH()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zmessage">$ZMESSAGE()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zmessage">Examples of $ZMESSAGE()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zparse">$ZPARSE()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zparse">Examples of $ZPARSE()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zpeek">$ZPEEK()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zpiece">$ZPIECE()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zpiece">Examples of $ZPIECE()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zprevious">$ZPREVIOUS()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zqgblmod">$ZQGBLMOD()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zsearch">$ZSEARCH()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zsearch">Examples of $ZSEARCH()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zsigproc">$ZSIGPROC()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zsigproc">Examples of $ZSIGPROC()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zsocket">$ZSOCKET()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zsubstr">$ZSUBSTR()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zsubstr">Examples of $ZSUBSTR()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zsyslog">$ZSYSLOG()</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#ztranslate">$ZTRANSLATE()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-ztranslate">Examples of $ZTRANSLATE()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#ztrigger">$ZTRIGGER()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-ztrigger">Examples of $ZTRIGGER()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#ztrnlnm">$ZTRNLNM()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-ztrnlnm">Examples of $ZTRNLNM()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zwidth">$ZWIDTH()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zwidth">Examples of $ZWIDTH()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zwrite">$ZWRITE()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zwrite">Examples of $ZWRITE()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zyhash">$ZYHASH()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zyhash">Examples of $ZYHASH()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zyissqlnull">$ZYISSQLNULL()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zyissqlnull">Examples of $ZYISSQLNULL()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#zysuffix">$ZYSUFFIX()</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="functions.html#examples-of-zysuffix">Examples of $ZYSUFFIX()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="isv.html">8. Intrinsic Special Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#device">$DEVICE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#ecode">$ECODE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#estack">$ESTACK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#etrap">$ETRAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#horolog">$HOROLOG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#io">$IO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#job">$JOB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#key">$KEY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#principal">$PRINCIPAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#quit">$QUIT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#reference">$REFERENCE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#stack">$STACK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#storage">$STORAGE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#system">$SYSTEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#test">$TEST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#tlevel">$TLEVEL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#trestart">$TRESTART</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#x">$X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#y">$Y</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#za">$ZA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zallocstor">$ZALLOCSTOR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zb">$ZB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zchset">$ZCHSET</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zclose">$ZCLOSE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zcmdline">$ZCMDLINE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zcompile">$ZCOMPILE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zcstatus">$ZCSTATUS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zdateform">$ZDATEFORM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zdirectory">$ZDIRECTORY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zeditor">$ZEDITOR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zeof">$ZEOF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zerror">$ZERROR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zgbldir">$ZGBLDIR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zhorolog">$ZHOROLOG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zininterrupt">$ZININTERRUPT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zinterrupt">$ZINTERRUPT</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#interrupt-handling">Interrupt Handling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zio">$ZIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zjob">$ZJOB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zkey">$ZKEY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zlevel">$ZLEVEL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zmaxtptime">$ZMAXTPTIME</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zmode">$ZMODE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zonlnrlbk">$ZONLNRLBK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zpatnumeric">$ZPATNUMERIC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zpin">$ZPIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zposition">$ZPOSITION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zpout">$ZPOUT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zprompt">$ZPROMPT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zquit">$ZQUIT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zrealstor">$ZREALSTOR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zreldate">$ZRELDATE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zroutines">$ZROUTINES</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#establishing-the-value-from-ydb-routines">Establishing the value from $ydb_routines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#setting-a-value-for-zroutines">Setting a Value for $ZROUTINES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#zroutines-examples">$ZROUTINES Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#zroutines-search-types">$ZROUTINES Search Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#zroutines-search-examples">$ZROUTINES Search Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#shared-library-file-specification-in-zroutines">Shared Library File Specification in $ZROUTINES</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zsource">$ZSOURCE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zstatus">$ZSTATUS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zstep">$ZSTEP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zstrpllim">$ZSTRPLLIM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zsystem">$ZSYSTEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#ztexit">$ZTEXIT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#ztimeout">$ZTIMEOUT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#ztrap">$ZTRAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zusedstor">$ZUSEDSTOR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zut">$ZUT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zversion">$ZVERSION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zyerror">$ZYERROR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zyintrsig">$ZYINTRSIG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zyrelease">$ZYRELEASE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zysqlnull">$ZYSQLNULL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#trigger-isvs">Trigger ISVs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#ztdata">$ZTDATA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#ztdelim">$ZTDELIM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#ztlevel">$ZTLEVEL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#ztname">$ZTNAME</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#ztoldval">$ZTOLDVAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#ztriggerop">$ZTRIGGEROP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#ztslate">$ZTSLATE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#ztupdate">$ZTUPDATE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#ztvalue">$ZTVALUE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#ztwormhole">$ZTWORMHOLE</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ioproc.html">9. Input/Output Processing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ioproc.html#i-o-intrinsic-special-variables">I/O Intrinsic Special Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#device-name-variables">Device Name Variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#io">$IO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#principal">$PRINCIPAL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#zio">$ZIO</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#cursor-position-variables">Cursor Position Variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#x">$X</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#y">$Y</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#maintenance-of-x-and-y">Maintenance of $X and $Y</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#status-variables">Status Variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#device">$DEVICE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#key">$KEY</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#za">$ZA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#zb">$ZB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#zeof">$ZEOF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#zpin">$ZPIN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#zpout">$ZPOUT</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ioproc.html#i-o-devices">I/O Devices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#i-o-device-recognition">I/O Device Recognition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#device-specification-defaults">Device Specification Defaults</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#how-i-o-device-parameters-work">How I/O Device Parameters Work</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#abbreviating-device-parameters">Abbreviating Device Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#document-conventions">Document Conventions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#device-independent-programming">Device-Independent Programming</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ioproc.html#using-terminals">Using Terminals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#setting-terminal-characteristics">Setting Terminal Characteristics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#logical-records-for-terminals">Logical Records for Terminals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#read-command-for-terminals">Read * Command for Terminals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#read-x-maxlen-command-for-terminals">READ X#maxlen Command for Terminals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#terminal-deviceparameter-summary">Terminal Deviceparameter Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#terminal-examples">Terminal Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#m-read-editing">M Read Editing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#user-interface">User Interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#use-device-parameters">USE Device Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#environment-variable">Environment Variable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#direct-mode-editing">Direct Mode Editing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#zshow-d">ZSHOW “D”</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ioproc.html#using-sequential-files">Using Sequential Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#setting-sequential-file-characteristics">Setting Sequential File Characteristics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#sequential-file-pointers">Sequential File Pointers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#line-terminators">Line Terminators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#read-write-operations">READ/WRITE Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#writing-binary-files">Writing Binary Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#sequential-file-deviceparameter-summary">Sequential File Deviceparameter Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#sequential-file-examples">Sequential File Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ioproc.html#fifo-characteristics">FIFO Characteristics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#considerations-in-implementing-fifos">Considerations in implementing FIFOs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#error-handling-for-fifos">Error Handling for FIFOs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#yottadb-recognition-of-fifos">YottaDB Recognition of FIFOs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#fifo-device-examples">FIFO Device Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#fifo-deviceparameter-summary">FIFO Deviceparameter Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ioproc.html#using-null-devices">Using NULL Devices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#null-deviceparameter-summary">NULL Deviceparameter Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#null-device-examples">NULL Device Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ioproc.html#using-pipe-devices">Using PIPE Devices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#modes-of-pipe-operation">Modes of PIPE Operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#pipe-characteristics">PIPE Characteristics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#pipe-device-examples">PIPE Device Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#pipe-deviceparameter-summary">PIPE Deviceparameter Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ioproc.html#using-socket-devices">Using Socket Devices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#message-management">Message Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#socket-read-operation">Socket Read Operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#socket-read-termination-conditions">Socket Read Termination Conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#message-delimiters">Message Delimiters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#read-commands">READ Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#write-command">WRITE Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#socket-device-operation">Socket Device Operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#socket-deviceparameter-summary">Socket Deviceparameter Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#socket-device-examples">Socket Device Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#tls-on-yottadb">TLS on YottaDB</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ioproc.html#i-o-commands">I/O Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#open">Open</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#append">APPEND</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#attach">ATTACH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#chset">CHSET</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#command">COMMAND</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#connect">CONNECT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#delimiter">DELIMITER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#exception">EXCEPTION</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#empterm">EMPTERM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#fflf">FFLF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#fifo">FIFO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#fixed">FIXED</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#follow">FOLLOW</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#group">GROUP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#ichset">ICHSET</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#independent">INDEPENDENT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#ikey">IKEY</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#ioerror">IOERROR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#key-open">KEY</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#listen">LISTEN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#morereadtime">MOREREADTIME</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#newversion">NEWVERSION</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#ochset">OCHSET</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#okey">OKEY</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#owner">OWNER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#pad">PAD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#parse">PARSE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#readonly">READONLY</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#recordsize">RECORDSIZE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#rewind">REWIND</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#seek-strexpr">SEEK=strexpr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#shell">SHELL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#stderr">STDERR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#stream">STREAM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#truncate">TRUNCATE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#uic">UIC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#variable">VARIABLE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#world">WORLD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#wrap">WRAP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#writeonly">WRITEONLY</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#zbfsize">ZBFSIZE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#zdelay">ZDELAY</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#zff">ZFF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#zibfsize">ZIBFSIZE</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#use">USE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#attach-use">ATTACH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#canonical">CANONICAL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#cenable">CENABLE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#clearscreen">CLEARSCREEN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id6">CONNECT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#convert">CONVERT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#ctrap">CTRAP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id9">DELIMITER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#detach">DETACH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#downscroll">DOWNSCROLL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#echo">ECHO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#editing">EDITING</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id10">EMPTERM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#eraseline">ERASELINE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#escape">ESCAPE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id11">EXCEPTION</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id13">FFLF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#filter">FILTER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id14">FOLLOW</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#hostsync">HOSTSYNC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#hupenable">HUPENABLE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id15">IKEY</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#inrewind">INREWIND</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#inseek-strexpr">INSEEK=strexpr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#insert">INSERT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id18">IOERROR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id19">KEY</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#length">LENGTH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id20">OKEY</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#outrewind">OUTREWIND</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#outseek-strexpr">OUTSEEK=strexpr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#passthru">PASSTHRU</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#readsync">READSYNC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id23">REWIND</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id24">SEEK=strexpr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#socket">SOCKET</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#terminator">TERMINATOR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id26">TRUNCATE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#ttsync">TTSYNC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#typeahead">TYPEAHEAD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#upscroll">UPSCROLL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#width">WIDTH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id27">WRAP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id29">X</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id30">Y</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id31">ZBFSIZE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id32">ZDELAY</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id33">ZFF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id34">ZIBFSIZE</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#read">READ</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#read-command">READ * Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#read-x-maxlen-command">Read X#maxlen command</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#write">WRITE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#id35">WRITE *</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#close">CLOSE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#delete">DELETE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#destroy">DESTROY</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id36">EXCEPTION</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id38">GROUP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id39">OWNER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#rename">RENAME</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id40">SOCKET</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#timeout">TIMEOUT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id41">UIC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ioproc.html#id42">WORLD</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ioproc.html#deviceparameter-summary-table">Deviceparameter Summary Table</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utility.html">10. Utility Routines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utility.html#using-the-utilities">Using the Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utility.html#date-and-time-utilities">Date and Time Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#d">%D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#date">%DATE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#h">%H</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#t">%T</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#ti">%TI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#to">%TO</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utility.html#conversion-utilities">Conversion Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#dh">%DH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#do">%DO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#hd">%HD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#ho">%HO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#lcase">%LCASE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#od">%OD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#oh">%OH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#ucase">%UCASE</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utility.html#mathematic-utilities">Mathematic Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#exp">%EXP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#sqroot">%SQROOT</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utility.html#string-utilities">String Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#mpiece">%MPIECE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#randstr">%RANDSTR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#trim">%TRIM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utility.html#global-utilities">Global Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#g">%G</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#gc">%GC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#gce">%GCE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#gd">%GD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#ged">%GED</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#gi">%GI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#go">%GO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#gse">%GSE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#gsel">%GSEL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#zshowvtolcl">%ZSHOWVTOLCL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utility.html#routine-utilities">Routine Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#fl">%FL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#rce">%RCE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#rd">%RD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#ri">%RI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#ro">%RO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#rse">%RSE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#rsel">%RSEL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utility.html#internationalization-utilities">Internationalization Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utility.html#system-management-utilities">System Management Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#dsewrap">%DSEWRAP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#dumpfhead">%DUMPFHEAD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#freecnt">%FREECNT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#peekbyname">%PEEKBYNAME()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#xcmd">%XCMD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#ydbprocstuckexec">%YDBPROCSTUCKEXEC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#ygblstat">%YGBLSTAT()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utility.html#utf-8-mode-utility-routines">UTF-8 Mode Utility Routines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#utf2hex">%UTF2HEX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utility.html#hex2utf">%HEX2UTF</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utility.html#utilities-summary-table">Utilities Summary Table</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="extrout.html">11. Integrating External Routines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="extrout.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extrout.html#access-to-non-m-routines">Access to non-M Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extrout.html#creating-a-shareable-library">Creating a Shareable Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extrout.html#using-external-calls">Using External Calls</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="extrout.html#pre-allocation-of-output-parameters">Pre-allocation of Output Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extrout.html#callback-mechanism">Callback Mechanism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extrout.html#limitations-on-the-external-program">Limitations on the External Program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extrout.html#examples-of-using-external-calls">Examples of Using External Calls</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="extrout.html#calls-from-external-routines-call-ins">Calls from External Routines: Call-Ins</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="extrout.html#relevant-files-for-call-ins">Relevant Files for Call-Ins</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="extrout.html#libyottadb-h">libyottadb.h</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extrout.html#call-in-table">Call-In table</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="extrout.html#call-in-interface">Call-In Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="extrout.html#ydb-ci-tab-open-ydb-ci-tab-open-t">ydb_ci_tab_open() / ydb_ci_tab_open_t()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extrout.html#ydb-ci-tab-switch-ydb-ci-tab-switch-t">ydb_ci_tab_switch() / ydb_ci_tab_switch_t()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extrout.html#call-an-m-routine-from-c">Call an M Routine from C</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="extrout.html#ydb-ci">ydb_ci</a></li>
+<li class="toctree-l5"><a class="reference internal" href="extrout.html#ydb-ci-t">ydb_ci_t</a></li>
+<li class="toctree-l5"><a class="reference internal" href="extrout.html#ydb-cip">ydb_cip</a></li>
+<li class="toctree-l5"><a class="reference internal" href="extrout.html#ydb-cip-t">ydb_cip_t</a></li>
+<li class="toctree-l5"><a class="reference internal" href="extrout.html#examples-calling-yottadb-from-a-c-program">Examples: Calling YottaDB from a C Program</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="extrout.html#print-error-messages">Print Error Messages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="extrout.html#ydb-zstatus">ydb_zstatus</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="extrout.html#building-standalone-programs">Building Standalone Programs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extrout.html#nested-call-ins">Nested Call-Ins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extrout.html#rules-to-follow-in-call-ins">Rules to Follow in Call-Ins</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="extrout.html#type-limits-for-call-ins-and-call-outs">Type Limits for Call-Ins and Call-Outs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="internatn.html">12. Internationalization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="internatn.html#collation-sequence-definitions">Collation Sequence Definitions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#creating-the-shared-library-holding-the-alternative-sequencing-routines">Creating the Shared Library Holding the Alternative Sequencing Routines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#defining-the-environment-variable">Defining the Environment Variable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#defining-a-default-database-collation-method">Defining a Default Database Collation Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#establishing-a-local-collation-sequence">Establishing A Local Collation Sequence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="internatn.html#creating-the-alternate-collation-routines">Creating the Alternate Collation Routines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#transformation-routine-gtm-ac-xform-1-or-gtm-ac-xform">Transformation Routine (gtm_ac_xform_1 or gtm_ac_xform)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#inverse-transformation-routine-gtm-ac-xback-or-gtm-ac-xback-1">Inverse Transformation Routine (gtm_ac_xback or gtm_ac_xback_1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#version-control-routines-gtm-ac-version-and-gtm-ac-verify">Version Control Routines (gtm_ac_version and gtm_ac_verify)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#using-the-gbldef-utility">Using the %GBLDEF Utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#example-of-upper-and-lower-case-alphabetic-collation-sequence">Example of Upper and Lower Case Alphabetic Collation Sequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#example-of-collating-alphabets-in-reverse-order-using-gtm-ac-xform-1-and-gtm-ac-xback-1">Example of Collating Alphabets in Reverse Order using gtm_ac_xform_1 and gtm_ac_xback_1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="internatn.html#implementing-an-alternative-collation-sequence-for-unicode-characters">Implementing an Alternative Collation Sequence for Unicode® Characters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internatn.html#matching-alternative-patterns">Matching Alternative Patterns</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#pattern-code-definition">Pattern Code Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#pattern-code-selection">Pattern Code Selection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="errproc.html">13. Error Processing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="errproc.html#compile-time-error-message-format">Compile Time Error Message Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errproc.html#processing-compile-time-errors">Processing Compile Time Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errproc.html#run-time-error-message-format">Run Time Error Message Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errproc.html#processing-run-time-errors">Processing Run-Time Errors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#run-time-errors-in-direct-mode">Run-Time Errors in Direct Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#run-time-errors-outside-of-direct-mode">Run-Time Errors Outside of Direct Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="errproc.html#program-handling-of-errors">Program Handling of Errors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#summary-of-yottadb-error-handling-facilities">Summary of YottaDB Error-Handling Facilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#ecode">$ECODE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#zstatus-content">$ZSTATUS Content</a></li>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#zerror-and-zyerror">$ZERROR and $ZYERROR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#etrap-behavior">$ETRAP Behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#nesting-etrap-and-using-estack">Nesting $ETRAP and using $ESTACK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#ztrap-behavior">$ZTRAP Behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#differences-between-etrap-and-ztrap">Differences between $ETRAP and $ZTRAP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#ztrap-interaction-with-etrap">$ZTRAP Interaction With $ETRAP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#choosing-etrap-or-ztrap">Choosing $ETRAP or $ZTRAP</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="errproc.html#example-1-returning-control-to-a-specific-execution-level">Example 1: Returning control to a specific execution level</a></li>
+<li class="toctree-l4"><a class="reference internal" href="errproc.html#example-2-ignoring-an-error">Example 2: Ignoring an Error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="errproc.html#example-3-nested-error-handlers">Example 3: Nested Error Handlers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="errproc.html#example-4-access-to-cause-of-error">Example 4: Access to “cause of error”</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#error-processing-cautions">Error Processing Cautions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#input-output-errors">Input/Output Errors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="errproc.html#error-actions">Error Actions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#break-on-an-error">Break on an Error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#unconditional-transfer-on-an-error">Unconditional Transfer on an Error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#setting-ztrap-for-each-level">Setting $ZTRAP for each level</a></li>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#nested-error-handling">Nested Error Handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#terminating-execution-on-an-error">Terminating Execution on an Error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#setting-ztrap-to-other-actions">Setting $ZTRAP to Other Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#summary-of-etrap-ztrap-error-handling-options">Summary of $ETRAP &amp; $ZTRAP Error-Handling Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#errors-in-ztrap">Errors in $ZTRAP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="errproc.html#recording-information-about-errors">Recording Information about Errors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="errproc.html#program-to-record-information-on-an-error-using-ztrap">Program to Record Information on an Error using $ZTRAP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">14. Triggers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="triggers.html#id1">Triggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="triggers.html#trigger-definition-file">Trigger Definition File</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="triggers.html#triggername-triggername-prefix">-triggername|-triggername-prefix*|-* .</a></li>
+<li class="toctree-l3"><a class="reference internal" href="triggers.html#trigvn">{+|-}trigvn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="triggers.html#command-cmd">-command=cmd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="triggers.html#xecute-strlit1">-xecute=”|&lt;&lt;strlit1”|&gt;&gt;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="triggers.html#pieces-int1-int2">[-pieces=int1[:int2][;…]]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="triggers.html#z-delim-expr">[-[z]delim=expr]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="triggers.html#options-no-i-solation-no-c-onsistencycheck">[-options= {no]i[solation]|[[no]c[onsistencycheck]}…</a></li>
+<li class="toctree-l3"><a class="reference internal" href="triggers.html#name-strlit2">[-name=strlit2]</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="triggers.html#trigger-isvs-summary">Trigger ISVs Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="triggers.html#chained-and-nested-triggers">Chained and Nested Triggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="triggers.html#a-simple-example">A Simple Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="triggers.html#trigger-definition-storage">Trigger Definition Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="triggers.html#trigger-invocation-and-execution-semantics">Trigger Invocation and Execution Semantics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="triggers.html#kill-zkill">Kill/ZKill</a></li>
+<li class="toctree-l3"><a class="reference internal" href="triggers.html#set">Set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="triggers.html#trigger-execution-environment">Trigger Execution Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="triggers.html#error-handling-during-trigger-execution">Error Handling during Trigger Execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="triggers.html#zgoto">ZGoto</a></li>
+<li class="toctree-l3"><a class="reference internal" href="triggers.html#accessing-trigger-xecute-source-code">Accessing Trigger Xecute Source Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="triggers.html#gt-cm">GT.CM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="triggers.html#other-utilities">Other Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="triggers.html#triggers-in-journaling-and-database-replication">Triggers in Journaling and Database Replication</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="triggers.html#journaling">Journaling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="triggers.html#multisite-database-replication">Multisite Database Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="triggers.html#mupip-trigger-and-ztrigger">MUPIP Trigger and $ZTRIGGER()</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="encrypt.html">15. Database Encryption Extensions to the YottaDB External Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix A: M Coding Standards - Do’s and Don’ts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendix.html#m-coding-standards-do-s-and-don-ts">M Coding Standards - Do’s and Don’ts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="appendix.html#do-s">Do’s</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#character-set">Character Set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#internationalization">Internationalization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#alias-variables-and-containers">Alias Variables and Containers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#parameter-passing">Parameter Passing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#naked-references">Naked References</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#entryrefs">Entryrefs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#lines-with-multiple-commands">Lines with Multiple Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#lines-width">Lines Width</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#error-handling">Error Handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#transaction-processing">Transaction Processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#break">BREAK</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#argumentless-do">Argumentless DO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#goto-and-zgoto">GOTO and ZGOTO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#halt-quit-and-halt">HALT,QUIT and HALT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#lock-zallocate-and-zdeallocate">LOCK, ZALLOCATE, and ZDEALLOCATE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#new">NEW</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#read">READ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#set">SET</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#xecute-indirection-zsystem-and-pipe-device-commands">XECUTE, Indirection, $ZSYSTEM and PIPE device commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#else">ELSE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#post-conditionals">Post Conditionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#zdata-and-data">$ZDATA() and $DATA()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#increment">$INCREMENT()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#next">$NEXT()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#piece">$PIECE()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#random">$RANDOM()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#zprevious">$ZPREVIOUS()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#etrap-vs-ztrap">$ETRAP vs. $ZTRAP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#key-vs-zb">$KEY vs. $ZB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#stack-vs-zlevel">$STACK vs. $ZLEVEL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#zcmdline">$ZCMDLINE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#extrinsic-functions-and-special-variables">Extrinsic Functions and Special Variables ($$)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#triggers">Triggers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#call-in-call-outs">Call-in/Call-outs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#autorelink">Autorelink</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="appendix.html#don-ts">Don’ts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#source-and-object-files">Source and Object Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#kill-9">kill -9</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#operate-as-root">Operate as Root</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#id1">Triggers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="appendix.html#local-variables">Local Variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">LICENSE</a></li>
+</ul>
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="index.html#indices-and-tables" title="Permalink to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="man.html" class="btn btn-neutral float-right" title="About this Manual" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017-2021, YottaDB LLC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+<hr/>
+<!-- DDG search widget,@author Juri Wornowitski,@version 2.0,@link https://www.plainlight.com/ddg --><div id="widdget" style="width:100%;margin:10px 0;"><style type="text/css">#widdget input {display:block;height:30px;padding:4px;outline:none;border:1px solid #8d8d8d;border-right:0;box-sizing:border-box;border-radius:3px 0 0 3px;width:calc(100% - 41px);font-size:15px;} #widdget button {float:left;cursor:pointer;width:43px;height:30px;color:#fff;background-image:linear-gradient(#7f72ca,#554492);border:0;border-radius:0 3px 3px 0;} #widdget button:active {background-image:linear-gradient(#002387,#002357);} #widdget button:focus {outline:none;}</style><form style="position:relative" onsubmit="this.elements[0].click();return false;"><div style="float:right;position:absolute;top:0;right:-2px;z-index:3"><button type="button" onclick="var v=this.parentElement.parentElement.elements[1].value;window.open('https://duckduckgo.com?q='+encodeURIComponent(v)+'+site%3Adocs.yottadb.com&kj=p');">&#128269;</button></div><input type="text" name="que" placeholder="Search documents with DuckDuckGo" /></form></div>
+ 
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

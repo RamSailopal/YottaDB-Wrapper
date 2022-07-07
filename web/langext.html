@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. YottaDB Language Extensions &mdash; Programmer&#39;s Guide  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. Development Cycle" href="devcycle.html" />
+    <link rel="prev" title="1. About YottaDB" href="about.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html">
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+	  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+		      <input type="text" name="q" placeholder="Search" />
+		          <input type="hidden" name="check_keywords" value="yes" />
+			      <input type="hidden" name="area" value="default" />
+			        </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://yottadb.com/resources/documentation">Main YottaDB Documentation Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="man.html">About this Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">1. About YottaDB</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="langext.html#">2. YottaDB Language Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="langext.html#operating-system-interface-facilities">Operating System Interface Facilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langext.html#debugging-facilities">Debugging Facilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langext.html#exception-handling-facilities">Exception Handling Facilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langext.html#journaling-extensions">Journaling Extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langext.html#extensions-for-additional-capability">Extensions for Additional Capability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langext.html#device-handling-extensions">Device Handling Extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="langext.html#alias-variable-extensions">Alias Variable Extensions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="langext.html#definitions">Definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langext.html#performance">Performance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langext.html#zwrite-zshow-v-format">ZWRITE/ZSHOW “V” Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langext.html#pass-by-reference">Pass By Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langext.html#set-and-quit-examples">SET* and QUIT* Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langext.html#kill-examples">KILL* Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langext.html#annotated-alias-examples">Annotated Alias Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="langext.html#extensions-for-unicode-standard-support">Extensions for Unicode® standard support</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="langext.html#philosophy-of-yottadb-s-support-for-the-unicode-standard">Philosophy of YottaDB’s support for the Unicode® standard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langext.html#icu">ICU</a></li>
+<li class="toctree-l3"><a class="reference internal" href="langext.html#discussion-and-best-practices">Discussion and Best Practices</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="langext.html#data-interchange">Data Interchange</a></li>
+<li class="toctree-l4"><a class="reference internal" href="langext.html#limitations">Limitations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="langext.html#performance-and-capacity">Performance and Capacity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="langext.html#maximums">Maximums</a></li>
+<li class="toctree-l4"><a class="reference internal" href="langext.html#golden-rules">Golden Rules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="devcycle.html">3. Development Cycle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opdebug.html">4. Operating and Debugging in Direct Mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="langfeat.html">5. General Language Features of M</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">6. Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">7. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isv.html">8. Intrinsic Special Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioproc.html">9. Input/Output Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utility.html">10. Utility Routines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extrout.html">11. Integrating External Routines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internatn.html">12. Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errproc.html">13. Error Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">14. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encrypt.html">15. Database Encryption Extensions to the YottaDB External Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix A: M Coding Standards - Do’s and Don’ts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">LICENSE</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Programmer's Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>2. YottaDB Language Extensions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="about.html" class="btn btn-neutral float-left" title="1. About YottaDB" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="devcycle.html" class="btn btn-neutral float-right" title="3. Development Cycle" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="yottadb-language-extensions">
+<span id="index-0"></span><h1><a class="toc-backref" href="langext.html#id2">2. YottaDB Language Extensions</a><a class="headerlink" href="langext.html#yottadb-language-extensions" title="Permalink to this heading">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="langext.html#yottadb-language-extensions" id="id2">2. YottaDB Language Extensions</a></p>
+<ul>
+<li><p><a class="reference internal" href="langext.html#operating-system-interface-facilities" id="id3">Operating System Interface Facilities</a></p></li>
+<li><p><a class="reference internal" href="langext.html#debugging-facilities" id="id4">Debugging Facilities</a></p></li>
+<li><p><a class="reference internal" href="langext.html#exception-handling-facilities" id="id5">Exception Handling Facilities</a></p></li>
+<li><p><a class="reference internal" href="langext.html#journaling-extensions" id="id6">Journaling Extensions</a></p></li>
+<li><p><a class="reference internal" href="langext.html#extensions-for-additional-capability" id="id7">Extensions for Additional Capability</a></p></li>
+<li><p><a class="reference internal" href="langext.html#device-handling-extensions" id="id8">Device Handling Extensions</a></p></li>
+<li><p><a class="reference internal" href="langext.html#alias-variable-extensions" id="id9">Alias Variable Extensions</a></p></li>
+<li><p><a class="reference internal" href="langext.html#extensions-for-unicode-standard-support" id="id10">Extensions for Unicode® standard support</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>In addition to providing all of the ANSI standard M features, YottaDB offers a number of language extensions. In this chapter, the language extensions are grouped by intended function to demonstrate their relationships to each other and to the programming process. A summary table is provided in each section. For a full description of a particular extension, refer to its complete entry in the <a class="reference external" href="commands.html">“Commands”</a>, <a class="reference external" href="functions.html">“Functions”</a>, or <a class="reference external" href="isv.html">“Intrinsic Special Variables”</a> chapters.</p>
+<p>The following sections describe the YottaDB language extensions listed below:</p>
+<ul class="simple">
+<li><p>UNIX interface facilities</p></li>
+<li><p>Debugging tools</p></li>
+<li><p>Exception-handling extensions</p></li>
+<li><p>Journaling extensions</p></li>
+<li><p>Extensions providing additional capability</p></li>
+<li><p>Device Handling Extensions</p></li>
+<li><p>Alias Variables Extensions</p></li>
+<li><p>Extensions for Unicode Support</p></li>
+</ul>
+<section id="operating-system-interface-facilities">
+<h2><a class="toc-backref" href="langext.html#id3">Operating System Interface Facilities</a><a class="headerlink" href="langext.html#operating-system-interface-facilities" title="Permalink to this heading">¶</a></h2>
+<p>To improve efficiency and reduce duplication and inconsistency, YottaDB is closely integrated with the host operating system environment. With YottaDB you can gain access to the operating system facilities to examine:</p>
+<ul class="simple">
+<li><p>System information, such as quotas and SIDs</p></li>
+<li><p>Jobs and processes</p></li>
+<li><p>Directories and files</p></li>
+<li><p>Devices</p></li>
+<li><p>Messages</p></li>
+<li><p>Privileges</p></li>
+</ul>
+<p>The following table summarizes the YottaDB operating system interface facilities.</p>
+<p><strong>Operating System Interface Facilities</strong></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 78%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Extension</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ZSYstem</p></td>
+<td><p>Provides access to the shell.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZMessage()</p></td>
+<td><p>Translates an error condition code into text form.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZCMdline</p></td>
+<td><p>Contains a string value specifying the “excess” portion of the command line that invoked the YottaDB process.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZJob</p></td>
+<td><p>Holds the pid of the process created by the last JOB command performed by the current process.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZPARSE()</p></td>
+<td><p>Parses a UNIX filename.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZSEARCH()</p></td>
+<td><p>Searches for one or more UNIX files.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZSYstem</p></td>
+<td><p>Contains the status code of the last ZSYSTEM.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZTRNLNM()</p></td>
+<td><p>Translates an environment variable.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZDIRectory</p></td>
+<td><p>Contains current working directory.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="debugging-facilities">
+<h2><a class="toc-backref" href="langext.html#id4">Debugging Facilities</a><a class="headerlink" href="langext.html#debugging-facilities" title="Permalink to this heading">¶</a></h2>
+<p>YottaDB provides a number of debugging features. These features include the ability to:</p>
+<ul class="simple">
+<li><p>Interactively execute routines using M commands.</p></li>
+<li><p>Display lines that may contain errors using the ZPRINT command and the $ZPOSITION special variable.</p></li>
+<li><p>Redisplay error messages using the $ZSTATUS special variable and the ZMESSAGE command.</p></li>
+<li><p>Set breakpoints and actions to bypass an error using the ZBREAK command.</p></li>
+<li><p>Execute a line at a time using the ZSTEP command.</p></li>
+<li><p>Display information about the M environment using the ZSHOW command.</p></li>
+<li><p>Modify the invocation stack with QUIT and ZGOTO.</p></li>
+<li><p>Incrementally add or modify code using the ZLINK and ZEDIT commands.</p></li>
+<li><p>Continue execution using the ZCONTINUE command.</p></li>
+<li><p>Establish “watch points” with triggers to trap incorrect accesses on global variable updates.</p></li>
+</ul>
+<p>The following table summarizes the YottaDB language extensions that facilitate debugging.</p>
+<p><strong>YottaDB Debugging Tools</strong></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Extension</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ZBreak</p></td>
+<td><p>Establishes a temporary breakpoint, with optional M action and/or activation count.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ZContinue</p></td>
+<td><p>Continues routine execution from a break.</p></td>
+</tr>
+<tr class="row-even"><td><p>ZEDit</p></td>
+<td><p>Invokes the UNIX text editor specified by the EDITOR environment variable.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ZGoto</p></td>
+<td><p>Removes multiple levels from the M invocation stack and transfers control.</p></td>
+</tr>
+<tr class="row-even"><td><p>ZLink</p></td>
+<td><p>Includes a new or modified M routine in the current M image; automatically recompiles if necessary.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ZMessage</p></td>
+<td><p>Signals the specified condition.</p></td>
+</tr>
+<tr class="row-even"><td><p>ZPrint</p></td>
+<td><p>Displays lines of source code.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ZSHow</p></td>
+<td><p>Displays information about the M environment.</p></td>
+</tr>
+<tr class="row-even"><td><p>ZSTep</p></td>
+<td><p>Incrementally executes a routine to the beginning of the next line of the same type.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ZWRite</p></td>
+<td><p>Displays all or some local or global variables.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZCSTATUS</p></td>
+<td><p>Holds the value of the status code for the last compile performed by a ZCOMPILE command.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZEDit</p></td>
+<td><p>Contains the status code for the last ZEDit.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZJOBEXAM()</p></td>
+<td><p>Performs a ZSHOW “*” to a default file location and name, or the one optionally specified by the argument.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZLEVel</p></td>
+<td><p>Contains the current level of DO/XECUTE nesting.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZMessage()</p></td>
+<td><p>Translates an error condition code into text form.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZPOSition</p></td>
+<td><p>Contains a string indicating the current execution location.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZPROmpt</p></td>
+<td><p>Controls the symbol displayed as the direct mode prompt.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZROutines</p></td>
+<td><p>Contains a string specifying a directory list containing the object, and optionally the source, files.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZSOurce</p></td>
+<td><p>Contains name of the M source program most recently ZLINKed or ZEDITed; default name for next ZEDIT or ZLINK.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZStatus</p></td>
+<td><p>Contains error condition code and location of the last exception condition occurring during routine execution.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZSTep</p></td>
+<td><p>Controls the default ZSTep action.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="exception-handling-facilities">
+<h2><a class="toc-backref" href="langext.html#id5">Exception Handling Facilities</a><a class="headerlink" href="langext.html#exception-handling-facilities" title="Permalink to this heading">¶</a></h2>
+<p>The YottaDB exception trapping allows you to do the following:</p>
+<ul class="simple">
+<li><p>DO a recovery routine and resume the original command stream.</p></li>
+<li><p>GOTO any special handling; an extended ZGOTO provides for context management.</p></li>
+<li><p>Report an error and enter Direct Mode for debugging.</p></li>
+<li><p>OPEN Input/Output devices with specific traps in addition to the main trap.</p></li>
+<li><p>Trap and process an exception based on a device error.</p></li>
+<li><p>Trap and process an exception based on terminal input.</p></li>
+</ul>
+<p>The following table summarizes the YottaDB language extensions that facilitate exception handling.</p>
+<p><strong>Exception Handling Extensions</strong></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 79%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Extension</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ZGoto</p></td>
+<td><p>Removes zero or more levels from the M Invocation stack and, optionally, transfers control.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ZMessage</p></td>
+<td><p>Signals the specified condition.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZCSTATUS</p></td>
+<td><p>Holds the value of the status code for the last compile performed by a ZCOMPILE command.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZEOF</p></td>
+<td><p>Contains indication of whether the last READ reached end-of-file.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZMessage()</p></td>
+<td><p>Translates an error condition code into text form.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZLevel</p></td>
+<td><p>Contains current level of DO/XECUTE nesting.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZStatus</p></td>
+<td><p>Contains error condition code and location of last exception condition occurring during routine execution.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZSYstem</p></td>
+<td><p>Contains the status code of the last ZSYSTEM.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZTrap</p></td>
+<td><p>Contains an XECUTE string or entryref that YottaDB invokes upon encountering an exception condition.</p></td>
+</tr>
+<tr class="row-odd"><td><p>EXCEPTION</p></td>
+<td><p>Provides a deviceparameter specifying an XECUTE string or entryref that YottaDB invokes upon encountering a device-
+related exception condition.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="journaling-extensions">
+<h2><a class="toc-backref" href="langext.html#id6">Journaling Extensions</a><a class="headerlink" href="langext.html#journaling-extensions" title="Permalink to this heading">¶</a></h2>
+<p>Journaling records redundant copies of database update information to increase protection against loss of information due to hardware and software failure. In YottaDB, TSTART and TCOMMIT mark the beginning and end of an application (logical) transaction, which may consist of multiple global variable updates. When a TCOMMIT takes $TLEVEL from one (1) to zero (0), it transfer all of the transaction updates to the journal file, and, except if TRANSACTIONID=”BATCH”, returns control to the application only after the associated records reach the secondary storage holding the journal file.</p>
+<p>The following table summarizes the YottaDB language extensions for journaling.</p>
+<p><strong>Journaling Extensions</strong></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 79%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Extensions</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>View</p></td>
+<td><p>Extended to ensure that YottaDB has transferred all updates to the journal file.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$View()</p></td>
+<td><p>Extended for examining journaling status.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="extensions-for-additional-capability">
+<h2><a class="toc-backref" href="langext.html#id7">Extensions for Additional Capability</a><a class="headerlink" href="langext.html#extensions-for-additional-capability" title="Permalink to this heading">¶</a></h2>
+<p>For ways to adjust some process operating characteristics, see the command description <a class="reference internal" href="commands.html#view-command"><span class="std std-ref">View</span></a>. For ways to get information about certain process operating characteristics, see the function description <a class="reference internal" href="functions.html#view-function"><span class="std std-ref">$VIEW()</span></a>.</p>
+<p>In YottaDB, support of environment specification for global names and resource names is possible. It is possible to excercise user code to customize interpretation of the environment specification. See <a class="reference external" href="langfeat.html">Chapter 5: “General Language Features of M”</a> for details.</p>
+<p>The following table summarizes YottaDB extensions that increase general capability.</p>
+<p><strong>Extensions for Additional Capability</strong></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Extension</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>View</p></td>
+<td><p>Modifies the environment.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ZAllocate*</p></td>
+<td><p>Facilitates incremental locking by locking a name without unlocking previously locked names.</p></td>
+</tr>
+<tr class="row-even"><td><p>ZDeallocate*</p></td>
+<td><p>Unlocks one or more names without necessarily unlocking other names.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ZHelp</p></td>
+<td><p>Provides access to on-line help.</p></td>
+</tr>
+<tr class="row-even"><td><p>ZWIthdraw</p></td>
+<td><p>“Kills” data in a node without affecting the node’s descendants.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$Order()</p></td>
+<td><p>Enhanced to return the next unsubscripted variable in collating sequence from the current environment. Name-level
+$ORDER() always returns an empty string when used with extended references.</p></td>
+</tr>
+<tr class="row-even"><td><p>$View()</p></td>
+<td><p>Examines the YottaDB environment.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZCStatus</p></td>
+<td><p>Returns the status from the last compile.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZDate()</p></td>
+<td><p>Converts a date and/or time in $HOROLOG format into formatted text, using a user-specified format string.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZPrevious()**</p></td>
+<td><p>Returns the previous element in a collating sequence, at the current level of a local or global array.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZA,$ZB, $ZEOF</p></td>
+<td><p>Return device dependent I/O status information.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZCOmpile</p></td>
+<td><p>Maintains the compiler qualifiers to be used on automatic compilation.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZBIT functions</p></td>
+<td><p>A series of functions beginning with the characters $ZBIT that allow manipulation of bits.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZGBLdir</p></td>
+<td><p>Maintains the name of the current global directory; may be set to switch this process to a new database.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZIO</p></td>
+<td><p>Contains translated name of current I/O device.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZINTerrupt</p></td>
+<td><p>Specifies the code to be XECUTE’d when an interrupt is processed.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZKEY</p></td>
+<td><p>SD: Returns current position in the sequential file based on last read.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZMAXTPTIme</p></td>
+<td><p>Contains an integer value indicating the time duration YottaDB should wait for the completion of all activities
+fenced by the current transaction’s outermost TSTART/TCOMMIT pair.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZROutines</p></td>
+<td><p>Maintains the list of directories to search during look-ups of object and source files.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZSYstem</p></td>
+<td><p>Returns the status code for the last subprocess invoked with the ZSYSTEM command.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZVERsion</p></td>
+<td><p>Contains a designation of the current version name, level, and operating system.</p></td>
+</tr>
+</tbody>
+</table>
+<p>* The ZALLOCATE and ZDEALLOCATE commands are provided for compatibility with other M systems. However, YottaDB recommends use of the standard LOCK command, which provides an incremental locking facility. The incremental lock provides both flexibility and greater compatibility with the M language standard.</p>
+<p>** The $ZPREVIOUS function is provided for compatibility with previous versions of YottaDB and other M systems. However, YottaDB recommends use of the standard two-argument form for the $ORDER function.</p>
+</section>
+<section id="device-handling-extensions">
+<h2><a class="toc-backref" href="langext.html#id8">Device Handling Extensions</a><a class="headerlink" href="langext.html#device-handling-extensions" title="Permalink to this heading">¶</a></h2>
+<p>In the earlier versions of the M standard, device behavior was defined as a framework, with the details left to the implementations. YottaDB supports Terminals, Sequential Disks, FIFOs, PIPEs and a Null device under this model. Subsequently device mnemonicspaces were added to the standard and some of them defined. YottaDB supports the SOCKET device under this model with some extensions identified with controlmnemonics starting with the letter “Z.”</p>
+<p>For details of YottaDB device handling see <a class="reference external" href="ioproc.html">Chapter 9: “Input/Output Processing”</a>.</p>
+</section>
+<section id="alias-variable-extensions">
+<span id="alias-var-ext"></span><h2><a class="toc-backref" href="langext.html#id9">Alias Variable Extensions</a><a class="headerlink" href="langext.html#alias-variable-extensions" title="Permalink to this heading">¶</a></h2>
+<p>Alias variables provide a layer of abstraction between the name of a local variable and an array analogous to that provided by M pass by reference in routines and function calls. Multiple local variables can be aliased to the same array, and a SET or KILL to one acts as a SET or KILL to all. Alias container variables provide a way to store a reference to an entire local variable array, using a subscrpted local, which protects the associated array even when it’s not accessible through any current local variable name.</p>
+<p>YottaDB aliases provide low level facilities on which an application can implement object-oriented techniques. An object can be mapped onto, and stored and manipulated in an array, then saved in an alias container variable from where it can be retrieved for processing. The use of appropriate subscripts in the array used for a container, provides a way to organize the stored objects and retrieve them by using the $ORDER() function to traverse the container array. The use of alias variables to implement objects provides significant efficiencies over traditional local variables because alias variables and alias container variables eliminate the need to execute MERGE commands to move objects.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;kill A,B
+YDB&gt;set <span class="nv">A</span><span class="o">=</span><span class="m">1</span>,*B<span class="o">=</span>A <span class="p">;</span> B <span class="p">&amp;</span> A are aliases
+YDB&gt;write B
+<span class="m">1</span>
+YDB&gt;
+</pre></div>
+</div>
+<p>Within the context of Alias Variables extensions:</p>
+<ul class="simple">
+<li><p>an array is very similar to its definition in the M standard, and means an entire tree of nodes, including the root and all descendants, except that it only applies to local variables and not to global variables.</p></li>
+<li><p>“Associated alias variables” means all alias variables and all alias container variables associated with an array.</p></li>
+<li><p>lvn is very similar to its definition in the M standard except that in the context of alias variables lvn is used to refer to a local variable name with a subscript.</p></li>
+<li><p>lname is very similar to its definition in the M standard, except that in the context of alias variables, lname is just the name of an unsubscripted local variable (root of an array).</p></li>
+<li><p>“Data cell” and “node” are synonyms.</p></li>
+</ul>
+<p>The following table summarizes Alias Variables extensions.</p>
+<p><strong>Alias Variables Extensions</strong></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 89%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Extension</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Set *</p></td>
+<td><p>Explicitly creates an alias. For more information, refer to the description of SET * in <a class="reference internal" href="commands.html#set-command"><span class="std std-ref">Set</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Kill *</p></td>
+<td><p>Removes the association between its arguments, and any associated data cells. For more information, refer to the description of KILL * in
+<a class="reference internal" href="commands.html#kill-command"><span class="std std-ref">Kill</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Quit *</p></td>
+<td><p>When QUIT * terminates an extrinsic function or an extrinsic special variable, it always returns an alias container. For more information, refer to the description of
+QUIT * in <a class="reference internal" href="commands.html#quit-command"><span class="std std-ref">Quit</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ZWrite / ZSHow “V”</p></td>
+<td><p>Produces Alias Variables format output. For more information, refer to
+<a class="reference internal" href="commands.html#zwrite-format-alias-vars"><span class="std std-ref">ZWRITE Format for Alias Variables</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>New</p></td>
+<td><p>For the scope of the NEW, a NEW of a name suspends its alias association. For more information, refer to
+<a class="reference internal" href="commands.html#new-command"><span class="std std-ref">New</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Exclusive New</p></td>
+<td><p>Create a scope in which some associations between an lname or an lvn and an array may be invisible. For more information, refer to
+<a class="reference internal" href="commands.html#new-command"><span class="std std-ref">New</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZAHandle()</p></td>
+<td><p>returns a unique identifier (handle) for the array associated with an lname or an alias container; for an subscripted lvn that is not an alias container, it returns an
+empty string. For more information, refer to <a class="reference internal" href="functions.html#zahandle-function"><span class="std std-ref">$ZAHANDLE()</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZDATA()</p></td>
+<td><p>Extends $DATA() to reflect the current alias state of the lvn or lname argument in order to identify alias and alias container variables. For more information, refer to
+<a class="reference internal" href="functions.html#zdata-function"><span class="std std-ref">$ZDATA()</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>View and $View()</p></td>
+<td><p>VIEW provides LV_GCOL, LV_REHASH, and STP_GCOL to perform garbage collection and local variable lookup table reorganization operations which normally happen
+automatically at appropriate times. For more information on the keywords of the VIEW command, refer to
+<a class="reference internal" href="commands.html#keywords-view-command"><span class="std std-ref">Keywords in VIEW Command</span></a>.</p>
+<p>$VIEW() provides LV_CREF, LV_GCOL, and LV_REF. YottaDB uses the LC_CREF, LV_GCOL, LV_REF keywords in testing and is documenting them to ensure completeness in
+product documentation. They may (or may not) be useful during application development for debugging or performance testing implementation alternatives. For more
+information the keywords of $VIEW(), refer to <a class="reference internal" href="functions.html#arg-kwrds-view"><span class="std std-ref">Argument Keywords of $VIEW()</span></a>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>TSTART, RESTART, and
+ROLLBACK</p></td>
+<td><p>TSTART command can optionally list names whose arrays are restored on a transaction RESTART. If any of these are alias variables or have nodes which are alias container
+variables, their associations are also restored on transaction RESTART. For more information, refer to
+Chapter 6: <a class="reference external" href="commands.html">Commands</a>.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="definitions">
+<h3>Definitions<a class="headerlink" href="langext.html#definitions" title="Permalink to this heading">¶</a></h3>
+<p><strong>Alias Variables</strong></p>
+<p>Alias Variables provide access to an array through multiple names. Conceptually an alias variable is the same as a pass-by-reference joining of multiple variable names, except that the joining of alias variables is explicit, whereas that of variables passed by reference is implicit. Indeed, the underlying implementation of alias variables and pass-by-reference within YottaDB is the same.</p>
+<ul class="simple">
+<li><p>All alias variables associated with the same array are equivalent in their access to its nodes - for example, a SET of a node in an array via one name is no different than a SET to that node using any other name of which it is an alias. Nothing about the order of their creation or association has any significance.</p></li>
+<li><p>Once an array becomes accessible via only a single unsubscripted name, YottaDB treats that name as a traditional local variable.</p></li>
+<li><p>YottaDB treats variables joined through pass-by-reference as a special variant of an alias variable. Pass-by-reference relates to the M stack model with implicit aliasing as a side effect of invocation with DO or $$ and implicit unaliasing as a side effect of QUIT. In the broader alias case, the program directly commands aliased and unaliased names without any binding to the M stack.</p></li>
+<li><p>YottaDB treats the state of a TP (Transaction Processing) RESTART variable as an internal alias, which it only exposes if the transaction creating it RESTARTs.</p></li>
+<li><p>YottaDB treats variables hidden by exclusive NEW as a type of alias.</p></li>
+<li><p>Owing to their implicit behavior, under certain circumstances, pass-by-reference aliases, RESTART variable and exclusive NEW aliases are not entirely symmetrical with respect to explicitly created alias variables (that is, they may come and go at different times, whereas alias variables come and go under application program control).</p></li>
+</ul>
+<p><strong>Alias Container Variables</strong></p>
+<p>Alias container variables are subscripted lvns that protect arrays for subsequent access by an alias variable. Since accessing an array requires a name, aliasing a name with the alias container regains access to an array stored in a container. For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;kill A,B,C
+YDB&gt;set <span class="nv">A</span><span class="o">=</span><span class="m">1</span>,*C<span class="o">(</span><span class="m">2</span><span class="o">)=</span>A <span class="p">;</span> C<span class="o">(</span><span class="m">2</span><span class="o">)</span> is a container
+YDB&gt;zwrite
+<span class="nv">A</span><span class="o">=</span><span class="m">1</span> <span class="p">;</span>*
+*C<span class="o">(</span><span class="m">2</span><span class="o">)=</span>A
+YDB&gt;set *B<span class="o">=</span>C<span class="o">(</span><span class="m">2</span><span class="o">)</span> <span class="p">;</span> B is now an <span class="nb">alias</span>
+YDB&gt;write B,<span class="s2">&quot;:&quot;</span>,<span class="nv">$length</span><span class="o">(</span>C<span class="o">(</span><span class="m">2</span><span class="o">))</span>,<span class="s2">&quot;:&quot;</span> <span class="p">;</span> An <span class="nb">alias</span> variable provides access but a container does not
+<span class="m">1</span>:0:
+YDB&gt;
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The value of an alias container is the empty string.</p></li>
+<li><p>Use the SET * command to associate an lname with the container to obtain an alias that provides access to the array in a container.</p></li>
+<li><p>SET with an alias container as left-hand side target replaces the value at that node of the container variable and destroys any prior alias association with an array.</p></li>
+<li><p>References to descendants of an alias container variable refer to nodes of the named parent array and have no relationship to any alias container held by a parent node.</p></li>
+<li><p>An alias container variable serves as a way to organize and manage entire arrays.</p></li>
+<li><p>While it takes two alias variables for an array to be considered aliased, it only takes one alias container variable to do so.</p></li>
+</ul>
+</section>
+<section id="performance">
+<h3>Performance<a class="headerlink" href="langext.html#performance" title="Permalink to this heading">¶</a></h3>
+<p>With two exceptions, alias and alias container variables add no overhead to normal local variable performance:</p>
+<ol class="arabic simple">
+<li><p>Complex patterns of aliases layered onto TSTART RESTART variables.</p></li>
+<li><p>Complex patterns of aliases intermixed with NEW scope management, particularly when using exclusive NEW.</p></li>
+</ol>
+<p>There is no reason to avoid aliases in any situation, but in those two contexts, YottaDB rewards attention to tidy design. YottaDB uses garbage collection to manage the storage used for local variables. Increasing the use of local variables, for example, to implement objects, will increase the need for garbage collection, even though the garbage collector and storage management are designed to be light weight and self-tuning. The use of alias variables to implement objects, however, is as efficient as any other method is likely to be, and except for the normal admonition to not keep arrays and local variables around when they are not needed, and to not create levels of contexts over and above those actually needed by application logic, use alias variables as liberally as your application needs dictate.</p>
+</section>
+<section id="zwrite-zshow-v-format">
+<h3>ZWRITE/ZSHOW “V” Format<a class="headerlink" href="langext.html#zwrite-zshow-v-format" title="Permalink to this heading">¶</a></h3>
+<p>ZWRITE as applied to local variables and ZSHOW “V” are conceptually similar, with two differences:</p>
+<ul class="simple">
+<li><p>ZWRITE allows the use of patterns to specify the variables and subscripts to display, whereas ZSHOW “V” applies to all local variables.</p></li>
+<li><p>ZSHOW “V” optionally allows the output to be directed to a global or local variable, whereas ZWRITE always directs its output to the current output device.</p></li>
+</ul>
+<p>For more information on the ZWRITE/ZSHOW “V” format for alias variables, refer to <a class="reference internal" href="commands.html#zwrite-format-alias-vars"><span class="std std-ref">ZWRITE Format for Alias Variables</span></a>.</p>
+</section>
+<section id="pass-by-reference">
+<h3>Pass By Reference<a class="headerlink" href="langext.html#pass-by-reference" title="Permalink to this heading">¶</a></h3>
+<p>YottaDB’s underlying implementation of pass-by-reference and alias variables is the same. As illustrated by the program “killalias” previously, ZWRITE displays variables joined though pass-by-reference using alias conventions. Pass-by-reference is distinguished from alias variables by its implicit creation and elimination. Note the interaction between pass-by-reference and alias variables when the association of a formallist parameter in a subprogram is changed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ /usr/local/lib/yottadb/r120/ydb -run ^switchalias
+switchalias <span class="p">;</span> Demonstrate Set * on formalist parameter
+  zprint <span class="p">;</span> Print this program
+  <span class="nb">set</span> <span class="nv">A</span><span class="o">=</span><span class="m">1</span>,B<span class="o">=</span><span class="m">2</span>
+  write <span class="s2">&quot;------------&quot;</span>,!
+  write <span class="s2">&quot;Initial Values:&quot;</span>,!
+  zwrite
+  <span class="k">do</span> S1<span class="o">(</span>.A<span class="o">)</span>
+  write <span class="s2">&quot;------------&quot;</span>,!
+  write <span class="s2">&quot;On return:&quot;</span>,!
+  zwrite
+  quit
+  <span class="p">;</span>
+S1<span class="o">(</span>X<span class="o">)</span> <span class="p">;</span>
+   <span class="nb">set</span> <span class="nv">X</span><span class="o">=</span><span class="m">3</span>
+   write <span class="s2">&quot;------------&quot;</span>,!
+   write <span class="s2">&quot;Inside call - note alias association for formallist parameter:&quot;</span>,!
+   zwrite
+   <span class="nb">set</span> *X<span class="o">=</span>B,X<span class="o">=</span><span class="m">4</span> <span class="p">;</span> Change association of formallist parameter
+   write <span class="s2">&quot;------------&quot;</span>,!
+   write <span class="s2">&quot;Note changed association&quot;</span>,!
+   zwrite
+   quit
+ ------------
+ Initial Values:
+ <span class="nv">A</span><span class="o">=</span><span class="m">1</span>
+ <span class="nv">B</span><span class="o">=</span><span class="m">2</span>
+ ------------
+ Inside call - note <span class="nb">alias</span> association <span class="k">for</span> formallist parameter:
+ <span class="nv">A</span><span class="o">=</span><span class="m">3</span> <span class="p">;</span>*
+ <span class="nv">B</span><span class="o">=</span><span class="m">2</span>
+ *X<span class="o">=</span>A
+ ------------
+ Note changed association
+ <span class="nv">A</span><span class="o">=</span><span class="m">3</span>
+ <span class="nv">B</span><span class="o">=</span><span class="m">4</span> <span class="p">;</span>*
+ *X<span class="o">=</span>B
+ ------------
+ On <span class="k">return</span>:
+ <span class="nv">A</span><span class="o">=</span><span class="m">3</span>
+ <span class="nv">B</span><span class="o">=</span><span class="m">4</span>
+ $
+</pre></div>
+</div>
+</section>
+<section id="set-and-quit-examples">
+<h3>SET* and QUIT* Examples<a class="headerlink" href="langext.html#set-and-quit-examples" title="Permalink to this heading">¶</a></h3>
+<p>The following table show the type of data movement of alias and alias container variables from QUIT * in a function to a SET * target:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 14%" />
+<col style="width: 18%" />
+<col style="width: 24%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>QUIT*</p></th>
+<th class="head"><p>SET*</p></th>
+<th class="head"><p>Result</p></th>
+<th class="head"><p>ZWRITE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>set *a=$$makealias(.c)</p></td>
+<td><p>Creates an alias container</p></td>
+<td><p>Dereferences the alias container</p></td>
+<td><p>Same as set *a=c</p></td>
+<td><p>*c=a</p></td>
+</tr>
+<tr class="row-odd"><td><p>set *a(1)=$$makealias(.c)</p></td>
+<td><p>Creates an alias container</p></td>
+<td><p>Dereferences the alias container</p></td>
+<td><p>Same as set *a(1)=c</p></td>
+<td><p>*a(1)=c</p></td>
+</tr>
+<tr class="row-even"><td><p>set *a=$$makecntnr(.c)</p></td>
+<td><p>Returns an alias container</p></td>
+<td><p>Copies the alias container</p></td>
+<td><p>Same as set *a=c(1)</p></td>
+<td><p>*c=a</p></td>
+</tr>
+<tr class="row-odd"><td><p>set *a(1)=$$makecntnr(.c)</p></td>
+<td><p>Returns an alias container</p></td>
+<td><p>Copies the alias container</p></td>
+<td><p>Same as set *a(1)=c(1)</p></td>
+<td><p>*a(1)=c</p></td>
+</tr>
+</tbody>
+</table>
+<p>The makealias function returns an alias of the argument:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>makealias(var)
+quit *var
+</pre></div>
+</div>
+<p>The makecntr function returns an alias container of the argument:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>makecntnr(var)
+new cont
+set *cont(1)=var
+quit *cont(1)
+</pre></div>
+</div>
+</section>
+<section id="kill-examples">
+<h3>KILL* Examples<a class="headerlink" href="langext.html#kill-examples" title="Permalink to this heading">¶</a></h3>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;Set <span class="nv">A</span><span class="o">=</span><span class="m">1</span>,*B<span class="o">=</span>A <span class="p">;</span> Create an array and an association
+YDB&gt;ZWRite <span class="p">;</span> Show that the array and association exist
+<span class="nv">A</span><span class="o">=</span><span class="m">1</span> <span class="p">;</span>*
+*B<span class="o">=</span>A
+YDB&gt;Kill *A <span class="p">;</span> Remove the association <span class="k">for</span> A - it now has no association and no array
+YDB&gt;ZWRite <span class="p">;</span> B is a traditional <span class="nb">local</span> variable
+<span class="nv">B</span><span class="o">=</span><span class="m">1</span>
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;Set <span class="nv">A</span><span class="o">=</span><span class="m">2</span> <span class="p">;</span> add a value <span class="k">for</span> A
+YDB&gt;ZWRite <span class="p">;</span> A and B have different values and both are traditional <span class="nb">local</span> variables
+<span class="nv">A</span><span class="o">=</span><span class="m">2</span>
+<span class="nv">B</span><span class="o">=</span><span class="m">1</span>
+YDB&gt;
+</pre></div>
+</div>
+<p>KILL on the other hand, removes data in the array (and possibly the array itself) without affecting any alias association.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;Set <span class="nv">A</span><span class="o">=</span><span class="m">2</span>,*B<span class="o">=</span>A <span class="p">;</span> Create an array and an association
+YDB&gt;ZWRite <span class="p">;</span> Both array and association exist
+<span class="nv">A</span><span class="o">=</span><span class="m">2</span> <span class="p">;</span>*
+*B<span class="o">=</span>A
+YDB&gt;Kill A <span class="p">;</span> Kill the array
+YDB&gt;ZWRite <span class="p">;</span> There is no data to show - only the association
+*B<span class="o">=</span>A
+YDB&gt;Set <span class="nv">B</span><span class="o">=</span><span class="m">3</span> <span class="p">;</span> Create a new value
+YDB&gt;ZWRite <span class="p">;</span> The association was unaffected by the Kill
+<span class="nv">A</span><span class="o">=</span><span class="m">3</span> <span class="p">;</span>*
+*B<span class="o">=</span>A
+YDB&gt;
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ /usr/local/lib/yottadb/r120/ydb -run ^killalias
+killalias <span class="p">;</span> Demonstrate Kill * of pass-by-reference
+       ZPrint <span class="p">;</span> Print this program
+       Set <span class="nv">A</span><span class="o">=</span><span class="m">1</span>,C<span class="o">=</span><span class="m">3</span>
+       Write <span class="s2">&quot;------------&quot;</span>,!
+       Write <span class="s2">&quot;Initial Values:&quot;</span>,!
+       ZWRite
+       Do K1<span class="o">(</span>.A,.C<span class="o">)</span> <span class="p">;</span> Pass A <span class="p">&amp;</span> C by reference
+       Write <span class="s2">&quot;------------&quot;</span>,!
+       Write <span class="s2">&quot;Value of A is unchanged because of Kill *B, but C has changed: &quot;</span>,!
+       ZWRite
+       Quit
+ <span class="p">;</span>
+ K1<span class="o">(</span>B,D<span class="o">)</span> <span class="p">;</span> A <span class="p">&amp;</span> C are bound to B <span class="p">&amp;</span> D respectively
+       Write <span class="s2">&quot;------------&quot;</span>,!
+       Write <span class="s2">&quot;A &amp; B are aliases, as are C &amp; D:&quot;</span>,!
+       ZWRite
+       Kill *B
+       Set <span class="nv">B</span><span class="o">=</span><span class="m">2</span>,D<span class="o">=</span><span class="m">4</span>
+       Write <span class="s2">&quot;------------&quot;</span>,!
+       Write <span class="s2">&quot;After Kill *B, A &amp; B are different but C &amp; D remain associated:&quot;</span>,!
+       ZWrite
+       Quit
+------------
+Initial Values:
+<span class="nv">A</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">C</span><span class="o">=</span><span class="m">3</span>
+------------
+A <span class="p">&amp;</span> B are aliases, as are C <span class="p">&amp;</span> D:
+<span class="nv">A</span><span class="o">=</span><span class="m">1</span> <span class="p">;</span>*
+*B<span class="o">=</span>A
+<span class="nv">C</span><span class="o">=</span><span class="m">3</span> <span class="p">;</span>*
+*D<span class="o">=</span>C
+------------
+After Kill *B, A <span class="p">&amp;</span> B are different but C <span class="p">&amp;</span> D remain associated:
+<span class="nv">A</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">B</span><span class="o">=</span><span class="m">2</span>
+<span class="nv">C</span><span class="o">=</span><span class="m">4</span> <span class="p">;</span>*
+*D<span class="o">=</span>C
+------------
+Value of A is unchanged because of Kill *B, but C has changed:
+<span class="nv">A</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">C</span><span class="o">=</span><span class="m">4</span>
+Example:
+YDB&gt;Set <span class="nv">A</span><span class="o">=</span><span class="m">1</span>,*B<span class="o">=</span>A <span class="p">;</span> Create an array and association
+YDB&gt;ZWRite <span class="p">;</span> Verify that it is there
+<span class="nv">A</span><span class="o">=</span><span class="m">1</span> <span class="p">;</span>*
+*B<span class="o">=</span>A
+YDB&gt;Kill <span class="o">(</span>A<span class="o">)</span> <span class="p">;</span> Kill everything except A
+YDB&gt;ZWRite <span class="p">;</span> Demonstrate that A also has no array
+YDB&gt;Set <span class="nv">A</span><span class="o">=</span><span class="m">2</span> <span class="p">;</span> Create an array
+YDB&gt;ZWRite <span class="p">;</span> The association survived the Kill
+<span class="nv">A</span><span class="o">=</span><span class="m">2</span> <span class="p">;</span>*
+*B<span class="o">=</span>A
+YDB&gt;
+</pre></div>
+</div>
+</section>
+<section id="annotated-alias-examples">
+<h3>Annotated Alias Examples<a class="headerlink" href="langext.html#annotated-alias-examples" title="Permalink to this heading">¶</a></h3>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ /usr/local/lib/yottadb/r120/ydb -run ^tprestart
+tprestart ; Transaction restart variable association also restored on restart
+  zprint ; Print this program
+  set A=&quot;Malvern&quot;,C=&quot;Pennsylvania&quot;,E=&quot;USA&quot;
+  set *B=C,*D(19355)=E
+  write &quot;------------&quot;,!
+  write &quot;Initial values &amp; association&quot;,!
+  zwrite
+  tstart (B,D) ; On restart: A not restored, B,D restored, C,E restored by association
+  if &#39;$TRestart Do  ; Change C,E if first time through
+  .set C=&quot;Wales&quot;,E=&quot;UK&quot;
+  .kill *D(19355)
+  .write &quot;------------&quot;,!
+  .write &quot;First time through transaction; B,C,D,E changed&quot;,!
+  .zwrite
+  .set A=&quot;Brynmawr&quot;
+  .kill *B
+  .write &quot;------------&quot;,!
+  .write &quot;A changed; association between B &amp; C and D &amp; E killed; B,D have no value&quot;,!
+  .zwrite
+  .trestart
+  else  Do  ; Show restored values on restart
+  write &quot;------------&quot;,!
+  write &quot;Second time through transaction; B,C,D,E &amp; association restored&quot;,!
+  zwrite
+  tcommit ; No global updates in this transaction!
+  quit
+------------
+Initial values &amp; association
+A=&quot;Malvern&quot;
+B=&quot;Pennsylvania&quot; ;*
+*C=B
+*D(19355)=E
+E=&quot;USA&quot; ;*
+------------
+First time through transaction; B,C,D,E changed
+A=&quot;Malvern&quot;
+B=&quot;Wales&quot; ;*
+*C=B
+E=&quot;UK&quot; ;*
+------------
+A changed; association between B &amp; C and D &amp; E killed; B,D have no value
+A=&quot;Brynmawr&quot;
+C=&quot;Wales&quot; ;*
+E=&quot;UK&quot; ;*
+------------
+Second time through transaction; B,C,D,E &amp; association restored
+A=&quot;Brynmawr&quot;
+B=&quot;Pennsylvania&quot; ;*
+*C=B
+*D(19355)=E
+E=&quot;USA&quot; ;*
+</pre></div>
+</div>
+<p>Note that TROLLBACK does not restore alias variables:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/yottadb/r120/ydb -run ^tprollback
+tprollback <span class="p">;</span>
+  zprint <span class="p">;</span> Print this program
+  <span class="nb">set</span> A<span class="o">(</span><span class="m">1</span><span class="o">)=</span><span class="m">1</span>,A<span class="o">(</span><span class="m">2</span><span class="o">)=</span><span class="m">2</span>,A<span class="o">(</span><span class="m">3</span><span class="o">)=</span><span class="m">3</span>
+  <span class="nb">set</span> B<span class="o">(</span><span class="m">1</span><span class="o">)=</span><span class="s2">&quot;1b&quot;</span>,*B<span class="o">(</span><span class="m">2</span><span class="o">)=</span>A,B<span class="o">(</span><span class="m">3</span><span class="o">)=</span><span class="m">3</span> <span class="p">;</span> B includes a container <span class="k">for</span> A
+  <span class="nb">set</span> *C<span class="o">(</span><span class="m">1</span><span class="o">)=</span>B   <span class="p">;</span> C includes a container <span class="k">for</span> B
+  <span class="nb">kill</span> *A,*B   <span class="p">;</span> C is the only way to the data
+  write <span class="s2">&quot;------------&quot;</span>,!
+  write <span class="s2">&quot;Only containers before transaction:&quot;</span>,!
+  zwrite
+  tstart <span class="o">(</span>C<span class="o">)</span>
+  <span class="k">if</span> <span class="s1">&#39;$trestart</span>
+<span class="s1">  .set *D=C(1) ; D is now an alias for what used to be B</span>
+<span class="s1">  .set D(3)=-D(3)</span>
+<span class="s1">  .set *D=D(2) ; D is now an alias for what used to be A</span>
+<span class="s1">  .set D(1)=-D(1)</span>
+<span class="s1">  .kill *D  ; Kill D after is used to manipulate the arrays</span>
+<span class="s1">  .write &quot;------------&quot;,!</span>
+<span class="s1">  .write &quot;Changed values before restart:&quot;,!</span>
+<span class="s1">  .zwrite</span>
+<span class="s1">  .trestart</span>
+<span class="s1">  write &quot;------------&quot;,!</span>
+<span class="s1">  write &quot;Restored values restart:&quot;,!</span>
+<span class="s1">  zwrite</span>
+<span class="s1">  kill C ; Kill only handle to arrays</span>
+<span class="s1">  write &quot;------------&quot;,!</span>
+<span class="s1">  write &quot;No local arrays left:&quot;,!</span>
+<span class="s1">  zwrite</span>
+<span class="s1">  trollback  ; Rollback transaction, don&#39;</span>t commit it
+  write <span class="s2">&quot;------------&quot;</span>,!
+  write <span class="s2">&quot;Rollback doesnt restore names and local arrays&quot;</span>,!
+  zwrite
+  quit
+------------
+Only containers before transaction:
+<span class="nv">$ZWRTAC</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+*C<span class="o">(</span><span class="m">1</span><span class="o">)=</span><span class="nv">$ZWRTAC1</span>
+<span class="nv">$ZWRTAC1</span><span class="o">(</span><span class="m">1</span><span class="o">)=</span><span class="s2">&quot;1b&quot;</span>
+*<span class="nv">$ZWRTAC1</span><span class="o">(</span><span class="m">2</span><span class="o">)=</span><span class="nv">$ZWRTAC2</span>
+<span class="nv">$ZWRTAC2</span><span class="o">(</span><span class="m">1</span><span class="o">)=</span><span class="m">1</span>
+<span class="nv">$ZWRTAC2</span><span class="o">(</span><span class="m">2</span><span class="o">)=</span><span class="m">2</span>
+<span class="nv">$ZWRTAC2</span><span class="o">(</span><span class="m">3</span><span class="o">)=</span><span class="m">3</span>
+<span class="nv">$ZWRTAC1</span><span class="o">(</span><span class="m">3</span><span class="o">)=</span><span class="m">3</span>
+<span class="nv">$ZWRTAC</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+------------
+Restored values restart:
+<span class="nv">$ZWRTAC</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+*C<span class="o">(</span><span class="m">1</span><span class="o">)=</span><span class="nv">$ZWRTAC1</span>
+<span class="nv">$ZWRTAC1</span><span class="o">(</span><span class="m">1</span><span class="o">)=</span><span class="s2">&quot;1b&quot;</span>
+*<span class="nv">$ZWRTAC1</span><span class="o">(</span><span class="m">2</span><span class="o">)=</span><span class="nv">$ZWRTAC2</span>
+<span class="nv">$ZWRTAC2</span><span class="o">(</span><span class="m">1</span><span class="o">)=</span><span class="m">1</span>
+<span class="nv">$ZWRTAC2</span><span class="o">(</span><span class="m">2</span><span class="o">)=</span><span class="m">2</span>
+<span class="nv">$ZWRTAC2</span><span class="o">(</span><span class="m">3</span><span class="o">)=</span><span class="m">3</span>
+<span class="nv">$ZWRTAC1</span><span class="o">(</span><span class="m">3</span><span class="o">)=</span><span class="m">3</span>
+<span class="nv">$ZWRTAC</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+------------
+No <span class="nb">local</span> arrays left:
+------------
+Rollback doesnt restore names and <span class="nb">local</span> arrays
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span> $ /usr/local/lib/yottadb/r120/ydb -run ^aliasexample<span class="p">;</span> Extended annotated <span class="nb">alias</span> example
+     zprint
+     write <span class="s2">&quot;------------&quot;</span>,!
+     <span class="nb">set</span> <span class="nv">x</span><span class="o">=</span><span class="s2">&quot;name level&quot;</span>,x<span class="o">(</span><span class="m">1</span><span class="o">)=</span><span class="m">1</span>,x<span class="o">(</span><span class="m">1</span>,2<span class="o">)=</span><span class="s2">&quot;1,2&quot;</span>,x<span class="o">(</span><span class="s2">&quot;foo&quot;</span><span class="o">)=</span><span class="s2">&quot;bar&quot;</span>
+     write <span class="nv">$ZDATA</span><span class="o">(</span>x<span class="o">)</span>,! <span class="p">;</span> x is a conventional lvn - output <span class="m">11</span>
+     <span class="nb">set</span> *y<span class="o">=</span>x <span class="p">;</span> x an y are now <span class="nb">alias</span> variables
+     write <span class="nv">$ZDATA</span><span class="o">(</span>x<span class="o">)</span>,! <span class="p">;</span> output appears as <span class="m">111</span>
+     <span class="nb">set</span> *a<span class="o">(</span><span class="m">1</span><span class="o">)=</span>y <span class="p">;</span> a<span class="o">(</span><span class="m">1</span><span class="o">)</span> is now an <span class="nb">alias</span> container variable
+     <span class="nb">set</span> <span class="nv">b</span><span class="o">=</span><span class="s2">&quot;bness&quot;</span>,b<span class="o">(</span><span class="s2">&quot;b&quot;</span><span class="o">)=</span><span class="s2">&quot;bbness&quot;</span> <span class="p">;</span> b is a conventional lvn
+     <span class="nb">set</span> *b<span class="o">=</span>a<span class="o">(</span><span class="m">1</span><span class="o">)</span> <span class="p">;</span> b joins x and y as <span class="nb">alias</span> variables <span class="k">for</span> the same data
+     <span class="p">;</span> prior b values are lost
+     <span class="p">;</span> <span class="nb">set</span> *&lt;name&gt; is equivalent to Kill *&lt;name&gt; Set *&lt;name&gt;
+     <span class="nb">set</span> y<span class="o">(</span><span class="s2">&quot;hi&quot;</span><span class="o">)=</span><span class="s2">&quot;sailor&quot;</span> <span class="p">;</span> Assignment applies to all of <span class="o">{</span>b,x,y<span class="o">}</span>
+     <span class="nb">kill</span> b<span class="o">(</span><span class="s2">&quot;foo&quot;</span><span class="o">)</span> <span class="p">;</span> Kill applies to all of <span class="o">{</span>b,x,y<span class="o">}</span>
+     <span class="nb">kill</span> *x <span class="p">;</span> x is undefined and no longer an <span class="nb">alias</span> variable
+     <span class="p">;</span> b and y still provide access to the data
+     write a<span class="o">(</span><span class="m">1</span><span class="o">)</span>,<span class="s2">&quot;&lt;&quot;</span>,! <span class="p">;</span> output appears as &lt;
+     write a<span class="o">(</span><span class="m">1</span><span class="o">)</span>*3,! <span class="p">;</span> output appears as <span class="m">0</span>
+     write <span class="nv">$length</span><span class="o">(</span>a<span class="o">(</span><span class="m">1</span><span class="o">))</span>,! <span class="p">;</span> output appears as <span class="m">0</span>
+     <span class="nb">set</span> <span class="nv">c</span><span class="o">=</span>y,c<span class="o">(</span><span class="s2">&quot;legs&quot;</span><span class="o">)=</span><span class="s2">&quot;tars&quot;</span> <span class="p">;</span> c is conventional lvn with value <span class="s2">&quot;name level&quot;</span>
+     <span class="k">do</span> sub1
+     write <span class="nv">$Data</span><span class="o">(</span>c<span class="o">)</span>,! <span class="p">;</span> output is <span class="m">1</span>
+     <span class="k">do</span> sub2<span class="o">(</span>.c<span class="o">)</span>
+     <span class="nb">set</span> a<span class="o">(</span><span class="m">1</span><span class="o">)=</span><span class="s2">&quot;&quot;</span> <span class="p">;</span> a<span class="o">(</span><span class="m">1</span><span class="o">)</span> ceases to be an <span class="nb">alias</span> container variable
+     <span class="p">;</span> has the value <span class="s2">&quot;&quot;</span>
+     write <span class="nv">$D</span><span class="o">(</span>i<span class="o">)</span>,! <span class="p">;</span> output is <span class="m">0</span>
+     <span class="nb">kill</span> *c,*y <span class="p">;</span> c and y become undefined lvns
+     zwrite b <span class="p">;</span> output is b<span class="o">(</span><span class="s2">&quot;got&quot;</span><span class="o">)=</span><span class="s2">&quot;a match&quot;</span>
+     <span class="p">;</span> it is no longer an <span class="nb">alias</span> variable
+     <span class="p">;</span> as everything <span class="k">else</span> has gone
+     quit
+sub1
+    new y <span class="p">;</span> <span class="k">in</span> this scope y is no longer an <span class="nb">alias</span> <span class="k">for</span> b
+    <span class="nb">set</span> *y<span class="o">=</span>c <span class="p">;</span> <span class="k">in</span> this scope c and y are <span class="nb">alias</span> variables
+    <span class="nb">kill</span> y<span class="o">(</span><span class="s2">&quot;legs&quot;</span><span class="o">)</span> <span class="p">;</span> Kill apples to all of <span class="o">{</span>c,y<span class="o">}</span>
+    <span class="nb">kill</span> *y <span class="p">;</span> <span class="k">in</span> this scope y is no longer an <span class="nb">alias</span> <span class="k">for</span> c
+    <span class="p">;</span> this is really redundant as
+    <span class="p">;</span> the Quit implicitly does the same thing
+    quit
+sub2<span class="o">(</span>i<span class="o">)</span> <span class="p">;</span> i and c are joined due to pass-by-reference
+    write <span class="nv">$ZAHandle</span><span class="o">(</span>c<span class="o">)=</span><span class="nv">$ZAHandle</span><span class="o">(</span>i<span class="o">)</span>,! <span class="p">;</span> output appears as <span class="m">1</span>
+    <span class="nb">kill</span> b <span class="p">;</span> data <span class="k">for</span> <span class="o">{</span>b,y<span class="o">}</span> is gone
+    <span class="p">;</span> both are undefined, but remain <span class="nb">alias</span> variables
+    <span class="nb">set</span> *c<span class="o">=</span>a<span class="o">(</span><span class="m">1</span><span class="o">)</span> <span class="p">;</span> c joins <span class="o">{</span>b,y<span class="o">}</span> as <span class="nb">alias</span> variable<span class="p">;</span> prior value of c lost
+    <span class="p">;</span> c is no longer <span class="nb">alias</span> of i
+    write <span class="nv">$ZAHandle</span><span class="o">(</span>c<span class="o">)=</span><span class="nv">$ZAHandle</span><span class="o">(</span>i<span class="o">)</span>,! <span class="p">;</span> output appears as <span class="m">0</span>
+    <span class="nb">set</span> <span class="nv">i</span><span class="o">=</span>a<span class="o">(</span><span class="m">1</span><span class="o">)</span> <span class="p">;</span> Assignment applies to i - value is <span class="s2">&quot;&quot;</span>
+    wet c<span class="o">(</span><span class="s2">&quot;got&quot;</span><span class="o">)=</span><span class="s2">&quot;a match&quot;</span> <span class="p">;</span> Assignment applies to all of <span class="o">{</span>b,c,y<span class="o">)</span>
+    quit
+
+------------
+<span class="m">11</span>
+<span class="m">111</span>
+&lt;
+<span class="m">0</span>
+<span class="m">0</span>
+<span class="m">1</span>
+<span class="m">1</span>
+<span class="m">0</span>
+<span class="m">0</span>
+b<span class="o">(</span><span class="s2">&quot;got&quot;</span><span class="o">)=</span><span class="s2">&quot;a match&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="extensions-for-unicode-standard-support">
+<h2><a class="toc-backref" href="langext.html#id10">Extensions for Unicode® standard support</a><a class="headerlink" href="langext.html#extensions-for-unicode-standard-support" title="Permalink to this heading">¶</a></h2>
+<p>To represent and process strings that use international characters, YottaDB processes can use Unicode.</p>
+<p>If the environment variable ydb_chset has a value of UTF-8 and either LC_ALL or LC_CTYPE is set to a locale with UTF-8 support (for example, zh_CN.utf8), a YottaDB process interprets strings as containing characters encoded in the UTF-8 representation. In the UTF-8 mode, YottaDB no longer assumes that one character is one byte, or that the glyph display width of a character is one. Depending on how ICU is built on a computer system, in order to operate in UTF-8 mode, a YottaDB process may well also need a third environment variable, ydb_icu_version set appropriately.</p>
+<p>If the environment variable ydb_chset has no value, the string “M”, or any value other than “UTF-8”, YottaDB treats each 8-bit byte as a character, which suffices for English, and many single-language applications.</p>
+<p>All YottaDB components related to M mode reside in the top level directory in which a YottaDB release is installed and the environment variable ydb_dist should point to that directory for M mode processes. All Unicode-related components reside in the utf8 subdirectory and the environment variable ydb_dist should point to that subdirectory for UTF-8 mode processes. So, in addition to the values of the environment variables ydb_chset and LC_ALL/LC_CTYPE, ydb_dist for a UTF-8 process should also point to the utf8 subdirectory.</p>
+<p>M mode and UTF-8 mode are set for the process, not for the database. As a subset of Unicode, ASCII characters ($CHAR() values 0 through 127) are interpreted identically by processes in M and UTF-8 modes. The indices and values in the database are simply sequences of bytes and therefore it is possible for one process to interpret a global node as encoded in UTF-8 and for another to interpret the same node as bytecodes. Note that such an application configuration would be extremely unusual, except perhaps during a transition phase or in connection with data import/export.</p>
+<p>In UTF-8 mode, string processing functions (such as $EXTRACT()) operate on strings of multi-byte characters, and can therefore produce different results in M and UTF-8 modes, depending on the actual data processed. Each function has a “Z” alter ego (for example, $ZEXTRACT()) that can be used to operate on sequences of bytes identically in M and UTF-8 modes (that is, in M mode, $EXTRACT() and $ZEXTRACT() behave identically).</p>
+<p>In M mode, the concept of an illegal character does not exist. In UTF-8 mode, a sequence of bytes may not represent a valid character, and generates an error when encountered by functions that expect and process UTF-8 strings. During a migration of an application to add support for Unicode, illegal character errors may be frequent and indicative of application code that is yet to be modified. VIEW “NOBADCHAR” suppresses these errors at times when their presence impedes development.</p>
+<p>In UTF-8 mode, YottaDB also supports IO encoded in UTF-16 variants as well as in the traditional one byte per character encoding from devices other than $PRINCIPAL.</p>
+<p>The following table summarizes YottaDB Unicode support.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 87%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Extension</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>$ASCII()</p></td>
+<td><p>IN UTF-8 mode, the $ASCII() function returns the integer Unicode code-point value of a character in the given string. Note that the name $ASCII() is somewhat anomalous for Unicode data
+but that name is the logical extension of the function from M mode to UTF-8 mode. For more information and usage examples, refer to
+<a class="reference internal" href="functions.html#ascii-function"><span class="std std-ref">$ASCII()</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$Char()</p></td>
+<td><p>In UTF-8 mode, $CHAR() returns a string composed of characters represented by the integer equivalents of the Unicode code-points specified in its argument(s). For more information and
+usage examples, refer to <a class="reference internal" href="functions.html#char-function"><span class="std std-ref">$CHAR()</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>$Extract()</p></td>
+<td><p>The $EXTRACT() function returns a substring of a given string. For more information and usage examples, refer to
+<a class="reference internal" href="functions.html#extract-function"><span class="std std-ref">$EXTRACT()</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$Find()</p></td>
+<td><p>The $FIND() function returns an integer character position that locates the occurrence of a substring within a string. For more information and usage examples, refer to
+<a class="reference internal" href="functions.html#find-function"><span class="std std-ref">$FIND()</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>$Justify()</p></td>
+<td><p>The $JUSTIFY() function returns a formatted string. For more information and usage examples, refer to <a class="reference internal" href="functions.html#justify-function"><span class="std std-ref">$JUSTIFY()</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$Length()</p></td>
+<td><p>The $LENGTH() function returns the length of a string measured in characters, or in “pieces” separated by a delimiter specified by its optional second argument. For more information and
+usage examples, refer to <a class="reference internal" href="functions.html#length-function"><span class="std std-ref">$LENGTH()</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>$Piece()</p></td>
+<td><p>The $PIECE() function returns a substring delimited by a specified string delimiter made up of one or more characters. For more information and usage examples, refer to
+<a class="reference internal" href="functions.html#piece-function"><span class="std std-ref">$PIECE()</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$TRanslate()</p></td>
+<td><p>The $TRANSLATE() function returns a string that results from replacing or dropping characters in the first of its arguments as specified by the patterns of its other arguments. For more
+information and usage examples, refer to <a class="reference internal" href="functions.html#translate-function"><span class="std std-ref">$TRANSLATE()</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>$X</p></td>
+<td><p>For UTF-8 mode and TRM and SD output, $X increases by the display-columns (width in glyphs) of a given string that is written to the current device. For more information and usage
+examples, refer to <a class="reference internal" href="isv.html#x-isv"><span class="std std-ref">$X</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZASCII()</p></td>
+<td><p>The $ZASCII() function returns the numeric byte value (0 through 255) of a given sequence of octets (8-bit bytes). For more information and usage examples, refer to
+<a class="reference internal" href="functions.html#zascii-function"><span class="std std-ref">$ZASCII()</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZCHset</p></td>
+<td><p>The read-only intrinsic special variable $ZCHSET takes its value from the environment variable ydb_chset. An application can obtain the character set used by a YottaDB process by the
+value of $ZCHSET. $ZCHSET can have only two values –“M”, or “UTF-8” and it cannot appear on the left of an equal sign in the SET command. For more information and usage examples, refer to
+<a class="reference internal" href="isv.html#zchset-isv"><span class="std std-ref">$ZCHSET</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZCHar()</p></td>
+<td><p>The $ZCHAR() function returns a byte sequence of one or more bytes corresponding to numeric byte value (0 through 255) specified in its argument(s). For more information and usage
+examples, refer to <a class="reference internal" href="functions.html#zchar-function"><span class="std std-ref">$ZCHAR()</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZCOnvert()</p></td>
+<td><p>The $ZCONVERT() function returns its first argument as a string converted to a different encoding. The two argument form changes the encoding for case within a character set. The three
+argument form changes the encoding scheme. For more information and usage examples, refer to <a class="reference internal" href="functions.html#zconvert-function"><span class="std std-ref">$ZCONVERT()</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZExtract()</p></td>
+<td><p>The $ZEXTRACT() function returns a byte sequence of a given sequence of octets (8-bit bytes). For more information and usage examples, refer to
+<a class="reference internal" href="functions.html#zextract-function"><span class="std std-ref">$ZEXTRACT()</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZFind()</p></td>
+<td><p>The $ZFIND() function returns an integer byte position that locates the occurrence of a byte sequence within a sequence of octets(8-bit bytes). For more information and usage examples,
+refer to <a class="reference internal" href="functions.html#zfind-function"><span class="std std-ref">$ZFIND()</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZJustify()</p></td>
+<td><p>The $JUSTIFY() function returns a formatted and fixed length byte sequence. For more information and usage examples, refer to
+<a class="reference internal" href="functions.html#zjustify-function"><span class="std std-ref">$ZJUSTIFY()</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZLength()</p></td>
+<td><p>The $ZLENGTH() function returns the length of a sequence of octets measured in bytes, or in “pieces” separated by a delimiter specified by its optional second argument. For more
+information and usage examples, refer to <a class="reference internal" href="functions.html#zlength-function"><span class="std std-ref">$ZLENGTH()</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZPATNumeric</p></td>
+<td><p>ZPATN[UMERIC] is a read-only intrinsic special variable that determines how YottaDB interprets the patcode N used in the pattern match operator. With $ZPATNUMERIC=”UTF-8”, the
+patcode N matches any numeric character as defined by Unicode. By default patcode N only matches the ASCII digits, which are the only digits which M actually treats as numerics. For more
+information and usage examples, refer to <a class="reference internal" href="isv.html#zpatnumeric-isv"><span class="std std-ref">$ZPATNUMERIC</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZPIece()</p></td>
+<td><p>The $ZPIECE() function returns a sequence of bytes delimited by a specified byte sequence made up of one or more bytes. In M, $ZPIECE() typically returns a logical field from a logical
+record. For more information and usage examples, refer to <a class="reference internal" href="functions.html#zpiece-function"><span class="std std-ref">$ZPIECE()</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZPROMpt</p></td>
+<td><p>$ZPROM[PT] contains a string value specifying the current Direct Mode prompt. By default, YDB&gt; is the Direct Mode prompt. M routines can modify $ZPROMPT by means of a SET command.
+$ZPROMPT cannot exceed 31 bytes. If an attempt is made to assign $ZPROMPT to a longer string, YottaDB takes only the first 31 bytes and truncates the rest. With character set UTF-8
+specified, if the 31st byte is not the end of a valid UTF-8 character, YottaDB truncates the $ZPROMPT value at the end of last character that completely fits within the 31 byte
+limit. For more information and usage examples, refer to <a class="reference internal" href="isv.html#zprompt-isv"><span class="std std-ref">$ZPROMPT</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZSUBstr()</p></td>
+<td><p>The $ZSUBSTR() function returns a properly encoded string from a sequence of bytes. For more information and usage examples, refer to
+<a class="reference internal" href="functions.html#zsubstr-function"><span class="std std-ref">$ZSUBSTR()</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZTRanslate()</p></td>
+<td><p>The $ZTRANSLATE() function returns a byte sequence that results from replacing or dropping bytes in the first of its arguments as specified by the patterns of its other arguments.
+$ZTRANSLATE() provides a tool for tasks such as encryption. For more information and usage examples, refer to
+<a class="reference internal" href="functions.html#ztranslate-function"><span class="std std-ref">$ZTRANSLATE()</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZWidth()</p></td>
+<td><p>The $ZWIDTH() function returns the numbers of columns required to display a given string on the screen or printer. For more information and usage examples, refer to
+<a class="reference internal" href="functions.html#zwidth-function"><span class="std std-ref">$ZWIDTH()</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>%HEX2UTF</p></td>
+<td><p>The %HEX2UTF utility returns the encoded character string from the given bytestream in hexadecimal notation. This routine has entry points for both interactive and non-interactive use.
+For more information and usage examples, refer to <a class="reference internal" href="utility.html#hex2utf-util"><span class="std std-ref">%HEX2UTF</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>%UTF2HEX</p></td>
+<td><p>The %UTF2HEX utility returns the hexadecimal notation of the internal byte encoding of a UTF-8 encoded character string. This routine has entry points for both interactive and
+non-interactive use. For more information and usage examples, refer to <a class="reference internal" href="utility.html#utf2hex-util"><span class="std std-ref">%UTF2HEX</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>[NO]WRAP (USE)</p></td>
+<td><p>Enables or disables automatic record termination. When the current record size ($X) reaches the maximum WIDTH and the device has WRAP enabled, YottaDB starts a new record, as if the
+routine had issued a WRITE ! command. For more information and usage examples, refer to <a class="reference internal" href="ioproc.html#wrap-ioproc"><span class="std std-ref">WRAP</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>DSE and LKE</p></td>
+<td><p>In UTF-8 mode, DSE and LKE accept characters in Unicode in all their command qualifiers that require file names, keys, or data (such as DSE -KEY, DSE -DATA and LKE -LOCK qualifiers).
+For more information, refer to the <a class="reference external" href="../AdminOpsGuide/mlocks.html">LKE</a> and <a class="reference external" href="../AdminOpsGuide/dse.html">DSE</a> chapter. For more information
+and usage examples, refer to the <a class="reference external" href="../AdminOpsGuide/index.html">Administration and Operations Guide</a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>GDE Objects</p></td>
+<td><p>GDE allows the name of a file to include characters in Unicode</p>
+<p>In UTF-8 mode, GDE considers a text file to be encoded in UTF-8 when it is executed via the “&#64;” command. For more information, refer to the
+<a class="reference external" href="../AdminOpsGuide/gde.html">GDE</a> chapter in the Administration and Operations Guide.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>FILTER[=expr]</p></td>
+<td><p>Specifies character filtering for specified cursor movement sequences on devices where FILTER applies.</p>
+<p>In UTF-8 mode, the usual Unicode line terminators (U+000A (LF), U+0000D (CR), U+000D followed by U+000A (CRLF), U+0085 (NEL), U+000C (FF), U+2028 (LS) and U+2029 (PS)) are recognized. If
+FILTER=CHARACTER is enabled, all of the terminators are recognized to maintain the values of $X and $Y. For more information, refer to
+<a class="reference internal" href="ioproc.html#no-filter"><span class="std std-ref">FILTER</span></a>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Job</p></td>
+<td><p>The Job command spawns a background process with the same environment as the M process doing the spawning. Therefore, if the parent process is operating in UTF-8 mode, the Job’d process
+also operates in UTF-8 mode. In the event that a background process must have a different mode from the parent, create a shell script to alter the environment as needed, and spawn it with
+a ZSYstem command, for example, ZSYstem “/path/to/shell/script &amp;”, or start it as a PIPE device. For more information and UTF-8 mode examples, refer
+<a class="reference internal" href="commands.html#job-command"><span class="std std-ref">Job</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>MUPIP</p></td>
+<td><p>MUPIP EXTRACT</p>
+<p>In UTF-8 mode, MUPIP EXTRACT, MUPIP JOURNAL -EXTRACT and MUPIP JOURNAL -LOSTTRANS write sequential output files in the UTF-8 character encoding form. For example, in UTF-8 mode if ^A has
+the value of 主要雨在西班牙停留在平原, the sequential output file of the MUPIP EXTRACT command is:</p>
+<p>09-OCT-2006 04:27:53 ZWR</p>
+<p>YottaDB MUPIP EXTRACT UTF-8</p>
+<p>^A=”主要雨在西班牙停留在平原”</p>
+<p>MUPIP LOAD</p>
+<p>MUPIP LOAD command considers a sequential file as encoded in UTF-8 if the environment variable ydb_chset is set to UTF-8. Ensure that MUPIP EXTRACT commands and corresponding MUPIP LOAD
+commands execute with the same setting for the environment variable ydb_chset. The M utility programs %GO and %GI have the same requirement for mode matching. For more information on
+MUPIP EXTRACT and MUPIP LOAD, refer to the <a class="reference external" href="../AdminOpsGuide/dbmgmt.html">General Database Management</a> chapter in the Administration and Operations Guide.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Open</p></td>
+<td><p>In UTF-8 mode, the OPEN command recognizes ICHSET, OCHSET, and CHSET as three additional deviceparameters to determine the encoding of the input/output devices. For more information and
+usage examples, refer to <a class="reference internal" href="commands.html#open-command"><span class="std std-ref">Open</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>Pattern Match Operator (?)</p></td>
+<td><p>YottaDB allows the pattern string literals to contain the characters in Unicode. Additionally, YottaDB extends the M standard pattern codes (patcodes) A, C, N, U, L, P and E to
+the Unicode character set. For more information, refer to <a class="reference internal" href="langfeat.html#pattern-match-op"><span class="std std-ref">Pattern Match Operator</span></a> and
+<a class="reference internal" href="isv.html#zpatnumeric-isv"><span class="std std-ref">$ZPATNUMERIC</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Read</p></td>
+<td><p>In UTF-8 mode, the READ command uses the character set value specified on the device OPEN as the character encoding of the input device. If character set “M” or “UTF-8” is specified, the
+data is read with no transformation. If character set is “UTF-16”, “UTF-16LE”, or “UTF-16BE”, the data is read with the specified encoding and transformed to UTF-8. If the READ command
+encounters an illegal character or a character outside the selected representation, it triggers a run-time error. The READ command recognizes all Unicode line terminators for non-FIXED
+devices. For more information and usage examples, refer to <a class="reference internal" href="ioproc.html#read-ioproc"><span class="std std-ref">READ</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>Read #</p></td>
+<td><p>When a number sign (#) and a non-zero integer expression immediately follow the variable name, the integer expression determines the maximum number of characters accepted as the input to
+the READ command. In UTF-8 or UTF-16 modes, this can occur in the middle of a sequence of combining code-points (some of which are typically non-spacing). When this happens, any display
+on the input device, may not represent the characters returned by the fixed-length READ (READ #). For more information and usage examples, refer to
+<a class="reference internal" href="ioproc.html#read-ioproc"><span class="std std-ref">READ</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Read *</p></td>
+<td><p>In UTF-8 or UTF-16 modes, the READ * command accepts one character in Unicode of input and puts the numeric code-point value for that character into the variable. For more information and
+usage examples, refer to <a class="reference internal" href="ioproc.html#read-ioproc"><span class="std std-ref">READ</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>View “[NO]BADCHAR”</p></td>
+<td><p>As an aid to migrating applications to Unicode, this UTF-8 mode VIEW command determines whether Unicode enabled functions trigger errors when they encounter illegal strings. For more
+information and usage examples, refer to <a class="reference internal" href="commands.html#view-command"><span class="std std-ref">View</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>User-defined Collation</p></td>
+<td><p>For some languages (such as Chinese), the ordering of strings according to Unicode code-points (character values) may not be the linguistically or culturally correct ordering. Supporting
+applications in such languages requires development of collation modules - YottaDB natively supports M collation, but does not include pre-built collation modules for any specific
+natural language. Therefore, applications that use characters in Unicode may need to implement their own collation functions. For more information on developing a collation module for
+Unicode, refer to <a class="reference internal" href="internatn.html#implement-alt-colltn-seq-unicode-chars"><span class="std std-ref">Implementing an Alternative Collation Sequence for Unicode® Characters</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>Unicode Byte Order Marker
+(BOM)</p></td>
+<td><p>When ICHSET is UTF-16, YottaDB uses BOM (U+FEFF) to automatically determine the endianess. For this to happen, the BOM must appear at the beginning of the file or data stream. If BOM
+is not present, YottaDB assumes big endianess. SEEK or APPEND operations require specifying the endianess (UTF-16LE or UTF-16BE) because they do not go to the beginning of the file
+or data stream to automatically determine the endianess. When endianess is not specified, SEEK or APPEND assume big endianess.</p>
+<p>If the character set of a device is UTF-8, YottaDB checks for and ignores a BOM on input.</p>
+<p>If the BOM does not match the character set specified at device OPEN, YottaDB produces an error. READ does not return BOM to the application and the BOM is not counted as part of the
+first record.</p>
+<p>If the output character set for a device is UTF-16 (but not UTF-16BE or UTF-16LE,) YottaDB writes a BOM before the initial output. The application code does not need to explicitly
+write the BOM.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>WIDTH=intexpr (USE)</p></td>
+<td><p>In UTF-8 mode and TRM and SD output, the WIDTH deviceparameter specifies the display-columns and is used with $X to control the truncation and WRAPping of the visual representation of the
+stream. For more information and usage examples, refer to <a class="reference internal" href="ioproc.html#width-ioproc"><span class="std std-ref">WIDTH</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>Write</p></td>
+<td><p>In UTF-8 mode, the WRITE command uses the character set specified on the device OPEN as the character encoding of the output device. If character set specifies “M” or “UTF-8”,
+YottaDB WRITEs the data with no transformation. If character set specifies “UTF-16”, “UTF-16LE” or “UTF-16BE”, the data is assumed to be encoded in UTF-8 and WRITE transforms it to
+the character encoding specified by the character set device parameter. For more information and usage examples, refer to
+<a class="reference internal" href="ioproc.html#write-ioproc"><span class="std std-ref">WRITE</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Write *</p></td>
+<td><p>When the argument of a WRITE command consists of a leading asterisk (*) followed by an integer expression, the WRITE command outputs the character represented by the code-point value of
+that integer expression. For more information and usage examples, refer to <a class="reference internal" href="ioproc.html#write-ioproc"><span class="std std-ref">WRITE</span></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>ZSHow</p></td>
+<td><p>In UTF-8 mode, the ZSHOW command exhibits byte-oriented and display-oriented behavior as follows:</p>
+<ul class="simple">
+<li><p>ZSHOW targeted to a device (ZSHOW “*”) aligns the output according to the numbers of display columns specified by the WIDTH deviceparameter.</p></li>
+</ul>
+<p>For more information and usage examples, refer to <a class="reference internal" href="commands.html#zshow-dest-vars"><span class="std std-ref">ZSHOW Destination Variables</span></a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<section id="philosophy-of-yottadb-s-support-for-the-unicode-standard">
+<h3>Philosophy of YottaDB’s support for the Unicode® standard<a class="headerlink" href="langext.html#philosophy-of-yottadb-s-support-for-the-unicode-standard" title="Permalink to this heading">¶</a></h3>
+<p>With the support for the Unicode® standard, there is no change to the YottaDB database engine or to the way that data is stored and manipulated. YottaDB has always allowed indices and values of M global and local variables to be either canonical numbers or any arbitrary sequence of bytes. There is also no change to the character set used for M source programs. M source programs have always been in ASCII (standard ASCII - $C(0) through $C(127) - is a proper subset of the UTF-8 encoding specified by the Unicode standard). YottaDB accepts some non-ASCII characters in comments and string literals.</p>
+<p>The changes in YottaDB to support the Unicode® standard are principally enhancements to M language features. Although conceptually simple, these changes fundamentally alter certain previously ingrained assumptions. For example:</p>
+<ol class="arabic simple">
+<li><p>The length of a string in characters is not the same as the length of a string in bytes. The length of a Unicode string in characters is always less than or equal to its length in bytes.</p></li>
+<li><p>The display width of a string on a terminal is different from the length of a string in characters - for example, with Unicode, a complex glyph may actually be composed of a series of glyphs or component symbols, each in turn a UTF-8 encoded character in a Unicode string.</p></li>
+<li><p>As a glyph may be composed of multiple characters, a string in Unicode can have canonical and non-canonical forms. The forms may be conceptually equivalent, but they are different strings of characters in Unicode.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>YottaDB treats canonical and non-canonical versions of the same string as different and unequal. YottaDB recommends that applications be written to use canonical forms. Where conformance to a canonical representation of input strings cannot be assured, application logic linguistically and culturally correct for each language should convert non-canonical strings to canonical strings.</p>
+</div>
+<p>Applications may operate on a combination of character and binary data - for example, some strings in the database may be digitized images of signatures and others may include escape sequences for laboratory instruments. Furthermore, since M applications have traditionally overloaded strings by storing different data items as pieces of the same string, the same string may contain both Unicode and binary data. YottaDB has functionality to allow a process to manipulate Unicode strings as well as binary data including strings containing both Unicode and binary data.</p>
+<p>The YottaDB design philosophy is to keep things simple, but no simpler than they need to be. There are areas of processing where the use of Unicode adds complexity. These typically arise where interpretations of lengths and interpretations of characters interact. For example:</p>
+<ol class="arabic simple">
+<li><p>A sequence of bytes is never illegal when considered as binary data, but can be illegal when treated as a UTF-8 string. The detection and handling of illegal UTF-8 strings adds complexity, especially when binary and UTF-8 data reside in different pieces of the same string.</p></li>
+<li><p>Since binary data may not map to graphic UTF-8 characters, the ZWRite format must represent such characters differently. A sequence of bytes that is output by a process interpreting it as UTF-8 data may require processing to form correctly input to a process that is interpreting that sequence as binary, and vice versa. Therefore, when performing IO operations, including MUPIP EXTRACT and MUPIP LOAD operations in ZWR format, ensure that processes have the compatible environment variables and/or logic to generate the desired output and correctly read and process the input.</p></li>
+<li><p>Application logic managing input/output that interacts with human beings or non-YottaDB applications requires even closer scrutiny. For example, fixed length records in files are always defined in terms of bytes. In Unicode-related operations, an application may output data such that a character would cross a record boundary (for example, a record may have two bytes of space left, and the next UTF-8 character may be three bytes long), in which case YottaDB fills the record with one or more pad bytes. When a padded record is read as UTF-8, trailing pad bytes are stripped by YottaDB and not provided to the application code.</p></li>
+</ol>
+<p>For some languages (such as Chinese), the ordering of strings according to UTF-8 code-points (character values) may not be the linguistically or culturally correct ordering. Supporting applications in such languages requires development of collation modules - YottaDB natively supports M collation, but does not include pre-built collation modules for any specific natural language.</p>
+<p><strong>Glyphs and Unicode Characters</strong></p>
+<p>Glyphs are the visual representation of text elements in writing systems and Unicode code-points are the underlying data. Internally, YottaDB stores UTF-8 encoded strings as sequences of Unicode code-points. A Unicode compatible output device - terminal, printer or application - renders the characters as sequences of glyphs that depict the sequence of code-points, but there may not be a one-to-one correspondence between characters and glyphs.</p>
+<p>For example, consider the following word from the Devanagari writing system.</p>
+<p>अच्छी</p>
+<p>On a screen or a printer, it is displayed in 4 columns. Internally, YottaDB stores it as a sequence of 5 Unicode code-points:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 19%" />
+<col style="width: 29%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Number</p></th>
+<th class="head"><p>Character</p></th>
+<th class="head"><p>Unicode code-point</p></th>
+<th class="head"><p>Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>अ</p></td>
+<td><p>U+0905</p></td>
+<td><p>DEVANAGARI LETTER A</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>च</p></td>
+<td><p>U+091A</p></td>
+<td><p>DEVANAGARI LETTER CA</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>्</p></td>
+<td><p>U+094D</p></td>
+<td><p>DEVANAGARI SIGN VIRAMA</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>छ</p></td>
+<td><p>U+091B</p></td>
+<td><p>DEVANAGARI LETTER CHA</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>ी</p></td>
+<td><p>U+0940</p></td>
+<td><p>DEVANAGARI VOWEL SIGN II</p></td>
+</tr>
+</tbody>
+</table>
+<p>The Devanagari writing system (U+0900 to U+097F) is based on the representation of syllables as contrasted with the use of an alphabet in English. Therefore, it uses the half-form of a consonant to represent certain syllables. The above example uses the half-form of the consonant (U+091A).</p>
+<p>Although the half-form form consonant is a valid text element in the context of the Devanagari writing system, it does not map directly to a character in the Unicode Standard. It is obtained by combining the DEVANAGARI LETTER CA, with DEVANAGARI SIGN VIRAMA, and DEVANAGARI LETTER CHA.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>च + ्  +  छ  =  च्छ
+</pre></div>
+</div>
+<p>On a screen or a printer, the terminal font detects the glyph image of the half-consonant and displays it at the next display position. Internally, YottaDB uses ICU’s glyph-related conventions for the Devanagari writing system to calculate the number of columns needed to display it. As a result, YottaDB advances $X by 1 when it encounters the combination of the 3 Unicode code-points that represent the half-form consonant.</p>
+<p>To view this example at the YottaDB prompt, type in the following command sequence:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;write <span class="nv">$ZCHSET</span>
+UTF-8
+YDB&gt;set <span class="nv">DS</span><span class="o">=</span><span class="nv">$char</span><span class="o">(</span><span class="nv">$$</span>FUNC^%HD<span class="o">(</span><span class="s2">&quot;0905&quot;</span><span class="o">))</span>_<span class="nv">$char</span><span class="o">(</span><span class="nv">$$</span>FUNC^%HD<span class="o">(</span><span class="s2">&quot;091A&quot;</span><span class="o">))</span>_<span class="nv">$char</span><span class="o">(</span><span class="nv">$$</span>FUNC^%HD<span class="o">(</span><span class="s2">&quot;094D&quot;</span><span class="o">))</span>
+YDB&gt;set <span class="nv">DS</span><span class="o">=</span>DS_<span class="nv">$char</span><span class="o">(</span><span class="nv">$$</span>FUNC^%HD<span class="o">(</span><span class="s2">&quot;091B&quot;</span><span class="o">))</span>_<span class="nv">$char</span><span class="o">(</span><span class="nv">$$</span>FUNC^%HD<span class="o">(</span><span class="s2">&quot;0940&quot;</span><span class="o">))</span>
+YDB&gt;write <span class="nv">$zwidth</span><span class="o">(</span>DS<span class="o">)</span><span class="p">;</span> <span class="m">4</span> columns are required to display <span class="nb">local</span> variable DS on the screen.
+<span class="m">4</span>
+YDB&gt;write <span class="nv">$length</span><span class="o">(</span>DS<span class="o">)</span><span class="p">;</span> DS contains <span class="m">5</span> characters or Unicode code-points.
+<span class="m">5</span>
+YDB&gt;
+</pre></div>
+</div>
+<p>For all writing systems supported by Unicode, a character is a code-point for string processing, network transmission, storage, and retrieval of Unicode data whereas a character is a glyph for displaying on the screen or printer. This holds true for many other popular programming languages. Keep this distinction in mind throughout the application development life-cycle.</p>
+</section>
+<section id="icu">
+<h3>ICU<a class="headerlink" href="langext.html#icu" title="Permalink to this heading">¶</a></h3>
+<p>ICU is a widely used, defacto standard package (see <a class="reference external" href="http://icu-project.org">http://icu-project.org</a> for more information) that YottaDB relies on for most operations that require knowledge of the Unicode® character sets, such as text boundary detection, character string conversion between UTF-8 and UTF-16, and calculating glyph display widths.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Unless Unicode support is sought for a process (that is, unless the environment variable ydb_chset is UTF8), YottaDB processes do not need ICU. In other words, existing, non-Unicode, applications continue to work on supported platforms without ICU.</p>
+</div>
+<p>An ICU version number is of the form major.minor.milli.micro where major, minor, milli and micro are integers. Two versions that have different major and/or minor version numbers can differ in functionality, and API compatibility is not guaranteed. The differences in milli or micro versions are maintenance releases that preserve functionality and API compatibility. ICU reference releases are defined by major and minor version numbers. Note that display widths for some characters changed in ICU 4.0 and may change again in the future, as both languages and ICU evolve.</p>
+<p>An operating system’s distribution generally includes an ICU library tailored to the OS and hardware, therefore, YottaDB does not provide any ICU libraries. In order to support Unicode functionality, YottaDB requires an appropriate version of ICU to be installed on the system - check the release notes for your YottaDB release for supported ICU versions.</p>
+<p>YottaDB expects ICU to be compiled with symbol renaming disabled and will issue an error at startup if the available version of ICU is built with symbol renaming enabled. To use a version of ICU built with symbol renaming enabled, the $ydb_icu_version environment variable indicates the MAJOR VERSION and MINOR VERSION numbers of the desired ICU formatted as MajorVersion.MinorVersion (for example “3.6” to denote ICU-3.6). When $ydb_icu_version is so defined, YottaDB attempts to open the specific version of ICU. In this case, YottaDB works regardless of whether or not symbols in this ICU have been renamed. A missing or ill-formed value for this environment variable causes YottaDB to only look for non-renamed ICU symbols. The release notes for each YottaDB release identify the required reference release version number as well as the milli and micro version numbers that were used to test YottaDB prior to release. In general, it should be safe to use any version of ICU with the specific ICU reference version number required and milli and micro version numbers greater than those identified in the release notes for that YottaDB version.</p>
+<p>ICU supports multiple threads within a process, and an ICU binary library can be compiled from source code to either support or not support multiple threads. In contrast, YottaDB does not support multiple threads within a YottaDB process. On some platforms, the stock ICU library, which is usually compiled to support multiple threads, may work unaltered with YottaDB. On other platforms, it may be required to rebuild ICU from its source files with support for multiple threads turned off. Refer to the release notes for each YottaDB release for details about the specific configuration tested and supported. In general, the YottaDB team’s preference for ICU binaries used for each YottaDB version are, in decreasing order of preference:</p>
+<ol class="arabic simple">
+<li><p>The stock ICU binary provided with the operating system distribution.</p></li>
+<li><p>A binary distribution of ICU from the download section of the ICU project page.</p></li>
+<li><p>A version of ICU locally compiled from source code provided by the operating system distribution with a configuration disabling multi-threading.</p></li>
+<li><p>A version of ICU locally compiled from the source code from the ICU project page with a configuration disabling multi-threading.</p></li>
+</ol>
+<p>YottaDB uses the POSIX function dlopen() to dynamically link to ICU. In the event you have other applications that require ICU compiled with threads, place the different builds of ICU in different locations, and use the dlopen() search path feature (for example, the LD_LIBRARY_PATH environment variable on Linux) to enable each application to link with its appropriate ICU.</p>
+</section>
+<section id="discussion-and-best-practices">
+<h3>Discussion and Best Practices<a class="headerlink" href="langext.html#discussion-and-best-practices" title="Permalink to this heading">¶</a></h3>
+<section id="data-interchange">
+<h4>Data Interchange<a class="headerlink" href="langext.html#data-interchange" title="Permalink to this heading">¶</a></h4>
+<p>The support for Unicode® in YottaDB only affects the interpretation of data in databases, and not databases themselves, a simple way to convert from a ZWR format extract in one mode to an extract in the other is to load it in the database using a process in the mode in which it was generated, and to once more extract it from the database using a process in the other mode.</p>
+<p>If a sequence of 8-bit octets contains bytes other than those in the ASCII range (0 through 127), an extract in ZWR format for the same sequence of bytes is different in “M” and “UTF-8” modes. In “M” mode, the $C() values in a ZWR format extract are always equal to or less than 255. In “UTF-8” mode, they can have larger values - the code-points of legal characters in Unicode can be far greater than 255.</p>
+<p>Note that the characters written to the output device are subject to the OCHSET transformation of the controlling output device. If OCHSET is “M”, the multi-byte characters are written in raw bytes without any transformation.</p>
+<ol class="arabic simple">
+<li><p>Each multi-byte graphic character (as classified by $ZCHSET) is written directly to the device converted to the encoding form specified by the OCHSET of the output device.</p></li>
+<li><p>Each multi-byte non-graphic character (as classified by $ZCHSET) is written in $CHAR(nnnn) notation, where nnnn is the decimal character code (that is, code-point up to 1114111 if $ZCHSET=”UTF-8” or up to 255 if $ZCHSET=”M”).</p></li>
+<li><p>If $ZCHSET=”UTF-8” and a subscript or data contains a malformed UTF-8 byte sequence, ZWRITE treats each byte in the sequence as a separate malformed character. Each such byte is written in $ZCHAR(nn[,…]) notation, where each nn is the corresponding byte in the illegal UTF-8 byte sequence.</p></li>
+</ol>
+<p>Note that attempts to use ZWRITE output from a system as input to another system using a different character set may result in errors or not yield the same state as existed on the source system. Application developers can deal with this by defining and using one or more pattern tables that declare all non-ASCII characters (or any useful subset thereof) to be non-graphic. For more details on defining pattern tables, please refer to <a class="reference internal" href="internatn.html#pattern-code-defn"><span class="std std-ref">Pattern Code Definition</span></a>.</p>
+</section>
+<section id="limitations">
+<h4>Limitations<a class="headerlink" href="langext.html#limitations" title="Permalink to this heading">¶</a></h4>
+<p><strong>User-defined pattern codes are not supported</strong></p>
+<p>Although the M standard patcodes (A,C,L,U,N,P,E) are extended to work with Unicode, application developers can neither change their default classification nor define the non-standard patcodes ((B,D,F-K,M,O,Q-T,V-X) beyond the ASCII subset. This means that the pattern tables cannot contain characters with codes greater than the maximum ASCII code 127.</p>
+<p><strong>String Normalization</strong></p>
+<p>In YottaDB, strings are not implicitly normalized. Unicode normalization is a method of computing canonical representation of the character strings. Normalization is required if the strings contain combination characters (such as accented characters consisting of a base character followed by an accent character) as well as precomposed characters. The Unicode™ standard has assigned code-points to such precomposed characters for backward compatibility with legacy code sets. For the applications containing both versions of the same character (or combining characters), Unicode recommends one of the normal forms. Because YottaDB does not normalize strings, the application developers must develop the functionality of normalizing the strings, as needed, in order for string matching and string collation to behave in a conventional and wholesome fashion. In such a case, edit checks can be used that only accept a single representation when multiple representations are possible.</p>
+<p><strong>UTF-16 is not supported for $PRINCIPAL Device</strong></p>
+<p>YottaDB does not support UTF-16, UTF-16LE and UTF-16BE encodings for $PRINCIPAL I/O devices (including Terminal, Sequential and Socket devices). In order to perform Unicode™-related I/O with the $PRINCIPAL device, application developers must use “UTF-8” for the ICHSET or OCHSET deviceparameters.</p>
+<p><strong>UTF-16 is not supported for Terminal Devices</strong></p>
+<p>Due to the uncommon usage and lack of support for UTF-16 by UNIX terminals and terminal emulators, YottaDB does not support UTF-16, UTF-16LE and UTF-16BE encodings for Terminal I/O devices. Note that UNIX platforms use UTF-8 as the defacto character encoding for Unicode. The terminal connections from remote hosts (such as Windows) must communicate with YottaDB in UTF-8 encoding.</p>
+<p><strong>Error Messages are in [American] English</strong></p>
+<p>YottaDB has no facility for a translation of product error messages or on-line help into languages other than [American] English. All error message text (except the messages arguments that could include Unicode™ data) is in the [American] English language.</p>
+</section>
+<section id="performance-and-capacity">
+<h4>Performance and Capacity<a class="headerlink" href="langext.html#performance-and-capacity" title="Permalink to this heading">¶</a></h4>
+<p>With the use of “UTF-8” as YottaDB’s internal character encoding, the additional requirements for CPU cycles, excluding collation algorithms, should not increase significantly compared with the identical application using the “M” character set. Additional memory requirements for “UTF-8” vary depending on the application as well as the actual character set used. For example, applications based on Latin-1 (2-byte encoded) characters may require up to twice the memory and those based on Chinese/Japanese (3-byte encoded) characters may require up to three times the memory compared to an identical application using “M” characters. The additional disk-space and I/O performance trade-offs for “UTF-8” also vary based on the application and the characters used.</p>
+<p><strong>Characters in arguments exchanged with external routines must be validated by the external routines</strong></p>
+<p>YottaDB does not check for illegal characters in a string before passing it to an external routine or in a returned value before assigning it to a YottaDB variable. This is because such checks add parameter-processing overhead. The application must ensure that the strings are in the encoding form expected by the respective routines. More robustly, external routines must interpret passed strings based on the value of the intrinsic variable $ZCHSET or the environment variable ydb_chset. The external routines can perform validation if needed.</p>
+</section>
+<section id="maximums">
+<h4>Maximums<a class="headerlink" href="langext.html#maximums" title="Permalink to this heading">¶</a></h4>
+<p>In prior versions of YottaDB, the restrictions on certain objects were put in place with the assumption that a character is represented by a single byte. With support for Unicode enabled in YottaDB, the following restrictions are in terms of bytes- not characters.</p>
+<p><strong>M Name Length</strong></p>
+<p>The maximum length of an M identifier is restricted to 31 bytes. Since identifier names are restricted to be in ASCII, programmers can define M names up to 31 characters long.</p>
+<p><strong>M String Length</strong></p>
+<p>The maximum length of an M string is restricted to 1,048,576 bytes (1Mib). Therefore, depending on the characters used, the maximum number of characters could be reduced from 1,048,576 characters to as few as 262,144 (256K) characters.</p>
+<p><strong>M Source Line Length</strong></p>
+<p>The maximum length of a program or indirect source line is restricted to 2,048 bytes. Application developers must be aware of this byte limit if they consider using multi-byte source comments or string literals in a source line.</p>
+<p><strong>Database Key and Record Sizes</strong></p>
+<p>The maximum allowed size for database keys (both global and nref keys) is 255 bytes, and for database records is 32K bytes. Application developers must be aware that keys or data containing multi-byte characters in Unicode are limited at a smaller number of characters than the number of available bytes.</p>
+</section>
+<section id="golden-rules">
+<h4>Golden Rules<a class="headerlink" href="langext.html#golden-rules" title="Permalink to this heading">¶</a></h4>
+<p>Adhere to the following rules of thumb to design and develop Unicode-based applications for deployment on YottaDB.</p>
+<ul class="simple">
+<li><p>YottaDB functionality related to Unicode becomes available only in UTF-8 mode.</p></li>
+<li><p>[At least] in UTF-8 mode, byte manipulation must use Z* equivalent functions.</p></li>
+<li><p>In M mode, standard functions are always identical to their Z equivalents.</p></li>
+<li><p>Use the same character set for all globals names and subscripts in an instance.</p></li>
+<li><p>Define a collation system according to the linguistic and cultural tenets of the language used.</p></li>
+<li><p>Create the application logic to ensure strings used as keys are canonical.</p></li>
+<li><p>Specify CHSET=”M” or otherwise handle illegal characters during the I/O operations.</p></li>
+<li><p>Communicate with any external routines using a compatible character encoding form.</p></li>
+<li><p>Compile and run programs in the same setting of $ZCHSET and “BADCHAR”.</p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="about.html" class="btn btn-neutral float-left" title="1. About YottaDB" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="devcycle.html" class="btn btn-neutral float-right" title="3. Development Cycle" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017-2021, YottaDB LLC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+<hr/>
+<!-- DDG search widget,@author Juri Wornowitski,@version 2.0,@link https://www.plainlight.com/ddg --><div id="widdget" style="width:100%;margin:10px 0;"><style type="text/css">#widdget input {display:block;height:30px;padding:4px;outline:none;border:1px solid #8d8d8d;border-right:0;box-sizing:border-box;border-radius:3px 0 0 3px;width:calc(100% - 41px);font-size:15px;} #widdget button {float:left;cursor:pointer;width:43px;height:30px;color:#fff;background-image:linear-gradient(#7f72ca,#554492);border:0;border-radius:0 3px 3px 0;} #widdget button:active {background-image:linear-gradient(#002387,#002357);} #widdget button:focus {outline:none;}</style><form style="position:relative" onsubmit="this.elements[0].click();return false;"><div style="float:right;position:absolute;top:0;right:-2px;z-index:3"><button type="button" onclick="var v=this.parentElement.parentElement.elements[1].value;window.open('https://duckduckgo.com?q='+encodeURIComponent(v)+'+site%3Adocs.yottadb.com&kj=p');">&#128269;</button></div><input type="text" name="que" placeholder="Search documents with DuckDuckGo" /></form></div>
+ 
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

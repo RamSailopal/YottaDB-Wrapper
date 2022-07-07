@@ -1,6 +1,6 @@
 #!/bin/bash
 apt-get update 
-apt-get install -y build-essential gcc cmake git wget libjson-c-dev libwebsockets-dev git libncurses-dev dialog sysvbanner
+apt-get install -y build-essential gcc cmake git wget libjson-c-dev libwebsockets-dev git libncurses-dev dialog sysvbanner apache2
 cd /usr/local
 git clone https://github.com/tsl0922/ttyd.git
 cd /usr/local/ttyd && mkdir build && cd build
@@ -16,7 +16,10 @@ vers=$(/opt/yottadb/current/ydb <<< 'W $ZV' | grep -v "YDB>")
 banner yottadb > splash.txt
 echo "Version: $vers" >> splash.txt
 echo "Website: https://yottadb.com" >> splash.txt
+echo "Offline documentation: http://localhost:8081" >> splash.txt
 cp splash.txt /opt/yottadb/current/
 cp /home/yottadb/ydb /usr/local/bin
+chown -R www-data.www-data /var/www/html
+service apache2 start
 ttyd -c "test:test" ydb
 

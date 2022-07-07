@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12. Internationalization &mdash; Programmer&#39;s Guide  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="13. Error Processing" href="errproc.html" />
+    <link rel="prev" title="11. Integrating External Routines" href="extrout.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html">
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+	  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+		      <input type="text" name="q" placeholder="Search" />
+		          <input type="hidden" name="check_keywords" value="yes" />
+			      <input type="hidden" name="area" value="default" />
+			        </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://yottadb.com/resources/documentation">Main YottaDB Documentation Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="man.html">About this Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">1. About YottaDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="langext.html">2. YottaDB Language Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devcycle.html">3. Development Cycle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opdebug.html">4. Operating and Debugging in Direct Mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="langfeat.html">5. General Language Features of M</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">6. Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">7. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isv.html">8. Intrinsic Special Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioproc.html">9. Input/Output Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utility.html">10. Utility Routines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extrout.html">11. Integrating External Routines</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="internatn.html#">12. Internationalization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="internatn.html#collation-sequence-definitions">Collation Sequence Definitions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#creating-the-shared-library-holding-the-alternative-sequencing-routines">Creating the Shared Library Holding the Alternative Sequencing Routines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#defining-the-environment-variable">Defining the Environment Variable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#defining-a-default-database-collation-method">Defining a Default Database Collation Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#establishing-a-local-collation-sequence">Establishing A Local Collation Sequence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="internatn.html#creating-the-alternate-collation-routines">Creating the Alternate Collation Routines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#transformation-routine-gtm-ac-xform-1-or-gtm-ac-xform">Transformation Routine (gtm_ac_xform_1 or gtm_ac_xform)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#inverse-transformation-routine-gtm-ac-xback-or-gtm-ac-xback-1">Inverse Transformation Routine (gtm_ac_xback or gtm_ac_xback_1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#version-control-routines-gtm-ac-version-and-gtm-ac-verify">Version Control Routines (gtm_ac_version and gtm_ac_verify)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#using-the-gbldef-utility">Using the %GBLDEF Utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#example-of-upper-and-lower-case-alphabetic-collation-sequence">Example of Upper and Lower Case Alphabetic Collation Sequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#example-of-collating-alphabets-in-reverse-order-using-gtm-ac-xform-1-and-gtm-ac-xback-1">Example of Collating Alphabets in Reverse Order using gtm_ac_xform_1 and gtm_ac_xback_1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="internatn.html#implementing-an-alternative-collation-sequence-for-unicode-characters">Implementing an Alternative Collation Sequence for Unicode® Characters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internatn.html#matching-alternative-patterns">Matching Alternative Patterns</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#pattern-code-definition">Pattern Code Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internatn.html#pattern-code-selection">Pattern Code Selection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="errproc.html">13. Error Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">14. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encrypt.html">15. Database Encryption Extensions to the YottaDB External Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix A: M Coding Standards - Do’s and Don’ts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">LICENSE</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Programmer's Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>12. Internationalization</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="extrout.html" class="btn btn-neutral float-left" title="11. Integrating External Routines" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="errproc.html" class="btn btn-neutral float-right" title="13. Error Processing" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="internationalization">
+<span id="index-0"></span><h1><a class="toc-backref" href="internatn.html#id1">12. Internationalization</a><a class="headerlink" href="internatn.html#internationalization" title="Permalink to this heading">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="internatn.html#internationalization" id="id1">12. Internationalization</a></p>
+<ul>
+<li><p><a class="reference internal" href="internatn.html#collation-sequence-definitions" id="id2">Collation Sequence Definitions</a></p>
+<ul>
+<li><p><a class="reference internal" href="internatn.html#creating-the-shared-library-holding-the-alternative-sequencing-routines" id="id3">Creating the Shared Library Holding the Alternative Sequencing Routines</a></p></li>
+<li><p><a class="reference internal" href="internatn.html#defining-the-environment-variable" id="id4">Defining the Environment Variable</a></p></li>
+<li><p><a class="reference internal" href="internatn.html#defining-a-default-database-collation-method" id="id5">Defining a Default Database Collation Method</a></p></li>
+<li><p><a class="reference internal" href="internatn.html#establishing-a-local-collation-sequence" id="id6">Establishing A Local Collation Sequence</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="internatn.html#creating-the-alternate-collation-routines" id="id7">Creating the Alternate Collation Routines</a></p>
+<ul>
+<li><p><a class="reference internal" href="internatn.html#transformation-routine-gtm-ac-xform-1-or-gtm-ac-xform" id="id8">Transformation Routine (gtm_ac_xform_1 or gtm_ac_xform)</a></p></li>
+<li><p><a class="reference internal" href="internatn.html#inverse-transformation-routine-gtm-ac-xback-or-gtm-ac-xback-1" id="id9">Inverse Transformation Routine (gtm_ac_xback or gtm_ac_xback_1)</a></p></li>
+<li><p><a class="reference internal" href="internatn.html#version-control-routines-gtm-ac-version-and-gtm-ac-verify" id="id10">Version Control Routines (gtm_ac_version and gtm_ac_verify)</a></p></li>
+<li><p><a class="reference internal" href="internatn.html#using-the-gbldef-utility" id="id11">Using the %GBLDEF Utility</a></p></li>
+<li><p><a class="reference internal" href="internatn.html#example-of-upper-and-lower-case-alphabetic-collation-sequence" id="id12">Example of Upper and Lower Case Alphabetic Collation Sequence</a></p></li>
+<li><p><a class="reference internal" href="internatn.html#example-of-collating-alphabets-in-reverse-order-using-gtm-ac-xform-1-and-gtm-ac-xback-1" id="id13">Example of Collating Alphabets in Reverse Order using gtm_ac_xform_1 and gtm_ac_xback_1</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="internatn.html#implementing-an-alternative-collation-sequence-for-unicode-characters" id="id14">Implementing an Alternative Collation Sequence for Unicode® Characters</a></p></li>
+<li><p><a class="reference internal" href="internatn.html#matching-alternative-patterns" id="id15">Matching Alternative Patterns</a></p>
+<ul>
+<li><p><a class="reference internal" href="internatn.html#pattern-code-definition" id="id16">Pattern Code Definition</a></p></li>
+<li><p><a class="reference internal" href="internatn.html#pattern-code-selection" id="id17">Pattern Code Selection</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>This chapter describes YottaDB facilities for applications using characters that are encoded in other than eight-bit bytes (octets). Before continuing with the use of UTF-8 features, you will need to ensure that your system has installed and configured the needed infrastructure for the languages you wish to support, including International Components for Unicode (ICU/libicu), UTF-8 locale(s), and terminal emulators with appropriate fonts. This chapter addresses the specific issues of defining alternative collation sequences, and defining unique patterns for use with the pattern match operator.</p>
+<p>Alternative collation sequences (or an alternative ordering of strings) can be defined for global and local variable subscripts. They can be established for specified globals or for an entire database. The alternative sequences are defined by a series of routines in an executable file pointed to by an environment variable. As the collation sequence is implemented by a user-supplied program, virtually any collation policy may be implemented. Detailed information on establishing alternative collation sequences and defining the environment variable is provided in the “Collation Sequence Definitions” below.</p>
+<p>M has defined pattern classes that serve as arguments to the pattern match operator. YottaDB supports user definition of additional pattern classes as well as redefinition of the standard pattern classes. Specific patterns are defined in a text file that is pointed to by an environment variable. Pattern classes may be re-defined dynamically. The details of defining these pattern classes and the environment variables are described in the section called “Matching Alternative Patterns”.</p>
+<p>For some languages (such as Chinese), the ordering of strings according to Unicode code-points (character values) may or may not be the linguistically or culturally correct ordering. Supporting applications in such languages requires the development of collation modules - YottaDB natively supports M collation, but does not include pre-built collation modules for any specific natural language. Therefore, applications that use characters in Unicode may need to implement their own collation functions. For more information on developing a collation module for Unicode, refer to <a class="reference internal" href="internatn.html#implement-alt-colltn-seq-unicode-chars"><span class="std std-ref">Implementing an Alternative Collation Sequence for Unicode® Characters</span></a>.</p>
+<section id="collation-sequence-definitions">
+<span id="colln-seq-defn"></span><h2><a class="toc-backref" href="internatn.html#id2">Collation Sequence Definitions</a><a class="headerlink" href="internatn.html#collation-sequence-definitions" title="Permalink to this heading">¶</a></h2>
+<p>Normally, YottaDB orders data with numeric values first, followed by strings sequenced by ASCII values. To use an alternative collating sequence, the following items must be provided at YottaDB process initialization.</p>
+<ul class="simple">
+<li><p>A shared library containing the routines for each alternative collation sequence</p></li>
+<li><p>An environment variable of the form ydb_collate_n, specifying the shared library containing the routines for alternative collation sequence n.</p></li>
+</ul>
+<section id="creating-the-shared-library-holding-the-alternative-sequencing-routines">
+<h3><a class="toc-backref" href="internatn.html#id3">Creating the Shared Library Holding the Alternative Sequencing Routines</a><a class="headerlink" href="internatn.html#creating-the-shared-library-holding-the-alternative-sequencing-routines" title="Permalink to this heading">¶</a></h3>
+<p>A shared library for an alternative collation sequence must contain the following four routines:</p>
+<ul class="simple">
+<li><p>gtm_ac_xform_1: Transforms subscripts up to the maximum supported string length to the alternative collation sequence, or gtm_ac_xform: Transforms subscripts up to 32,767 bytes to the alternative collation sequence.</p></li>
+<li><p>gtm_ac_xback_1: Use with gtm_ac_xform_1 to transform the alternative collation keys back to the original subscript representation, or gtm_ac_xback: Use with gtm_ac_xform to transform the alternative collation keys back to the original subscript representation.</p></li>
+<li><p>gtm_ac_version: Returns a numeric version identifier for the “currently active” set of collation routines.</p></li>
+<li><p>gtm_ac_verify: Returns the success (odd) or failure (even) in matching a collation sequence with a given version number.</p></li>
+</ul>
+<p>YottaDB searches the shared library for the gtm_ac_xform_1 and gtm_ac_xback_1 before searching for the gtm_ac_xform and gtm_ac_xback routines. If the shared library contains gtm_ac_xform_1, YottaDB ignores gtm_ac_xform even if it is present. If YottaDB finds gtm_ac_xform_1 but does not find gtm_ac_xback_1, it reports a YDB-E-COLLATIONUNDEF error with an additional mismatch warning YDB-E-COLLFNMISSING.</p>
+<p>If the application does not use strings longer than 32,767 bytes, the alternative collation library need not contain the gtm_ac_xform_1 and gtm_ac_xback_1 routines. On the other hand, if the application passes strings greater than 32,767 bytes (but less than the maximum support string length) and does not provide gtm_xc_xform_1 and gtm_xc_xback_1, YottaDB issues the run-time error YDB-E-COLLARGLONG.</p>
+<p>Note that database key sizes are much more restricted by YottaDB than local key sizes, and may be restricted further by user configuration.</p>
+</section>
+<section id="defining-the-environment-variable">
+<h3><a class="toc-backref" href="internatn.html#id4">Defining the Environment Variable</a><a class="headerlink" href="internatn.html#defining-the-environment-variable" title="Permalink to this heading">¶</a></h3>
+<p>YottaDB locates the alternative collation sequences through the environment variable ydb_collate_n where n is an integer from 1 to 255 that identifies the collation sequence, and pathname identifies the shared library containing the routines for that collation sequence, for example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nv">ydb_collate_1</span><span class="o">=</span>/opt/yottadb/collation
+$ <span class="nb">export</span> ydb_collate_1
+</pre></div>
+</div>
+<p>Multiple alternative collation sequence definitions can co-exist.</p>
+<p><strong>Considerations in Establishing Alternative Collations</strong></p>
+<p>Alternative collation sequences for a global must be set when the global contains no data. When the global is defined, the collation sequence is stored in the global. This ensures the future integrity of the global’s collation. If it becomes necessary to change the collation sequence of a global containing data, you must copy the data to a temporary repository, delete the global, modify the variable’s collation sequence by reinitializing the global either in a region that has the desired collation or with %GBLDEF, and restore the data from the temporary repository.</p>
+<p>Be careful when creating the transformation and inverse transformation routines. The transformation routine must unambiguously and reliably encode every possible input value. The inverse routine must faithfully return the original value in every case. Errors in these routines can produce delayed symptoms that could be hard to debug. These routines may not be written in M.</p>
+</section>
+<section id="defining-a-default-database-collation-method">
+<h3><a class="toc-backref" href="internatn.html#id5">Defining a Default Database Collation Method</a><a class="headerlink" href="internatn.html#defining-a-default-database-collation-method" title="Permalink to this heading">¶</a></h3>
+<p>YottaDB lets you define an alternative collation sequence as the default when creating a new database. Subsequently, this default is applied when each new global is created.</p>
+<p>This default collation sequence is set as a GDE qualifier for the ADD, CHANGE, and TEMPLATE commands using the following example with CHANGE:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>GDE&gt;CHANGE -REGION DEFAULT -COLLATION_DEFAULT<span class="o">=</span>&lt;<span class="m">0</span>-255&gt;
+</pre></div>
+</div>
+<p>This qualifier always applies to regions, and takes effect when a database is created with MUPIP CREATE. The output of GDE SHOW displays this value, and DSE DUMP -FILEHEADER also includes this information. In the absence of an alternative default collations sequence, the default used is 0, or ASCII.</p>
+<p>The value cannot be changed once a database file is created, and will be in effect for the life of the database file. The same restriction applies to the version of the collation sequence. The version of a collation sequence implementation is also stored in the database fileheader and cannot be modified except by recreating the file.</p>
+<p>If the code of the collation sequence changes, making it incompatible with the collation sequence in use when the database was created, use the following procedure to ensure the continued validity of the database. MUPIP EXTRACT the database using the older compatible collation routines, then recreate and MUPIP LOAD using the newer collation routines.</p>
+</section>
+<section id="establishing-a-local-collation-sequence">
+<span id="establish-local-colln-seq"></span><h3><a class="toc-backref" href="internatn.html#id6">Establishing A Local Collation Sequence</a><a class="headerlink" href="internatn.html#establishing-a-local-collation-sequence" title="Permalink to this heading">¶</a></h3>
+<p>All subscripted local variables for a process must use the same collation sequence. The collation sequence used by local variables can be established as a default or in the current process. The local collation sequence can only be changed when a process has no subscripted local variables defined.</p>
+<p>To establish a default local collation sequence provide a numeric value to the environment variable ydb_local_collate to select one of the collation tables, for example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nv">ydb_local_collate</span><span class="o">=</span>n
+$ <span class="nb">export</span> ydb_local_collate
+</pre></div>
+</div>
+<p>where n is the number of a collation sequence that matches a valid collation number defined by an environment variable in the form ydb_collate_n.</p>
+<p>An active process can use the %LCLCOL utility to define the collation sequence for subscripts of local variables. %LCLCOL has these extrinsic entry points:</p>
+<p>set^%LCLCOL(n)changes the local collation to the type specified by n.</p>
+<p>If the collation sequence is not available, the routine returns a false (0) and does not modify the local collation sequence.</p>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>IF &#39;$$set^%LCLCOL(3) D
+. Write &quot;local collation sequence not changed&quot;,! Break
+</pre></div>
+</div>
+<p>This piece of code illustrates $$set^LCLCOL used as an extrinsic. It would write an error message and BREAK if the local collation sequence was not set to 3.</p>
+<p>set^%LCLCOL(n,ncol) determines the null collation type to be used with the collation type n.</p>
+<ul class="simple">
+<li><p>If the truth value of ncol is TRUE(1), local variables use standard null collation.</p></li>
+<li><p>If the truth value of ncol is FALSE(0), local variables use historical null collation.</p></li>
+</ul>
+<p>With set^%LCLCOL(,ncol), the null collation order can be changed while keeping the alternate collation order unchanged. If subscripted local variables exist, the null collation order cannot be changed. In this case, YottaDB issues YDB-E-COLLDATAEXISTS.</p>
+<p>get^%LCLCOL returns the current local type.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;Write <span class="nv">$$</span>get^%LCLCOL
+<span class="m">0</span>
+</pre></div>
+</div>
+<p>This example uses $$get^%LCLCOL as an extrinsic that returns 0, indicating that the effective local collation sequence is the standard M collation sequence.</p>
+<p>If set^%LCLCOL is not specified and ydb_local_collate is not defined, or is invalid, the process uses M standard collation. The following would be considered invalid values:</p>
+<ul class="simple">
+<li><p>A value less than 0</p></li>
+<li><p>A value greater than 255</p></li>
+<li><p>A legal collation sequence that is inaccessible to the process</p></li>
+</ul>
+<p>Inaccessibility could be caused by a missing environment variable, a missing image, or security denial of access.</p>
+</section>
+</section>
+<section id="creating-the-alternate-collation-routines">
+<h2><a class="toc-backref" href="internatn.html#id7">Creating the Alternate Collation Routines</a><a class="headerlink" href="internatn.html#creating-the-alternate-collation-routines" title="Permalink to this heading">¶</a></h2>
+<p>Each alternative collation sequence requires a set of four user-created routines–gtm_ac_xform_1 (or gtm_ac_xform), gtm_ac_xback_1 (or gtm_ac_xback), gtm_ac_version, and gtm_ac_verify. The original and transformed strings are passed between YottaDB and the user-created routines using parameters of type gtm_descriptor or gtm32_descriptor. An “include file” gtm_descript.h, located in the YottaDB distribution directory, defines gtm_descriptor (used with gtm_ac_xform and gtm_ac_xback) as:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">short</span><span class="w"> </span><span class="n">len</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">short</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">val</span><span class="p">;</span><span class="w"></span>
+<span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="n">gtm_descriptor</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On 64-bit UNIX platforms, gtm_descriptor may grow by up to eight (8) additional bytes as a result of compiler padding to meet platform alignment requirements.</p>
+</div>
+<p>gtm_descript.h defines gtm32_descriptor (used with gtm_xc_xform_1 and gtm_xc_xback_2) as:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">len</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">val</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="n">gtm32_descriptor</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>where len is the length of the data, type is set to DSC_K_DTYPE_T (indicating that this is an M string), and val points to the text of the string.</p>
+<p>The interface to each routine is described below.</p>
+<section id="transformation-routine-gtm-ac-xform-1-or-gtm-ac-xform">
+<h3><a class="toc-backref" href="internatn.html#id8">Transformation Routine (gtm_ac_xform_1 or gtm_ac_xform)</a><a class="headerlink" href="internatn.html#transformation-routine-gtm-ac-xform-1-or-gtm-ac-xform" title="Permalink to this heading">¶</a></h3>
+<p>gtm_ac_xform_1 or gtm_ac_xform routines transforms subscripts to the alternative collation sequence.</p>
+<p>If the application uses subscripted lvns longer than 32,767 bytes (but less than 1,048,576 bytes), the alternative collation library must contain the gtm_ac_xform_1 and gtm_ac_xback_1 routines. Otherwise, the alternative collation library can contain gtm_ac_xform and gtm_ac_xback.</p>
+<p>The syntax of this routine is:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;gtm_descript.h&quot;</span><span class="cp"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">gtm_ac_xform_1</span><span class="p">(</span><span class="n">gtm32_descriptor</span><span class="o">*</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="n">gtm32_descriptor</span><span class="o">*</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">outlen</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Input Arguments</strong></p>
+<p>The input arguments for gtm_ac_xform are:</p>
+<p>in: a gtm32_descriptor containing the string to be transformed.</p>
+<p>level: an integer; this is not used currently, but is reserved for future facilities.</p>
+<p>out: a gtm32_descriptor to be filled with the transformed key.</p>
+<p><strong>Output Arguments</strong></p>
+<p>return value: A long word status code.</p>
+<p>out: A transformed subscript in the string buffer, passed by gtm32_descriptor.</p>
+<p>outlen: A 32-bit signed integer, passed by reference, returning the actual length of the transformed key.</p>
+<p>The syntax of gtm_ac_xform routine is:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;gtm_descript.h&quot;</span><span class="cp"></span>
+<span class="kt">long</span><span class="w"> </span><span class="n">gtm_ac_xform</span><span class="p">(</span><span class="n">gtm_descriptor</span><span class="w"> </span><span class="o">*</span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="n">gtm_descriptor</span><span class="w"> </span><span class="o">*</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">outlen</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Input Arguments</strong></p>
+<p>The input arguments for gtm_ac_xform are:</p>
+<p>in: a gtm_descriptor containing the string to be transformed.</p>
+<p>level: an integer; this is not used currently, but is reserved for future facilities.</p>
+<p>out: a gtm_descriptor to be filled with the transformed key.</p>
+<p><strong>Output Arguments</strong></p>
+<p>The output arguments for gtm_ac_xform are:</p>
+<p>return value: a long result providing a status code; it indicates the success (zero) or failure (non-zero) of the transformation.</p>
+<p>out: a gtm_descriptor containing the transformed key.</p>
+<p>outlen: an unsigned long, passed by reference, giving the actual length of the output key.</p>
+<p>Example:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;gtm_descript.h&quot;</span><span class="cp"></span>
+<span class="cp">#define MYAPP_SUBSC2LONG 12345678</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">xform_table</span><span class="p">[</span><span class="mi">256</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="mi">0</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">2</span><span class="p">,</span><span class="w">  </span><span class="mi">3</span><span class="p">,</span><span class="w">  </span><span class="mi">4</span><span class="p">,</span><span class="w">  </span><span class="mi">5</span><span class="p">,</span><span class="w">  </span><span class="mi">6</span><span class="p">,</span><span class="w">  </span><span class="mi">7</span><span class="p">,</span><span class="w">  </span><span class="mi">8</span><span class="p">,</span><span class="w">  </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"></span>
+<span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="mi">26</span><span class="p">,</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w"></span>
+<span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w"> </span><span class="mi">35</span><span class="p">,</span><span class="w"> </span><span class="mi">36</span><span class="p">,</span><span class="w"> </span><span class="mi">37</span><span class="p">,</span><span class="w"> </span><span class="mi">38</span><span class="p">,</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="mi">43</span><span class="p">,</span><span class="w"> </span><span class="mi">44</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w"> </span><span class="mi">46</span><span class="p">,</span><span class="w"> </span><span class="mi">47</span><span class="p">,</span><span class="w"></span>
+<span class="mi">48</span><span class="p">,</span><span class="w"> </span><span class="mi">49</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">51</span><span class="p">,</span><span class="w"> </span><span class="mi">52</span><span class="p">,</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w"> </span><span class="mi">54</span><span class="p">,</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w"> </span><span class="mi">57</span><span class="p">,</span><span class="w"> </span><span class="mi">58</span><span class="p">,</span><span class="w"> </span><span class="mi">59</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="mi">61</span><span class="p">,</span><span class="w"> </span><span class="mi">62</span><span class="p">,</span><span class="w"> </span><span class="mi">63</span><span class="p">,</span><span class="w"></span>
+<span class="mi">64</span><span class="p">,</span><span class="w"> </span><span class="mi">65</span><span class="p">,</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w"> </span><span class="mi">69</span><span class="p">,</span><span class="w"> </span><span class="mi">71</span><span class="p">,</span><span class="w"> </span><span class="mi">73</span><span class="p">,</span><span class="w"> </span><span class="mi">75</span><span class="p">,</span><span class="w"> </span><span class="mi">77</span><span class="p">,</span><span class="w"> </span><span class="mi">79</span><span class="p">,</span><span class="w"> </span><span class="mi">81</span><span class="p">,</span><span class="w"> </span><span class="mi">83</span><span class="p">,</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span><span class="w"> </span><span class="mi">87</span><span class="p">,</span><span class="w"> </span><span class="mi">89</span><span class="p">,</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w"> </span><span class="mi">93</span><span class="p">,</span><span class="w"></span>
+<span class="mi">95</span><span class="p">,</span><span class="w"> </span><span class="mi">97</span><span class="p">,</span><span class="w"> </span><span class="mi">99</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span><span class="mi">107</span><span class="p">,</span><span class="mi">109</span><span class="p">,</span><span class="mi">111</span><span class="p">,</span><span class="mi">113</span><span class="p">,</span><span class="mi">115</span><span class="p">,</span><span class="mi">117</span><span class="p">,</span><span class="mi">118</span><span class="p">,</span><span class="mi">119</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="mi">121</span><span class="p">,</span><span class="w"></span>
+<span class="mi">122</span><span class="p">,</span><span class="w"> </span><span class="mi">66</span><span class="p">,</span><span class="w"> </span><span class="mi">68</span><span class="p">,</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="w"> </span><span class="mi">72</span><span class="p">,</span><span class="w"> </span><span class="mi">74</span><span class="p">,</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w"> </span><span class="mi">78</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="mi">82</span><span class="p">,</span><span class="w"> </span><span class="mi">84</span><span class="p">,</span><span class="w"> </span><span class="mi">86</span><span class="p">,</span><span class="w"> </span><span class="mi">88</span><span class="p">,</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w"> </span><span class="mi">92</span><span class="p">,</span><span class="w"> </span><span class="mi">94</span><span class="p">,</span><span class="w"></span>
+<span class="mi">96</span><span class="p">,</span><span class="w"> </span><span class="mi">98</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">104</span><span class="p">,</span><span class="mi">106</span><span class="p">,</span><span class="mi">108</span><span class="p">,</span><span class="mi">110</span><span class="p">,</span><span class="mi">112</span><span class="p">,</span><span class="mi">114</span><span class="p">,</span><span class="mi">116</span><span class="p">,</span><span class="mi">123</span><span class="p">,</span><span class="mi">124</span><span class="p">,</span><span class="mi">125</span><span class="p">,</span><span class="mi">126</span><span class="p">,</span><span class="mi">127</span><span class="p">,</span><span class="w"></span>
+<span class="mi">128</span><span class="p">,</span><span class="mi">129</span><span class="p">,</span><span class="mi">130</span><span class="p">,</span><span class="mi">131</span><span class="p">,</span><span class="mi">132</span><span class="p">,</span><span class="mi">133</span><span class="p">,</span><span class="mi">134</span><span class="p">,</span><span class="mi">135</span><span class="p">,</span><span class="mi">136</span><span class="p">,</span><span class="mi">137</span><span class="p">,</span><span class="mi">138</span><span class="p">,</span><span class="mi">139</span><span class="p">,</span><span class="mi">140</span><span class="p">,</span><span class="mi">141</span><span class="p">,</span><span class="mi">142</span><span class="p">,</span><span class="mi">143</span><span class="p">,</span><span class="w"></span>
+<span class="mi">144</span><span class="p">,</span><span class="mi">145</span><span class="p">,</span><span class="mi">146</span><span class="p">,</span><span class="mi">147</span><span class="p">,</span><span class="mi">148</span><span class="p">,</span><span class="mi">149</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">151</span><span class="p">,</span><span class="mi">152</span><span class="p">,</span><span class="mi">153</span><span class="p">,</span><span class="mi">154</span><span class="p">,</span><span class="mi">155</span><span class="p">,</span><span class="mi">156</span><span class="p">,</span><span class="mi">157</span><span class="p">,</span><span class="mi">158</span><span class="p">,</span><span class="mi">159</span><span class="p">,</span><span class="w"></span>
+<span class="mi">160</span><span class="p">,</span><span class="mi">161</span><span class="p">,</span><span class="mi">162</span><span class="p">,</span><span class="mi">163</span><span class="p">,</span><span class="mi">164</span><span class="p">,</span><span class="mi">165</span><span class="p">,</span><span class="mi">166</span><span class="p">,</span><span class="mi">167</span><span class="p">,</span><span class="mi">168</span><span class="p">,</span><span class="mi">169</span><span class="p">,</span><span class="mi">170</span><span class="p">,</span><span class="mi">171</span><span class="p">,</span><span class="mi">172</span><span class="p">,</span><span class="mi">173</span><span class="p">,</span><span class="mi">174</span><span class="p">,</span><span class="mi">175</span><span class="p">,</span><span class="w"></span>
+<span class="mi">176</span><span class="p">,</span><span class="mi">177</span><span class="p">,</span><span class="mi">178</span><span class="p">,</span><span class="mi">179</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="mi">181</span><span class="p">,</span><span class="mi">182</span><span class="p">,</span><span class="mi">183</span><span class="p">,</span><span class="mi">184</span><span class="p">,</span><span class="mi">185</span><span class="p">,</span><span class="mi">186</span><span class="p">,</span><span class="mi">187</span><span class="p">,</span><span class="mi">188</span><span class="p">,</span><span class="mi">189</span><span class="p">,</span><span class="mi">190</span><span class="p">,</span><span class="mi">191</span><span class="p">,</span><span class="w"></span>
+<span class="mi">192</span><span class="p">,</span><span class="mi">193</span><span class="p">,</span><span class="mi">194</span><span class="p">,</span><span class="mi">195</span><span class="p">,</span><span class="mi">196</span><span class="p">,</span><span class="mi">197</span><span class="p">,</span><span class="mi">198</span><span class="p">,</span><span class="mi">199</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">201</span><span class="p">,</span><span class="mi">202</span><span class="p">,</span><span class="mi">203</span><span class="p">,</span><span class="mi">204</span><span class="p">,</span><span class="mi">205</span><span class="p">,</span><span class="mi">206</span><span class="p">,</span><span class="mi">207</span><span class="p">,</span><span class="w"></span>
+<span class="mi">208</span><span class="p">,</span><span class="mi">209</span><span class="p">,</span><span class="mi">210</span><span class="p">,</span><span class="mi">211</span><span class="p">,</span><span class="mi">212</span><span class="p">,</span><span class="mi">213</span><span class="p">,</span><span class="mi">214</span><span class="p">,</span><span class="mi">215</span><span class="p">,</span><span class="mi">216</span><span class="p">,</span><span class="mi">217</span><span class="p">,</span><span class="mi">218</span><span class="p">,</span><span class="mi">219</span><span class="p">,</span><span class="mi">220</span><span class="p">,</span><span class="mi">221</span><span class="p">,</span><span class="mi">222</span><span class="p">,</span><span class="mi">223</span><span class="p">,</span><span class="w"></span>
+<span class="mi">224</span><span class="p">,</span><span class="mi">225</span><span class="p">,</span><span class="mi">226</span><span class="p">,</span><span class="mi">227</span><span class="p">,</span><span class="mi">228</span><span class="p">,</span><span class="mi">229</span><span class="p">,</span><span class="mi">230</span><span class="p">,</span><span class="mi">231</span><span class="p">,</span><span class="mi">232</span><span class="p">,</span><span class="mi">233</span><span class="p">,</span><span class="mi">234</span><span class="p">,</span><span class="mi">235</span><span class="p">,</span><span class="mi">236</span><span class="p">,</span><span class="mi">237</span><span class="p">,</span><span class="mi">238</span><span class="p">,</span><span class="mi">239</span><span class="p">,</span><span class="w"></span>
+<span class="mi">240</span><span class="p">,</span><span class="mi">241</span><span class="p">,</span><span class="mi">242</span><span class="p">,</span><span class="mi">243</span><span class="p">,</span><span class="mi">244</span><span class="p">,</span><span class="mi">245</span><span class="p">,</span><span class="mi">246</span><span class="p">,</span><span class="mi">247</span><span class="p">,</span><span class="mi">248</span><span class="p">,</span><span class="mi">249</span><span class="p">,</span><span class="mi">250</span><span class="p">,</span><span class="mi">251</span><span class="p">,</span><span class="mi">252</span><span class="p">,</span><span class="mi">253</span><span class="p">,</span><span class="mi">254</span><span class="p">,</span><span class="mi">255</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+<span class="kt">long</span><span class="w"></span>
+<span class="nf">gtm_ac_xform</span><span class="w"> </span><span class="p">(</span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">outlen</span><span class="p">)</span><span class="w"></span>
+<span class="n">gtm_descriptor</span><span class="w"> </span><span class="o">*</span><span class="n">in</span><span class="p">;</span><span class="w">    </span><span class="cm">/* the input string */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">;</span><span class="w">            </span><span class="cm">/* the subscript level */</span><span class="w"></span>
+<span class="n">gtm_descriptor</span><span class="w"> </span><span class="o">*</span><span class="n">out</span><span class="p">;</span><span class="w">    </span><span class="cm">/* the output buffer */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">outlen</span><span class="p">;</span><span class="w">        </span><span class="cm">/* the length of the output string */</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"></span>
+<span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">cp</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">cout</span><span class="p">;</span><span class="w"></span>
+<span class="cm">/* Ensure space in the output buffer for the string. */</span><span class="w"></span>
+<span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">;</span><span class="w"></span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">)</span><span class="w"></span>
+<span class="k">return</span><span class="w"> </span><span class="n">MYAPP_SUBSC2LONG</span><span class="p">;</span><span class="w"></span>
+<span class="cm">/* There is space, copy the string, transforming, if necessary */</span><span class="w"></span>
+<span class="n">cp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span><span class="w">            </span><span class="cm">/* Address of first byte of input string */</span><span class="w"></span>
+<span class="n">cout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span><span class="w">        </span><span class="cm">/* Address of first byte of output buffer */</span><span class="w"></span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="o">--</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="o">*</span><span class="n">cout</span><span class="o">++</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xform_table</span><span class="p">[</span><span class="o">*</span><span class="n">cp</span><span class="o">++</span><span class="p">];</span><span class="w"></span>
+<span class="o">*</span><span class="n">outlen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">;</span><span class="w"></span>
+<span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Transformation Routine Characteristics</strong></p>
+<p>The input and output values may contain &lt;NUL&gt; (hex code 00) characters.</p>
+<p>The collation transformation routine may concatenate a sentinel, such as &lt;NUL&gt;, followed by the original subscript on the end of the transformed key. If the key length is not an issue, this permits the inverse transformation routine to simply retrieve the original subscript rather than calculating its value based on the transformed key.</p>
+<p>If there are reasons not to append the entire original subscript, YottaDB allows you to concatenate a sentinel plus a predefined code so the original subscript can be easily retrieved by the inverse transformation routine, but still assures a reformatted key that is unique.</p>
+</section>
+<section id="inverse-transformation-routine-gtm-ac-xback-or-gtm-ac-xback-1">
+<h3><a class="toc-backref" href="internatn.html#id9">Inverse Transformation Routine (gtm_ac_xback or gtm_ac_xback_1)</a><a class="headerlink" href="internatn.html#inverse-transformation-routine-gtm-ac-xback-or-gtm-ac-xback-1" title="Permalink to this heading">¶</a></h3>
+<p>This routine returns altered keys to the original subscripts. The syntax of this routine is:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;gtm_descript.h&quot;</span><span class="cp"></span>
+<span class="kt">long</span><span class="w"> </span><span class="n">gtm_ac_xback</span><span class="p">(</span><span class="n">gtm_descriptor</span><span class="w"> </span><span class="o">*</span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="n">gtm_descriptor</span><span class="w"> </span><span class="o">*</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">outlen</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The arguments of gtm_ac_xback are identical to those of gtm_ac_xform.</p>
+<p>The syntax of gtm_ac_xback_1 is:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;gtm_descript.h&quot;</span><span class="cp"></span>
+<span class="kt">long</span><span class="w"> </span><span class="n">gtm_ac_xback_1</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">gtm32_descriptor</span><span class="w"> </span><span class="o">*</span><span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="n">gtm32_descriptor</span><span class="w"> </span><span class="o">*</span><span class="n">dst</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">dstlen</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The arguments of gtm_ac_xback_1 are identical to those of gtm_ac_xform_1.</p>
+<p>Example:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;gtm_descript.h&quot;</span><span class="cp"></span>
+<span class="cp">#define MYAPP_SUBSC2LONG 12345678</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">inverse_table</span><span class="p">[</span><span class="mi">256</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"></span>
+<span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="mi">26</span><span class="p">,</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w"></span>
+<span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w"> </span><span class="mi">35</span><span class="p">,</span><span class="w"> </span><span class="mi">36</span><span class="p">,</span><span class="w"> </span><span class="mi">37</span><span class="p">,</span><span class="w"> </span><span class="mi">38</span><span class="p">,</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="mi">43</span><span class="p">,</span><span class="w"> </span><span class="mi">44</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w"> </span><span class="mi">46</span><span class="p">,</span><span class="w"> </span><span class="mi">47</span><span class="p">,</span><span class="w"></span>
+<span class="mi">48</span><span class="p">,</span><span class="w"> </span><span class="mi">49</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">51</span><span class="p">,</span><span class="w"> </span><span class="mi">52</span><span class="p">,</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w"> </span><span class="mi">54</span><span class="p">,</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w"> </span><span class="mi">57</span><span class="p">,</span><span class="w"> </span><span class="mi">58</span><span class="p">,</span><span class="w"> </span><span class="mi">59</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="mi">61</span><span class="p">,</span><span class="w"> </span><span class="mi">62</span><span class="p">,</span><span class="w"> </span><span class="mi">63</span><span class="p">,</span><span class="w"></span>
+<span class="mi">64</span><span class="p">,</span><span class="w"> </span><span class="mi">65</span><span class="p">,</span><span class="w"> </span><span class="mi">97</span><span class="p">,</span><span class="w"> </span><span class="mi">66</span><span class="p">,</span><span class="w"> </span><span class="mi">98</span><span class="p">,</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w"> </span><span class="mi">99</span><span class="p">,</span><span class="w"> </span><span class="mi">68</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">69</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="w"> </span><span class="mi">71</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="w"> </span><span class="mi">72</span><span class="p">,</span><span class="w"></span>
+<span class="mi">104</span><span class="p">,</span><span class="w"> </span><span class="mi">73</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span><span class="w"> </span><span class="mi">74</span><span class="p">,</span><span class="mi">106</span><span class="p">,</span><span class="w"> </span><span class="mi">75</span><span class="p">,</span><span class="mi">107</span><span class="p">,</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="mi">108</span><span class="p">,</span><span class="w"> </span><span class="mi">77</span><span class="p">,</span><span class="mi">109</span><span class="p">,</span><span class="w"> </span><span class="mi">78</span><span class="p">,</span><span class="mi">110</span><span class="p">,</span><span class="w"> </span><span class="mi">79</span><span class="p">,</span><span class="mi">111</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"></span>
+<span class="mi">112</span><span class="p">,</span><span class="w"> </span><span class="mi">81</span><span class="p">,</span><span class="mi">113</span><span class="p">,</span><span class="w"> </span><span class="mi">82</span><span class="p">,</span><span class="mi">114</span><span class="p">,</span><span class="w"> </span><span class="mi">83</span><span class="p">,</span><span class="mi">115</span><span class="p">,</span><span class="w"> </span><span class="mi">84</span><span class="p">,</span><span class="mi">116</span><span class="p">,</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span><span class="mi">117</span><span class="p">,</span><span class="w"> </span><span class="mi">86</span><span class="p">,</span><span class="mi">118</span><span class="p">,</span><span class="w"> </span><span class="mi">87</span><span class="p">,</span><span class="mi">119</span><span class="p">,</span><span class="w"> </span><span class="mi">88</span><span class="p">,</span><span class="w"></span>
+<span class="mi">120</span><span class="p">,</span><span class="w"> </span><span class="mi">89</span><span class="p">,</span><span class="mi">121</span><span class="p">,</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="mi">122</span><span class="p">,</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w"> </span><span class="mi">92</span><span class="p">,</span><span class="w"> </span><span class="mi">93</span><span class="p">,</span><span class="w"> </span><span class="mi">94</span><span class="p">,</span><span class="w"> </span><span class="mi">95</span><span class="p">,</span><span class="w"> </span><span class="mi">96</span><span class="p">,</span><span class="mi">123</span><span class="p">,</span><span class="mi">124</span><span class="p">,</span><span class="mi">125</span><span class="p">,</span><span class="mi">126</span><span class="p">,</span><span class="mi">127</span><span class="p">,</span><span class="w"></span>
+<span class="mi">128</span><span class="p">,</span><span class="mi">129</span><span class="p">,</span><span class="mi">130</span><span class="p">,</span><span class="mi">131</span><span class="p">,</span><span class="mi">132</span><span class="p">,</span><span class="mi">133</span><span class="p">,</span><span class="mi">134</span><span class="p">,</span><span class="mi">135</span><span class="p">,</span><span class="mi">136</span><span class="p">,</span><span class="mi">137</span><span class="p">,</span><span class="mi">138</span><span class="p">,</span><span class="mi">139</span><span class="p">,</span><span class="mi">140</span><span class="p">,</span><span class="mi">141</span><span class="p">,</span><span class="mi">142</span><span class="p">,</span><span class="mi">143</span><span class="p">,</span><span class="w"></span>
+<span class="mi">144</span><span class="p">,</span><span class="mi">145</span><span class="p">,</span><span class="mi">146</span><span class="p">,</span><span class="mi">147</span><span class="p">,</span><span class="mi">148</span><span class="p">,</span><span class="mi">149</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">151</span><span class="p">,</span><span class="mi">152</span><span class="p">,</span><span class="mi">153</span><span class="p">,</span><span class="mi">154</span><span class="p">,</span><span class="mi">155</span><span class="p">,</span><span class="mi">156</span><span class="p">,</span><span class="mi">157</span><span class="p">,</span><span class="mi">158</span><span class="p">,</span><span class="mi">159</span><span class="p">,</span><span class="w"></span>
+<span class="mi">160</span><span class="p">,</span><span class="mi">161</span><span class="p">,</span><span class="mi">162</span><span class="p">,</span><span class="mi">163</span><span class="p">,</span><span class="mi">164</span><span class="p">,</span><span class="mi">165</span><span class="p">,</span><span class="mi">166</span><span class="p">,</span><span class="mi">167</span><span class="p">,</span><span class="mi">168</span><span class="p">,</span><span class="mi">169</span><span class="p">,</span><span class="mi">170</span><span class="p">,</span><span class="mi">171</span><span class="p">,</span><span class="mi">172</span><span class="p">,</span><span class="mi">173</span><span class="p">,</span><span class="mi">174</span><span class="p">,</span><span class="mi">175</span><span class="p">,</span><span class="w"></span>
+<span class="mi">176</span><span class="p">,</span><span class="mi">177</span><span class="p">,</span><span class="mi">178</span><span class="p">,</span><span class="mi">179</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="mi">181</span><span class="p">,</span><span class="mi">182</span><span class="p">,</span><span class="mi">183</span><span class="p">,</span><span class="mi">184</span><span class="p">,</span><span class="mi">185</span><span class="p">,</span><span class="mi">186</span><span class="p">,</span><span class="mi">187</span><span class="p">,</span><span class="mi">188</span><span class="p">,</span><span class="mi">189</span><span class="p">,</span><span class="mi">190</span><span class="p">,</span><span class="mi">191</span><span class="p">,</span><span class="w"></span>
+<span class="mi">192</span><span class="p">,</span><span class="mi">193</span><span class="p">,</span><span class="mi">194</span><span class="p">,</span><span class="mi">195</span><span class="p">,</span><span class="mi">196</span><span class="p">,</span><span class="mi">197</span><span class="p">,</span><span class="mi">198</span><span class="p">,</span><span class="mi">199</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">201</span><span class="p">,</span><span class="mi">202</span><span class="p">,</span><span class="mi">203</span><span class="p">,</span><span class="mi">204</span><span class="p">,</span><span class="mi">205</span><span class="p">,</span><span class="mi">206</span><span class="p">,</span><span class="mi">207</span><span class="p">,</span><span class="w"></span>
+<span class="mi">208</span><span class="p">,</span><span class="mi">209</span><span class="p">,</span><span class="mi">210</span><span class="p">,</span><span class="mi">211</span><span class="p">,</span><span class="mi">212</span><span class="p">,</span><span class="mi">213</span><span class="p">,</span><span class="mi">214</span><span class="p">,</span><span class="mi">215</span><span class="p">,</span><span class="mi">216</span><span class="p">,</span><span class="mi">217</span><span class="p">,</span><span class="mi">218</span><span class="p">,</span><span class="mi">219</span><span class="p">,</span><span class="mi">220</span><span class="p">,</span><span class="mi">221</span><span class="p">,</span><span class="mi">222</span><span class="p">,</span><span class="mi">223</span><span class="p">,</span><span class="w"></span>
+<span class="mi">224</span><span class="p">,</span><span class="mi">225</span><span class="p">,</span><span class="mi">226</span><span class="p">,</span><span class="mi">227</span><span class="p">,</span><span class="mi">228</span><span class="p">,</span><span class="mi">229</span><span class="p">,</span><span class="mi">230</span><span class="p">,</span><span class="mi">231</span><span class="p">,</span><span class="mi">232</span><span class="p">,</span><span class="mi">233</span><span class="p">,</span><span class="mi">234</span><span class="p">,</span><span class="mi">235</span><span class="p">,</span><span class="mi">236</span><span class="p">,</span><span class="mi">237</span><span class="p">,</span><span class="mi">238</span><span class="p">,</span><span class="mi">239</span><span class="p">,</span><span class="w"></span>
+<span class="mi">240</span><span class="p">,</span><span class="mi">241</span><span class="p">,</span><span class="mi">242</span><span class="p">,</span><span class="mi">243</span><span class="p">,</span><span class="mi">244</span><span class="p">,</span><span class="mi">245</span><span class="p">,</span><span class="mi">246</span><span class="p">,</span><span class="mi">247</span><span class="p">,</span><span class="mi">248</span><span class="p">,</span><span class="mi">249</span><span class="p">,</span><span class="mi">250</span><span class="p">,</span><span class="mi">251</span><span class="p">,</span><span class="mi">252</span><span class="p">,</span><span class="mi">253</span><span class="p">,</span><span class="mi">254</span><span class="p">,</span><span class="mi">255</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+<span class="kt">long</span><span class="w"> </span><span class="nf">gtm_ac_xback</span><span class="w"> </span><span class="p">(</span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">outlen</span><span class="p">)</span><span class="w"></span>
+<span class="n">gtm_descriptor</span><span class="w"> </span><span class="o">*</span><span class="n">in</span><span class="p">;</span><span class="w">    </span><span class="cm">/* the input string */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">;</span><span class="w">            </span><span class="cm">/* the subscript level */</span><span class="w"></span>
+<span class="n">gtm_descriptor</span><span class="w"> </span><span class="o">*</span><span class="n">out</span><span class="p">;</span><span class="w">    </span><span class="cm">/* output buffer */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">outlen</span><span class="p">;</span><span class="w">        </span><span class="cm">/* the length of the output string */</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"></span>
+<span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">cp</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">cout</span><span class="p">;</span><span class="w"></span>
+<span class="w"> </span><span class="cm">/* Ensure space in the output buffer for the string. */</span><span class="w"></span>
+<span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">;</span><span class="w"></span>
+<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">)</span><span class="w"></span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">MYAPP_SUBSC2LONG</span><span class="p">;</span><span class="w"></span>
+<span class="w"> </span><span class="cm">/* There is enough space, copy the string, transforming, if necessary */</span><span class="w"></span>
+<span class="w"> </span><span class="n">cp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span><span class="w">            </span><span class="cm">/* Address of first byte of input string */</span><span class="w"></span>
+<span class="w"> </span><span class="n">cout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span><span class="w">        </span><span class="cm">/* Address of first byte of output buffer */</span><span class="w"></span>
+<span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="o">--</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="w"> </span><span class="o">*</span><span class="n">cout</span><span class="o">++</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inverse_table</span><span class="p">[</span><span class="o">*</span><span class="n">cp</span><span class="o">++</span><span class="p">];</span><span class="w"></span>
+<span class="w"> </span><span class="o">*</span><span class="n">outlen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">;</span><span class="w"></span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="version-control-routines-gtm-ac-version-and-gtm-ac-verify">
+<h3><a class="toc-backref" href="internatn.html#id10">Version Control Routines (gtm_ac_version and gtm_ac_verify)</a><a class="headerlink" href="internatn.html#version-control-routines-gtm-ac-version-and-gtm-ac-verify" title="Permalink to this heading">¶</a></h3>
+<p>Two user-defined version control routines provide a safety mechanism to guard against a collation routine being used on the wrong global, or an attempt being made to modify a collation routine for an existing global. Either of these situations could cause incorrect collation or damage to subscripts.</p>
+<p>When a global is assigned an alternative collation sequence, YottaDB invokes a user-supplied routine that returns a numeric version identifier for the set of collation routines, which was stored with the global. The first time a process accesses the global, YottaDB determines the assigned collation sequence, then invokes another user-supplied routine. The second routine matches the collation sequence and version identifier assigned to the global with those of the current set of collation routines.</p>
+<p>When you write the code that matches the type and version, you can decide whether to modify the version identifier and whether to allow support of globals created using a previous version of the routine.</p>
+<p><strong>Version Identifier Routine (gtm_ac_version)</strong></p>
+<p>This routine returns an integer identifier between 0 and 255. This integer provides a mechanism to enforce compatibility as a collation sequence potentially evolves. When YottaDB first uses an alternate collation sequence for a database or global, it captures the version and if it finds the version has changed it at some later startup, it generates an error. The syntax is:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">gtm_ac_version</span><span class="p">()</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">gtm_ac_version</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Verification Routine (gtm_ac_verify)</strong></p>
+<p>This routine verifies that the type and version associated with a global are compatible with the active set of routines. Both the type and version are unsigned characters passed by value. The syntax is:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;gtm_descript.h&quot;</span><span class="cp"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">gtm_ac_verify</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">ver</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="nl">Example</span><span class="p">:</span><span class="w"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;gtm_descript.h&quot;</span><span class="cp"></span>
+<span class="cp">#define MYAPP_WRONGVERSION 20406080    </span><span class="cm">/* User condition */</span><span class="cp"></span>
+<span class="n">gtm_ac_verify</span><span class="w"> </span><span class="p">(</span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">ver</span><span class="p">)</span><span class="w"></span>
+<span class="w">     </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">ver</span><span class="p">;</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+<span class="w">   </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ver</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">        </span><span class="cm">/* version checking may be more complex */</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">   </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">MYAPP_WRONGVERSION</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="using-the-gbldef-utility">
+<span id="use-gbldef-util"></span><h3><a class="toc-backref" href="internatn.html#id11">Using the %GBLDEF Utility</a><a class="headerlink" href="internatn.html#using-the-gbldef-utility" title="Permalink to this heading">¶</a></h3>
+<p>Use the %GBLDEF utility to get, set, or kill the collation sequence of a global variable mapped by the current global directory. %GBLDEF cannot modify the collation sequence for either a global containing data or a global whose subscripts span multiple regions. To change the collation sequence for a global variable that contains data, extract the data, KILL the variable, change the collation sequence, and reload the data. Use GDE to modify the collation sequence of a global variable that spans regions.</p>
+<p><strong>Assigning the Collation Sequence</strong></p>
+<p>To assign a collation sequence to an individual global use the extrinsic entry point:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>set^%GBLDEF(gname,nct,act)
+</pre></div>
+</div>
+<p>where:</p>
+<ul class="simple">
+<li><p>The first argument, gname, is the name of the global. If the global name appears as a literal, it must be enclosed in quotation marks (” “). The must be a legal M variable name, including the leading caret (^).</p></li>
+<li><p>The second argument, nct, is an integer that determines whether numeric subscripts are treated as strings. The value is FALSE (0) if numeric subscripts are to collate before strings, as in standard M, and TRUE (1) if numeric subscripts are to be treated as strings (for example, where 10 collates before 9).</p></li>
+<li><p>The third argument, act, is an integer specifying the active collation sequence– from 0, standard M collation, to 255.</p></li>
+<li><p>If the global contains data, this function returns a FALSE (0) and does not modify the existing collation sequence definition.</p></li>
+<li><p>If the global’s subscripts span multiple regions, the function returns a false (0). Use the global directory (GBLNAME object in GDE) to set collation characteristics for a global whose subscripts span multiple regions.</p></li>
+<li><p>Always execute this function outside of a TSTART/TCOMMIT fence. If $TLEVEL is non-zero, the function returns a false(0).</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;kill ^G
+YDB&gt;write <span class="nv">$select</span><span class="o">(</span><span class="nv">$$</span>set^%GBLDEF<span class="o">(</span><span class="s2">&quot;^G&quot;</span>,0,3<span class="o">)</span>:<span class="s2">&quot;ok&quot;</span>,1:<span class="s2">&quot;failed&quot;</span><span class="o">)</span>
+ok
+YDB&gt;
+</pre></div>
+</div>
+<p>This deletes the global variable ^G, then uses the $$set%GBLDEF as an extrinsic to set ^G to the collation sequence number 3 with numeric subscripts collating before strings. Using $$set%GBLDEF as an argument to $SELECT provides a return value as to whether or not the set was successful. $SELECT will return a “FAILED” message if the collation sequence requested is undefined.</p>
+<p><strong>Examining Global Collation Characteristics</strong></p>
+<p>To examine the collation characteristics currently assigned to a global use the extrinsic entry point:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>get^%GBLDEF(gname[,reg])
+</pre></div>
+</div>
+<p>where gname specifies the global variable name. When gname spans multiple regions, reg specifies a region in the span.</p>
+<p>This function returns the data associated with the global name as a comma delimited string having the following pieces:</p>
+<ul class="simple">
+<li><p>A truth-valued integer specifying FALSE (0) if numeric subscripts collate before strings, as in standard M, and TRUE (1) if numeric subscripts are handled as strings.</p></li>
+<li><p>An integer specifying the collation sequence.</p></li>
+<li><p>An integer specifying the version, or revision level, of the currently implemented collation sequence.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>get^%GBLDEF(gname) returns global specific characteristics, which can differ from collation characteristics defined for the database file at MUPIP CREATE time from settings in the global directory. A “0” return from $$get^%gbldef(gname[,reg]) indicates that the global has no special characteristics and uses the region default collation, while a “0,0,0” return indicates that the global is explicitly defined to M collation. DSE DUMP -FILEHEADER command displays region collation whenever the collation is other than M standard collation.</p>
+</div>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;Write <span class="nv">$$</span>get^%GBLDEF<span class="o">(</span><span class="s2">&quot;^G&quot;</span><span class="o">)</span>
+<span class="m">1</span>,3,1
+</pre></div>
+</div>
+<p>This example returns the collation sequence information currently assigned to the global ^G.</p>
+<p><strong>Deleting Global Collation Characteristics</strong></p>
+<p>To delete the collation characteristics currently assigned to a global, use the extrinsic entry point:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>kill^%GBLDEF(gname)
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>If the global contains data, the function returns a false (0) and does not modify the global.</p></li>
+<li><p>If the global’s subscript span multiple regions, the function returns a false (0). Use the global directory (GBLNAME object in GDE) to set collation characteristics for a global whose subscripts span multiple regions.</p></li>
+<li><p>Always execute this function outside of a TSTART/TCOMMIT fence. If $TLEVEL is non-zero, the function returns a false (0).</p></li>
+</ul>
+</section>
+<section id="example-of-upper-and-lower-case-alphabetic-collation-sequence">
+<h3><a class="toc-backref" href="internatn.html#id12">Example of Upper and Lower Case Alphabetic Collation Sequence</a><a class="headerlink" href="internatn.html#example-of-upper-and-lower-case-alphabetic-collation-sequence" title="Permalink to this heading">¶</a></h3>
+<p>This example is to create an alternate collation sequence that collates upper and lower case alphabetic characters in such a way that the set of keys “du Pont,” “Friendly,” “le Blanc,” and “Madrid” collates as:</p>
+<ul class="simple">
+<li><p>du Pont</p></li>
+<li><p>Friendly</p></li>
+<li><p>le Blanc</p></li>
+<li><p>Madrid</p></li>
+</ul>
+<p>This is in contrast to the standard M collation that orders them as:</p>
+<ul class="simple">
+<li><p>Friendly</p></li>
+<li><p>Madrid</p></li>
+<li><p>du Pont</p></li>
+<li><p>le Blanc</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>No claim of copyright is made with respect to the code used in this example. Please do not use the code as-is in a production environment.</p>
+</div>
+<p>Please ensure that you have a correctly configured YottaDB installation, correctly configured environment variables, with appropriate directories and files.</p>
+<p>Seasoned YottaDB users may want to download polish.c used in this example and proceed directly to the compiling and linking instructions. First time users may want to start from the beginning.</p>
+<p>Create a new file called polish.c and put the following code:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;gtm_descript.h&quot;</span><span class="cp"></span>
+<span class="cp">#define COLLATION_TABLE_SIZE     256</span>
+<span class="cp">#define MYAPPS_SUBSC2LONG        12345678</span>
+<span class="cp">#define SUCCESS     0</span>
+<span class="cp">#define FAILURE     1</span>
+<span class="cp">#define VERSION     0</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">xform_table</span><span class="p">[</span><span class="n">COLLATION_TABLE_SIZE</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">          </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="mi">26</span><span class="p">,</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w"> </span><span class="mi">35</span><span class="p">,</span><span class="w"> </span><span class="mi">36</span><span class="p">,</span><span class="w"> </span><span class="mi">37</span><span class="p">,</span><span class="w"> </span><span class="mi">38</span><span class="p">,</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="mi">43</span><span class="p">,</span><span class="w"> </span><span class="mi">44</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w"> </span><span class="mi">46</span><span class="p">,</span><span class="w"> </span><span class="mi">47</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">48</span><span class="p">,</span><span class="w"> </span><span class="mi">49</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">51</span><span class="p">,</span><span class="w"> </span><span class="mi">52</span><span class="p">,</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w"> </span><span class="mi">54</span><span class="p">,</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w"> </span><span class="mi">57</span><span class="p">,</span><span class="w"> </span><span class="mi">58</span><span class="p">,</span><span class="w"> </span><span class="mi">59</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="mi">61</span><span class="p">,</span><span class="w"> </span><span class="mi">62</span><span class="p">,</span><span class="w"> </span><span class="mi">63</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">64</span><span class="p">,</span><span class="w"> </span><span class="mi">65</span><span class="p">,</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w"> </span><span class="mi">69</span><span class="p">,</span><span class="w"> </span><span class="mi">71</span><span class="p">,</span><span class="w"> </span><span class="mi">73</span><span class="p">,</span><span class="w"> </span><span class="mi">75</span><span class="p">,</span><span class="w"> </span><span class="mi">77</span><span class="p">,</span><span class="w"> </span><span class="mi">79</span><span class="p">,</span><span class="w"> </span><span class="mi">81</span><span class="p">,</span><span class="w"> </span><span class="mi">83</span><span class="p">,</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span><span class="w"> </span><span class="mi">87</span><span class="p">,</span><span class="w"> </span><span class="mi">89</span><span class="p">,</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w"> </span><span class="mi">93</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">95</span><span class="p">,</span><span class="w"> </span><span class="mi">97</span><span class="p">,</span><span class="w"> </span><span class="mi">99</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span><span class="mi">107</span><span class="p">,</span><span class="mi">109</span><span class="p">,</span><span class="mi">111</span><span class="p">,</span><span class="mi">113</span><span class="p">,</span><span class="mi">115</span><span class="p">,</span><span class="mi">117</span><span class="p">,</span><span class="mi">118</span><span class="p">,</span><span class="mi">119</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="mi">121</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">122</span><span class="p">,</span><span class="w"> </span><span class="mi">66</span><span class="p">,</span><span class="w"> </span><span class="mi">68</span><span class="p">,</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="w"> </span><span class="mi">72</span><span class="p">,</span><span class="w"> </span><span class="mi">74</span><span class="p">,</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w"> </span><span class="mi">78</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="mi">82</span><span class="p">,</span><span class="w"> </span><span class="mi">84</span><span class="p">,</span><span class="w"> </span><span class="mi">86</span><span class="p">,</span><span class="w"> </span><span class="mi">88</span><span class="p">,</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w"> </span><span class="mi">92</span><span class="p">,</span><span class="w"> </span><span class="mi">94</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">96</span><span class="p">,</span><span class="w"> </span><span class="mi">98</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">104</span><span class="p">,</span><span class="mi">106</span><span class="p">,</span><span class="mi">108</span><span class="p">,</span><span class="mi">110</span><span class="p">,</span><span class="mi">112</span><span class="p">,</span><span class="mi">114</span><span class="p">,</span><span class="mi">116</span><span class="p">,</span><span class="mi">123</span><span class="p">,</span><span class="mi">124</span><span class="p">,</span><span class="mi">125</span><span class="p">,</span><span class="mi">126</span><span class="p">,</span><span class="mi">127</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">128</span><span class="p">,</span><span class="mi">129</span><span class="p">,</span><span class="mi">130</span><span class="p">,</span><span class="mi">131</span><span class="p">,</span><span class="mi">132</span><span class="p">,</span><span class="mi">133</span><span class="p">,</span><span class="mi">134</span><span class="p">,</span><span class="mi">135</span><span class="p">,</span><span class="mi">136</span><span class="p">,</span><span class="mi">137</span><span class="p">,</span><span class="mi">138</span><span class="p">,</span><span class="mi">139</span><span class="p">,</span><span class="mi">140</span><span class="p">,</span><span class="mi">141</span><span class="p">,</span><span class="mi">142</span><span class="p">,</span><span class="mi">143</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">144</span><span class="p">,</span><span class="mi">145</span><span class="p">,</span><span class="mi">146</span><span class="p">,</span><span class="mi">147</span><span class="p">,</span><span class="mi">148</span><span class="p">,</span><span class="mi">149</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">151</span><span class="p">,</span><span class="mi">152</span><span class="p">,</span><span class="mi">153</span><span class="p">,</span><span class="mi">154</span><span class="p">,</span><span class="mi">155</span><span class="p">,</span><span class="mi">156</span><span class="p">,</span><span class="mi">157</span><span class="p">,</span><span class="mi">158</span><span class="p">,</span><span class="mi">159</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">160</span><span class="p">,</span><span class="mi">161</span><span class="p">,</span><span class="mi">162</span><span class="p">,</span><span class="mi">163</span><span class="p">,</span><span class="mi">164</span><span class="p">,</span><span class="mi">165</span><span class="p">,</span><span class="mi">166</span><span class="p">,</span><span class="mi">167</span><span class="p">,</span><span class="mi">168</span><span class="p">,</span><span class="mi">169</span><span class="p">,</span><span class="mi">170</span><span class="p">,</span><span class="mi">171</span><span class="p">,</span><span class="mi">172</span><span class="p">,</span><span class="mi">173</span><span class="p">,</span><span class="mi">174</span><span class="p">,</span><span class="mi">175</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">176</span><span class="p">,</span><span class="mi">177</span><span class="p">,</span><span class="mi">178</span><span class="p">,</span><span class="mi">179</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="mi">181</span><span class="p">,</span><span class="mi">182</span><span class="p">,</span><span class="mi">183</span><span class="p">,</span><span class="mi">184</span><span class="p">,</span><span class="mi">185</span><span class="p">,</span><span class="mi">186</span><span class="p">,</span><span class="mi">187</span><span class="p">,</span><span class="mi">188</span><span class="p">,</span><span class="mi">189</span><span class="p">,</span><span class="mi">190</span><span class="p">,</span><span class="mi">191</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">192</span><span class="p">,</span><span class="mi">193</span><span class="p">,</span><span class="mi">194</span><span class="p">,</span><span class="mi">195</span><span class="p">,</span><span class="mi">196</span><span class="p">,</span><span class="mi">197</span><span class="p">,</span><span class="mi">198</span><span class="p">,</span><span class="mi">199</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">201</span><span class="p">,</span><span class="mi">202</span><span class="p">,</span><span class="mi">203</span><span class="p">,</span><span class="mi">204</span><span class="p">,</span><span class="mi">205</span><span class="p">,</span><span class="mi">206</span><span class="p">,</span><span class="mi">207</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">208</span><span class="p">,</span><span class="mi">209</span><span class="p">,</span><span class="mi">210</span><span class="p">,</span><span class="mi">211</span><span class="p">,</span><span class="mi">212</span><span class="p">,</span><span class="mi">213</span><span class="p">,</span><span class="mi">214</span><span class="p">,</span><span class="mi">215</span><span class="p">,</span><span class="mi">216</span><span class="p">,</span><span class="mi">217</span><span class="p">,</span><span class="mi">218</span><span class="p">,</span><span class="mi">219</span><span class="p">,</span><span class="mi">220</span><span class="p">,</span><span class="mi">221</span><span class="p">,</span><span class="mi">222</span><span class="p">,</span><span class="mi">223</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">224</span><span class="p">,</span><span class="mi">225</span><span class="p">,</span><span class="mi">226</span><span class="p">,</span><span class="mi">227</span><span class="p">,</span><span class="mi">228</span><span class="p">,</span><span class="mi">229</span><span class="p">,</span><span class="mi">230</span><span class="p">,</span><span class="mi">231</span><span class="p">,</span><span class="mi">232</span><span class="p">,</span><span class="mi">233</span><span class="p">,</span><span class="mi">234</span><span class="p">,</span><span class="mi">235</span><span class="p">,</span><span class="mi">236</span><span class="p">,</span><span class="mi">237</span><span class="p">,</span><span class="mi">238</span><span class="p">,</span><span class="mi">239</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">240</span><span class="p">,</span><span class="mi">241</span><span class="p">,</span><span class="mi">242</span><span class="p">,</span><span class="mi">243</span><span class="p">,</span><span class="mi">244</span><span class="p">,</span><span class="mi">245</span><span class="p">,</span><span class="mi">246</span><span class="p">,</span><span class="mi">247</span><span class="p">,</span><span class="mi">248</span><span class="p">,</span><span class="mi">249</span><span class="p">,</span><span class="mi">250</span><span class="p">,</span><span class="mi">251</span><span class="p">,</span><span class="mi">252</span><span class="p">,</span><span class="mi">253</span><span class="p">,</span><span class="mi">254</span><span class="p">,</span><span class="mi">255</span><span class="w"></span>
+<span class="w">          </span><span class="p">};</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">inverse_table</span><span class="p">[</span><span class="n">COLLATION_TABLE_SIZE</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">          </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="mi">26</span><span class="p">,</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w"> </span><span class="mi">35</span><span class="p">,</span><span class="w"> </span><span class="mi">36</span><span class="p">,</span><span class="w"> </span><span class="mi">37</span><span class="p">,</span><span class="w"> </span><span class="mi">38</span><span class="p">,</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="mi">43</span><span class="p">,</span><span class="w"> </span><span class="mi">44</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w"> </span><span class="mi">46</span><span class="p">,</span><span class="w"> </span><span class="mi">47</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">48</span><span class="p">,</span><span class="w"> </span><span class="mi">49</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">51</span><span class="p">,</span><span class="w"> </span><span class="mi">52</span><span class="p">,</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w"> </span><span class="mi">54</span><span class="p">,</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w"> </span><span class="mi">57</span><span class="p">,</span><span class="w"> </span><span class="mi">58</span><span class="p">,</span><span class="w"> </span><span class="mi">59</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="mi">61</span><span class="p">,</span><span class="w"> </span><span class="mi">62</span><span class="p">,</span><span class="w"> </span><span class="mi">63</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">64</span><span class="p">,</span><span class="w"> </span><span class="mi">65</span><span class="p">,</span><span class="w"> </span><span class="mi">97</span><span class="p">,</span><span class="w"> </span><span class="mi">66</span><span class="p">,</span><span class="w"> </span><span class="mi">98</span><span class="p">,</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w"> </span><span class="mi">99</span><span class="p">,</span><span class="w"> </span><span class="mi">68</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">69</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="w"> </span><span class="mi">71</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="w"> </span><span class="mi">72</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">104</span><span class="p">,</span><span class="w"> </span><span class="mi">73</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span><span class="w"> </span><span class="mi">74</span><span class="p">,</span><span class="mi">106</span><span class="p">,</span><span class="w"> </span><span class="mi">75</span><span class="p">,</span><span class="mi">107</span><span class="p">,</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="mi">108</span><span class="p">,</span><span class="w"> </span><span class="mi">77</span><span class="p">,</span><span class="mi">109</span><span class="p">,</span><span class="w"> </span><span class="mi">78</span><span class="p">,</span><span class="mi">110</span><span class="p">,</span><span class="w"> </span><span class="mi">79</span><span class="p">,</span><span class="mi">111</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">112</span><span class="p">,</span><span class="w"> </span><span class="mi">81</span><span class="p">,</span><span class="mi">113</span><span class="p">,</span><span class="w"> </span><span class="mi">82</span><span class="p">,</span><span class="mi">114</span><span class="p">,</span><span class="w"> </span><span class="mi">83</span><span class="p">,</span><span class="mi">115</span><span class="p">,</span><span class="w"> </span><span class="mi">84</span><span class="p">,</span><span class="mi">116</span><span class="p">,</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span><span class="mi">117</span><span class="p">,</span><span class="w"> </span><span class="mi">86</span><span class="p">,</span><span class="mi">118</span><span class="p">,</span><span class="w"> </span><span class="mi">87</span><span class="p">,</span><span class="mi">119</span><span class="p">,</span><span class="w"> </span><span class="mi">88</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">120</span><span class="p">,</span><span class="w"> </span><span class="mi">89</span><span class="p">,</span><span class="mi">121</span><span class="p">,</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="mi">122</span><span class="p">,</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w"> </span><span class="mi">92</span><span class="p">,</span><span class="w"> </span><span class="mi">93</span><span class="p">,</span><span class="w"> </span><span class="mi">94</span><span class="p">,</span><span class="w"> </span><span class="mi">95</span><span class="p">,</span><span class="w"> </span><span class="mi">96</span><span class="p">,</span><span class="mi">123</span><span class="p">,</span><span class="mi">124</span><span class="p">,</span><span class="mi">125</span><span class="p">,</span><span class="mi">126</span><span class="p">,</span><span class="mi">127</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">128</span><span class="p">,</span><span class="mi">129</span><span class="p">,</span><span class="mi">130</span><span class="p">,</span><span class="mi">131</span><span class="p">,</span><span class="mi">132</span><span class="p">,</span><span class="mi">133</span><span class="p">,</span><span class="mi">134</span><span class="p">,</span><span class="mi">135</span><span class="p">,</span><span class="mi">136</span><span class="p">,</span><span class="mi">137</span><span class="p">,</span><span class="mi">138</span><span class="p">,</span><span class="mi">139</span><span class="p">,</span><span class="mi">140</span><span class="p">,</span><span class="mi">141</span><span class="p">,</span><span class="mi">142</span><span class="p">,</span><span class="mi">143</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">144</span><span class="p">,</span><span class="mi">145</span><span class="p">,</span><span class="mi">146</span><span class="p">,</span><span class="mi">147</span><span class="p">,</span><span class="mi">148</span><span class="p">,</span><span class="mi">149</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">151</span><span class="p">,</span><span class="mi">152</span><span class="p">,</span><span class="mi">153</span><span class="p">,</span><span class="mi">154</span><span class="p">,</span><span class="mi">155</span><span class="p">,</span><span class="mi">156</span><span class="p">,</span><span class="mi">157</span><span class="p">,</span><span class="mi">158</span><span class="p">,</span><span class="mi">159</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">160</span><span class="p">,</span><span class="mi">161</span><span class="p">,</span><span class="mi">162</span><span class="p">,</span><span class="mi">163</span><span class="p">,</span><span class="mi">164</span><span class="p">,</span><span class="mi">165</span><span class="p">,</span><span class="mi">166</span><span class="p">,</span><span class="mi">167</span><span class="p">,</span><span class="mi">168</span><span class="p">,</span><span class="mi">169</span><span class="p">,</span><span class="mi">170</span><span class="p">,</span><span class="mi">171</span><span class="p">,</span><span class="mi">172</span><span class="p">,</span><span class="mi">173</span><span class="p">,</span><span class="mi">174</span><span class="p">,</span><span class="mi">175</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">176</span><span class="p">,</span><span class="mi">177</span><span class="p">,</span><span class="mi">178</span><span class="p">,</span><span class="mi">179</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="mi">181</span><span class="p">,</span><span class="mi">182</span><span class="p">,</span><span class="mi">183</span><span class="p">,</span><span class="mi">184</span><span class="p">,</span><span class="mi">185</span><span class="p">,</span><span class="mi">186</span><span class="p">,</span><span class="mi">187</span><span class="p">,</span><span class="mi">188</span><span class="p">,</span><span class="mi">189</span><span class="p">,</span><span class="mi">190</span><span class="p">,</span><span class="mi">191</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">192</span><span class="p">,</span><span class="mi">193</span><span class="p">,</span><span class="mi">194</span><span class="p">,</span><span class="mi">195</span><span class="p">,</span><span class="mi">196</span><span class="p">,</span><span class="mi">197</span><span class="p">,</span><span class="mi">198</span><span class="p">,</span><span class="mi">199</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">201</span><span class="p">,</span><span class="mi">202</span><span class="p">,</span><span class="mi">203</span><span class="p">,</span><span class="mi">204</span><span class="p">,</span><span class="mi">205</span><span class="p">,</span><span class="mi">206</span><span class="p">,</span><span class="mi">207</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">208</span><span class="p">,</span><span class="mi">209</span><span class="p">,</span><span class="mi">210</span><span class="p">,</span><span class="mi">211</span><span class="p">,</span><span class="mi">212</span><span class="p">,</span><span class="mi">213</span><span class="p">,</span><span class="mi">214</span><span class="p">,</span><span class="mi">215</span><span class="p">,</span><span class="mi">216</span><span class="p">,</span><span class="mi">217</span><span class="p">,</span><span class="mi">218</span><span class="p">,</span><span class="mi">219</span><span class="p">,</span><span class="mi">220</span><span class="p">,</span><span class="mi">221</span><span class="p">,</span><span class="mi">222</span><span class="p">,</span><span class="mi">223</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">224</span><span class="p">,</span><span class="mi">225</span><span class="p">,</span><span class="mi">226</span><span class="p">,</span><span class="mi">227</span><span class="p">,</span><span class="mi">228</span><span class="p">,</span><span class="mi">229</span><span class="p">,</span><span class="mi">230</span><span class="p">,</span><span class="mi">231</span><span class="p">,</span><span class="mi">232</span><span class="p">,</span><span class="mi">233</span><span class="p">,</span><span class="mi">234</span><span class="p">,</span><span class="mi">235</span><span class="p">,</span><span class="mi">236</span><span class="p">,</span><span class="mi">237</span><span class="p">,</span><span class="mi">238</span><span class="p">,</span><span class="mi">239</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="mi">240</span><span class="p">,</span><span class="mi">241</span><span class="p">,</span><span class="mi">242</span><span class="p">,</span><span class="mi">243</span><span class="p">,</span><span class="mi">244</span><span class="p">,</span><span class="mi">245</span><span class="p">,</span><span class="mi">246</span><span class="p">,</span><span class="mi">247</span><span class="p">,</span><span class="mi">248</span><span class="p">,</span><span class="mi">249</span><span class="p">,</span><span class="mi">250</span><span class="p">,</span><span class="mi">251</span><span class="p">,</span><span class="mi">252</span><span class="p">,</span><span class="mi">253</span><span class="p">,</span><span class="mi">254</span><span class="p">,</span><span class="mi">255</span><span class="w"></span>
+<span class="w">          </span><span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Elements in xform_table represent input order for transform. Elements in inverse_table represent reverse transform for x_form_table.</p>
+<p>Add the following code for the gtm_ac_xform transformation routine:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">long</span><span class="w"> </span><span class="nf">gtm_ac_xform</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">gtm_descriptor</span><span class="w"> </span><span class="o">*</span><span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="n">gtm_descriptor</span><span class="w"> </span><span class="o">*</span><span class="n">dst</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">dstlen</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">       </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"></span>
+<span class="w">       </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w">  </span><span class="o">*</span><span class="n">cp</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">cpout</span><span class="p">;</span><span class="w"></span>
+<span class="w">       </span><span class="cp">#ifdef DEBUG</span>
+<span class="w">       </span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">[</span><span class="n">COLLATION_TABLE_SIZE</span><span class="p">],</span><span class="w"> </span><span class="n">output</span><span class="p">[</span><span class="n">COLLATION_TABLE_SIZE</span><span class="p">];</span><span class="w"></span>
+<span class="w">       </span><span class="cp">#endif</span>
+<span class="w">       </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">src</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">;</span><span class="w"></span>
+<span class="w">       </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">dst</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">)</span><span class="w"></span>
+<span class="w">       </span><span class="k">return</span><span class="w"> </span><span class="n">MYAPPS_SUBSC2LONG</span><span class="p">;</span><span class="w"></span>
+<span class="w">       </span><span class="n">cp</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">src</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span><span class="w"></span>
+<span class="w">       </span><span class="cp">#ifdef DEBUG</span>
+<span class="w">       </span><span class="n">memcpy</span><span class="p">(</span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">cp</span><span class="p">,</span><span class="w"> </span><span class="n">src</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">);</span><span class="w"></span>
+<span class="w">       </span><span class="n">input</span><span class="p">[</span><span class="n">src</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;\0&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="w">       </span><span class="cp">#endif</span>
+<span class="w">       </span><span class="n">cpout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">dst</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span><span class="w"></span>
+<span class="w">       </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">n</span><span class="o">--</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">       </span><span class="o">*</span><span class="n">cpout</span><span class="o">++</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xform_table</span><span class="p">[</span><span class="o">*</span><span class="n">cp</span><span class="o">++</span><span class="p">];</span><span class="w"></span>
+<span class="w">       </span><span class="o">*</span><span class="n">cpout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;\0&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="w">       </span><span class="o">*</span><span class="n">dstlen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">src</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">;</span><span class="w"></span>
+<span class="w">       </span><span class="cp">#ifdef DEBUG</span>
+<span class="w">       </span><span class="n">memcpy</span><span class="p">(</span><span class="n">output</span><span class="p">,</span><span class="w"> </span><span class="n">dst</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="n">dst</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">);</span><span class="w"></span>
+<span class="w">       </span><span class="n">output</span><span class="p">[</span><span class="n">dst</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;\0&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="w">       </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Input = </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">       </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">dstlen</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="s">&quot; %d &quot;</span><span class="p">,(</span><span class="kt">int</span><span class="w"> </span><span class="p">)</span><span class="n">input</span><span class="p">[</span><span class="n">n</span><span class="p">]);</span><span class="w"></span>
+<span class="w">       </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Output = </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">       </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">dstlen</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="o">++</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="s">&quot; %d &quot;</span><span class="p">,(</span><span class="kt">int</span><span class="w"> </span><span class="p">)</span><span class="n">output</span><span class="p">[</span><span class="n">n</span><span class="p">]);</span><span class="w"></span>
+<span class="w">       </span><span class="cp">#endif</span>
+<span class="w">       </span><span class="k">return</span><span class="w"> </span><span class="n">SUCCESS</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Add the following code for the gtm_ac_xback reverse transformation routine:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>long gtm_ac_xback ( gtm_descriptor *src, int level, gtm_descriptor *dst, int *dstlen)
+      {
+       int n;
+       unsigned char  *cp, *cpout;
+       #ifdef DEBUG
+       char input[256], output[256];
+       #endif
+       n = src-&gt;len;
+       if ( n &gt; dst-&gt;len)
+       return MYAPPS_SUBSC2LONG;
+       cp  = (unsigned char *)src-&gt;val;
+       cpout = (unsigned char *)dst-&gt;val;
+       while ( n-- &gt; 0 )
+       *cpout++ = inverse_table[*cp++];
+       *cpout = &#39;\0&#39;;
+       *dstlen = src-&gt;len;
+       #ifdef DEBUG
+       memcpy(input, src-&gt;val, src-&gt;len);
+       input[src-&gt;len] = &#39;\&#39;;
+       memcpy(output, dst-&gt;val, dst-&gt;len);
+       output[dst-&gt;len] = &#39;\0&#39;;
+       fprintf(stderr, &quot;Input = %s, Output = %s\n&quot;,input, output);
+       #endif
+       return SUCCESS;
+      }
+</pre></div>
+</div>
+<p>Add code for the version identifier routine (gtm_ac_version) or the verification routine (gtm_ac_verify):</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">gtm_ac_version</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">VERSION</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">gtm_ac_verify</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">ver</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="n">ver</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">VERSION</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Save and compile polish.c. On x86 GNU/Linux (64-bit Ubuntu 10.10), execute a command like the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gcc -c polish.c -I<span class="nv">$ydb_dist</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The -I$ydb_dist option includes libyottadb.h.</p>
+</div>
+<p>Create a new shared library or add the above routines to an existing one. The following command adds these alternative sequence routines to a shared library called altcoll.so on x86 GNU/Linux (64-bit Ubuntu 10.10).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gcc -o altcoll.so -shared polish.o
+</pre></div>
+</div>
+<p>Set $ydb_collate_1 to point to the location of altcoll.so.</p>
+<p>At the YDB&gt; prompt execute the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;Write <span class="nv">$SELECT</span><span class="o">(</span><span class="nv">$$</span>set^%GBLDEF<span class="o">(</span><span class="s2">&quot;^G&quot;</span>,0,1<span class="o">)</span>:<span class="s2">&quot;OK&quot;</span>,1:<span class="s2">&quot;FAILED&quot;</span><span class="o">)</span>
+      OK
+</pre></div>
+</div>
+<p>This deletes the global variable ^G, then sets ^G to the collation sequence number 1 with numeric subscripts collating before strings.</p>
+<p>Assign the following value to ^G.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;Set ^G<span class="o">(</span><span class="s2">&quot;du Pont&quot;</span><span class="o">)=</span><span class="m">1</span>
+YDB&gt;Set ^G<span class="o">(</span><span class="s2">&quot;Friendly&quot;</span><span class="o">)=</span><span class="m">1</span>
+YDB&gt;Set ^G<span class="o">(</span><span class="s2">&quot;le Blanc&quot;</span><span class="o">)=</span><span class="m">1</span>
+YDB&gt;Set ^G<span class="o">(</span><span class="s2">&quot;Madrid&quot;</span><span class="o">)=</span><span class="m">1</span>
+</pre></div>
+</div>
+<p>See how the subscript of ^G order according to the alternative collation sequence:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;ZWRite ^G
+^G<span class="o">(</span><span class="s2">&quot;du Pont&quot;</span><span class="o">)=</span><span class="m">1</span>
+^G<span class="o">(</span><span class="s2">&quot;Friendly&quot;</span><span class="o">)=</span><span class="m">1</span>
+^G<span class="o">(</span><span class="s2">&quot;le Blanc&quot;</span><span class="o">)=</span><span class="m">1</span>
+^G<span class="o">(</span><span class="s2">&quot;Madrid&quot;</span><span class="o">)=</span><span class="m">1</span>
+</pre></div>
+</div>
+</section>
+<section id="example-of-collating-alphabets-in-reverse-order-using-gtm-ac-xform-1-and-gtm-ac-xback-1">
+<h3><a class="toc-backref" href="internatn.html#id13">Example of Collating Alphabets in Reverse Order using gtm_ac_xform_1 and gtm_ac_xback_1</a><a class="headerlink" href="internatn.html#example-of-collating-alphabets-in-reverse-order-using-gtm-ac-xform-1-and-gtm-ac-xback-1" title="Permalink to this heading">¶</a></h3>
+<p>This example creates an alternate collation sequence that collates alphabets in reverse order. This is in contrast to the standard M collation that collates alphabets in ascending order.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>No claim of copyright is made with respect to the code used in this example. Please do not use the code as-is in a production environment.</p>
+</div>
+<p>Please ensure that you have a correctly configured YottaDB installation and correctly configured environment variables with appropriate directories and files.</p>
+<p>Download <a class="reference external" href="https://gitlab.com/YottaDB/DB/YDBDoc/raw/master/ProgGuide/col_reverse_32.c">col_reverse_32.c</a> from GitLab. It contains code for the transformation routine (gtm_ac_xform_1), reverse transformation routine (gtm_ac_xback_1) and the version control routines (gtm_ac_version and gtm_ac_verify).</p>
+<p>Save and compile col_reverse_32.c. On x86 GNU/Linux (64-bit Ubuntu 10.10), execute a command like the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gcc -c col_reverse_32.c -I<span class="nv">$ydb_dist</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The -I$ydb_dist option includes libyottadb.h.</p>
+</div>
+<p>Create a new shared library or add the routines to an existing one. The following command adds these alternative sequence routines to a shared library called altcoll.so on x86 GNU/Linux (64-bit Ubuntu 10.10).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gcc -o revcol.so -shared col_reverse_32.o
+</pre></div>
+</div>
+<p>Set the environment variable ydb_collate_2 to point to the location of revcol.so. To set the local variable collation to this alternative collation sequence, set the environment variable ydb_local_collate to 2.</p>
+<p>At the prompt, execute the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;Write <span class="nv">$SELECT</span><span class="o">(</span><span class="nv">$$</span>set^%GBLDEF<span class="o">(</span><span class="s2">&quot;^E&quot;</span>,0,2<span class="o">)</span>:<span class="s2">&quot;OK&quot;</span>,1:<span class="s2">&quot;FAILED&quot;</span><span class="o">)</span>
+OK
+</pre></div>
+</div>
+<p>Assign the following values to ^E.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;Set ^E<span class="o">(</span><span class="s2">&quot;du Pont&quot;</span><span class="o">)=</span><span class="m">1</span>
+YDB&gt;Set ^E<span class="o">(</span><span class="s2">&quot;Friendly&quot;</span><span class="o">)=</span><span class="m">1</span>
+YDB&gt;Set ^E<span class="o">(</span><span class="s2">&quot;le Blanc&quot;</span><span class="o">)=</span><span class="m">1</span>
+YDB&gt;Set ^E<span class="o">(</span><span class="s2">&quot;Madrid&quot;</span><span class="o">)=</span><span class="m">1</span>
+</pre></div>
+</div>
+<p>Notice how the subscripts of ^E are sorted in reverse order:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;zwrite ^E
+^G<span class="o">(</span><span class="s2">&quot;le Blanc&quot;</span><span class="o">)=</span><span class="m">1</span>
+^G<span class="o">(</span><span class="s2">&quot;du Pont&quot;</span><span class="o">)=</span><span class="m">1</span>
+^G<span class="o">(</span><span class="s2">&quot;Madrid&quot;</span><span class="o">)=</span><span class="m">1</span>
+^G<span class="o">(</span><span class="s2">&quot;Friendly&quot;</span><span class="o">)=</span><span class="m">1</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="implementing-an-alternative-collation-sequence-for-unicode-characters">
+<span id="implement-alt-colltn-seq-unicode-chars"></span><h2><a class="toc-backref" href="internatn.html#id14">Implementing an Alternative Collation Sequence for Unicode® Characters</a><a class="headerlink" href="internatn.html#implementing-an-alternative-collation-sequence-for-unicode-characters" title="Permalink to this heading">¶</a></h2>
+<p>By default, YottaDB sorts string subscripts in the default order of the Unicode® UTF-8 numeric code-point values. Since this implied ordering may or may not be linguistically or culturally correct for a specific application, an implementation of an algorithm such as the Unicode® Collation Algorithm (UCA) may be required. Note that the implementation of collation in YottaDB requires the implementation of two functions, f(x) and g(y). f(x) transforms each input sequence of bytes into an alternative sequence of bytes for storage. Within the YottaDB database engine, M nodes are retrieved according to the byte order in which they are stored. For each y that can be generated by f(x), g(y) is an inverse function that provides the original sequence of bytes; in other words, g(f(x)) must be equal to x for all x that the application processes. For example, for the People’s Republic of China, it may be appropriate to convert from UTF-8 to Guojia Biaozhun (国家标准), the GB18030 standard, for example, using the libiconv library. The following requirements are important:</p>
+<ul>
+<li><p><strong>Unambiguous transformation routines</strong>: The transform and its inverse must convert each input string to a unique sequence of bytes for storage, and convert each sequence of stored bytes back to the original string.</p></li>
+<li><p><strong>Collation sequence for all expected character sequences in subscripts</strong>: YottaDB does not validate the subscript strings passed to/from the collation routines. If the application design allows illegal UTF-8 character sequences to be stored in the database, the collation functions must appropriately transform and inverse transform these as well.</p></li>
+<li><p><strong>Handle different string lengths for before and after transformation</strong>: If the lengths of the input string and transformed string differ, and, for local variables, if the output buffer passed by YottaDB is not sufficient, follow the procedure described below:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Global Collation Routines: The transformed key must not exceed the lesser of the maximum key size configuration or 1019 bytes, the maximum GDS key size. YottaDB allocates a temporary buffer of size 1019 bytes in the output string descriptor (of type DSC_K_DTYPE_T) and passes it to the collation routine to return the transformed key.</p></li>
+<li><p>Local Collation Routines: YottaDB allocates a temporary buffer in the output string descriptor based on the size of the input string. Both transformation and inverse transformation must check the buffer size, and if it is not sufficient, the transformation must allocate sufficient memory, set the output descriptor value (val field of the descriptor) to point to the new memory , and return the transformed key successfully. Since YottaDB copies the key from the output descriptor into its internal structures, it is important that the memory allocated remains available even after the collation routines return. Collation routines are typically called throughout the process lifetime, and therefore, YottaDB expects the collation libraries to define a large static buffer sufficient to hold all key sizes in the application. Alternatively, the collation transform can use a large heap buffer (allocated by the system malloc() or YottaDB ydb_malloc()). Application developers must choose the method best suited to their needs.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="matching-alternative-patterns">
+<h2><a class="toc-backref" href="internatn.html#id15">Matching Alternative Patterns</a><a class="headerlink" href="internatn.html#matching-alternative-patterns" title="Permalink to this heading">¶</a></h2>
+<p>YottaDB allows the definition of unique patterns for use with the pattern match operator, in place of, or in addition to, the standard C, N, U, L, and P. You can redefine existing pattern codes (patcodes), or add new ones. These codes are defined in a specification file. The format is described in the next section.</p>
+<section id="pattern-code-definition">
+<span id="pattern-code-defn"></span><h3><a class="toc-backref" href="internatn.html#id16">Pattern Code Definition</a><a class="headerlink" href="internatn.html#pattern-code-definition" title="Permalink to this heading">¶</a></h3>
+<p>This section explains the requirements for specifying alternative pattern codes. These specifications are created as a table in a file which YottaDB loads at run time.</p>
+<p>Use the following keywords to construct your text file. Each keyword must:</p>
+<ul class="simple">
+<li><p>Appear as the first non-whitespace entry on a line.</p></li>
+<li><p>Be upper case.</p></li>
+</ul>
+<p>The table names also must be uppercase. The patcodes are not case-sensitive.</p>
+<p>PATSTART indicates the beginning of the definition text and must appear before the first table definition.</p>
+<p>PATTABLE indicates the beginning of the table definition. The keyword PATTABLE is followed by a whitespace, then the table name. The text file can contain multiple PATTABLEs.</p>
+<p>PATCODE indicates the beginning of a patcode definition. The keyword PATCODE is followed by a whitespace, then the patcode identifying character. On the next line enter a comma-delimited list of integer codes that satisfy the patcode. A PATCODE definition is always included in the most recently named PATTABLE. A PATTABLE can contain multiple PATCODEs.</p>
+<p>PATEND indicates the end of the definition text; it must appear after the last table definition.</p>
+<p>To continue the comma-delimited list on multiple lines, place a dash (-) at the end of each line that is not the last one in the sequence. To enter comments in the file, begin the line with a semi-colon (;).</p>
+<p>The following example illustrates a possible patcode table called “NEWLANGUAGE”. The example has definitions for patcodes “S,” which would be a non-standard pattern character, and “L,” which would substitute alternative definitions for the standard “L” (or lower case) pattern characters.</p>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PATSTART
+  PATTABLE NEWLANGUAGE
+  PATCODE S
+      144,145,146,147,148,149,150
+  PATCODE L
+      230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255
+PATEND
+</pre></div>
+</div>
+<p>Be mindful of the following items as you define your patcode table.</p>
+<ul class="simple">
+<li><p>YottaDB loads a table name only once during the invocation of a process. Changes to a loaded table do not apply to running processes that have already referenced that table.</p></li>
+<li><p>The table name “M” is a reserved designation for standard M, which is included in the YottaDB run-time library.</p></li>
+<li><p>Standard patcodes A and E cannot be explicitly redefined. A is always the union of codes U and L; E always designates the set of all characters.</p></li>
+<li><p>The C pattern code you define is used by YottaDB to determine those characters which are to be treated as unprintable. All characters not defined as C are treated as printable.</p></li>
+<li><p>In UTF-8 mode, M standard patcodes (A,C,L,U,N,P,E) work with Unicode® characters. Application developers can neither change their default classification nor define the non-standard patcodes ((B,D,F-K,M,O,Q-T,V-X) beyond the ASCII subset. This means that the pattern tables cannot contain characters with codes greater than the maximum ASCII code 127.</p></li>
+</ul>
+</section>
+<section id="pattern-code-selection">
+<h3><a class="toc-backref" href="internatn.html#id17">Pattern Code Selection</a><a class="headerlink" href="internatn.html#pattern-code-selection" title="Permalink to this heading">¶</a></h3>
+<p>To establish a default patcode table for a database define the environment variable:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nv">ydb_pattern_file</span><span class="o">=</span>pathname
+$ <span class="nb">export</span> ydb_pattern_file
+</pre></div>
+</div>
+<p>where filename is the text file containing the patcode table definition, and</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nv">ydb_pattern_table</span><span class="o">=</span>tablename
+$ <span class="nb">export</span> ydb_pattern_table
+</pre></div>
+</div>
+<p>where tablename is the name of the patcode table within the file pointed to by ydb_pattern_file.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>YottaDB performs operations on literals at compile time and the pattern codes’ settings may have an impact on such operations. Therefore, it is safest to always compile with the same pattern code settings as those used at runtime. If changes to pattern codes are required at run time, “hide” any patterns used on literal expressions from the compiler (which are uncommon) using XECUTE commands or indirection.</p>
+</div>
+<p>Within an active process, the patcode table is established using the M VIEW command and the %PATCODE utility. Before invoking the %PATCODE utility, you may use VIEW to load pattern definition files for YottaDB. The required keyword and value are:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>VIEW &quot;PATLOAD&quot;:&quot;pathname&quot;
+</pre></div>
+</div>
+<p>This allows you to use the %PATCODE utility or the VIEW command to set current patcode table. The format of the VIEW command to set the patcode table is:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>VIEW &quot;PATCODE&quot;:&quot;tablename&quot;
+</pre></div>
+</div>
+<p>This is equivalent to set ^%PATCODE explained below.</p>
+<p>%PATCODE has the following extrinsic entry points:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>set^%PATCODE(tn)
+</pre></div>
+</div>
+<p>sets the current patcode table to the one having the name specified by tn, in the defined file specification.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;Write <span class="nv">$$</span>set^%PATCODE<span class="o">(</span><span class="s2">&quot;NEWLANGUAGE&quot;</span><span class="o">)</span>
+<span class="m">1</span>
+</pre></div>
+</div>
+<p>If there is no table with that name, the function returns a false (0) and does not modify the current patcode table.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>get^%PATCODE
+</pre></div>
+</div>
+<p>returns the current patcode table name.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;Write <span class="nv">$$</span>get^%PATCODE
+NEWLANGUAGE
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="extrout.html" class="btn btn-neutral float-left" title="11. Integrating External Routines" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="errproc.html" class="btn btn-neutral float-right" title="13. Error Processing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017-2021, YottaDB LLC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+<hr/>
+<!-- DDG search widget,@author Juri Wornowitski,@version 2.0,@link https://www.plainlight.com/ddg --><div id="widdget" style="width:100%;margin:10px 0;"><style type="text/css">#widdget input {display:block;height:30px;padding:4px;outline:none;border:1px solid #8d8d8d;border-right:0;box-sizing:border-box;border-radius:3px 0 0 3px;width:calc(100% - 41px);font-size:15px;} #widdget button {float:left;cursor:pointer;width:43px;height:30px;color:#fff;background-image:linear-gradient(#7f72ca,#554492);border:0;border-radius:0 3px 3px 0;} #widdget button:active {background-image:linear-gradient(#002387,#002357);} #widdget button:focus {outline:none;}</style><form style="position:relative" onsubmit="this.elements[0].click();return false;"><div style="float:right;position:absolute;top:0;right:-2px;z-index:3"><button type="button" onclick="var v=this.parentElement.parentElement.elements[1].value;window.open('https://duckduckgo.com?q='+encodeURIComponent(v)+'+site%3Adocs.yottadb.com&kj=p');">&#128269;</button></div><input type="text" name="que" placeholder="Search documents with DuckDuckGo" /></form></div>
+ 
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

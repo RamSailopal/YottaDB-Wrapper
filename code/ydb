@@ -2,7 +2,7 @@
 mens() {
 	if [[ "$1" != "1" ]]
 	then
-		dialog --exit-label Continue --textbox /opt/yottadb/current/splash.txt 14 100
+		dialog --exit-label Continue --textbox /opt/yottadb/current/splash.txt 20 100
 		clear
 	fi
 	resp=$(dialog --menu "Select an option:" 10 100 6 1 "Access YottaDB" 2 "View a global" 3 "Edit routine" 4 "Offline Documentation" 5 "Search documentation" 6 "Exit" 2>&1 >/dev/tty)

@@ -1,0 +1,2102 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>8. Intrinsic Special Variables &mdash; Programmer&#39;s Guide  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="9. Input/Output Processing" href="ioproc.html" />
+    <link rel="prev" title="7. Functions" href="functions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html">
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+	  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+		      <input type="text" name="q" placeholder="Search" />
+		          <input type="hidden" name="check_keywords" value="yes" />
+			      <input type="hidden" name="area" value="default" />
+			        </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://yottadb.com/resources/documentation">Main YottaDB Documentation Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="man.html">About this Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">1. About YottaDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="langext.html">2. YottaDB Language Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devcycle.html">3. Development Cycle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opdebug.html">4. Operating and Debugging in Direct Mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="langfeat.html">5. General Language Features of M</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">6. Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">7. Functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="isv.html#">8. Intrinsic Special Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#device">$DEVICE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#ecode">$ECODE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#estack">$ESTACK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#etrap">$ETRAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#horolog">$HOROLOG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#io">$IO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#job">$JOB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#key">$KEY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#principal">$PRINCIPAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#quit">$QUIT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#reference">$REFERENCE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#stack">$STACK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#storage">$STORAGE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#system">$SYSTEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#test">$TEST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#tlevel">$TLEVEL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#trestart">$TRESTART</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#x">$X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#y">$Y</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#za">$ZA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zallocstor">$ZALLOCSTOR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zb">$ZB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zchset">$ZCHSET</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zclose">$ZCLOSE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zcmdline">$ZCMDLINE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zcompile">$ZCOMPILE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zcstatus">$ZCSTATUS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zdateform">$ZDATEFORM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zdirectory">$ZDIRECTORY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zeditor">$ZEDITOR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zeof">$ZEOF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zerror">$ZERROR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zgbldir">$ZGBLDIR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zhorolog">$ZHOROLOG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zininterrupt">$ZININTERRUPT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zinterrupt">$ZINTERRUPT</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#interrupt-handling">Interrupt Handling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zio">$ZIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zjob">$ZJOB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zkey">$ZKEY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zlevel">$ZLEVEL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zmaxtptime">$ZMAXTPTIME</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zmode">$ZMODE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zonlnrlbk">$ZONLNRLBK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zpatnumeric">$ZPATNUMERIC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zpin">$ZPIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zposition">$ZPOSITION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zpout">$ZPOUT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zprompt">$ZPROMPT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zquit">$ZQUIT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zrealstor">$ZREALSTOR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zreldate">$ZRELDATE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zroutines">$ZROUTINES</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#establishing-the-value-from-ydb-routines">Establishing the value from $ydb_routines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#setting-a-value-for-zroutines">Setting a Value for $ZROUTINES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#zroutines-examples">$ZROUTINES Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#zroutines-search-types">$ZROUTINES Search Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#zroutines-search-examples">$ZROUTINES Search Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#shared-library-file-specification-in-zroutines">Shared Library File Specification in $ZROUTINES</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zsource">$ZSOURCE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zstatus">$ZSTATUS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zstep">$ZSTEP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zstrpllim">$ZSTRPLLIM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zsystem">$ZSYSTEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#ztexit">$ZTEXIT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#ztimeout">$ZTIMEOUT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#ztrap">$ZTRAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zusedstor">$ZUSEDSTOR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zut">$ZUT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zversion">$ZVERSION</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zyerror">$ZYERROR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zyintrsig">$ZYINTRSIG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zyrelease">$ZYRELEASE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#zysqlnull">$ZYSQLNULL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isv.html#trigger-isvs">Trigger ISVs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#ztdata">$ZTDATA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#ztdelim">$ZTDELIM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#ztlevel">$ZTLEVEL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#ztname">$ZTNAME</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#ztoldval">$ZTOLDVAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#ztriggerop">$ZTRIGGEROP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#ztslate">$ZTSLATE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#ztupdate">$ZTUPDATE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#ztvalue">$ZTVALUE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isv.html#ztwormhole">$ZTWORMHOLE</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ioproc.html">9. Input/Output Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utility.html">10. Utility Routines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extrout.html">11. Integrating External Routines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internatn.html">12. Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errproc.html">13. Error Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">14. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encrypt.html">15. Database Encryption Extensions to the YottaDB External Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix A: M Coding Standards - Do’s and Don’ts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">LICENSE</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Programmer's Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>8. Intrinsic Special Variables</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="functions.html" class="btn btn-neutral float-left" title="7. Functions" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ioproc.html" class="btn btn-neutral float-right" title="9. Input/Output Processing" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="intrinsic-special-variables">
+<span id="index-0"></span><h1><a class="toc-backref" href="isv.html#id7">8. Intrinsic Special Variables</a><a class="headerlink" href="isv.html#intrinsic-special-variables" title="Permalink to this heading">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="isv.html#intrinsic-special-variables" id="id7">8. Intrinsic Special Variables</a></p>
+<ul>
+<li><p><a class="reference internal" href="isv.html#device" id="id8">$DEVICE</a></p></li>
+<li><p><a class="reference internal" href="isv.html#ecode" id="id9">$ECODE</a></p></li>
+<li><p><a class="reference internal" href="isv.html#estack" id="id10">$ESTACK</a></p></li>
+<li><p><a class="reference internal" href="isv.html#etrap" id="id11">$ETRAP</a></p></li>
+<li><p><a class="reference internal" href="isv.html#horolog" id="id12">$HOROLOG</a></p></li>
+<li><p><a class="reference internal" href="isv.html#io" id="id13">$IO</a></p></li>
+<li><p><a class="reference internal" href="isv.html#job" id="id14">$JOB</a></p></li>
+<li><p><a class="reference internal" href="isv.html#key" id="id15">$KEY</a></p></li>
+<li><p><a class="reference internal" href="isv.html#principal" id="id16">$PRINCIPAL</a></p></li>
+<li><p><a class="reference internal" href="isv.html#quit" id="id17">$QUIT</a></p></li>
+<li><p><a class="reference internal" href="isv.html#reference" id="id18">$REFERENCE</a></p></li>
+<li><p><a class="reference internal" href="isv.html#stack" id="id19">$STACK</a></p></li>
+<li><p><a class="reference internal" href="isv.html#storage" id="id20">$STORAGE</a></p></li>
+<li><p><a class="reference internal" href="isv.html#system" id="id21">$SYSTEM</a></p></li>
+<li><p><a class="reference internal" href="isv.html#test" id="id22">$TEST</a></p></li>
+<li><p><a class="reference internal" href="isv.html#tlevel" id="id23">$TLEVEL</a></p></li>
+<li><p><a class="reference internal" href="isv.html#trestart" id="id24">$TRESTART</a></p></li>
+<li><p><a class="reference internal" href="isv.html#x" id="id25">$X</a></p></li>
+<li><p><a class="reference internal" href="isv.html#y" id="id26">$Y</a></p></li>
+<li><p><a class="reference internal" href="isv.html#za" id="id27">$ZA</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zallocstor" id="id28">$ZALLOCSTOR</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zb" id="id29">$ZB</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zchset" id="id30">$ZCHSET</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zclose" id="id31">$ZCLOSE</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zcmdline" id="id32">$ZCMDLINE</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zcompile" id="id33">$ZCOMPILE</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zcstatus" id="id34">$ZCSTATUS</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zdateform" id="id35">$ZDATEFORM</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zdirectory" id="id36">$ZDIRECTORY</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zeditor" id="id37">$ZEDITOR</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zeof" id="id38">$ZEOF</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zerror" id="id39">$ZERROR</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zgbldir" id="id40">$ZGBLDIR</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zhorolog" id="id41">$ZHOROLOG</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zininterrupt" id="id42">$ZININTERRUPT</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zinterrupt" id="id43">$ZINTERRUPT</a></p>
+<ul>
+<li><p><a class="reference internal" href="isv.html#interrupt-handling" id="id44">Interrupt Handling</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="isv.html#zio" id="id45">$ZIO</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zjob" id="id46">$ZJOB</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zkey" id="id47">$ZKEY</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zlevel" id="id48">$ZLEVEL</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zmaxtptime" id="id49">$ZMAXTPTIME</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zmode" id="id50">$ZMODE</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zonlnrlbk" id="id51">$ZONLNRLBK</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zpatnumeric" id="id52">$ZPATNUMERIC</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zpin" id="id53">$ZPIN</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zposition" id="id54">$ZPOSITION</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zpout" id="id55">$ZPOUT</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zprompt" id="id56">$ZPROMPT</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zquit" id="id57">$ZQUIT</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zrealstor" id="id58">$ZREALSTOR</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zreldate" id="id59">$ZRELDATE</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zroutines" id="id60">$ZROUTINES</a></p>
+<ul>
+<li><p><a class="reference internal" href="isv.html#establishing-the-value-from-ydb-routines" id="id61">Establishing the value from $ydb_routines</a></p></li>
+<li><p><a class="reference internal" href="isv.html#setting-a-value-for-zroutines" id="id62">Setting a Value for $ZROUTINES</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zroutines-examples" id="id63">$ZROUTINES Examples</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zroutines-search-types" id="id64">$ZROUTINES Search Types</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zroutines-search-examples" id="id65">$ZROUTINES Search Examples</a></p></li>
+<li><p><a class="reference internal" href="isv.html#shared-library-file-specification-in-zroutines" id="id66">Shared Library File Specification in $ZROUTINES</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="isv.html#zsource" id="id67">$ZSOURCE</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zstatus" id="id68">$ZSTATUS</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zstep" id="id69">$ZSTEP</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zstrpllim" id="id70">$ZSTRPLLIM</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zsystem" id="id71">$ZSYSTEM</a></p></li>
+<li><p><a class="reference internal" href="isv.html#ztexit" id="id72">$ZTEXIT</a></p></li>
+<li><p><a class="reference internal" href="isv.html#ztimeout" id="id73">$ZTIMEOUT</a></p></li>
+<li><p><a class="reference internal" href="isv.html#ztrap" id="id74">$ZTRAP</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zusedstor" id="id75">$ZUSEDSTOR</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zut" id="id76">$ZUT</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zversion" id="id77">$ZVERSION</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zyerror" id="id78">$ZYERROR</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zyintrsig" id="id79">$ZYINTRSIG</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zyrelease" id="id80">$ZYRELEASE</a></p></li>
+<li><p><a class="reference internal" href="isv.html#zysqlnull" id="id81">$ZYSQLNULL</a></p></li>
+<li><p><a class="reference internal" href="isv.html#trigger-isvs" id="id82">Trigger ISVs</a></p>
+<ul>
+<li><p><a class="reference internal" href="isv.html#ztdata" id="id83">$ZTDATA</a></p></li>
+<li><p><a class="reference internal" href="isv.html#ztdelim" id="id84">$ZTDELIM</a></p></li>
+<li><p><a class="reference internal" href="isv.html#ztlevel" id="id85">$ZTLEVEL</a></p></li>
+<li><p><a class="reference internal" href="isv.html#ztname" id="id86">$ZTNAME</a></p></li>
+<li><p><a class="reference internal" href="isv.html#ztoldval" id="id87">$ZTOLDVAL</a></p></li>
+<li><p><a class="reference internal" href="isv.html#ztriggerop" id="id88">$ZTRIGGEROP</a></p></li>
+<li><p><a class="reference internal" href="isv.html#ztslate" id="id89">$ZTSLATE</a></p></li>
+<li><p><a class="reference internal" href="isv.html#ztupdate" id="id90">$ZTUPDATE</a></p></li>
+<li><p><a class="reference internal" href="isv.html#ztvalue" id="id91">$ZTVALUE</a></p></li>
+<li><p><a class="reference internal" href="isv.html#ztwormhole" id="id92">$ZTWORMHOLE</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>This chapter describes the M Intrinsic Special Variables implemented in YottaDB. All entries starting with the letter Z are YottaDB additions to the ANSI standard Intrinsic Special Variables. None of the Intrinsic Special Variables are case sensitive.</p>
+<p>M Intrinsic Special Variables start with a single dollar sign ($). YottaDB provides such variables for program examination. In some cases, the Intrinsic Special Variables may be set to modify the corresponding part of the environment.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>None of the Intrinsic Special Variables can be KILLed. SETting or NEWing is generally not allowed, but is specifically noted in the descriptions of those that do.</p>
+</div>
+<section id="device">
+<h2><a class="toc-backref" href="isv.html#id8">$DEVICE</a><a class="headerlink" href="isv.html#device" title="Permalink to this heading">¶</a></h2>
+<p>$D[EVICE] reflects the status of the current device. If the status of the device does not reflect an error-condition, the value of $DEVICE, when interpreted as a truth-value is 0 (FALSE). If the status of the device reflects an error condition, the value of $DEVICE, when interpreted as a truth-value is 1 (TRUE).</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>The initial value of $DEVICE is implementation dependent. However, if the initial value of $IO is an empty string, then the initial value of $DEVICE is also an empty string.
+</pre></div>
+</div>
+<p>$DEVICE gives status code and meaning, in one access:</p>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1,Connection reset by peer
+</pre></div>
+</div>
+<p>The above message is displayed on the server side when the socket device is closed on the client side.</p>
+</section>
+<section id="ecode">
+<span id="ecode-isv"></span><h2><a class="toc-backref" href="isv.html#id9">$ECODE</a><a class="headerlink" href="isv.html#ecode" title="Permalink to this heading">¶</a></h2>
+<p>$EC[ODE] contains a list of error codes for “active” errors - error conditions which are not yet resolved. If there are no active errors, $ECODE contains the empty string. Whenever an error occurs, a code for that error is appended to the value of $ECODE in such a way that the value of $ECODE always starts and ends with a comma.</p>
+<p>The value of $ECODE can be SET, and when it is set to a non-NULL value, error processing starts.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See <a class="reference external" href="errproc.html">Chapter 13: “Error Processing”</a> to learn about $ECODE’s role in error processing.</p>
+</div>
+<p>The list of codes in $ECODE start with a comma, and are seperated by commas. A code starts with “M”, “U”, or “Z”, with the rest of it being numeric. “M” codes are assigned by MDC (M Development Committee), “U” by application (programmers), and “Z” codes by M implementors (in this case YottaDB).</p>
+<p>An error always has a YottaDB specified code and many errors also have an ANSI Standard code. The complete list of standardized error codes can be referenced from the <a class="reference external" href="../MessageRecovery/index.html">Message and Recovery Procedures Reference Manual</a> and onwards.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>IF $ECODE[&quot;,M61,&quot; WRITE &quot;Undefined local variable&quot;
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The leftmost character of the value of $ECODE is always a comma. This means that every error code that is stored in $ECODE is surrounded by commas. If $ECODE was to contain an error code without commas around it(that is, “M61”), the variable would check for the subset “M6” as well. Thus, it is recommended that you include the commas in the value to check. For example; check whether $ECODE contains “,M61,”.</p>
+</div>
+<p>$ECODE can be SET but not NEW’d. When $ECODE is set to the empty string (” “), error handling becomes “inactive” and therefore QUIT does not trigger additional error handling.</p>
+<p>When $ECODE is not set to the empty string, M error handling is active, which also affects behavior in some aspects of $STACK.</p>
+</section>
+<section id="estack">
+<h2><a class="toc-backref" href="isv.html#id10">$ESTACK</a><a class="headerlink" href="isv.html#estack" title="Permalink to this heading">¶</a></h2>
+<p>$ES[TACK] contains an integer count of the number of M virtual machine stack levels that have been activated and not removed since the last time $ESTACK was NEW’d.</p>
+<p>A NEW $ESTACK saves the value of current $ESTACK and then sets its value to zero (0). If $ESTACK has not been NEW’d in the current execution path, $ESTACK=$STACK.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>SET $ETRAP=&quot;QUIT:$ESTACK GOTO LABEL^ROUTINE&quot;
+</pre></div>
+</div>
+<p>$ESTACK maybe used as a flag to indicate error traps invoked in particular stack levels needed to perform some different action(s). $ESTACK can be most useful in setting up a layered error trapping mechanism.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>YottaDB does not permit $ESTACK to be SET, however $ESTACK can be NEWed.</p>
+</div>
+</section>
+<section id="etrap">
+<span id="etrap-isv"></span><h2><a class="toc-backref" href="isv.html#id11">$ETRAP</a><a class="headerlink" href="isv.html#etrap" title="Permalink to this heading">¶</a></h2>
+<p>$ET[RAP] contains a string value that YottaDB invokes when an error occurs during routine execution. When a process is initiated, YottaDB assigns $ETRAP the value of the ydb_etrap environment variable, if ydb_etrap is defined, and otherwise the empty string, in which case $ZTRAP=”B” controls initial error handling.</p>
+<p>The value of this variable is the M[UMPS] code that YottaDB executes when it encounters an error.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>SET $ETRAP=&quot;QUIT:$ESTACK GOTO LABEL^ROUTINE&quot;
+</pre></div>
+</div>
+<p>The value of $ETRAP is changed with the SET command. Changing the value of $ETRAP with the SET command initiates a new trap; it does not save the old trap.</p>
+<p>$ETRAP may also appear as an argument to an inclusive NEW command. NEW $ETRAP causes YottaDB to stack the active condition handler’s ($ETRAP) old value. NEW leaves the $ETRAP unchanged regardless of the previously active condition handler. NEW $ETRAP command puts $ETRAP in control for error handling.</p>
+<p>For more examples of the use of special variable $ETRAP, see the function <a class="reference internal" href="functions.html#stack-function"><span class="std std-ref">$STACK()</span></a>.</p>
+</section>
+<section id="horolog">
+<h2><a class="toc-backref" href="isv.html#id12">$HOROLOG</a><a class="headerlink" href="isv.html#horolog" title="Permalink to this heading">¶</a></h2>
+<p>$H[OROLOG] contains a string value specifying the number of days since “31 December, 1840,” and the number of seconds since the midnight of that date in the time zone of the process, separated by a comma (,). At midnight, the piece of the string following the comma resets to zero (0), and the piece preceding the comma increments by one (1). YottaDB does not permit the SET command to modify $HOROLOG. A process takes the system time from the system clock, but can adjust the time zone by appropriately setting the TZ environment variable before invoking YottaDB.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;Write <span class="nv">$HOROLOG</span>
+</pre></div>
+</div>
+<p>Produces the result 58883,55555 at 3:25:55 pm on 20 March, 2002.</p>
+<p>For further information on formatting $HOROLOG for external use, refer to <a class="reference internal" href="functions.html#zdate-function"><span class="std std-ref">$ZDATE()</span></a>.</p>
+</section>
+<section id="io">
+<h2><a class="toc-backref" href="isv.html#id13">$IO</a><a class="headerlink" href="isv.html#io" title="Permalink to this heading">¶</a></h2>
+<p>$I[O] contains the name of the current device specified by the last USE command. The M standard does not permit the SET command to modify $IO. USE 0 produces the same $IO as USE $P[RINCIPAL], but $P is the preferred construct.</p>
+</section>
+<section id="job">
+<h2><a class="toc-backref" href="isv.html#id14">$JOB</a><a class="headerlink" href="isv.html#job" title="Permalink to this heading">¶</a></h2>
+<p>$J[OB] the current process identifier.</p>
+<p>YottaDB uses the decimal representation of the current process identifier (PID) for the value of $JOB. $JOB is guaranteed to be unique for every concurrently operating process on a system. However, operating systems reuse PIDs over time. YottaDB does not permit the SET command to modify $JOB.</p>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>LOOP0 for  set itm=$order(^tmp($J,itm)) quit:itm=&quot;&quot;  do LOOP1
+</pre></div>
+</div>
+<p>This uses $J as the first subscript in a temporary global to insure that every process uses separate data space in the global ^tmp.</p>
+</section>
+<section id="key">
+<h2><a class="toc-backref" href="isv.html#id15">$KEY</a><a class="headerlink" href="isv.html#key" title="Permalink to this heading">¶</a></h2>
+<p>$K[EY] contains the string that terminated the most recent READ command from the current device (including any introducing and terminating characters). If no READ command was issued to the current device or if no terminator is used, the value of $KEY is an empty string. However, when input is terminated by typing a function key, the value of $KEY is equal to the string of characters that is transmitted by that function key.</p>
+<p>The effect of a READ *glvn on $KEY is unspecified.</p>
+<p>For terminals, $KEY and $ZB both have the terminator.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See the READ and WRITE commands in <a class="reference external" href="commands.html">Chapter 6: “Commands”</a>.</p>
+</div>
+<p>For SOCKET:</p>
+<p>$KEY contains the socket handle and the state information of the current SOCKET device after certain I/O commands.</p>
+<p>After a successful OPEN or USE with the LISTEN deviceparameter, $KEY contains for TCP sockets:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;LISTENING|&lt;socket_handle&gt;|&lt;portnumber&gt;&quot;
+</pre></div>
+</div>
+<p>and for LOCAL sockets:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;LISTENING|&lt;socket_handle&gt;|&lt;address&gt;&quot;
+</pre></div>
+</div>
+<p>After a successful OPEN or USE with the CONNECT device parameter or when YottaDB was started with a socket as the $PRINCIPAL device, $KEY contains:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;ESTABLISHED|&lt;socket handle&gt;|&lt;address&gt;&quot;
+</pre></div>
+</div>
+<p>When WRITE/WAIT selects an incoming connection, $KEY contains:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;CONNECT|&lt;socket_handle&gt;|&lt;address&gt;&quot;
+</pre></div>
+</div>
+<p>When WRITE/WAIT selects a socket with data available for reading, $KEY contains:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;READ|&lt;socket_handle&gt;|&lt;address&gt;&quot;
+</pre></div>
+</div>
+<p>For TCP sockets, &lt;address&gt; is the numeric IP address for the remote end of the connection. For LOCAL sockets it is the path to the socket.</p>
+<p>For TCP LISTENING sockets, &lt;portnumber&gt; is the local port on which socket_handle is listening for incoming connections. For LOCAL LISTENING sockets, it is the path of the socket.</p>
+<p>If the WRITE /WAIT was timed, $KEY returns an empty value if the wait timed out or there was no established connection. $KEY only has the selected handle, if any, immediately after a WRITE /WAIT. $KEY is also used by other socket I/O commands such as READ which sets it to the delimiter or malformed Unicode® character, if any, which terminated the read.</p>
+</section>
+<section id="principal">
+<h2><a class="toc-backref" href="isv.html#id16">$PRINCIPAL</a><a class="headerlink" href="isv.html#principal" title="Permalink to this heading">¶</a></h2>
+<p>$P[RINCIPAL] contains the absolute pathname of the principal (initial $IO) device. $PRINCIPAL is an MDC Type A enhancement to standard M.</p>
+<p>Input and output for a process may come from separate devices, namely, the standard input and output. However, the M I/O model allows only one device to be USEd (or active) at a time. When an image starts, YottaDB implicitly OPENs the standard input and standard output device(s) and assigns the device(s) to $PRINCIPAL. For USE deviceparameters, it is the standard input that determines the device type.</p>
+<p>For an image invoked interactively, $PRINCIPAL is the user’s terminal. For an image invoked from a terminal by means of a shell script, $PRINCIPAL is the shell script’s standard input (usually the terminal) and standard output (also usually the terminal) for output, unless the shell redirects the input or output.</p>
+<p>YottaDB provides a mechanism for the user to create a name for $PRINCIPAL in the shell before invoking YottaDB. The environment variable ydb_principal, if defined, becomes a synonym for the actual device and the value for $PRINCIPAL. $IO holds the same value as $PRINCIPAL. $ZIO in this case, holds the fully expanded name of the actual device. See “$ZIO” for an example of its usage.</p>
+<p>YottaDB ignores a CLOSE specifying the principal device. YottaDB does not permit the SET command to modify $PRINCIPAL.</p>
+<p>YottaDB fulfills READ to $PRINCIPAL when it is an empty socket device (that is, one with all sockets detached) with an empty string, and discards WRITE output to such a device.</p>
+<p>YottaDB opens /dev/null as a placeholder for a socket which used to be associated with $PRINCIPAL via stdin when it is closed.</p>
+<p>YottaDB creates a SOCKET device for $PRINCIPAL when standard input is a LOCAL domain socket and sets the default DELIMITER to “$C(10)” for sockets in the device.</p>
+<p>When $PRINCIPAL identifies a device that supports REWIND, the REWIND or INREWIND device parameters perform a REWIND of the input and OUTREWIND performs a REWIND of the output.</p>
+<p>When $PRINCIPAL has different input/output devices, the USE command recognizes intrinsic special variables $ZPIN or $ZPOUT and applies appropriate deviceparameters to the input or output side of $PRINCIPAL, respectively. A USE with $ZPIN or $ZPOUT sets $IO to $PRINCIPAL for READs and WRITEs from the input and output side of $PRINCIPAL. For more information refer to “$ZPIN” or “$ZPOUT” .</p>
+</section>
+<section id="quit">
+<h2><a class="toc-backref" href="isv.html#id17">$QUIT</a><a class="headerlink" href="isv.html#quit" title="Permalink to this heading">¶</a></h2>
+<p>$Q[UIT] indicates whether the current block of code was called as an extrinsic function or as a subroutine.</p>
+<p>If $Q[UIT] contains 1 (when the current process-stack frame is invoked by an extrinsic function), the QUIT would therefore require an argument.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When a process is initiated, but before any commands are processed, the value of $Q[UIT] is zero (0).</p>
+</div>
+<p>This special variable is mainly used in error-trapping conditions. Its value tells whether the current DO level was reached by means of a subroutine call (DO xxx) or by a function call (SET variable=$$xxx).</p>
+<p>A typical way of exiting from an error trap is:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>QUIT:$QUIT &quot;&quot; QUIT
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>YottaDB does not permit $QUIT to be SET or NEWed.</p>
+</div>
+</section>
+<section id="reference">
+<span id="reference-isv"></span><h2><a class="toc-backref" href="isv.html#id18">$REFERENCE</a><a class="headerlink" href="isv.html#reference" title="Permalink to this heading">¶</a></h2>
+<p>$R[EFERENCE] contains the last global reference. Until the first global reference is made by an M program or after a global reference with an invalid key, $REFERENCE contains the empty string (“”). This way it is useful in determining if the usage of a naked reference is valid.</p>
+<p>A typical way of using this is:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>IF $REFERENCE=&quot;&quot; QUIT &quot;&lt;undefined&gt;&quot;
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>$R[EFERENCE] being a read-only variable cannot be SET or NEW’d.</p>
+</div>
+</section>
+<section id="stack">
+<span id="stack-isv"></span><h2><a class="toc-backref" href="isv.html#id19">$STACK</a><a class="headerlink" href="isv.html#stack" title="Permalink to this heading">¶</a></h2>
+<p>$ST[ACK] contains an integer value of zero (0) or greater indicating the current level of M execution stack depth.</p>
+<p>When a process is initiated but before any command is executed, the value of $STACK is zero (0).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The difference between $STACK and $ESTACK is that $ESTACK may appear as an argument of the NEW command. NEWing $ESTACK resets its value to zero (0), and can be useful to set up a layered error trapping mechanism.</p>
+</div>
+<p>The value of $STACK is “absolute” since the start of a YottaDB process, whereas the value of $ESTACK is “relative” to the most recent “anchoring point”.</p>
+<p>For examples on the use of special variable $STACK, see <a class="reference internal" href="functions.html#stack-function"><span class="std std-ref">$STACK()</span></a>.</p>
+</section>
+<section id="storage">
+<h2><a class="toc-backref" href="isv.html#id20">$STORAGE</a><a class="headerlink" href="isv.html#storage" title="Permalink to this heading">¶</a></h2>
+<p>$S[TORAGE] contains an integer value specifying the number of free bytes of address space remaining between the memory currently under management by the process and the theoretical maximum available to the process.</p>
+<p>YottaDB uses memory for code (instructions) and data. If the amount of virtual memory available to the process exceeds 2,147,483,647 bytes, it is reported as 2,147,483,647 bytes.</p>
+<p>Instruction space starts out with the original executable image. However, YottaDB may expand instruction space by ZLINKing additional routines.</p>
+<p>Data space starts out with stack space that never expands, and pool space which may expand. Operations such as opening a database or creating a local variable may cause an expansion in pool space. YottaDB expands pool space in fairly large increments. Therefore, SETs of local variables may not affect $STORAGE at all or may cause an apparently disproportionate drop in its value.</p>
+<p>Once a YottaDB process adds either instruction or data space, it never releases that space. However, YottaDB does reuse process space made available by actions such as KILLs of local variables. $STORAGE can neither be SET or NEWed.</p>
+</section>
+<section id="system">
+<h2><a class="toc-backref" href="isv.html#id21">$SYSTEM</a><a class="headerlink" href="isv.html#system" title="Permalink to this heading">¶</a></h2>
+<p>$SY[STEM] contains a string that identifies the executing M instance. The value of $SYSTEM is a string that starts with a unique numeric code that identifies the manufacturer. Codes are assigned by the MDC (M Development Committee).</p>
+<p>$SYSTEM in YottaDB starts with “47” followed by a comma and the evaluation of the environment variable ydb_sysid or gtm_sysid. If neither of the names have any evaluation (i.e. both are undefined), the value after the comma is gtm_sysid.</p>
+</section>
+<section id="test">
+<span id="test-isv"></span><h2><a class="toc-backref" href="isv.html#id22">$TEST</a><a class="headerlink" href="isv.html#test" title="Permalink to this heading">¶</a></h2>
+<p>$T[EST] contains a truth value specifying the evaluation of the last IF argument or the result of the last operation with timeout. If the last timed operation timed out, $TEST contains FALSE (0); otherwise, it contains TRUE (1).</p>
+<p>$TEST serves as the implicit argument for ELSE commands and argumentless IF commands.</p>
+<p>M stacks $TEST when invoking an extrinsic and performing an argumentless DO. After these operations complete with an implicit or explicit QUIT, M restores the corresponding stacked value. Because, with these two exceptions, $TEST reflects the last IF argument or timeout result on a process wide basis. Use $TEST only in immediate proximity to the operation that last updated it.</p>
+<p>Neither $SELECT() nor post-conditional expressions modify $TEST.</p>
+<p>M routines cannot modify $TEST with the SET command.</p>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>IF x=+x DO ^WORK
+ELSE SET x=0
+</pre></div>
+</div>
+<p>The ELSE statement causes M to use the value of $TEST to determine whether to execute the rest of the line. Because the code in routine WORK may use IFs and timeouts, this use of $TEST is not recommended.</p>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>SET MYFLG=x=+x
+IF MYFLG DO ^WORK
+IF &#39;MYFLG SET x=0
+</pre></div>
+</div>
+<p>This example introduces a local variable flag to address the problems of the prior example. Note that its behavior results in the opposite $TEST value from the prior example.</p>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>IF x=+x DO ^WORK IF 1
+ELSE SET x=0
+</pre></div>
+</div>
+<p>This example uses the IF 1 to ensure that the ELSE works counter to the IF.</p>
+</section>
+<section id="tlevel">
+<span id="tlevel-isv"></span><h2><a class="toc-backref" href="isv.html#id23">$TLEVEL</a><a class="headerlink" href="isv.html#tlevel" title="Permalink to this heading">¶</a></h2>
+<p>$TL[EVEL] contains a count of executed TSTARTs that are currently unmatched by TCOMMITs. $TLEVEL is zero (0) when there is no TRANSACTION in progress. When $TLEVEL is greater than one (&gt;1), it indicates that there are nested sub-transactions in progress. Sub-transactions are always subject to the completion of the main TRANSACTION and cannot be independently acted upon by COMMIT, ROLLBACK, or RESTART.</p>
+<p>$TLEVEL can be used to determine whether there is a TRANSACTION in progress and to determine the level of nesting of sub-transactions.</p>
+<p>M routines cannot modify $TLEVEL with SET.</p>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>IF $TLEVEL TROLLBACK
+</pre></div>
+</div>
+<p>This example performs a TROLLBACK if a transaction is in progress. A statement like this should appear in any error handler used with transaction processing. For more information on transaction processing, see <a class="reference external" href="langfeat.html">Chapter 5: “General Language Features of M”</a>.</p>
+</section>
+<section id="trestart">
+<h2><a class="toc-backref" href="isv.html#id24">$TRESTART</a><a class="headerlink" href="isv.html#trestart" title="Permalink to this heading">¶</a></h2>
+<p>$TR[ESTART] contains a count of the number of times the current TRANSACTION has been RESTARTed. A RESTART can be explicit (specified in M as a TRESTART) or implicit (initiated by YottaDB as part of its internal concurrency control mechanism). $TRESTART can have values of 0 through 4. When there is no TRANSACTION in progress, $TRESTART is zero (0).</p>
+<p>$TRESTART can be used by the application to limit the number of RESTARTs, or to cause a routine to perform different actions during a RESTART than during the initial execution.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>YottaDB does not permit the SET command to modify $TRESTART.</p>
+</div>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>TRANS TSTART ():SERIAL
+IF $TRESTART&gt;2 WRITE !;&quot;Access Conflict&quot; QUIT
+</pre></div>
+</div>
+<p>This example terminates the sub-routine with a message if the number of RESTARTs exceeds 2.</p>
+</section>
+<section id="x">
+<span id="x-isv"></span><h2><a class="toc-backref" href="isv.html#id25">$X</a><a class="headerlink" href="isv.html#x" title="Permalink to this heading">¶</a></h2>
+<p>$X contains an integer value ranging from 0 to 65,535, specifying the horizontal position of a virtual cursor in the current output record. $X=0 represents the left-most position of a record or row.</p>
+<p>Every OPEN device has a $X. However, M only accesses $X of the current device. Therefore, exercise care in sequencing USE commands and references to $X.</p>
+<p>Generally, YottaDB increments $X for every character written to and read from the current device. Usually, the increment is 1, but for a process in UTF-8 mode, the increment is the number of glyphs or codepoints (depends on the type of device). M format control characters, write filtering, and the device WIDTH also have an effect on $X.</p>
+<p>$X never equals or exceeds the value of the device WIDTH. Whenever it reaches the value equal to the device WIDTH, it gets reset to zero (0).</p>
+<p>YottaDB follows the MDC Type A recommendation and permits an M routine to SET $X. However, SET $X does not automatically issue device commands or escape sequences to reposition the physical cursor.</p>
+</section>
+<section id="y">
+<h2><a class="toc-backref" href="isv.html#id26">$Y</a><a class="headerlink" href="isv.html#y" title="Permalink to this heading">¶</a></h2>
+<p>$Y contains an integer value ranging from 0 to 65,535 specifying the vertical position of a virtual cursor in the current output page. $Y=0 represents the top row or line.</p>
+<p>Every OPEN device has a $Y. However, M only accesses $Y of the current device. Therefore, exercise care in sequencing USE commands and references to $Y.</p>
+<p>When YottaDB finishes the logical record in progress, it generally increments $Y. YottaDB recognizes the end of a logical record when it processes certain M format control characters, or when the record reaches its maximum size, as determined by the device WIDTH, and the device is set to WRAP. The definition of “logical record” varies from device to device. For an exact definition, see the sections on each device type. Write filtering and the device LENGTH also have an effect on $Y.</p>
+<p>$Y never equals or exceeds the value of the device LENGTH. Whenever it reaches the value equal to the device LENGTH, it gets reset to zero (0).</p>
+<p>YottaDB permits an M routine to SET $Y. However, SET $Y does not automatically issue device commands or escape sequences to reposition the physical cursor.</p>
+</section>
+<section id="za">
+<h2><a class="toc-backref" href="isv.html#id27">$ZA</a><a class="headerlink" href="isv.html#za" title="Permalink to this heading">¶</a></h2>
+<p>$ZA contains a status determined by the last read on the device. The value is a decimal integer with a meaning determined by the device as follows:</p>
+<p>For Terminal I/O:</p>
+<p>0: Indicating normal termination of a read operation</p>
+<p>1: Indicating a parity error</p>
+<p>2: Indicating that the terminator sequence was too long</p>
+<p>9: Indicating a default for all other errors</p>
+<p>For Sequential Disk and Tape Files I/O:</p>
+<p>0: Indicating normal termination of a read operation</p>
+<p>9: Indicating a failure of a read operation</p>
+<p>For Fifos I/O:</p>
+<p>Decimal representing $JOB (identifier) of the process that wrote the last message the current process read</p>
+<p>$ZA refers to the status of the current device. Therefore, exercise care in sequencing USE commands and references to $ZA.</p>
+<p>YottaDB does not permit the SET command to modify $ZA.</p>
+<p>For more information on $ZA, refer <a class="reference external" href="ioproc.html">“Input/Output Processing”</a>.</p>
+</section>
+<section id="zallocstor">
+<span id="zallocstor-isv"></span><h2><a class="toc-backref" href="isv.html#id28">$ZALLOCSTOR</a><a class="headerlink" href="isv.html#zallocstor" title="Permalink to this heading">¶</a></h2>
+<p>$ZALLOCSTOR contains the number of bytes that are (sub) allocated (including overhead) by YottaDB for various activities. It provides one view (see also “$ZREalstor” and “$ZUSedstor”) of the process memory utilization and can help identify storage related problems. YottaDB does not permit $ZALLOCSTOR to be SET or NEWed.</p>
+</section>
+<section id="zb">
+<h2><a class="toc-backref" href="isv.html#id29">$ZB</a><a class="headerlink" href="isv.html#zb" title="Permalink to this heading">¶</a></h2>
+<p>$ZB contains a string specifying the input terminator for the last terminal READ. $ZB contains null and is not maintained for devices other than terminals. $ZB may contain any legal input terminator, such as &lt;CR&gt; (ASCII 13) or an escape sequence starting with &lt;ESC&gt; (ASCII 27), from zero (0) to 15 bytes in length. $ZB contains null for any READ terminated by a timeout or any fixed-length READ terminated by input reaching the maximum length.</p>
+<p>$ZB contains the actual character string, not a sequence of numeric ASCII codes.</p>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>SET zb=$ZB FOR i=1:1:$L(zb) WRITE !,i,?5,$A(zb,i)
+</pre></div>
+</div>
+<p>This displays the series of ASCII codes for the characters in $ZB.</p>
+<p>$ZB refers to the last READ terminator of the current device. Therefore, exercise care in sequencing USE commands and references to $ZB.</p>
+<p>YottaDB does not permit the SET command to modify $ZB.</p>
+<p>For more information on $ZB, refer to the <a class="reference external" href="ioproc.html">“Input/Output Processing” chapter</a>.</p>
+</section>
+<section id="zchset">
+<span id="zchset-isv"></span><h2><a class="toc-backref" href="isv.html#id30">$ZCHSET</a><a class="headerlink" href="isv.html#zchset" title="Permalink to this heading">¶</a></h2>
+<p>$ZCHSET is a read-only intrinsic special variable that takes its value from the environment variable ydb_chset. An application can obtain the character set used by a YottaDB process by the value of $ZCHSET. $ZCHSET can have only two values –“M”, or “UTF-8”.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>YottaDB performs operations on literals at compile time and the character set may have an impact on such operations. Therefore, always compile with the same character set as that used at runtime.</p>
+</div>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">export</span> <span class="nv">ydb_chset</span><span class="o">=</span>UTF-8
+$ ydb
+YDB&gt;write <span class="nv">$zchset</span>
+UTF-8
+YDB&gt;
+</pre></div>
+</div>
+</section>
+<section id="zclose">
+<h2><a class="toc-backref" href="isv.html#id31">$ZCLOSE</a><a class="headerlink" href="isv.html#zclose" title="Permalink to this heading">¶</a></h2>
+<p>Provides termination status of the last PIPE CLOSE as follows:</p>
+<ul class="simple">
+<li><p>-99 when the check times out</p></li>
+<li><p>-98 for unanticipated problems with the check</p></li>
+<li><p>the negative of the signal value if a signal terminated the co-process.</p></li>
+</ul>
+<p>If positive, $ZCLOSE contains the exit status returned by the last co-process.</p>
+</section>
+<section id="zcmdline">
+<h2><a class="toc-backref" href="isv.html#id32">$ZCMDLINE</a><a class="headerlink" href="isv.html#zcmdline" title="Permalink to this heading">¶</a></h2>
+<p>$ZCM[DLINE] contains a string value specifying the “excess” portion of the command line that invoked the YottaDB process. By “excess” is meant the portion of the command line that is left after YottaDB has done all of its command line processing. For example, a command line yottadb -direct extra1 extra2 causes YottaDB to process the command line upto yottadb -direct and place the “excess” of the command line, that is “extra1 extra2” in $ZCMDLINE. $ZCMDLINE gives the M routine access to the shell command line input.</p>
+<p>Note that the actual user input command line might have been transformed by the shell (for example, removing one level of quotes, filename, and wildcard substituion, and so on.), and it is this transformed command line that YottaDB processes.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cat &gt; test.m
+write <span class="s2">&quot; </span><span class="nv">$ZCMDLINE</span><span class="s2">=&quot;</span>,<span class="nv">$ZCMDLINE</span>,!
+quit
+$ yottadb -run <span class="nb">test</span> OTHER  information
+<span class="nv">$ZCMDLINE</span><span class="o">=</span>OTHER information
+$
+</pre></div>
+</div>
+<p>This creates the program test.m, which writes the value of $ZCMDLINE. Note how the two spaces specified in OTHER information in the command line gets transformed to just one space in OTHER information in $ZCMDLINE due to the shell’s pre-processing.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cat foo.m
+foo     <span class="p">;</span> a routine to invoke an arbitrary entry with or without parameters<span class="p">;</span>
+<span class="nb">set</span> <span class="nv">$etrap</span><span class="o">=</span><span class="s2">&quot;&quot;</span> <span class="p">;</span> <span class="nb">exit</span> <span class="k">if</span> the input is not valid
+<span class="k">if</span> <span class="nv">$length</span><span class="o">(</span><span class="nv">$zcmdline</span><span class="o">)</span> <span class="k">do</span> @<span class="nv">$zcmdline</span> quit
+quit
+$ yottadb -run foo <span class="s1">&#39;BAR^FOOBAR(&quot;hello&quot;)&#39;</span>
+</pre></div>
+</div>
+<p>In this example, YottaDB processes the shell command line up to foo and puts the rest in $ZCMDLINE. This mechanism allows yottadb -run to invoke an arbitrary entryref with or without parameters. Note that this example encloses the command line argument with single quotes to prevent inappropriate expansion in Bourne-type shells. Always remember to use the escaping and quoting conventions of the shell and YottaDB to prevent inappropriate expansion.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use the ^%XCMD utility to XECUTEs code from the shell command line and return any error status (truncated to a single byte on UNIX) that the code generates. For more information, refer to “%XCMD”.</p>
+</div>
+</section>
+<section id="zcompile">
+<h2><a class="toc-backref" href="isv.html#id33">$ZCOMPILE</a><a class="headerlink" href="isv.html#zcompile" title="Permalink to this heading">¶</a></h2>
+<p>$ZCO[MPILE] contains a string value composed of one or more qualifiers that control the YottaDB compiler. Explicit ZLINKs and auto-ZLINKs use these qualifiers as defaults for any compilations that they perform.</p>
+<p>$ZCOMPILE is a read-write ISV, that is, it can appear on the left side of the equal sign (=) in the argument to the SET command. A $ZCOMPILE value has the form of a list of M command qualifiers each separated by a space ( ).</p>
+<p>When the environment variable ydb_compile is defined, YottaDB initializes $ZCOMPILE to the translation of ydb_compile. Otherwise YottaDB initializes $ZCOMPILE to null. Changes to the value of $ZCOMPILE during a YottaDB invocation only last for the current invocation and do not change the value of the environment variable ydb_compile.</p>
+<p>ZCOMPILE returns a status of 1 after any error in compilation.</p>
+<p>When $ZCOMPILE is null, YottaDB uses the default M command qualifiers -IGNORE, -LABEL=LOWER, -NOLIST, and -OBJECT. See <a class="reference external" href="devcycle.html">Chapter 3: “Development Cycle”</a> for detailed descriptions of the M command qualifiers.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">export</span> <span class="nv">ydb_compile</span><span class="o">=</span><span class="s2">&quot;-LIST -LENGTH=56 -SPACE=2&quot;</span>
+$ ydb
+YDB&gt;WRITE <span class="nv">$ZCOMPILE</span>
+-LIST -LENGTH<span class="o">=</span><span class="m">56</span> -SPACE<span class="o">=</span><span class="m">2</span>
+YDB&gt;SET <span class="nv">$ZCOMPILE</span><span class="o">=</span><span class="s2">&quot;-LIST -NOIGNORE&quot;</span>
+YDB&gt;WRITE <span class="nv">$ZCOMPILE</span>
+-LIST -NOIGNORE
+YDB&gt;ZLINK <span class="s2">&quot;A.m&quot;</span>
+YDB&gt;HALT
+$ <span class="nb">echo</span> <span class="nv">$ydb_compile</span>
+-LIST -LENGTH<span class="o">=</span><span class="m">56</span> -SPACE<span class="o">=</span><span class="m">2</span>
+</pre></div>
+</div>
+<p>This example uses the environment variable ydb_compile to set up $ZCOMPILE. Then it modifies $ZCOMPILE with the SET command. The ZLINK argument specifies a file with a .m extension (type), which forces a compile. The compile produces a listing for routine A.m and does not produce an object module if A.m contains compilation errors. After YottaDB terminates, the shell command echo $ydb_compile demonstrates that the SET command did not change the environment variable.</p>
+</section>
+<section id="zcstatus">
+<span id="zcstatus-isv"></span><h2><a class="toc-backref" href="isv.html#id34">$ZCSTATUS</a><a class="headerlink" href="isv.html#zcstatus" title="Permalink to this heading">¶</a></h2>
+<p>$ZC[STATUS] holds the value of the status code for the last compilation performed by a ZCOMPILE command.</p>
+<p>YottaDB does not permit the SET command to modify $ZSTATUS.</p>
+</section>
+<section id="zdateform">
+<h2><a class="toc-backref" href="isv.html#id35">$ZDATEFORM</a><a class="headerlink" href="isv.html#zdateform" title="Permalink to this heading">¶</a></h2>
+<p>$ZDA[TEFORM] contains an integer value, specifying the output year format of $ZDATE(). $ZDATEFORM can be modified using the SET command. YottaDB initializes $ZDATEFORM to the translation of the environment variable ydb_zdate_form. If ydb_zdate_form is not defined, YottaDB initializes $ZDATEFORM to zero (0).</p>
+<p>See <a class="reference internal" href="functions.html#zdate-function"><span class="std std-ref">$ZDATE()</span></a> for the usage of $ZDATEFORM. $ZDATEFORM also defines the behavior of some date and time utility routines; refer <a class="reference external" href="utility.html">“Utility Routines”</a>.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;WRITE <span class="nv">$ZDATEFROM</span>
+<span class="m">0</span>
+YDB&gt;WRITE <span class="nv">$ZDATE</span><span class="o">(</span><span class="nv">$H</span><span class="o">)</span>
+<span class="m">11</span>/15/18
+YDB&gt;SET <span class="nv">$ZDATEFORM</span><span class="o">=</span><span class="m">1</span>
+YDB&gt;WRITE <span class="nv">$ZDATE</span><span class="o">(</span><span class="nv">$H</span><span class="o">)</span>
+<span class="m">11</span>/15/2018
+</pre></div>
+</div>
+</section>
+<section id="zdirectory">
+<h2><a class="toc-backref" href="isv.html#id36">$ZDIRECTORY</a><a class="headerlink" href="isv.html#zdirectory" title="Permalink to this heading">¶</a></h2>
+<p>$ZD[IRECTORY] contains the string value of the full path of the current directory. Initially $ZDIRECTORY contains the default/current directory from which the YottaDB image/process was activated.</p>
+<p>If the current directory does not exist at the time of YottaDB process activation, YottaDB errors out.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;WRITE <span class="nv">$ZDIR</span>
+/usr/tmp
+YDB&gt;SET <span class="nv">$ZDIR</span><span class="o">=</span><span class="s2">&quot;..&quot;</span>
+YDB&gt;WRITE <span class="nv">$ZDIR</span>
+/usr
+</pre></div>
+</div>
+<p>This example displays the current working directory and changes $ZDIR to the parent directory.</p>
+<p>$ZDIRECTORY is a read-write Intrinsic Special Variable, that is, it can appear on the left side of the equal sign (=) in the argument to a SET command. If an attempt is made to set $ZDIRECTORY to a non-existent directory specification, YottaDB issues an error and keeps the value of $ZDIRECTORY unchanged.</p>
+<p>At image exit, YottaDB restores the current directory to the directory that was the current directory when YottaDB was invoked even if that directory does not exist.</p>
+</section>
+<section id="zeditor">
+<h2><a class="toc-backref" href="isv.html#id37">$ZEDITOR</a><a class="headerlink" href="isv.html#zeditor" title="Permalink to this heading">¶</a></h2>
+<p>(Last updated: <a class="reference external" href="https://gitlab.com/YottaDB/DB/YDB/tags/r1.24">r1.24</a>)</p>
+<p>$ZED[ITOR] holds the value of the status code for the last edit session invoked by a ZEDIT command.</p>
+<p>YottaDB does not permit the SET or NEW command to modify $ZEDITOR.</p>
+</section>
+<section id="zeof">
+<h2><a class="toc-backref" href="isv.html#id38">$ZEOF</a><a class="headerlink" href="isv.html#zeof" title="Permalink to this heading">¶</a></h2>
+<p>$ZEO[F] contains a truth-valued expression indicating whether the last READ operation reached the end-of-file. $ZEOF equals TRUE (1) at EOF and FALSE (0) at other positions.</p>
+<p>YottaDB does not maintain $ZEOF for terminal devices.</p>
+<p>$ZEOF refers to the end-of-file status of the current device. Therefore, exercise care in sequencing USE commands and references to $ZEOF.</p>
+<p>YottaDB does not permit the SET or NEW command to modify $ZEOF.</p>
+<p>For more information on $ZEOF, refer to the <a class="reference external" href="ioproc.html">“Input/Output Processing” chapter</a>.</p>
+</section>
+<section id="zerror">
+<h2><a class="toc-backref" href="isv.html#id39">$ZERROR</a><a class="headerlink" href="isv.html#zerror" title="Permalink to this heading">¶</a></h2>
+<p>$ZE[RROR] is supposed to hold the application-specific error-code corresponding to the YottaDB error-code stored in $ECODE/$ZSTATUS (see <a class="reference internal" href="isv.html#ecode-isv"><span class="std std-ref">$ECODE</span></a> and <a class="reference internal" href="isv.html#zstatus-isv"><span class="std std-ref">$ZSTATUS</span></a>).</p>
+<p>$ZERROR contains a default value of “Unprocessed $ZERROR, see $ZSTATUS” at process startup.</p>
+<p>$ZERROR can be SET but not NEWed.</p>
+<p>The mapping of a YottaDB error-code to the application-specific error-code is achieved as follows. Whenever YottaDB encounters an error, $ECODE/$ZSTATUS gets set first. It then invokes the code that $ZYERROR points to if it is not null. It is intended that the code invoked by $ZYERROR use the value of $ZSTATUS to select or construct a value to which it SETs $ZERROR. If an error is encountered by the attempt to execute the code specified in $ZYERROR, YottaDB sets $ZERROR to the error status encountered. If $ZYERROR is null, YottaDB does not change the value of $ZERROR. In all cases, YottaDB proceeds to return control to the code specified by $ETRAP/$ZTRAP or device EXCEPTION whichever is applicable. For details, see <a class="reference internal" href="isv.html#zyerror-isv"><span class="std std-ref">$ZYERROR</span></a>.</p>
+</section>
+<section id="zgbldir">
+<h2><a class="toc-backref" href="isv.html#id40">$ZGBLDIR</a><a class="headerlink" href="isv.html#zgbldir" title="Permalink to this heading">¶</a></h2>
+<p>$ZG[BLDIR] contains the value of the current Global Directory filename. When $ZGBLDIR specifies an invalid or inaccessible file, YottaDB cannot successfully perform database operations.</p>
+<p>YottaDB initializes $ZGBLDIR to the translation of the environment variable ydb_gbldir. The value of the ydb_gbldir environment variable may include a reference to another environment variable. If ydb_gbldir is not defined, YottaDB initializes $ZGBLDIR to the value of the environment variable gtm_gbldir, and if that is not defined, then to null. When $ZGBLDIR is null, YottaDB constructs a file name for the Global Directory using the string $ydb_gbldir and the extension .gld in the current working directory.</p>
+<p>$ZGBLDIR is a read-write Intrinsic Special Variable, (i.e., it can appear on the left side of the equal sign (=) in the argument to the SET command). SET $ZGBLDIR=”” causes YottaDB to assign $ZGBLDIR using the same logic as at process startup. NEWing $ZGBLDIR is the same as SET $ZGBLDIR=””, which as just noted may change its value. As with NEWed local variables, QUIT restores the prior value in effect at the time of call. A $ZGBLDIR value may include an environment variable.</p>
+<p>SETting $ZGBLDIR also causes YottaDB to attempt to open the specified file. If the file name is invalid or the file is inaccessible, YottaDB triggers an error without changing the value of $ZGBLDIR.</p>
+<p>To establish a value for $ZGBLDIR outside of M, use the appropriate shell command to assign a translation to ydb_gbldir. Defining ydb_gbldir provides a convenient way to use the same Global Directory during a session where you repeatedly invoke and leave YottaDB.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nv">ydb_gbldir</span><span class="o">=</span>test.gld
+$ <span class="nb">export</span> ydb_gbldir
+$ ydb
+YDB&gt;WRITE <span class="nv">$zgbldir</span>
+/usr/dev/test.gld
+YDB&gt;SET <span class="nv">$zgbldir</span><span class="o">=</span><span class="s2">&quot;yottadb.gld&quot;</span>
+YDB&gt;WRITE <span class="nv">$zgbldir</span>
+yottadb.gld
+YDB&gt;HALT
+$ <span class="nb">echo</span> <span class="nv">$ydb_gbldir</span>
+test.gld
+</pre></div>
+</div>
+<p>This example defines the environment variable ydb_gbldir. Upon entering YottaDB Direct Mode, $ZGBLDIR has the value supplied by ydb_gbldir. The SET command changes the value. After the YottaDB image terminates, the echo command demonstrates that ydb_gbldir was not modified by the M SET command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ls test.gld
+test.gld not found
+$ ydb
+YDB&gt;WRITE <span class="nv">$zgbldir</span>
+/usr/dev/yottadb.gld
+YDB&gt;set <span class="nv">$zgbldir</span><span class="o">=</span><span class="s2">&quot;test.gld&quot;</span>
+%YDB-E-ZGBLDIRACC, Cannot access global directory
+<span class="s2">&quot;/usr/dev/test.gld&quot;</span>. Retaining /usr/dev/yottadb.gld<span class="s2">&quot;</span>
+<span class="s2">%SYSTEM-E-ENO2, No such file or directory</span>
+<span class="s2">YDB&gt;WRITE </span><span class="nv">$zgbldir</span><span class="s2"></span>
+<span class="s2">/usr/dev/yottadb.gld</span>
+<span class="s2">YDB&gt;halt</span>
+$<span class="s2"></span>
+</pre></div>
+</div>
+<p>The SET command attempts to change the value of $ZGBLDIR to test.gld. Because the file does not exist, YottaDB reports an error and does not change the value of $ZGBLDIR.</p>
+<p>To facilitate application migration to YottaDB from other M implementations (for example to convert UCI and VOL specifications to global directories) in the environment specification, YottaDB provides an interface to translate strings to global directory filenames. With the exception of the function name, this facility is identical to that <a class="reference internal" href="langfeat.html#opt-ydb-env-xltn-fac"><span class="std std-ref">used for extended references</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Using this facility impacts the performance of <em>every</em> global access. Make sure you use it only when static determination of the global directory is not feasible. When used, maximize the efficiency of the translation routines.</p>
+</div>
+<p>Enable the facility by setting the environment variable <code class="code docutils literal notranslate"><span class="pre">ydb_gbldir_translate</span></code> to the path of a shared library with the entry point <code class="code docutils literal notranslate"><span class="pre">ydb_gbldir_xlate()</span></code> . The global directory used is the value assigned to $zgbldir as translated by the routine. <code class="code docutils literal notranslate"><span class="pre">ydb_gbldir_xlate()</span></code> has the same signature as the ydb_env_xlate() routine used for environment translation.</p>
+<pre class="literal-block">int ydb_gbldir_xlate(ydb_string_t *in1, ydb_string_t *in2, ydb_string_t *in3, ydb_string_t *out)</pre>
+<p>where ydb_string_t is a structure defined in libyottadb.h as follows:</p>
+<pre class="literal-block">typedef struct
+{
+     unsigned long   length;
+     char            *address;
+} ydb_string_t;</pre>
+<p>and</p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">in1</span></code> references the value being assigned to $zgbldir;</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">in2</span></code> is the NULL string - the parameter exists only so that the signature matches that of <code class="code docutils literal notranslate"><span class="pre">ydb_env_translate()</span></code>;</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">in3</span></code> references $zdirectory the current directory of the process; and</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">out</span></code> is a return value that references the actual global directory file to be used.</p></li>
+</ul>
+<p>A return value other than zero (0) indicates an error in translation, and is reported as a YottaDB error.</p>
+<p>Refer to <a class="reference internal" href="langfeat.html#opt-ydb-env-xltn-fac"><span class="std std-ref">the extended reference facility</span></a> for more information.</p>
+</section>
+<section id="zhorolog">
+<h2><a class="toc-backref" href="isv.html#id41">$ZHOROLOG</a><a class="headerlink" href="isv.html#zhorolog" title="Permalink to this heading">¶</a></h2>
+<p>$ZH[OROLOG] returns 4 comma-separated pieces (for example, “63638,39194,258602,14400”). The first two pieces are identical to the two pieces of $HOROLOG. $ZHOROLOG is a drop-in replacement for $HOROLOG in all application code of the form $PIECE($HOROLOG,”,”,…). For example, $ZHOROLOG can be used as the first argument of $ZDATE(). The third piece is the number of microseconds in the current second. The accuracy of the third piece is subject to the precision of the system clock. The fourth piece is an offset in seconds to UTC. For any valid UTC time offset, the fourth piece is a number between -43200 (for UTC-12:00) and +50400 (for UTC+14:00). The value of the fourth piece remains constant all through the year except for those places that observe daylight saving time. To obtain the $HOROLOG representation of UTC, add the fourth piece to the second piece of $ZHOROLOG and proceed as follows:</p>
+<ul class="simple">
+<li><p>If the result is a negative number, subtract one from the first piece and add 86400 (number of seconds in a day) to the second piece.</p></li>
+<li><p>If the result is a positive number greater than 86400, add one to the first piece and subtract 86400 from the second piece.</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>YDB&gt;zprint ^zhoro
+zhoro(zone)
+ set:&#39;$data(zone) zone=&quot;Europe/London&quot;
+ new zutzh
+ set zutzh=$$getzutzh(zone)
+ do displaytzdetails(zutzh,zone)
+ quit
+getzutzh(zone)
+ set shcommand=&quot;TZ=&quot;_zone_&quot; $ydb_dist/yottadb -run %XCMD &#39;write $zut,&quot;&quot; &quot;&quot;,$zhorolog,&quot;&quot; &quot;&quot;,$zdate($horolog,&quot;&quot;MON DD,YYYY 12:60:SS AM&quot;&quot;),!&#39;&quot;
+ set descname=&quot;tzpipe&quot;
+ open descname:(shell=&quot;/bin/sh&quot;:command=shcommand:readonly)::&quot;pipe&quot;
+ use descname read dateline use $principal close descname
+ quit dateline
+displaytzdetails(zutzh,zone)
+ set zut=$piece(zutzh,&quot; &quot;,1)   ; $ZUT
+ set zh=$piece(zutzh,&quot; &quot;,2)    ; $ZHOROLOG
+ set zhfp=$piece(zh,&quot;,&quot;,1)     ; first piece of $ZH of zone
+ set zhsp=$piece(zh,&quot;,&quot;,2)
+ set zhtp=$piece(zh,&quot;,&quot;,3)
+ set zhfop=$piece(zh,&quot;,&quot;,4)
+ set tz=zhfop/3600,hours=$select(tz*tz=1:&quot; Hour &quot;,1:&quot; Hours &quot;)
+ write &quot;Time in &quot;,zone,&quot; &quot;,$piece(zutzh,&quot; &quot;,3,6),&quot; $ZUT=&quot;,zut,!,$select(tz&lt;0:-tz_hours_&quot;Ahead of&quot;,1:tz_hours_&quot;Behind&quot;),&quot; UTC&quot;,!
+ set zhsp=zhsp+zhfop
+ if zhsp&gt;86400 set zhfp=zhfp+1,zhsp=zhsp-86400     ; 86400 seconds in a day
+ else  if zhsp&lt;1 set zhfp=zhfp-1,zhsp=zhsp+86400
+ write &quot;Time in UTC &quot;,$zdate(zhfp_&quot;,&quot;_zhsp,&quot;MON DD,YYYY 12:60:SS AM&quot;)
+ quit
+YDB&gt;do ^zhoro
+Time in Europe/London APR 10,2018 05:20:29 PM $ZUT=1428682829213711
+1 Hour Ahead of UTC
+Time in UTC APR 10,2018 04:20:29 PM
+YDB&gt;
+</pre></div>
+</div>
+</section>
+<section id="zininterrupt">
+<h2><a class="toc-backref" href="isv.html#id42">$ZININTERRUPT</a><a class="headerlink" href="isv.html#zininterrupt" title="Permalink to this heading">¶</a></h2>
+<p>$ZINI[NTERRUPT] evaluates to 1 (TRUE) when a process is executing code initiated by the interrupt mechanism, and otherwise 0 (FALSE).</p>
+<p>YottaDB does not permit the SET or NEW commands to modify $ZININTERRUPT.</p>
+</section>
+<section id="zinterrupt">
+<span id="zinterrupt-isv"></span><h2><a class="toc-backref" href="isv.html#id43">$ZINTERRUPT</a><a class="headerlink" href="isv.html#zinterrupt" title="Permalink to this heading">¶</a></h2>
+<p>$ZINT[ERRUPT] specifies the code to be XECUTE’d when an interrupt (for example, through a MUPIP INTRPT) is processed. While a $ZINTERRUPT action is in process, any additional interrupt signals are discarded. When an interrupt handler is invoked, the current values of $REFERENCE is saved and restored when the interrupt handler returns. The current device ($IO) is neither saved nor restored.</p>
+<p>YottaDB permits the SET command to modify the value of $ZINTERRUPT.</p>
+<p>If an interrupt handler changes the current IO device (via USE), it is the responsibility of the interrupt handler to restore the current IO device before returning. There are sufficient legitimate possibilities for why an interrupt routine would want to change the current IO device (for example; daily log switching), that this part of the process context is not saved and restored automatically.</p>
+<p>The initial value for $ZINTERRUPT is taken from the UNIX environment variable ydb_zinterrupt if it is specified, otherwise it defaults to the following string:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>IF $ZJOBEXAM()
+</pre></div>
+</div>
+<p>The IF statement executes the $ZJOBEXAM function but effectively discards the return value.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the default value for $ZINTERRUPT is modified, no $ZJOBEXAM() will occur unless the replacement value directly or indirectly invokes that function. In other words, while $ZJOBEXAM() is part of the interrupt handling by default, it is not an implicit part of the interrupt handling.</p>
+</div>
+<section id="interrupt-handling">
+<h3><a class="toc-backref" href="isv.html#id44">Interrupt Handling</a><a class="headerlink" href="isv.html#interrupt-handling" title="Permalink to this heading">¶</a></h3>
+<p>YottaDB process execution is interruptible with the following events:</p>
+<ul class="simple">
+<li><p>Typing CTRL+C or getting SIGINT (if CENABLE). YottaDB ignores SIGINT (CTRL+C) if $PRINCIPAL is not a terminal.</p></li>
+<li><p>Typing one of the CTRAP characters</p></li>
+<li><p>Exceeding $ZMAXTPTIME in a transaction</p></li>
+<li><p>Getting a MUPIP INTRPT (SIGUSR1)</p></li>
+<li><p>+$ZTEXit evaluates to a truth value at the outermost TCOMMIT or TROLLBACK</p></li>
+</ul>
+<p>When YottaDB detects any of these events, it transfers control to a vector that depends on the event. For CTRAP characters and ZMAXTPTIME, YottaDB uses the $ETRAP or $ZTRAP vectors described in more detail in the Error Processing chapter. For INTRPT and $ZTEXit, it XECUTEs the interrupt handler code placed in $ZINTERRUPT. If $ZINTERRUPT is an empty string, nothing is done in response to a MUPIP INTRPT. The default value of $ZINTERRUPT is “IF $ZJOBEXAM()” which redirects a dump of ZSHOW “*” to a file and reports each such occasion to the operator log. For CTRL+C with CENABLE, it enters Direct Mode to give the programmer control.</p>
+<p>YottaDB recognizes most of these events when they occur but transfers control to the interrupt vector at the start of each M line, at each iteration of a FOR LOOP, at certain points during the execution of commands which may take a “long” time. For example, ZWRITE, HANG, LOCK, MERGE, ZSHOW “V”, OPENs of disk files and FIFOs, OPENs of SOCKETs with the CONNECT parameter (unless zero timeout,) WRITE /WAIT for SOCKETs, and READ for terminals, SOCKETs, FIFOs, and PIPEs. If +$ZTEXIT evaluates to a truth value at the outermost TCOMMIT or TROLLBACK, YottaDB XECUTEs $ZINTERRUPT after completing the commit or rollback. CTRAP characters are recognized when they are read on UNIX.</p>
+<p>If an interrupt event occurs in a long running external call (for example, waiting in a message queue), YottaDB recognizes the event but makes the vector transfer after the external call returns when it reaches the next appropriate execution boundary.</p>
+<p>When an interrupt handler is invoked, YottaDB saves and restores the current values of $REFERENCE. However, the current device ($IO) is neither saved nor restored. If an interrupt handler changes $IO (via USE), ensure that the interrupt handler restores the current device before returning. To restore the device which was current when the interrupt handler began, specify USE without any deviceparameters. Any attempt to do IO on a device which was actively doing IO when the interrupt was recognized may result in a ZINTERCURSEIO error.</p>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>set $zinterrupt=&quot;do ^interrupthandler($io)&quot;
+interrupthandler(currentdev)
+       do ^handleinterrupt ; handle the interrupt
+       use currentdev      ; restore the device which was current when the interrupt was recognized
+       quit
+</pre></div>
+</div>
+<p>The use of the INTRPT facility may create a temporary hang or pause while the interrupt handler code is executed. For the default case where the interrupt handler uses IF $ZJOBEXAM() to create a dump, the pause duration depends on the number of local variables in the process at the time of the dump and on the speed of the disk being written to. The dumps are slower on a network-mounted disk than on a disk directly connected to the local system. Any interrupt driven code should be designed to account for this issue.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Because sending an interrupt signal requires the sender to have appropriate permissions, the use of the job interrupt facility itself does not present any inherent security exposures. Nonetheless, because the dump files created by the default action contain the values of every local variable in the context at the time they are made, inappropriate access to the dump files would constitute a security exposure. Make sure the design and implementation of any interrupt logic includes careful consideration to security issues.</p>
+</div>
+<p>During the execution of the interrupt handling code, $ZINTERRUPT evaluates to 1 (TRUE).</p>
+<p>If an error occurs while compiling the $ZINTERRUPT code, the error handler is not invoked (the error handler is invoked if an error occurs while executing the $ZINTERRUPT code), YottaDB sends the YDB-ERRWZINTR message and the compiler error message to the operator log facility. If the YottaDB process is at a direct mode prompt or is executing a direct mode command (for example, a FOR loop), YottaDB also sends the YDB-ERRWZINTR error message to the user console along with the compilation error. In both cases, the interrupted process resumes execution without performing any action specified by the defective $ZINTERRUPT vector.</p>
+<p>If YottaDB encounters an error during creation of the interrupt handler’s stack frame (before transferring control to the application code specified by the vector), that error is prefixed with a YDB-ERRWZINTR error. The error handler then executes normal error processing associated with the interrupted routine. Any other errors that occur in code called by the interrupt vector invoke error processing as described in <a class="reference external" href="errproc.html">Chapter 13: “Error Processing”</a>.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>The interrupt handler does not operate &quot;outside&quot; the current M environment but rather within the environment of the process.
+</pre></div>
+</div>
+<p>TP transaction is in progress (0&lt;$TLEVEL), updates to globals are not safe since a TP restart can be signaled at any time prior to the transaction being committed - even after the interrupt handler returns. A TP restart reverses all global updates and unwinds the M stack so it is as if the interrupt never occurred. The interrupt handler is not redriven as part of a transaction restart. Referencing (reading) globals inside an interrupt handler can trigger a TP restart if a transaction is active. When programming interrupt handling, either discard interrupts when 0&lt;$TLEVEL (forcing the interrupting party to try again), or use local variables that are not restored by a TRESTART to defer the interrupt action until after the final TCOMMIT.</p>
+</section>
+</section>
+<section id="zio">
+<h2><a class="toc-backref" href="isv.html#id45">$ZIO</a><a class="headerlink" href="isv.html#zio" title="Permalink to this heading">¶</a></h2>
+<p>$ZIO contains the translated name of the current device, in contrast to $IO, which contains the name as specified by the USE command.</p>
+<p>YottaDB does not permit the SET or NEW command to modify $ZIO.</p>
+<p>An example where $ZIO contains a value different from $IO is if the environment variable ydb_principal is defined.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nv">ydb_principal</span><span class="o">=</span><span class="s2">&quot;foo&quot;</span>
+$ <span class="nb">export</span> ydb_principal
+YDB&gt;WRITE <span class="nv">$IO</span>
+foo
+YDB&gt;WRITE <span class="nv">$ZIO</span>
+/dev/pts/8
+</pre></div>
+</div>
+<p>Notice that $ZIO contains the actual terminal device name while $IO contains the string pointed to by the environment variable ydb_principal.</p>
+</section>
+<section id="zjob">
+<span id="zjob-isv"></span><h2><a class="toc-backref" href="isv.html#id46">$ZJOB</a><a class="headerlink" href="isv.html#zjob" title="Permalink to this heading">¶</a></h2>
+<p>$ZJ[OB] holds the pid of the process created by the last JOB command performed by the current process.</p>
+<p>YottaDB initializes $ZJOB to zero (0) at process startup. If the JOB command fails to spawn a new job, YottaDB sets $ZJOB to zero (0). Note that because of the left to right evaluation order of M, using $ZJOB in the jobparameter string results in using the value created by the last, rather than the current JOB command, which is not likely to match common coding practice.</p>
+<p>YottaDB does not permit the SET or NEW command to modify $ZJOB.</p>
+</section>
+<section id="zkey">
+<h2><a class="toc-backref" href="isv.html#id47">$ZKEY</a><a class="headerlink" href="isv.html#zkey" title="Permalink to this heading">¶</a></h2>
+<p>For Socket devices:</p>
+<p>$ZKEY contains a list of sockets in the current SOCKET device which are ready for use. Its contents include both non selected but ready sockets from the prior WRITE/WAITs and any sockets with unread data in their YottaDB buffer. $ZKEY can be used any time a SOCKET device is current. Once an incoming socket (that is, “LISTENING”) has been accepted either by being selected by WRITE/WAIT or by USE socdev:socket=”listeningsocket”, it is removed from $ZKEY.</p>
+<p>$ZKEY contains any one of the following values:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;LISTENING|&lt;listening_socket_handle&gt;|{&lt;portnumber&gt;|&lt;/path/to/LOCAL_socket&gt;}&quot;
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;READ|&lt;socket_handle&gt;|&lt;address&gt;&quot;
+</pre></div>
+</div>
+<p>If $ZKEY contains one or more “READ|&lt;socket_handle&gt;|&lt;address&gt;” entries, it means there are ready to READ sockets that were selected by WRITE/WAIT or were partially read and there is data left in their buffer. Each entry is delimited by a “;”.</p>
+<p>If $ZKEY contains one or more “LISTENING|&lt;listening_socket_handle&gt;|{&lt;portnumber|/path/to/LOCAL_socket&gt;}” entries, it means that there are pending connections and a USE s:socket=listening_socket_handle will accept a pending connection and remove the LISTENING|&lt;listening_socket_handle&gt; entry from $ZKEY.</p>
+<p>$ZKEY is empty if no sockets have data in the buffer and there are no unaccepted incoming sockets from previous WRITE/WAITs.</p>
+<p>For a Sequential File Device:</p>
+<p>$ZKEY contains the current position in the file based on the last READ. This is in bytes for STREAM and VARIABLE formats, and in a record,byte pair for FIXED format. For FIXED format, SEEKs and normal READs always produce a zero byte position; a non-zero byte position in $ZKEY for FIXED format operation indicates a partially read record, caused by a READ # or READ *. In FIXED mode, the information returned for $ZKEY is a function of record size, and, if a USE command changes record size by specifying the WIDTH deviceparameter while the file is open, $ZKEY offsets change accordingly; if record size changes, previously saved values of $ZKEY are likely inappropriate for use with SEEK.</p>
+</section>
+<section id="zlevel">
+<span id="zlevel-isv"></span><h2><a class="toc-backref" href="isv.html#id48">$ZLEVEL</a><a class="headerlink" href="isv.html#zlevel" title="Permalink to this heading">¶</a></h2>
+<p>$ZL[EVEL] contains an integer value indicating the “level of nesting” caused by DO commands, XECUTE commands, and extrinsic functions in the M invocation stack.</p>
+<p>$ZLEVEL has an initial value of one (1) and increments by one with each DO, XECUTE or extrinsic function. Any QUIT that does not terminate a FOR loop decrements $ZLEVEL. ZGOTO may also reduce $ZLEVEL. In accordance with the M standard, a FOR command does not increase $ZLEVEL. M routines cannot modify $ZLEVEL with the SET or NEW commands.</p>
+<p>Use $ZLEVEL in debugging or in an error-handling mechanism to capture a level for later use in a ZGOTO argument.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;zprint ^zleve
+zleve<span class="p">;</span>
+ <span class="k">do</span> B
+ write X,!
+ quit
+B
+ goto C
+ quit
+C
+ <span class="k">do</span> D
+ quit
+D
+ <span class="nb">set</span> <span class="nv">X</span><span class="o">=</span><span class="nv">$ZLEVEL</span>
+ quit
+YDB&gt;do ^zleve
+ <span class="m">4</span>
+YDB&gt;
+</pre></div>
+</div>
+<p>This program, executed from Direct Mode, produces a value of 4 for $ZLEVEL. If you run this program from the shell, the value of $ZLEVEL is three (3).</p>
+</section>
+<section id="zmaxtptime">
+<h2><a class="toc-backref" href="isv.html#id49">$ZMAXTPTIME</a><a class="headerlink" href="isv.html#zmaxtptime" title="Permalink to this heading">¶</a></h2>
+<p>$ZMAXTPTI[ME] contains an integer value indicating the time duration YottaDB should wait for the completion of all activities fenced by the current transaction’s outermost TSTART/TCOMMIT pair.</p>
+<p>$ZMAXTPTIME can be SET but cannot be NEWed.</p>
+<p>$ZMAXTPTIME takes its value from the environment variable ydb_maxtptime. If ydb_maxtptime is not defined, the initial value of $ZMAXTPTIME is zero (0) seconds which indicates “no timeout” (unlimited time). The value of $ZMAXTPTIME when a transaction’s outermost TSTART operation executes determines the timeout setting for that transaction.</p>
+<p>When a $ZMAXTPTIME expires, YottaDB executes the $ETRAP/$ZTRAP exception handler currently in effect.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Negative values of $ZMAXTPTIME are also treated as “no timeout”. Timeouts apply only to the outermost transaction, that is, $ZMAXTPTIME has no effect when TSTART is nested within another transaction.</p>
+</div>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Test;testing TP timeouts
+  set $ZMAXTPTIME=6,^X=0,^Y=0,^Z=0
+  write &quot;Start with $ZMAXTPTIME=&quot;,$ZMAXTPTIME,&quot;:&quot;,!
+  for sleep=3:2:9 do
+  . set retlvl=$zlevel
+  . do longtran;ztrap on longtran
+  ;continues execution
+  ;on next line
+  . write &quot;(^X,^Y)=(&quot;,^X,&quot;,&quot;,^Y,&quot;)&quot;,!
+  write !,&quot;Done TP Timeout test.&quot;,!
+  quit
+longtran ;I/O in TP doesn&#39;t get rolled back
+  set $etrap=&quot; goto err&quot;
+  tstart ():serial
+  set ^X=1+^X
+  write !,&quot;^X=&quot;,^X,&quot;,will set ^Y to &quot;,sleep
+  write &quot; in &quot;,sleep,&quot; seconds...&quot;
+  hang sleep
+  set ^Y=sleep
+  write &quot;^Y=&quot;,^Y
+  tcommit
+  write &quot;...committed.&quot;,!
+  quit
+err;
+  write !,&quot;In $ETRAP handler. Error was: &quot;
+  write !,&quot; &quot;,$zstatus
+  if $TLEVEL do ;test allows handler use outside of TP
+  . trollback
+  . write &quot;Rolled back transaction.&quot;
+  write !
+  set $ecode=&quot;&quot;
+  zgoto retlvl
+</pre></div>
+</div>
+<p>Results:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Start with $ZMAXTPTIME=6:
+^X=1,will set ^Y to 3 in 3 seconds...^Y=3...committed.
+^X=2,will set ^Y to 5 in 5 seconds...^Y=5...committed.
+^X=3,will set ^Y to 7 in 7 seconds...
+In $ETRAP handler. Error was:
+150377322,longtran+7^tptime,%YDB-E-TPTIMEOUT, Transaction timeoutRolled back transaction.
+^X=3,will set ^Y to 9 in 9 seconds...
+In $ETRAP handler. Error was:
+150377322,longtran+7^tptime,%YDB-E-TPTIMEOUT, Transaction timeoutRolled back transaction.
+Done TP Timeout test.
+</pre></div>
+</div>
+</section>
+<section id="zmode">
+<h2><a class="toc-backref" href="isv.html#id50">$ZMODE</a><a class="headerlink" href="isv.html#zmode" title="Permalink to this heading">¶</a></h2>
+<p>$ZMO[DE] contains a string value indicating the process execution mode.</p>
+<p>The mode can be:</p>
+<ul class="simple">
+<li><p>INTERACTIVE</p></li>
+<li><p>OTHER</p></li>
+</ul>
+<p>M routines cannot modify $ZMODE.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;WRITE <span class="nv">$ZMODE</span>
+INTERACTIVE
+</pre></div>
+</div>
+<p>This displays the process mode.</p>
+</section>
+<section id="zonlnrlbk">
+<h2><a class="toc-backref" href="isv.html#id51">$ZONLNRLBK</a><a class="headerlink" href="isv.html#zonlnrlbk" title="Permalink to this heading">¶</a></h2>
+<p>$ZONLNRLBK increments every time a process detects a concurrent MUPIP JOURNAL -ONLINE -ROLLBACK.</p>
+<p>YottaDB initializes $ZONLNRLBK to zero (0) at process startup. YottaDB does not permit the SET or NEW commands to modify $ZONLNRLBK.</p>
+<p>For more information on online rollback, refer to the -ONLINE qualifier of -ROLLBACK in the <a class="reference external" href="../AdminOpsGuide/index.html">Administration and Operations Guide</a>.</p>
+</section>
+<section id="zpatnumeric">
+<span id="zpatnumeric-isv"></span><h2><a class="toc-backref" href="isv.html#id52">$ZPATNUMERIC</a><a class="headerlink" href="isv.html#zpatnumeric" title="Permalink to this heading">¶</a></h2>
+<p>$ZPATN[UMERIC] is a read-only intrinsic special variable that determines how YottaDB interprets the patcode “N” used in the pattern match operator.</p>
+<p>With $ZPATNUMERIC=”UTF-8”, the patcode “N” matches any numeric character as defined by UTF-8 encoding. With $ZPATNUMERIC=”M”, YottaDB restricts the patcode “N” to match only ASCII digits 0-9 (that is, ASCII 48-57). When a process starts in UTF-8 mode, intrinsic special variable $ZPATNUMERIC takes its value from the environment variable ydb_patnumeric. YottaDB initializes the intrinsic special variable $ZPATNUMERIC to “UTF-8” if the environment variable ydb_patnumeric is defined to “UTF-8”. If the environment variable ydb_patnumeric is not defined or set to a value other than “UTF-8”, YottaDB initializes $ZPATNUMERIC to “M”.</p>
+<p>YottaDB populates $ZPATNUMERIC at process initialization from the environment variable ydb_patnumeric and does not allow the process to change the value.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>YottaDB performs operations on literals at compile time and the pattern codes settings may have an impact on such operations. Therefore, always compile with the same pattern code settings as those used at runtime.</p>
+</div>
+<p>For UTF-8 characters, YottaDB assigns patcodes based on the default classification of the Unicode® character set by the ICU library with three adjustments:</p>
+<ul class="simple">
+<li><p>If $ZPATNUMERIC is not “UTF-8”, non-ASCII decimal digits are classified as A.</p></li>
+<li><p>Non-decimal numerics (Nl and No) are classified as A.</p></li>
+<li><p>The remaining characters (those not classified by ICU functions: u_isalpha, u_isdigit, u_ispunct, u_iscntrl, the above options) are classified into either patcode P or C. The ICU function u_isprint is used since it returns “TRUE” for non-control characters.</p></li>
+</ul>
+<p>The following table contains the resulting Unicode general category to M patcode mapping:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 46%" />
+<col style="width: 54%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Unicode General Category</p></th>
+<th class="head"><p>Patcode Class</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>L* (all letters)</p></td>
+<td><p>A</p></td>
+</tr>
+<tr class="row-odd"><td><p>M* (all marks)</p></td>
+<td><p>P</p></td>
+</tr>
+<tr class="row-even"><td><p>Nd (decimal numbers)</p></td>
+<td><p>N (if decimal digit is ASCII or $ZPATNUMERIC is
+“UTF-8”, otherwise A</p></td>
+</tr>
+<tr class="row-odd"><td><p>Nl (letter numbers)</p></td>
+<td><p>A (examples of Nl are Roman numerals)</p></td>
+</tr>
+<tr class="row-even"><td><p>No (other numbers)</p></td>
+<td><p>A (examples of No are fractions)</p></td>
+</tr>
+<tr class="row-odd"><td><p>P* (all punctuation)</p></td>
+<td><p>P</p></td>
+</tr>
+<tr class="row-even"><td><p>S* (all symbols)</p></td>
+<td><p>P</p></td>
+</tr>
+<tr class="row-odd"><td><p>Zs (spaces)</p></td>
+<td><p>P</p></td>
+</tr>
+<tr class="row-even"><td><p>Zl (line separators)</p></td>
+<td><p>C</p></td>
+</tr>
+<tr class="row-odd"><td><p>Zp (paragraph separators)</p></td>
+<td><p>C</p></td>
+</tr>
+<tr class="row-even"><td><p>C* (all control code points)</p></td>
+<td><p>C</p></td>
+</tr>
+</tbody>
+</table>
+<p>For a description of the Unicode general categories, refer to <a class="reference external" href="http://unicode.org/charts/">http://unicode.org/charts/</a>.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;write <span class="nv">$zpatnumeric</span>
+UTF-8
+YDB&gt;Write <span class="nv">$Char</span><span class="o">(</span><span class="nv">$$</span>FUNC^%HD<span class="o">(</span><span class="s2">&quot;D67&quot;</span><span class="o">))</span>?.N <span class="p">;</span> This is the Malayalam decimal digit <span class="m">1</span>
+<span class="m">1</span>
+YDB&gt;Write <span class="m">1</span>+<span class="nv">$Char</span><span class="o">(</span><span class="nv">$$</span>FUNC^%HD<span class="o">(</span><span class="s2">&quot;D67&quot;</span><span class="o">))</span>
+<span class="m">1</span>
+YDB&gt;Write <span class="m">1</span>+<span class="nv">$Char</span><span class="o">(</span><span class="nv">$$</span>FUNC^%HD<span class="o">(</span><span class="s2">&quot;31&quot;</span><span class="o">))</span> <span class="p">;</span> This is the ASCII digit <span class="m">1</span>
+<span class="m">2</span>
+</pre></div>
+</div>
+</section>
+<section id="zpin">
+<span id="zpin-isv"></span><h2><a class="toc-backref" href="isv.html#id53">$ZPIN</a><a class="headerlink" href="isv.html#zpin" title="Permalink to this heading">¶</a></h2>
+<p>When $PRINCIPAL has different input/output devices, the USE command recognizes intrinsic special variable $ZPIN to apply appropriate deviceparameters to the input side of $PRINCIPAL. A USE with $ZPIN sets $IO to $PRINCIPAL for READs and WRITEs from the input and output side of $PRINCIPAL. $ZSOCKET() also accepts $ZPIN as its first argument and, if the device is a split SOCKET device, supplies information on the input SOCKET device. In any context other than USE or $ZSOCKET(), or if $PRINCIPAL is not a split device, $PRINCIPAL, $ZPIN and $ZPOUT are synonyms. In the case of a split $PRINCIPAL, $ZPIN returns the value of $PRINCIPAL followed by the string “&lt; /” Any attempt to OPEN $ZPIN results in a DEVOPENFAIL error.</p>
+<p>For more information refer to <a class="reference internal" href="ioproc.html#principal-io-isv"><span class="std std-ref">$PRINCIPAL</span></a>, <a class="reference internal" href="isv.html#zpout-isv"><span class="std std-ref">$ZPOUT</span></a>, and <a class="reference internal" href="functions.html#zsocket-function"><span class="std std-ref">$ZSOCKET()</span></a>.</p>
+</section>
+<section id="zposition">
+<span id="zposition-isv"></span><h2><a class="toc-backref" href="isv.html#id54">$ZPOSITION</a><a class="headerlink" href="isv.html#zposition" title="Permalink to this heading">¶</a></h2>
+<p>$ZPOS[ITION] contains a string value specifying the current entryref, where entryref is [label][+offset]^routine, and the offset is evaluated from the closest preceding label.</p>
+<p>YottaDB does not permit the SET or NEW commands to modify $ZPOSITION.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;WRITE !,<span class="nv">$ZPOS</span>,! ZPRINT @<span class="nv">$ZPOS</span>
+</pre></div>
+</div>
+<p>This example displays the current location followed by the source code for that line.</p>
+</section>
+<section id="zpout">
+<span id="zpout-isv"></span><h2><a class="toc-backref" href="isv.html#id55">$ZPOUT</a><a class="headerlink" href="isv.html#zpout" title="Permalink to this heading">¶</a></h2>
+<p>When $PRINCIPAL has different input/output devices, the USE command recognizes intrinsic special variables $ZPOUT to apply appropriate deviceparameters to the output side of $PRINCIPAL. A USE with $ZPOUT sets $IO to $PRINCIPAL for READs and WRITEs from the input and output side of $PRINCIPAL. $ZSOCKET() also accepts $ZPOUT as its first argument and, if the device is a split SOCKET device, supplies information on the output SOCKET device. In any context other than USE or $ZSOCKET(), or if $PRINCIPAL is not a split device, $PRINCIPAL, $ZPIN and $ZPOUT are synonyms. In the case of a split $PRINCIPAL, $ZPOUT returns the value of $PRINCIPAL followed by the string “&gt; /” Any attempt to OPEN $ZPOUT results in a DEVOPENFAIL error.</p>
+<p>For more information refer to <a class="reference internal" href="ioproc.html#principal-io-isv"><span class="std std-ref">$PRINCIPAL</span></a>, <a class="reference internal" href="isv.html#zpin-isv"><span class="std std-ref">$ZPIN</span></a>, and <a class="reference internal" href="functions.html#zsocket-function"><span class="std std-ref">$ZSOCKET()</span></a>.</p>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>;zpioin
+;123456789012345678901234567890123456789012345678901234567890
+;A12345678901234567890123456789012345678901234567890123456789
+zpio
+  ; yottadb -r zpio &lt; zpioin
+  write &quot;$PRINCIPAL = &quot;,$P,!
+  write &quot;$ZPIN = &quot;,$ZPIN,!
+  write &quot;$ZPOUT = &quot;,$ZPOUT,!
+  write &quot;Read first line from zpioin with default settings&quot;,!
+  read x
+  write x,!
+  zshow &quot;d&quot;
+  use $ZPIN:(wrap:width=50)
+  write &quot;After $ZPIN set to wrap and width set to 50&quot;,!
+  zshow &quot;d&quot;
+  write &quot;Read next 50 characters from zpioin&quot;,!
+  read y
+  write y,!
+  use $ZPOUT:wrap
+  use $ZPIN:nowrap
+  write &quot;After $ZPOUT set to wrap and $ZPIN set to nowrap&quot;,!
+  zshow &quot;d&quot;
+  use $ZPOUT:nowrap
+  write &quot;After $ZPOUT set to nowrap&quot;,!
+  zshow &quot;d&quot;
+  use $P:wrap
+  write &quot;After $P set to wrap&quot;,!
+  zshow &quot;d&quot;
+  use $ZPOUT:width=40
+  write &quot;After $ZPOUT width set to 40&quot;,!
+  zshow &quot;d&quot;
+  use $ZPOUT:nowrap
+  write &quot;After $ZPOUT set to nowrap&quot;,!
+  zshow &quot;d&quot;
+  write x,!
+  quit
+</pre></div>
+</div>
+</section>
+<section id="zprompt">
+<span id="zprompt-isv"></span><h2><a class="toc-backref" href="isv.html#id56">$ZPROMPT</a><a class="headerlink" href="isv.html#zprompt" title="Permalink to this heading">¶</a></h2>
+<p>$ZPROM[PT] contains a string value specifying the current Direct Mode prompt. By default, YDB&gt; is the Direct Mode prompt. M routines can modify $ZPROMPT by means of a SET command. $ZPROMPT cannot exceed 16 characters. If an attempt is made to assign $ZPROMPT to a longer string, only the first 16 characters will be taken.</p>
+<p>In UTF-8 mode, if the 31st byte is not the end of a valid UTF-8 character, YottaDB truncates the $ZPROMPT value at the end of the last character that completely fits within the 31 byte limit.</p>
+<p>The environment variable ydb_prompt initializes $ZPROMPT at process startup.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;set <span class="nv">$zprompt</span><span class="o">=</span><span class="s2">&quot;Test01&quot;</span>&gt;<span class="s2">&quot;</span>
+<span class="s2">Test01&gt;set </span><span class="nv">$zprompt</span><span class="s2">=&quot;</span>YDB&gt;<span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>This example changes the YottaDB prompt to Test01&gt; and then back to YDB&gt;.</p>
+</section>
+<section id="zquit">
+<h2><a class="toc-backref" href="isv.html#id57">$ZQUIT</a><a class="headerlink" href="isv.html#zquit" title="Permalink to this heading">¶</a></h2>
+<p>$ZQUIT indicates whether the functionality associated with the ydb_zquit_anyway environment variable is enabled. If the environment variable ydb_zquit_anyway is defined and evaluates to 1 or any case-independent string or leading substrings of “TRUE” or “YES”, YottaDB sets $ZQUIT to 1 and executes code of the form QUIT &lt;expr&lt; as if it were SET &lt;tmp&gt;=&lt;expr&gt; QUIT:$QUIT tmp QUIT, where &lt;tmp&gt; is a temporary local variable in the YottaDB runtime system that is not visible to the application code. The value of $ZQUIT is a compile time setting, i.e., it can be set during run-time, but it has no effect on the behavior existing object code - it only effects code generated by auto-ZLINK or the ZCOMPILE command. This setting has no effect on late bound code such as that in XECUTE arguments, $ETRAP and $ZTRAP device EXCEPTIONS.</p>
+<p>If ydb_zquit_anyway is not defined or evaluates to 0 or any case-independent string or leading substrings of “FALSE” or “NO”, YottaDB sets $ZQUIT to 0 and executes QUIT &lt;expr&gt; as specified by the standard. This feature is helpful when you want to run a block of code both as a routine and as an extrinsic function. Consider the following example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;zprint ^rtnasfunc
+rtnasfunc<span class="o">(</span>expr1<span class="o">)</span>
+write <span class="s2">&quot;Hello &quot;</span>,expr1,!
+quit
+</pre></div>
+</div>
+<p>When the ydb_zquit_anyway functionality is diabled, extrinsic function invocations return an error as per the standard.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;write <span class="nv">$zquit</span>
+<span class="m">0</span>
+YDB&gt;write <span class="nv">$$</span>^rtnasfunc<span class="o">(</span><span class="s2">&quot;jdoe&quot;</span><span class="o">)</span>
+Hello jdoe
+%YDB-E-QUITARGREQD, Quit from an extrinsic must have an argument
+</pre></div>
+</div>
+<p>However, if you enable the ydb_zquit_anyway feature, extrinsic function invocations do not return an error.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;write <span class="nv">$zquit</span>
+<span class="m">1</span>
+YDB&gt;write <span class="nv">$$</span>^rtnasfunc<span class="o">(</span><span class="s2">&quot;jdoe&quot;</span><span class="o">)</span>
+Hello jdoe
+YDB&gt;
+</pre></div>
+</div>
+</section>
+<section id="zrealstor">
+<span id="zrealstor-isv"></span><h2><a class="toc-backref" href="isv.html#id58">$ZREALSTOR</a><a class="headerlink" href="isv.html#zrealstor" title="Permalink to this heading">¶</a></h2>
+<p>$ZREALSTOR contains the total memory (in bytes) allocated by the YottaDB process, which may or may not actually be in use. It provides one view (see also <a class="reference internal" href="isv.html#zallocstor-isv"><span class="std std-ref">$ZALLOCSTOR</span></a> and <a class="reference internal" href="isv.html#zusedstor-isv"><span class="std std-ref">$ZUSEDSTOR</span></a>) of the process memory utilization and can help identify storage related problems. YottaDB does not permit $ZREALSTOR to be SET or NEWed.</p>
+</section>
+<section id="zreldate">
+<h2><a class="toc-backref" href="isv.html#id59">$ZRELDATE</a><a class="headerlink" href="isv.html#zreldate" title="Permalink to this heading">¶</a></h2>
+<p>$ZRELDATE provides the UTC date/time of the YottaDB build in the form YYYYMMDD 24:60 ffffffffffffffffffffffffffffffffffffffff (where date/time stamp is in $ZDATE() notation). The third part of the timestamp is the hexadecimal hash assigned by the version control system to identify the last source code commit. While $ZYRELEASE is probably a better identifier for most uses, $ZRELDATE may be a helpful alternative for those testing pre-release builds.</p>
+<p>For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;write <span class="nv">$zreldate</span>
+<span class="m">20200813</span> <span class="m">12</span>:10 177eb8e48098204dafe564cac2bcb84312b2853a
+</pre></div>
+</div>
+</section>
+<section id="zroutines">
+<span id="zroutines-isv"></span><h2><a class="toc-backref" href="isv.html#id60">$ZROUTINES</a><a class="headerlink" href="isv.html#zroutines" title="Permalink to this heading">¶</a></h2>
+<p>$ZRO[UTINES] contains a string value specifying a directory or list of directories containing object files. Each object directory may also have an associated directory, or list of directories, containing the corresponding source files. These directory lists are used by certain YottaDB functions, primarily auto-ZLINK, to locate object and source files. The order in which directories appear in a given list determines the order in which they are searched for the appropriate item.</p>
+<p>Any environment variables that are part of the string used to set $ZROUTINES, either at process startup or explicitly during execution, are expanded to absolute path names. This eliminates the need for application code using $ZROUTINES to do the expansion.</p>
+<p>Searches that use $ZROUTINES treat files as either object or source files. YottaDB treats files with an extension of .o as object files and files with an extension of .m as source files.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Paths used in $ZROUTINES to locate routines must not include embedded spaces, as $ZROUTINES uses spaces as delimiters.</p>
+</div>
+<section id="establishing-the-value-from-ydb-routines">
+<h3><a class="toc-backref" href="isv.html#id61">Establishing the value from $ydb_routines</a><a class="headerlink" href="isv.html#establishing-the-value-from-ydb-routines" title="Permalink to this heading">¶</a></h3>
+<p>If the environment variable <code class="code docutils literal notranslate"><span class="pre">ydb_routines</span></code> is not set when the <code class="code docutils literal notranslate"><span class="pre">yottadb</span></code> process starts, or if it is set to the empty string (<code class="code docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>), YottaDB sets it in the environment to <code class="code docutils literal notranslate"><span class="pre">$ydb_dist/libyottadbutil.so</span></code> if it exists, and to <code class="code docutils literal notranslate"><span class="pre">$ydb_dist</span></code> if it does not, and then uses that value.</p>
+<p>Commands or functions such as DO, GOTO, ZGOTO, ZBREAK, ZPRINT, and $TEXT may auto-ZLINK and thereby indirectly use $ZROUTINES. If their argument does not specify a directory, ZEDIT and explicit ZLINK use $ZROUTINES. ZPRINT and $TEXT use $ZROUTINES to locate a source file if YottaDB cannot find the source file pointed to by the object file. For more information on ZLINK and auto-ZLINK, see the <a class="reference external" href="devcycle.html">“Development Cycle”</a> and <a class="reference external" href="commands.html">“Commands”</a> chapters.</p>
+</section>
+<section id="setting-a-value-for-zroutines">
+<h3><a class="toc-backref" href="isv.html#id62">Setting a Value for $ZROUTINES</a><a class="headerlink" href="isv.html#setting-a-value-for-zroutines" title="Permalink to this heading">¶</a></h3>
+<p>$ZRO[UTINES] is a read-write Intrinsic Special Variable, so M can also SET the value.</p>
+<p>By default, each directory entry in $ZROUTINES is assumed to contain both object and source files. However, each object directory may have an associated directory or list of directories to search for the corresponding source files. This is done by specifying the source directory list, in parentheses, following the object directory specification.</p>
+<p>If the command specifies more than one source directory for an object directory, the source directories must be separated by spaces, and the entire list must be enclosed in parentheses ( ) following the object directory specification. If the object directory should also be searched for source, the name of that directory must be included in the parentheses (usually as the first element in the list). Directory-specifications may also include empty parentheses, directing YottaDB to proceed as if no source files exist for objects located in the qualified directory.</p>
+<p>To set $ZROUTINES outside of M, use the appropriate shell command to set ydb_routines. Because ydb_routines is a list, enclose the value in quotation marks (” “).</p>
+<p>Changes to the value of $ZROUTINES during a YottaDB invocation only last for the current invocation, and do not change the value of ydb_routines.</p>
+<p>Directory specifications may include an environment variable. When YottaDB SETs $ZROUTINES, it translates all environment variables and verifies the syntax and the existence of all specified directories. If $ZROUTINES is set to an invalid value, YottaDB generates a run-time error and does not change the value of $ZROUTINES. Because the environment variables are translated when $ZROUTINES is set, any changes to their definition have no effect until $ZROUTINES is set again.</p>
+</section>
+<section id="zroutines-examples">
+<h3><a class="toc-backref" href="isv.html#id63">$ZROUTINES Examples</a><a class="headerlink" href="isv.html#zroutines-examples" title="Permalink to this heading">¶</a></h3>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;s <span class="nv">$zroutines</span><span class="o">=</span><span class="s2">&quot;.(../src) </span><span class="nv">$ydb_dist</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>This example directs YottaDB to look for object modules first in your current directory, then in the distribution directory that contains the percent routines. YottaDB locates sources for objects in your current directory in the sibling /src directory.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nv">ydb_routines</span><span class="o">=</span><span class="s2">&quot;/usr/jones /usr/smith&quot;</span>
+$ <span class="nb">export</span> ydb_routines
+$ ydb
+YDB&gt;write <span class="nv">$zroutines</span>
+<span class="s2">&quot;/usr/jones /usr/smith&quot;</span>
+YDB&gt;set <span class="nv">$zro</span><span class="o">=</span><span class="s2">&quot;/usr/jones/utl /usr/smith/utl&quot;</span>
+YDB&gt;write <span class="nv">$zroutines</span>
+<span class="s2">&quot;/usr/jones/utl /usr/smith/utl&quot;</span>
+YDB&gt;halt
+$ <span class="nb">echo</span> <span class="nv">$ydb_routines</span>
+/usr/jones /usr/smith
+</pre></div>
+</div>
+<p>This example defines the environment variable ydb_routines. Upon entering YottaDB Direct Mode $zroutines has the value supplied by ydb_routines. The SET command changes the value. When the YottaDB image terminates, the shell echo command demonstrates that ydb_routines has not been modified by the M SET command.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;SET <span class="nv">$ZRO</span><span class="o">=</span><span class="s2">&quot;. /usr/smith&quot;</span>
+</pre></div>
+</div>
+<p>This example sets $zroutines to a list containing two directories.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;SET <span class="nv">$ZRO</span><span class="o">=</span><span class="s2">&quot;. /usr/smith&quot;</span>
+</pre></div>
+</div>
+<p>This example sets $zroutines to a list containing two directories.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;set <span class="nv">$zro</span><span class="o">=</span><span class="s2">&quot;/usr/smith(/usr/smith/tax /usr/smith/fica)&quot;</span>
+</pre></div>
+</div>
+<p>This example specifies that YottaDB should search the directory /usr/smith for object files, and the directories /usr/smith/tax and /usr/smith/fica for source files. Note that in this example. YottaDB does not search /usr/smith for source files.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;set <span class="nv">$zro</span><span class="o">=</span><span class="s2">&quot;/usr/smith(/usr/smith /usr/smith/tax /usr/smith/fica)&quot;</span>
+</pre></div>
+</div>
+<p>This example specifies that YottaDB should search the directory /usr/smith for object files and the directories /usr/smith/tax and /usr/smith/fica for source files. Note that the difference between this example and the previous one is that YottaDB searches /usr/smith for both object and source files.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;set <span class="nv">$zro</span><span class="o">=</span><span class="s2">&quot;/usr/smith /usr/smith/tax() /usr/smith/fica&quot;</span>
+</pre></div>
+</div>
+<p>This specifies that YottaDB should search /usr/smith and /usr/smith/fica for object and source files. However, because the empty parentheses indicate directories searched only for object files, YottaDB does not search /usr/smith/tax for source files.</p>
+<p>Omitting the parentheses indicates that YottaDB can search the directory for both source and object files. $ZROUTINES=/usr/smith is equivalent to $ZROUTINES=/usr/smith(/usr/smith).</p>
+</section>
+<section id="zroutines-search-types">
+<h3><a class="toc-backref" href="isv.html#id64">$ZROUTINES Search Types</a><a class="headerlink" href="isv.html#zroutines-search-types" title="Permalink to this heading">¶</a></h3>
+<p>YottaDB uses $ZRO[UTINES] to perform three types of searches:</p>
+<ul class="simple">
+<li><p>Object-only when the command or function using $ZROUTINES requires a .o file extension.</p></li>
+<li><p>Source-only when the command or function using $ZROUTINES requires a file extension other than .o.</p></li>
+<li><p>Object-source match when the command or function using $ZROUTINES does not specify a file extension.</p></li>
+</ul>
+<p>An explicit ZLINK that specifies a non .OBJ .o extension is considered to be a function that has not specified a file extension for the above searching purposes.</p>
+<p>All searches proceed from left to right through $ZROUTINES. By default, YottaDB searches directories for both source and object files. YottaDB searches directories followed by empty parentheses ( ) for object files only. YottaDB searches directories in parentheses only for source files.</p>
+<p>Once an object-matching search locates an object file, the source search becomes limited. If the directory containing the object file has an attached parenthetical list of directories, YottaDB only searches the directories in the attached list for matching source files. If the directory containing the object files does not have following parentheses, YottaDB restricts the search for matching source files to the same directory. If the object module is in a directory qualified by empty parentheses, YottaDB cannot perform any operation that refers to the source file.</p>
+<p>The following table shows YottaDB commands and functions using $ZROUTINES and the search types they support.</p>
+<p><strong>YottaDB Commands and $ZROUTINES Search Types</strong></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 24%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Search / Function</p></th>
+<th class="head"><p>File Extension Specified</p></th>
+<th class="head" colspan="3"><p>Search Type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p><strong>Obj Only</strong></p></td>
+<td><p><strong>Source Only</strong></p></td>
+<td><p><strong>Match</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>EXPLICIT ZLINK</p></td>
+<td><p>.o</p></td>
+<td><p>X</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Not .o</p></td>
+<td></td>
+<td></td>
+<td><p>X</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>None</p></td>
+<td></td>
+<td></td>
+<td><p>X</p></td>
+</tr>
+<tr class="row-even"><td><p>AUTO-ZLINK</p></td>
+<td><p>None</p></td>
+<td></td>
+<td></td>
+<td><p>X</p></td>
+</tr>
+<tr class="row-odd"><td><p>ZEDIT</p></td>
+<td><p>Not .o</p></td>
+<td></td>
+<td><p>X</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ZPRINT</p></td>
+<td><p>None</p></td>
+<td></td>
+<td><p>X</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>$TEXT</p></td>
+<td><p>None</p></td>
+<td></td>
+<td><p>X</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>If ZPRINT or $TEXT() require a source module for a routine that is not in the current image, YottaDB first performs an auto-ZLINK with a matching search.</p>
+<p>ZPRINT or $TEXT locate the source module using a file specification for the source file located in the object module. If YottaDB finds the source module in the directory where it was when it was compiled, the run-time system does not use $ZROUTINES. If YottaDB cannot find the source file in the indicated location, the run-time system uses $ZROUTINES.</p>
+</section>
+<section id="zroutines-search-examples">
+<h3><a class="toc-backref" href="isv.html#id65">$ZROUTINES Search Examples</a><a class="headerlink" href="isv.html#zroutines-search-examples" title="Permalink to this heading">¶</a></h3>
+<p>This section describes a model for understanding $ZROUTINES operations and the illustrating examples, which may assist you if you wish to examine the topic closely.</p>
+<p>You may think of $ZROUTINES as supplying a two dimensional matrix of places to look for files. The matrix has one or more rows. The first row in the matrix contains places to look for object files and the second and following rows contain places to look for source files. Each column represents the set of places that contain information related to the object modules in the first row of the column.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;s <span class="nv">$zro</span><span class="o">=</span><span class="s2">&quot;. /usr/smi/utl() /usr/jon/utl</span>
+<span class="s2">(/usr/jon/utl/so /usr/smi/utl)&quot;</span>
+</pre></div>
+</div>
+<p>The following table illustrates the matrix view of this $ZROUTINES.</p>
+<p><strong>$ZROUTINES Search Matrix</strong></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 27%" />
+<col style="width: 29%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Search For</p></th>
+<th class="head"><p>Column 1</p></th>
+<th class="head"><p>Column 2</p></th>
+<th class="head"><p>Column 3</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>OBJECTS</p></td>
+<td><p>.</p></td>
+<td><p>/usr/smi/utl</p></td>
+<td><p>/usr/jon/utl</p></td>
+</tr>
+<tr class="row-odd"><td><p>SOURCE</p></td>
+<td><p>.</p></td>
+<td></td>
+<td><p>/usr/jon/utl/so</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td></td>
+<td><p>/usr/smi/utl</p></td>
+</tr>
+</tbody>
+</table>
+<p>To perform object-only searches, YottaDB searches only the directories or object libraries in the top ‘objects’ row for each column starting at column one. If YottaDB does not locate the object file in a directory or object library in the ‘objects’ row of a column, YottaDB begins searching again in the next column. If YottaDB cannot locate the file in any of the columns, it issues a run-time error.</p>
+<p>As illustrated in the preceding table, YottaDB searches for object files in the directories . ,/usr/smi/utl and /usr/jon/utl.</p>
+<p>To perform source-only searches, YottaDB looks down to the ‘source’ row at the bottom of each column, excluding columns headed by object-only directories (that is, those object directories, which consist of an empty list of source directories) or object libraries. If YottaDB cannot locate the source file in the ‘source’ row of a column, it searches the next eligible column.</p>
+<p>To perform object-source match searches, YottaDB looks at each column starting at column one. YottaDB does an object-only search in the ‘objects’ row of a column and a source-only search in the ‘source’ row(s) of a column. If YottaDB locates either the object-file or the source-file, the search is completed. Else, YottaDB starts searching the next column. If YottaDB cannot locate either the object file or the source file in any of the columns, it issues a run-time error.</p>
+<p>As illustrated in the preceding table, YottaDB searches for source-files in the directory “.” in column one. If YottaDB cannot locate the source file in “.”, it omits column two because it is an object-only directory and instead searches column three. Since column three specifies /usr/jon/utl/so and /usr/smi/utl, YottaDB searches for the source-file in these directories in column three and not in /usr/jon/utl. If YottaDB cannot locate the source-file in column three, it terminates the search and issues a run-time error.</p>
+<p>Once the object-source match search is done, YottaDB now has either the object-file or source-file or both available. YottaDB then recompiles the source-file based on certain conditions, before linking the object-file into the current image. See “ZLink” for more information on those conditions.</p>
+<p>If auto-ZLINK or ZLINK determines that the source file requires [re]compilation, YottaDB places the object file in the above object directory in the same column as the source file. For example, if YottaDB locates the source file in /usr/smi/utl in column three, YottaDB places the resultant object file in /usr/jon/utl.</p>
+</section>
+<section id="shared-library-file-specification-in-zroutines">
+<h3><a class="toc-backref" href="isv.html#id66">Shared Library File Specification in $ZROUTINES</a><a class="headerlink" href="isv.html#shared-library-file-specification-in-zroutines" title="Permalink to this heading">¶</a></h3>
+<p>The $ZROUTINES ISV allows individual UNIX shared library file names to be specified in the search path. During a search for auto-ZLINK, when a shared library is encountered, it is probed for a given routine and, if found, that routine is linked/loaded into the image. During an explicit ZLINK, all shared libraries in $ZROUTINES are ignored and are not searched for a given routine.</p>
+<p>$ZROUTINES syntax contains a file-specification indicating shared library file path. YottaDB does not require any designated extension for the shared library component of $ZROUTINES. Any file specification that does not name a directory is treated as a shared library. However, it is recommended that the extension commonly used on a given platform for shared library files be given to any YottaDB shared libraries. See “Linking YottaDB Shared Images”. A shared library component cannot specify source directories. YottaDB reports an error at an attempt to associate any source directory with a shared library in $ZROUTINES.</p>
+<p>The following traits of $ZROUTINES help support shared libraries:</p>
+<ul class="simple">
+<li><p>The $ZROUTINES search continues to find objects in the first place, processing from left to right, that holds a copy; it ignores any copies in subsequent locations. However, now for auto-ZLINK, shared libraries are accepted as object repositories with the same ability to supply objects as directories.</p></li>
+<li><p>Explicit ZLINK, never searches Shared Libraries. This is because explicit ZLINK is used to link a newly created routine or to re-link a modified routine and there is no mechanism to load new objects into an active shared library.</p></li>
+<li><p>ZPRINT and $TEXT() of the routines in a shared library, read source file path from the header of the loaded routine. If the image does not contain the routine, an auto-ZLINK is initiated. If the source file path recorded in the routine header when the module was compiled cannot be located, ZPRINT and $TEXT() initiate a search from the beginning of $ZROUTINES, skipping over the shared library file specifications. If the located source does not match the code in image (checked via checksum), ZPRINT generates an object-source mismatch status and $TEXT() returns a null string.</p></li>
+<li><p>ZEDIT, when searching $ZROUTINES, skips shared libraries like explicit ZLINK for the same reasons. $ZSOURCE ISV is implicitly set to the appropriate source file.</p></li>
+</ul>
+<p>For example, if libshare.so is built with foo.o compiled from ./shrsrc/foo.m, the following commands specify that YottaDB should search the library ./libshare.so for symbol foo when do ^foo is encountered.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;SET <span class="nv">$ZROUTINES</span><span class="o">=</span><span class="s2">&quot;./libshare.so ./obj(./shrsrc)&quot;</span>
+YDB&gt;DO ^foo<span class="p">;</span>auto-ZLINK foo - shared
+YDB&gt;ZEDIT <span class="s2">&quot;foo&quot;</span><span class="p">;</span>edit ./shrsrc/foo.m
+YDB&gt;W <span class="nv">$ZSOURCE</span>,!<span class="p">;</span>prints foo
+YDB&gt;ZPRINT +0^foo<span class="p">;</span>issues a source-object mismatch status TXTSRCMAT error message
+YDB&gt;ZLINK <span class="s2">&quot;foo&quot;</span><span class="p">;</span>re-compile ./shrsrc/foo.m to generate ./obj/foo.o.
+YDB&gt;W <span class="nv">$TEXT</span><span class="o">(</span>+0^foo<span class="o">)</span><span class="p">;</span>prints foo
+</pre></div>
+</div>
+<p>Note that ZPRINT reports an error, as foo.m does not match the routine already linked into image. Also note that, to recompile and re-link the ZEDITed foo.m, its source directory needs to be attached to the object directory [./obj] in $ZROUTINES. The example assumes the shared library (libshare.so) has been built using shell commands. For the procedure to build a shared library from a list of YottaDB generated object (.o) files, see “Linking YottaDB Shared Images” below.</p>
+<p><strong>Linking YottaDB Shared Images</strong></p>
+<p>Following are the steps (UNIX system commands, and YottaDB commands) that need to be taken to use YottaDB shared image linking with $ZROUTINES.</p>
+<ul class="simple">
+<li><p><em>Compile source (.m) files to object (.o) files</em></p></li>
+</ul>
+<p>In order to share M routines, YottaDB generates objects (.o) with position independent code, a primary requirement for shared libraries. No change to the compiling procedures is needed. However, any objects generated by a previous release must be recompiled.</p>
+<ul class="simple">
+<li><p><em>Create a shared library from object (.o) files</em></p></li>
+</ul>
+<p>To create a shared library, use the following syntax:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ld -shared -o libshr.so file1.o file2.o
+</pre></div>
+</div>
+<p>Where libshr.so is replaced with name of the shared library one wishes to create. The file1.o and file2.o are replaced with one or more object files created by the YottaDB compiler that the user wishes to put into the shared library. Refer to the ld man page on specific platform for details.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Source directories cannot be specified with a shared library in $ZROUTINES, as YottaDB does not support additions or modifications to active shared libraries. Searching for a routine in a shared library is a two step process: (1) Load the library and (2) Lookup the symbol corresponding to the M entryref. Since YottaDB always performs the first step (even on platforms with no shared binary support), use shared libraries in $ZROUTINES with care to keep the process footprint minimal. On all platforms, it is strongly recommended not to include unused shared libraries in $ZROUTINES.</p>
+</div>
+<ul class="simple">
+<li><p><em>Establish $ZROUTINES from ydb_routines</em></p></li>
+</ul>
+<p>When the environment variable ydb_routines is defined, YottaDB initializes $ZROUTINES to the value of ydb_routines. The $ZROUTINES ISV can also be modified using SET command.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nv">ydb_routines</span><span class="o">=</span><span class="s2">&quot;./libabc.so ./obj(./src)&quot;</span>
+$ <span class="nb">export</span> ydb_routines
+$ yottadb -direct
+YDB&gt;w <span class="nv">$ZROUTINES</span>,!<span class="p">;</span>writes <span class="s2">&quot;./libabc.so ./obj(./src)&quot;</span>
+YDB&gt;do ^a<span class="p">;</span>runs ^a from libabc.so
+YDB&gt;do ^b<span class="p">;</span>runs ^b from libabc.so
+YDB&gt;do ^c<span class="p">;</span>runs ^c from libabc.so
+YDB&gt;h
+$
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><em>$ZROUTINES settings for auto-relink</em></p></li>
+</ul>
+<p>By suffixing one or more directory names in $ZROUTINES with a single asterisk (*), processes can subscribe to updates of object files published in those directories. At the invocation of DO, GOTO, or ZGOTO, extrinsic functions, $TEXT(), or ZPRINT that specify an entryref which includes a routine name (vs. a label without a routine name), yottadb processes (and mupip processes executing trigger logic) automatically relink (“auto-relink”) and execute published new versions of routines.</p>
+<ul class="simple">
+<li><p>Label references (that is, without a routine name), whether direct or through indirection, always refer to the current routine, and do not invoke auto-relink logic.</p></li>
+<li><p>Use shell quoting rules when appending asterisks to directory names in the ydb_routines environment variable - asterisks must be passed in to YottaDB, and not expanded by the shell.</p></li>
+<li><p>YottaDB accepts but ignores asterisk suffixes to directory names on 32-bit Linux on x86 platforms, where it does not provide auto-relinking.</p></li>
+<li><p>Changing $ZROUTINES causes all routines linked from auto-relink-enabled directories in the process to be re-linked.</p></li>
+<li><p>Note that a relink does not automatically reload a routine every time. When YottaDB initiates a relink and the object file (object hash) is the same as the existing one, YottaDB bypasses the relink and uses the existing object file.</p></li>
+</ul>
+<p>The ZRUPDATE command publishes new versions of routines to subscribers.</p>
+</section>
+</section>
+<section id="zsource">
+<span id="zsource-isv"></span><h2><a class="toc-backref" href="isv.html#id67">$ZSOURCE</a><a class="headerlink" href="isv.html#zsource" title="Permalink to this heading">¶</a></h2>
+<p>$ZSO[URCE] contains a string value specifying the default pathname for the ZEDIT and ZLINK commands. ZEDIT or ZLINK without an argument is equivalent to ZEDIT/ZLINK $ZSOURCE.</p>
+<p>$ZSOURCE initially contains the null string. When ZEDIT and ZLINK commands have a pathname for an argument, they implicitly set $ZSOURCE to that argument. This ZEDIT/ZLINK argument can include a full pathname or a relative one. A relative path could include a file in the current directory, or the path to the file from the current working directory. In the latter instance, do not include the slash before the first directory name. $ZSOURCE will prefix the path to the current working directory including that slash.</p>
+<p>The file name may contain a file extension. If the extension is .m or .o, $ZSOURCE drops it. The ZEDIT command accepts arguments with extensions other than .m or .o. $ZSOURCE retains the extension when such arguments are passed.</p>
+<p>If $ZSOURCE contains a file with an extension other than .m or .o, ZEDIT processes it but ZLINK returns an error message</p>
+<p>$ZSOURCE is a read-write Intrinsic Special Variable, (i.e., it can appear on the left side of the equal sign (=) in the argument to the SET command). A $ZSOURCE value may include an environment variable. YottaDB handles logical names that translate to other logical names by performing iterative translations.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;ZEDIT <span class="s2">&quot;subr.m&quot;</span>
+.
+.
+YDB&gt;WRITE <span class="nv">$ZSOURCE</span>
+subr
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;ZEDIT <span class="s2">&quot;test&quot;</span>
+.
+.
+.
+YDB&gt;WRITE <span class="nv">$ZSOURCE</span>
+<span class="s2">&quot;test&quot;</span>
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;ZEDIT <span class="s2">&quot;/usr/smith/report.txt&quot;</span>
+.
+.
+.
+YDB&gt;WRITE <span class="nv">$ZSOURCE</span>
+/usr/smith/report.txt
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;ZLINK <span class="s2">&quot;BASE.O&quot;</span>
+.
+.
+.
+YDB&gt;WRITE <span class="nv">$ZSOURCE</span>
+BASE
+</pre></div>
+</div>
+</section>
+<section id="zstatus">
+<span id="zstatus-isv"></span><h2><a class="toc-backref" href="isv.html#id68">$ZSTATUS</a><a class="headerlink" href="isv.html#zstatus" title="Permalink to this heading">¶</a></h2>
+<p>$ZS[TATUS] contains a string value specifying the error condition code and location of the last exception condition that occurred during routine execution.</p>
+<p>YottaDB maintains $ZSTATUS as a string consisting of three or more substrings. The string consists of the following:</p>
+<ul class="simple">
+<li><p>An error message number as the first substring.</p></li>
+<li><p>The entryref of the line in error as the second substring; a comma (,) separates the first and second substrings.</p></li>
+<li><p>The message detail as the third substring. The format of this is a percent sign (%) identifying the message facility, a hyphen (-) identifying the error severity, another hyphen identifying the message identification followed by a comma (,), which is followed by the message text if any:</p></li>
+</ul>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Format: %&lt;FAC&gt;-&lt;SEV&gt;-&lt;ID&gt;, &lt;TEXT&gt;
+Example: %YDB-E-DIVZERO, Attempt to divide by zero
+</pre></div>
+</div>
+<p>YottaDB sets $ZSTATUS when it encounters errors during program execution, but not when it encounters errors in a Direct Mode command.</p>
+<p>$ZSTATUS is a read-write Intrinsic Special Variable, (i.e., it can occur on the left side of the equal sign (=) in the argument to the SET command). While it will accept any string, YottaDB recommends setting it to null. M routines cannot modify $ZSTATUS with the NEW command.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;WRITE <span class="nv">$ZSTATUS</span>
+<span class="m">150373110</span>,+1^MYFILE,%YDB-E-DIVZERO,
+Attempt to divide by zero
+</pre></div>
+</div>
+<p>This example displays the status generated by a divide by zero (0).</p>
+</section>
+<section id="zstep">
+<span id="zstep-isv"></span><h2><a class="toc-backref" href="isv.html#id69">$ZSTEP</a><a class="headerlink" href="isv.html#zstep" title="Permalink to this heading">¶</a></h2>
+<p>$ZST[EP] contains a string value specifying the default action for the ZSTEP command. $ZSTEP provides the ZSTEP action only when the ZSTEP command does not specify an action.</p>
+<p>$ZSTEP initially contains the the value of the $ydb_zstep environment variable or string “B” if $ydb_zstep is not defined; note that the default “B” causes the process to enter direct mode. $ZSTEP is a read-write Intrinsic Special Variable, (that is, it can appear on the left side of the equal sign (=) in the argument to the SET command).</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;WRITE <span class="nv">$ZSTEP</span>
+B
+YDB&gt;
+</pre></div>
+</div>
+<p>This example displays the current value of $ZSTEP, which is the default.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;SET <span class="nv">$ZSTEP</span><span class="o">=</span><span class="s2">&quot;ZP @</span><span class="nv">$ZPOS</span><span class="s2"> B&quot;</span>
+</pre></div>
+</div>
+<p>This example sets $ZSTEP to code that displays the contents of the next line to execute, and then enters Direct Mode.</p>
+</section>
+<section id="zstrpllim">
+<span id="zstrpllim-isv"></span><h2><a class="toc-backref" href="isv.html#id70">$ZSTRPLLIM</a><a class="headerlink" href="isv.html#zstrpllim" title="Permalink to this heading">¶</a></h2>
+<p>$ZSTRP[LLIM] provides a way for a process to limit its process private memory used for local variable and scratch storage. When the value is 0 or negative, the default, there is no limit. A positive value specifies a byte limit. When a request for additional memory exceeds the limit, YottaDB does the expansion and then produces an STPCRIT error. By default, a later request for memory produces an STPOFLOW, unless subsequent to STPCRIT , $ZSTRPLLIM has been set to the same or higher limit. Note that YottaDB allocates memory in large blocks so the interaction of $ZSTRPLLIM with memory growth is not exact. When the ydb_string_pool_limit environment variable specifies a positive value, YottaDB uses it for the initial value of $ZSTRPLLIM.</p>
+</section>
+<section id="zsystem">
+<span id="zsystem-isv"></span><h2><a class="toc-backref" href="isv.html#id71">$ZSYSTEM</a><a class="headerlink" href="isv.html#zsystem" title="Permalink to this heading">¶</a></h2>
+<p>$ZSY[STEM] holds the value of the status code for the last subprocess invoked with the ZSYSTEM command.</p>
+</section>
+<section id="ztexit">
+<h2><a class="toc-backref" href="isv.html#id72">$ZTEXIT</a><a class="headerlink" href="isv.html#ztexit" title="Permalink to this heading">¶</a></h2>
+<p>$ZTE[XIT] contains an expression that controls the YottaDB interrupt facility at the transaction commit or rollback. At each outermost TCOMMIT or TROLLBACK, If +$ZTEXIT evaluates to non-zero (TRUE), then $ZINTERRUPT is XECUTEd after completing the commit or rollback.</p>
+<p>$ZTEXIT is a read-write ISV, that is, it can appear on the left side of the equal sign (=) in the argument to the SET command. M routines cannot NEW $ZTEXIT. YottaDB initializes $ZTEXIT to null at the process startup. Note that the changes to the value of $ZTEXIT during a YottaDB invocation last for the entire duration of the process, so it is the application’s responsibility to reset $ZTEXIT after $ZINTERRUPT is delivered in order to turn off redelivering the interrupt every subsequent transaction commit or rollback.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">export</span> <span class="nv">sigusrval</span><span class="o">=</span><span class="m">10</span>
+$ ydb
+YDB&gt;zprint ^ztran
+foo<span class="p">;</span>
+  <span class="nb">set</span> <span class="nv">$ztexit</span><span class="o">=</span><span class="m">1</span>
+  <span class="nb">set</span> <span class="nv">$zinterrupt</span><span class="o">=</span><span class="s2">&quot;d ^throwint&quot;</span>
+  tstart <span class="o">()</span>
+  <span class="k">for</span> <span class="nv">i</span><span class="o">=</span><span class="m">1</span>:1:10 <span class="k">do</span>
+  . <span class="nb">set</span> ^ACN<span class="o">(</span>i,<span class="s2">&quot;bal&quot;</span><span class="o">)=</span>i*100
+  tstart <span class="o">()</span>
+  <span class="k">do</span> ^throwint
+  <span class="p">;</span><span class="k">do</span> ^proc
+  tcommit:<span class="nv">$tlevel</span><span class="o">=</span><span class="m">2</span>
+  <span class="k">for</span> <span class="nv">i</span><span class="o">=</span><span class="m">1</span>:1:10 <span class="k">do</span>
+  . <span class="nb">set</span> ^ACN<span class="o">(</span>i,<span class="s2">&quot;int&quot;</span><span class="o">)=</span>i*0.05
+  <span class="p">;</span><span class="k">do</span> ^srv
+  <span class="k">if</span> <span class="nv">$tlevel</span> trollback
+  <span class="p">;</span><span class="k">do</span> ^exc
+  <span class="nb">set</span> <span class="nv">$ztexit</span><span class="o">=</span><span class="s2">&quot;&quot;</span>,<span class="nv">$zinterrupt</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+  quit
+bar<span class="p">;</span>
+  write <span class="s2">&quot;Begin Transaction&quot;</span>,!
+  <span class="nb">set</span> <span class="nv">$ztexit</span><span class="o">=</span><span class="m">1</span>
+  tstart <span class="o">()</span>
+  i <span class="s1">&#39;$zsigproc($j,$ztrnlnm(&quot;sigusrval&quot;)) write &quot;interrupt sent...&quot;,!!</span>
+<span class="s1">  for i=1:1:4 set ^B(i)=i*i</span>
+<span class="s1">  tcommit</span>
+<span class="s1">  write &quot;End Transaction&quot;,!</span>
+<span class="s1">  ;do ^srv</span>
+<span class="s1">  quit</span>
+<span class="s1">YDB&gt;zprint ^throwint</span>
+<span class="s1">throwint</span>
+<span class="s1">  set $zinterrupt=&quot;write !,&quot;&quot;interrupt occurred at : &quot;&quot;,$stack($stack-1,&quot;&quot;PLACE&quot;&quot;),! set $ztexit=1&quot;</span>
+<span class="s1">  if &#39;</span><span class="nv">$zsigproc</span><span class="o">(</span><span class="nv">$job</span>,<span class="nv">$ztrnlnm</span><span class="o">(</span><span class="s2">&quot;sigusrval&quot;</span><span class="o">))</span> write <span class="s2">&quot;interrupt sent to process&quot;</span>
+  write <span class="s2">&quot;***************************************&quot;</span>,!!
+  quit
+YDB&gt;do foo^ztran
+interrupt sent to process
+interrupt occurred at : throwint+3^throwint
+***************************************
+interrupt occurred at : foo+13^ztran
+YDB&gt;
+</pre></div>
+</div>
+<p>In the above call to foo^ztran, the interrupt handler is a user-defined routine, throwint. The process is sent a signal (SIGUSR1), and $ZINTERRUPT is executed. At the outermost trollback, the interrupt is rethrown, causing $ZINTERRUPT to be executed again.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;w <span class="nv">$zinterrupt</span>
+<span class="s2">&quot;IF </span><span class="nv">$ZJOBEXAM</span><span class="s2">()&quot;</span>
+YDB&gt;zsystem <span class="s2">&quot;ls YDB_JOBEXAM*&quot;</span>
+ls: No match.
+YDB&gt;do bar^ztran
+Begin Transaction
+interrupt sent...
+End Transaction
+YDB&gt;zsystem <span class="s2">&quot;ls YDB_JOBEXAM*&quot;</span>
+YDB_JOBEXAM.ZSHOW_DMP_3951_1  YDB_JOBEXAM.ZSHOW_DMP_3951_2
+YDB&gt;
+</pre></div>
+</div>
+<p>This uses the default value of $ZINTERRUPT to service interrupts issued to the process. The $ZJOBEXAM function executes a ZSHOW “*”, and stores the output in each YDB_ZJOBEXAM_ZSHOW_DMP for the initial interrupt, and at tcommit when the interrupt is rethrown.</p>
+</section>
+<section id="ztimeout">
+<h2><a class="toc-backref" href="isv.html#id73">$ZTIMEOUT</a><a class="headerlink" href="isv.html#ztimeout" title="Permalink to this heading">¶</a></h2>
+<p>$ZTIMEOUT controls a single process wide timer. The format of the $ZTIMEOUT ISV is:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ZTIMeout=([timeout][:labelref])
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The optional timeout in seconds specifies with millisecond accuracy how long from the current time the timer interrupts the process. If the specified timeout is negative, YottaDB cancels the timer. If the timeout is zero, YottaDB treats it as it would a DO of the vector.</p></li>
+<li><p>The optional labelref specifies a code vector defining a fragment of M code to which YottaDB transfers control as if with a DO when the timeout expires. If the timeout is missing, the assignment must start with a colon and only changes the vector, and in this case, if the timeout is the empty string, YottaDB removes any current vector.</p></li>
+</ul>
+<p>Note that YottaDB only recognizes interrupts such as from $ZTIMEOUT at points where it can properly resume operation, such as the beginning of a line, when waiting for a command with a timeout, or when starting a FOR iteration. When a timeout occurs, if the last assignment specified no vector, YottaDB uses the current $ETRAP or $ZTRAP. YottaDB rejects an attempted KILL of $ZTIMeout with the VAREXPECTED error and an attempted NEW of $ZTIMeout with the SVNONEW error.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;zprint ^ztimeout
+ztimeout
+  <span class="p">;</span> Display <span class="nv">$ztimeout</span>
+    write !,<span class="nv">$ztimeout</span>               <span class="p">;</span> display <span class="nv">$ZTIMeout</span> - <span class="k">in</span> this <span class="k">case</span> the initial value -1
+                                    <span class="p">;</span> <span class="nb">set</span> with a vector <span class="o">(</span><span class="k">do</span> ^TIMEOUT<span class="o">)</span>
+    <span class="nb">set</span> <span class="nv">$ztimeout</span><span class="o">=</span><span class="s2">&quot;60:do ^TIMEOUT&quot;</span>  <span class="p">;</span> timeout of <span class="m">1</span> minute. After timeout expires, XECUTEs <span class="k">do</span> ^TIMEOUT
+    write !,<span class="nv">$ztimeout</span>               <span class="p">;</span> displays the remaining time:vector <span class="k">until</span> timeout
+  <span class="p">;</span> <span class="nb">set</span> without a vector
+    <span class="nb">set</span> <span class="nv">$ztimeout</span><span class="o">=</span><span class="m">120</span>               <span class="p">;</span> <span class="nb">set</span> the timeout to <span class="m">2</span> minutes without changing the vector
+    <span class="nb">set</span> <span class="nv">$ztimeout</span><span class="o">=</span><span class="s2">&quot;1234do ^TIMEOUT&quot;</span> <span class="p">;</span> missing colon creates a timeout <span class="k">for</span> <span class="m">1234</span> seconds
+    <span class="nb">set</span> <span class="nv">$ztimeout</span><span class="o">=</span><span class="s2">&quot;10:&quot;</span>             <span class="p">;</span> <span class="nb">set</span> the timeout to <span class="m">10</span> seconds and vector to current etrap or ztrap
+    <span class="nb">set</span> <span class="nv">$ztimeout</span><span class="o">=</span>-1                <span class="p">;</span> <span class="nb">set</span> cancels the timeout
+  <span class="p">;</span> Note that <span class="nb">set</span> to <span class="m">0</span> triggers an immediate timeout
+    <span class="nb">set</span> <span class="nv">$ztimeout</span><span class="o">=</span><span class="m">0</span>                 <span class="p">;</span> triggers the current vector
+    <span class="nb">set</span> <span class="nv">$ztimeout</span><span class="o">=</span><span class="s2">&quot;0:DO FOO&quot;</span>        <span class="p">;</span> this has the same effect as DO FOO
+YDB&gt;
+</pre></div>
+</div>
+</section>
+<section id="ztrap">
+<span id="ztrap-isv"></span><h2><a class="toc-backref" href="isv.html#id74">$ZTRAP</a><a class="headerlink" href="isv.html#ztrap" title="Permalink to this heading">¶</a></h2>
+<p>$ZT[RAP] contains a string value that YottaDB XECUTEs when an error occurs during routine execution.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The following discussion assumes that $ETRAP error handling is simultaneously not in effect (that is, $ETRAP=””).  See <a class="reference external" href="errproc.html">Chapter 13: “Error Processing”</a> for more information on the interaction between $ETRAP and $ZTRAP.</p>
+</div>
+<p>When the $ZTRAP variable is not null, YottaDB executes $ZTRAP at the current level. The $ZTRAP variable has the initial value of “B,” and puts the process in Direct Mode when an error condition occurs. If the value of $ZTRAP is null (“”), an exception causes the image to run-down with the condition code associated with the exception. If $ZTRAP contains invalid source code, YottaDB displays an error message and puts the process into Direct Mode.</p>
+<p>$ZTRAP is a read-write Intrinsic Special Variable, (that is, it can appear on the left side of the equal sign (=) in the argument to the SET command).</p>
+<p>$ZTRAP may also appear as an argument to an inclusive NEW command. NEW $ZTRAP causes YottaDB to stack the current $ZTRAP value, and set its value to the empty string ($ZTRAP=””). The NEW command puts the $ZTRAP in control for error handling. When the program QUITs from the invocation level where the NEW occurred, YottaDB restores the value previously stacked by the NEW. NEW $ZTRAP provides nesting of $ZTRAP. Because $ZTRAP=”” terminates the image when an error occurs, SET $ZTRAP= generally follows immediately after NEW $ZTRAP. You may use this technique to construct error handling strategies corresponding to the nesting of your programs. If the environment variable ydb_ztrap_new evaluates to boolean TRUE (case insensitive string “TRUE”, or case insensitive string “YES”, or a non-zero number), $ZTRAP is NEWed when $ZTRAP is SET; otherwise $ZTRAP is not stacked when it is SET.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>QUIT from a $ZTRAP terminates the level at which the $ZTRAP was activated.</p>
+</div>
+<p>Keep $ZTRAP simple and put complicated logic in another routine. If the action specified by $ZTRAP results in another run-time error before changing the value of $ZTRAP, YottaDB invokes $ZTRAP until it exhausts the process stack space, terminating the image. Carefully debug exception handling.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;S <span class="nv">$ZTRAP</span><span class="o">=</span><span class="s2">&quot;ZP @</span><span class="nv">$ZPOS</span><span class="s2"> B&quot;</span>
+</pre></div>
+</div>
+<p>This example modifies $ZTRAP to display source code for the line where YottaDB encounters an error before entering Direct Mode.</p>
+<p>There are four settings of $ZTRAP controlled by the UNIX environment variable ydb_ztrap_form.</p>
+<p>The four settings of ydb_ztrap_form are:</p>
+<ul class="simple">
+<li><p>code - If ydb_ztrap_form evaluates to “code” (or a value that is not one of the subsequently described values), then YottaDB treats $ZTRAP as code and handles it as previously described in the documentation.</p></li>
+<li><p>entryref - If ydb_ztrap_form evaluates to “entryref” then YottaDB treats it as an entryref argument to an implicit GOTO command.</p></li>
+<li><p>adaptive - If ydb_ztrap_form evaluates to “adaptive” then if $ZTRAP does not compile to valid M code, then $ZTRAP is treated as just described for “entryref.” Since there is little ambiguity, code and entryref forms of $ZTRAP can be intermixed in the same application.</p></li>
+<li><p>pope[ntryref] / popa[daptive] - If ydb_ztrap_form evaluates to “POPE[NTRYREF]” or “POPA[DAPTIVE]” (case insensitive) and $ZTRAP value is in the form of entryref, YottaDB unwinds the M stack from the level at which an error occurred to (but not including) the level at which $ZTRAP was last SET. Then, YottaDB transfers control to the entryref in $ZTRAP at the level where the $ZTRAP value was SET. If the UNIX environment variable ydb_zyerror is defined to a valid entryref, YottaDB transfers control to the specified entryref (with an implicit DO) after unwinding the stack and before transferring control to the entryref specified in $ZTRAP.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>YottaDB attempts to compile $ZTRAP before evaluating $ZTRAP as an entryref. Because YottaDB allows commands without arguments such as QUIT, ZGOTO, or HANG as valid labels, be careful not to use such keywords as labels for error handling code in “adaptive” mode.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Like $ZTRAP values, invocation of device EXCEPTION values follow the pattern specified by the current ydb_ztrap_form setting except that there is never any implicit popping with EXCEPTION action.</p>
+</div>
+</section>
+<section id="zusedstor">
+<span id="zusedstor-isv"></span><h2><a class="toc-backref" href="isv.html#id75">$ZUSEDSTOR</a><a class="headerlink" href="isv.html#zusedstor" title="Permalink to this heading">¶</a></h2>
+<p>$ZUSEDSTOR is the value in $ZALLOCSTOR minus storage management overhead and represents the actual memory, in bytes, requested by current activities. It provides one view (see also <a class="reference internal" href="isv.html#zallocstor-isv"><span class="std std-ref">$ZALLOCSTOR</span></a> and <a class="reference internal" href="isv.html#zrealstor-isv"><span class="std std-ref">$ZREALSTOR</span></a>) of the process memory utilization and can help identify storage related problems. YottaDB does not permit $ZUSEDSTOR to be SET or NEWed.</p>
+</section>
+<section id="zut">
+<h2><a class="toc-backref" href="isv.html#id76">$ZUT</a><a class="headerlink" href="isv.html#zut" title="Permalink to this heading">¶</a></h2>
+<p>$ZUT (UNIX time or universal time) returns the number of microseconds since January 1, 1970 00:00:00 UTC, which provides a time stamp for directly comparing different timezones. $ZUT accuracy is subject to the precision of the system clock (use man gettimeofday from the UNIX shell for more information).</p>
+</section>
+<section id="zversion">
+<h2><a class="toc-backref" href="isv.html#id77">$ZVERSION</a><a class="headerlink" href="isv.html#zversion" title="Permalink to this heading">¶</a></h2>
+<p>$ZV[ERSION] contains a string value identifying the GT.M version on which the YottaDB release is built. $ZV[ERSION] is a space-delimited string with four pieces as follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;product&gt; &lt;release&gt; &lt;OS&gt; &lt;architecture&gt;
+</pre></div>
+</div>
+<p>&lt;product&gt; is always “GT.M”.</p>
+<p>&lt;release&gt; always begins with “V”, and has the structure V&lt;DB_Format&gt;.&lt;major_release&gt;-&lt;minor_release&gt;[&lt;bug_fix_level&gt;] where:</p>
+<ul class="simple">
+<li><p>&lt;DB_Format&gt; identifies the block format of YottaDB database files compatible with the release. For example, V4, V5, and V6. The &lt;DB_Format&gt; piece in $ZVERSION does not change even when a MUPIP UPRGRADE or MUPIP DOWNGRADE changes the DB Format element in the database fileheader.</p></li>
+<li><p>&lt;major_release&gt; identifies a release with major enhancements.</p></li>
+<li><p>&lt;minor_release&gt; identifies minor enhancements to a major release. The classification of major and minor enhancements is at the discretion of GT.M.</p></li>
+<li><p>An optional &lt;bug_fix_level&gt; is an upper-case letter indicating bug fixes but no new enhancements. Note that GT.M is built monolithically and never patched. Even though a bug fix release has only bug fixes, it should be treated as a new GT.M release and installed in a separate directory.</p></li>
+</ul>
+<p>&lt;OS&gt; is the host operating system name.</p>
+<p>&lt;architecture&gt; is the hardware architecture for which the release of GT.M is compiled. Note that GT.M retains its original names for continuity even if vendor branding changes, for example, “RS6000”.</p>
+<p>M routines cannot modify $ZVERSION.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>YottaDB treats $ZVERSION as a literal at compile time. Therefore, always compile with the same version as that used at runtime.</p>
+</div>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;write <span class="nv">$zversion</span>
+GT.M V6.3-008 Linux x86_64
+</pre></div>
+</div>
+<p>This example displays the current version identifier for GT.M.</p>
+<p>See the $ZYRELEASE intrinsic special variable to identify the YottaDB release.</p>
+</section>
+<section id="zyerror">
+<span id="zyerror-isv"></span><h2><a class="toc-backref" href="isv.html#id78">$ZYERROR</a><a class="headerlink" href="isv.html#zyerror" title="Permalink to this heading">¶</a></h2>
+<p>$ZYER[ROR] is a read/write ISV that contains a string value pointing to an entryref. After YottaDB encounters an error, if $ZYERROR is set to a non-null value, YottaDB invokes the routine at the entryref specified by $ZYERROR with an implicit DO. It is intended that the code invoked by $ZYERROR use the value of $ZSTATUS to select or construct a value to which it SETs $ZERROR. If $ZYERROR is not a valid entryref or if an error occurs while executing the entryref specified by $ZYERROR, YottaDB SETs $ZERROR to the error status encountered. YottaDB then returns control to the M code specified by $ETRAP/$ZTRAP or device EXCEPTION.</p>
+<p>$ZYERROR is implicitly NEWed on entry to the routine specified by $ZYERROR. However, if YottaDB fails to compile, YottaDB does not transfer control to the entryref specified by $ZYERROR.</p>
+<p>YottaDB permits $ZYERROR to be modified by the SET and NEW commands.</p>
+</section>
+<section id="zyintrsig">
+<h2><a class="toc-backref" href="isv.html#id79">$ZYINTRSIG</a><a class="headerlink" href="isv.html#zyintrsig" title="Permalink to this heading">¶</a></h2>
+<p>$ZYINTRSIG is a read only ISV that holds the value <code class="code docutils literal notranslate"><span class="pre">&quot;SIGUSR1&quot;</span></code> or <code class="code docutils literal notranslate"><span class="pre">&quot;SIGUSR2&quot;</span></code> depending on whether a <code class="code docutils literal notranslate"><span class="pre">SIGUSR1</span></code> or <code class="code docutils literal notranslate"><span class="pre">SIGUSR2</span></code> signal triggers the current <code class="code docutils literal notranslate"><span class="pre">$ZINTERRUPT</span></code> invocation (i.e. if <code class="code docutils literal notranslate"><span class="pre">$ZINTERRUPT</span></code> is 1). If <code class="code docutils literal notranslate"><span class="pre">$ZINTERRUPT</span></code> is 0, <code class="code docutils literal notranslate"><span class="pre">$ZYINTRSIG</span></code> holds the value <code class="code docutils literal notranslate"><span class="pre">&quot;</span> <span class="pre">&quot;</span></code>. Note that the value can be <code class="code docutils literal notranslate"><span class="pre">&quot;SIGUSR2&quot;</span></code> only if the environment variable <code class="code docutils literal notranslate"><span class="pre">ydb_treat_sigusr2_like_sigusr1</span></code> was set to a non-zero value.</p>
+<p><code class="code docutils literal notranslate"><span class="pre">$ZYINTRSIG</span></code> allows M code inside <code class="code docutils literal notranslate"><span class="pre">$ZINTERRUPT</span></code> differentiate whether it was a <code class="code docutils literal notranslate"><span class="pre">SIGUSR1</span></code> or <code class="code docutils literal notranslate"><span class="pre">SIGUSR2</span></code> that invoked the <code class="code docutils literal notranslate"><span class="pre">$ZINTERRUPT</span></code> mechanism and take different actions if necessary.</p>
+<p>$ZYINTRSIG was added to YottaDB effective release <a class="reference external" href="https://gitlab.com/YottaDB/DB/YDB/-/tags/r1.32">r1.32</a>.</p>
+</section>
+<section id="zyrelease">
+<h2><a class="toc-backref" href="isv.html#id80">$ZYRELEASE</a><a class="headerlink" href="isv.html#zyrelease" title="Permalink to this heading">¶</a></h2>
+<p>The $ZYRE[LEASE] intrinsic special variable contains a string value that application code can use to determine the YottaDB release it is running on. $ZYRELEASE is a space delimited string with four pieces as follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;product&gt;&lt;release&gt;&lt;os&gt;&lt;architecture&gt;
+</pre></div>
+</div>
+<p>&lt;product&gt; is always “YottaDB”.</p>
+<p>&lt;release&gt; always begins with an “r” and is a number structured as follows:</p>
+<ul class="simple">
+<li><p>The number before the decimal point (“.”) is the major release number.</p></li>
+<li><p>A decimal point.</p></li>
+<li><p>The first digit after the decimal point is a minor release number.</p></li>
+<li><p>The second (and last) digit after the decimal point is a bug fix level (so “r3.21” would the first bug fix level of the “r3.20” release).</p></li>
+</ul>
+<p>&lt;os&gt; is the operating system, e.g., “Linux”</p>
+<p>&lt;architecture&gt; is the underlying CPU architecture, e.g., “x86_64”</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>$zyrelease is a read-only intrinsic special variable. As the code generator treats $zyrelease as a string constant known at compile time, and optimizes accordingly, ensure that you run object code only on the same YottaDB release on which you compiled it.</p>
+</div>
+</section>
+<section id="zysqlnull">
+<span id="zysqlnull-isv"></span><h2><a class="toc-backref" href="isv.html#id81">$ZYSQLNULL</a><a class="headerlink" href="isv.html#zysqlnull" title="Permalink to this heading">¶</a></h2>
+<p>The read-only $ZYSQLNULL intrinsic special variable is conceptually equivalent to a logical value of unknown, and can be assigned as the value or used as a subscript of a local variable.</p>
+<p>When $ZYSQLNULL is an operand, the results are as follows:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 66%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Operator(s)</p></td>
+<td><p>Result</p></td>
+</tr>
+<tr class="row-even"><td><p>Binary <code class="code docutils literal notranslate"><span class="pre">!</span></code></p></td>
+<td><p>If the other operand evaluates to true (1), the result is true, otherwise the result is $ZYSQLNULL</p></td>
+</tr>
+<tr class="row-odd"><td><p>Binary <code class="code docutils literal notranslate"><span class="pre">&amp;</span></code></p></td>
+<td><p>If the other operand evalutes to false (0), the result is false, otherwise the result is $ZYSQLNULL</p></td>
+</tr>
+<tr class="row-even"><td><p>All binary operators except <code class="code docutils literal notranslate"><span class="pre">!</span></code> and <code class="code docutils literal notranslate"><span class="pre">&amp;</span></code></p></td>
+<td><p>Regardless of the value of the other operand, the result is $ZYSQLNULL</p></td>
+</tr>
+<tr class="row-odd"><td><p>Unary <code class="code docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p>$ZYSQLNULL</p></td>
+</tr>
+<tr class="row-even"><td><p>Unary <code class="code docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>$ZYSQLNULL</p></td>
+</tr>
+<tr class="row-odd"><td><p>Unary <code class="code docutils literal notranslate"><span class="pre">'</span></code></p></td>
+<td><p>$ZYSQLNULL</p></td>
+</tr>
+</tbody>
+</table>
+<p>$TEST has only 2 values: false (0) and true (1). An IF statement whose condition evaluates to $ZYSQLNULL sets $TEST to 0 and does not execute the rest the line. Commands with postconditionals that evaluate to $ZYSQLNULL do not execute the command.</p>
+<p>ZSHOW and ZWRITE of $ZYSQLNULL values show a value of $ZYSQLNULL. WRITE does not show any value for $ZYSQLNULL just as it does with <code class="code docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>.</p>
+<p>$ZYSQLNULL can be a subscript of a local variable. In that case, it collates after all other subscripts, i.e., $ORDER() and $QUERY() return that subscript at the very end.</p>
+<p>The function $ZYISSQLNULL() returns 1 if its sole argument has a value of $ZYSQLNULL, and 0 otherwise.</p>
+<p>Using $ZYSQLNULL as a subscript or assigning it as the value of a global variable (including implicitly with a MERGE), using it as a subscript in a LOCK/ZALLOCATE/ZDEALLOCATE command, or in a context that expects an integer or a numeric value raises the ZYSQLNULLNOTVALID error. Other than usage as an operand as discussed above, $ZYSQLNULL in a context that expects a string, e.g. <code class="code docutils literal notranslate"><span class="pre">$ASCII($ZYSQLNULL,1)</span></code>, is treated like the empty string  <code class="code docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>.</p>
+<p>$ZYSQLNULL was added to YottaDB effective release <a class="reference external" href="https://gitlab.com/YottaDB/DB/YDB/-/tags/r1.30">r1.30</a>.</p>
+</section>
+<section id="trigger-isvs">
+<span id="id4"></span><h2><a class="toc-backref" href="isv.html#id82">Trigger ISVs</a><a class="headerlink" href="isv.html#trigger-isvs" title="Permalink to this heading">¶</a></h2>
+<p>YottaDB provides nine ISVs (Intrinsic Special Variables) to facilitate trigger operations. With the exception of $ZTWORMHOLE, all numeric trigger-related ISVs return zero (0) outside of a trigger context; non-numeric ISVs return the empty string.</p>
+<section id="ztdata">
+<span id="ztdata-isv"></span><h3><a class="toc-backref" href="isv.html#id83">$ZTDATA</a><a class="headerlink" href="isv.html#ztdata" title="Permalink to this heading">¶</a></h3>
+<p>Within trigger context, $ZTDATA returns $DATA(&#64;$REFERENCE)#2 for a SET or $DATA(&#64;$REFERENCE) for a KILL, ZKILL or ZWITHDRAW prior to the explicit update. This provides a fast path alternative, avoiding the need for indirection in trigger code, to help trigger code determine the characteristics of the triggering node prior to the triggering update. For a SET, it shows whether the node did or did not hold data - whether a SET is modifying the contents of an existing node or creating data at a new node. For a KILL it shows whether the node had descendants and whether it had data.</p>
+</section>
+<section id="ztdelim">
+<span id="ztdelim-isv"></span><h3><a class="toc-backref" href="isv.html#id84">$ZTDELIM</a><a class="headerlink" href="isv.html#ztdelim" title="Permalink to this heading">¶</a></h3>
+<p>$ZTDE[LIM] returns the piece delimiter/separator, as specified by -delim or -zdelim in the trigger definition. This allows SET type triggers to extract updated pieces defined in $ZTUPDATE and KILL/ZKILL type triggers to extract the relevant pieces in the node value (of the node being killed) without having the piece separator hard coded into the trigger routine. $ZTDELIM is the empty string outside of a trigger context. It is also the empty string inside a trigger context if -delim or -zdelim was not specified in the trigger definition.</p>
+</section>
+<section id="ztlevel">
+<span id="ztlevel-isv"></span><h3><a class="toc-backref" href="isv.html#id85">$ZTLEVEL</a><a class="headerlink" href="isv.html#ztlevel" title="Permalink to this heading">¶</a></h3>
+<p>Within trigger context, $ZTLEVEL returns the current level of trigger nesting (invocation by a trigger of an additional trigger by an update in trigger context).</p>
+<p>$ZTLEVEL greater than one (&gt;1) indicates that there are nested triggers in progress. When a single update invokes multiple triggers solely because of multiple trigger matches of that initial (non-trigger) update, they are not nested (they are chained) and thus all have same $ZTLEVEL.</p>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>+^Cycle(1) -commands=Set -xecute=&quot;Write &quot;&quot;$ZTLevel for ^Cycle(1) is: &quot;&quot;,$ZTLevel Set ^Cycle(2)=1&quot;
++^Cycle(2) -commands=Set -xecute=&quot;Write &quot;&quot;$ZTLevel for ^Cycle(2) is: &quot;&quot;,$ZTLevel Set ^Cycle(1)=1&quot;
+</pre></div>
+</div>
+<p>These trigger definitions show different values of $ZTLEVEL when two triggers are called recursively (and pathologically).</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>+^Acct(&quot;ID&quot;) -commands=set -xecute=&quot;set ^Acct(1)=$ztvalue+1&quot;
++^Acct(sub=:) -command=set -xecute=&quot;set ^X($ztvalue)=sub&quot;
+</pre></div>
+</div>
+<p>SET ^Acct(“ID”)=10 invokes both the above triggers in some order and $ZTLEVEL will have the same value in both because these triggers are chained rather than nested.</p>
+</section>
+<section id="ztname">
+<span id="ztname-isv"></span><h3><a class="toc-backref" href="isv.html#id86">$ZTNAME</a><a class="headerlink" href="isv.html#ztname" title="Permalink to this heading">¶</a></h3>
+<p>Within a trigger context, $ZTNAME returns the trigger name. Outside a trigger context, $ZTNAME returns an empty string.</p>
+</section>
+<section id="ztoldval">
+<span id="ztoldval-isv"></span><h3><a class="toc-backref" href="isv.html#id87">$ZTOLDVAL</a><a class="headerlink" href="isv.html#ztoldval" title="Permalink to this heading">¶</a></h3>
+<p>Within trigger context, $ZTOLDVAL returns the prior (old) value of the global node whose update caused the trigger invocation. This provides a fast path alternative to $GET(&#64;$REFERENCE) at trigger entry (which avoids the heavyweight indirection). If there are multiple triggers matching the same node (chained), $ZTOLDVAL returns the same result for each of them.</p>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>+^Acct(1,&quot;ID&quot;) -commands=Set -xecute=&quot;Write:$ZTOLdval &quot;&quot;The prior value of ^Acct(1,ID) was: &quot;&quot;,$ZTOLdval&quot;
+</pre></div>
+</div>
+<p>This trigger gets invoked with a SET and displays the prior value (if it exists) of ^Acct(1,”ID”).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;w ^Acct<span class="o">(</span><span class="m">1</span>,<span class="s2">&quot;ID&quot;</span><span class="o">)</span>
+<span class="m">1975</span>
+YDB&gt;s ^Acct<span class="o">(</span><span class="m">1</span>,<span class="s2">&quot;ID&quot;</span><span class="o">)=</span><span class="m">2011</span>
+The prior value of ^Acct<span class="o">(</span><span class="m">1</span>,ID<span class="o">)</span> was: <span class="m">1975</span>
+</pre></div>
+</div>
+</section>
+<section id="ztriggerop">
+<span id="ztriggerop-isv"></span><h3><a class="toc-backref" href="isv.html#id88">$ZTRIGGEROP</a><a class="headerlink" href="isv.html#ztriggerop" title="Permalink to this heading">¶</a></h3>
+<p>Within trigger context, for SET (including MERGE and $INCREMENT() operations), $ZTRIGGEROP has the value “S”. For KILL, $ZTRIGGEROP has the value “K” For ZKILL or ZWITHDRAW, $ZTRIGGEROP has the value “ZK”.</p>
+</section>
+<section id="ztslate">
+<span id="ztslate-isv"></span><h3><a class="toc-backref" href="isv.html#id89">$ZTSLATE</a><a class="headerlink" href="isv.html#ztslate" title="Permalink to this heading">¶</a></h3>
+<p>$ZTSLATE allows you to specify a string that you want to make available in chained or nested triggers invoked for an outermost transaction (when a TSTART takes $TLEVEL from 0 to 1). You might use $ZTSLATE to accumulate transaction-related information, for example $ZTOLDVAL and $ZTVALUE, available within trigger context for use in a subsequent trigger later in the same transaction. For example, you can use $ZTSLATE to build up an application history or journal record to be written when a transaction is about to commit.</p>
+<p>You can SET $ZTSLATE only while a database trigger is active. YottaDB clears $ZTSLATE for the outermost transaction or on a TRESTART. However, YottaDB retains $ZTSLATE for all sub-transactions (where $TLEVEL&gt;1).</p>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>TSTART ()       ; Implicitly clears $ZTSLAT
+SET ^ACC(ACN1,BAL)=AMT          ; Trigger sets $ZTSLATE=ACN_&quot;|&quot;
+SET ^ACC(ACN2,BAL)=-AMT         ; Trigger sets $ZTSLATE=$ZTSLATE_ACN_&quot;|&quot;
+ZTRIGGER ^ACT(&quot;TRANS&quot;)          ; Trigger uses $ZTSLATE to update transaction log
+TCOMMIT
+</pre></div>
+</div>
+</section>
+<section id="ztupdate">
+<span id="ztupdate-isv"></span><h3><a class="toc-backref" href="isv.html#id90">$ZTUPDATE</a><a class="headerlink" href="isv.html#ztupdate" title="Permalink to this heading">¶</a></h3>
+<p>Within trigger context, for SET commands where the YottaDB trigger specifies a piece separator, $ZTUPDATE provides a comma separated list of piece numbers that differ between the current values of $ZTOLDVAL and $ZTVALUE. If the trigger specifies a piece separator, but does not specify any pieces of interest, $ZTUPDATE identifies all changed pieces. $ZTUPDATE is 0 in all other cases (that is: for SET commands where the YottaDB trigger does not specify a piece separator or for KILLs). Note that if an update matches more than one trigger, all matching triggers see the same $ZTOLDVAL at trigger entry but potentially different values of $ZTVALUE so $ZTUPDATE could change due to the actions of each matching trigger even though all matching triggers have identical -[z]delim and -piece specifications.</p>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>+^trigvn -commands=Set -pieces=1;3:6 -delim=&quot;|&quot; -xecute=&quot;Write !,$ZTUPDATE&quot;
+</pre></div>
+</div>
+<p>In the above trigger definition entry, $ZTUPDATE displays a comma separated list of the changed piece numbers if one of the pieces of interest: 1,3,4,5,or 6 are modified by the update.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;write ^trigvn
+Window<span class="p">|</span>Table<span class="p">|</span>Chair<span class="p">|</span>Curtain<span class="p">|</span>Cushion<span class="p">|</span>Air Conditioner
+YDB&gt;set ^trigvn<span class="o">=</span><span class="s2">&quot;Window|Dining Table|Chair|Vignette|Pillow|Air Conditioner&quot;</span>
+<span class="m">4</span>,5
+</pre></div>
+</div>
+<p>Note that even though piece numbers 2,4 and 5 are changed, $ZTUPDATE displays only 4,5 because the trigger is not defined for updates for the second piece.</p>
+</section>
+<section id="ztvalue">
+<span id="ztvalue-isv"></span><h3><a class="toc-backref" href="isv.html#id91">$ZTVALUE</a><a class="headerlink" href="isv.html#ztvalue" title="Permalink to this heading">¶</a></h3>
+<p>For SET, $ZTVALUE has the value assigned to the node by the explicit SET operation. Modifying $ZTVALUE within a trigger modifies the eventual value YottaDB assigns to the node. Note that changing $ZTVALUE has a small performance impact because it causes an additional update operation on the node once all trigger code completes. If a node has multiple associated triggers, each trigger receives the current value of $ZTVALUE, however, because the triggers run in arbitrary order, YottaDB strongly recommends no more than one trigger change any given element of application data, for example: a particular piece. For KILL and its variants, $ZTVALUE returns the empty string. While YottaDB accepts updates to $ZTVALUE within the trigger code invoked for a KILL or any of its variants, it ultimately discards any such value. Outside trigger context, attempting to SET $ZTVALUE produces a SETINTRIGONLY error.</p>
+</section>
+<section id="ztwormhole">
+<span id="ztwormhole-isv"></span><h3><a class="toc-backref" href="isv.html#id92">$ZTWORMHOLE</a><a class="headerlink" href="isv.html#ztwormhole" title="Permalink to this heading">¶</a></h3>
+<p>$ZTWORMHOLE allows you to specify a string up to 128KB of information that you want to make available during trigger execution. You can use $ZTWORMHOLE to supply an application context or process context to your trigger logic. Because YottaDB makes $ZTWORMHOLE available throughout the duration of the process, you can access or update $ZTWORMHOLE both from inside and outside a trigger.</p>
+<p>$ZTWORMHOLE provides a mechanism to access information from a process/application context that is otherwise unavailable in trigger context. As part of any update that invokes at least one trigger which references/sets $ZTWORMHOLE, YottaDB records any non-empty string value of $ZTWORMHOLE, after one or more triggers invoked as part of the update return, in the YottaDB database journal file. The value stored in the journal file is the value $ZTWORMHOLE has at the time the trigger code returns to application code. YottaDB also transmits this $ZTWORMHOLE value from the journal file into the replication stream, thus providing the same context to triggers invoked by MUPIP processes (either as part of the replicating instance update process or as part of MUPIP journal recovery/rollback). Therefore, whenever you use $ZTWORMHOLE in a trigger, you create a software <cite>wormhole &lt;https://en.wikipedia.org/wiki/Wormhole&gt;</cite> for process context that is otherwise unavailable during RECOVER/ROLLBACK or to a replicating instance.</p>
+<p>While a <a class="reference external" href="https://docs.yottadb.com/AdminOpsGuide/ydbjournal.html#extract-file-name-stdout">MUPIP JOURNAL EXTRACT</a> displays the $ZTWORMHOLE journal record before the journal records corresponding to the database update that initiated the trigger as well as journal records corresponding to database updates that happen inside the trigger, the value displayed in the $ZTWORMHOLE journal record is the value when trigger code returns back to application code.</p>
+<p>Note that if a trigger sets values of $ZTWORMHOLE or NEW’s it within the trigger, it is always the last value that is propagated through the wormhole. If you are not careful, you can write “clever” code that is unmaintainable by later programmers; consider yourself warned.</p>
+<p>Note that if trigger code does not reference/set $ZTWORMHOLE, YottaDB does not make it available to MUPIP (via the journal files or replication stream). Therefore, if a replicating secondary has different trigger code than the initiating primary and the triggers on the replicating node require information from $ZTWORMHOLE, the triggers on the initiating node must reference/set $ZTWORMHOLE to ensure YottaDB maintains the data it contains for use by the update process on the replicating node. While you can change $ZTWORMHOLE within trigger code, because of the arbitrary ordering of trigger invocation on the same node, if multiple triggers for the same update modify $ZTWORMHOLE to different values, the final value of $ZTWORMHOLE after all triggers have been invoked (which is what gets stored in the journal file and gets replicated across to the replicating instance update process) becomes unpredictable. Therefore, such an approach requires careful design and implementation.</p>
+<p>YottaDB allows $ZTWORMHOLE to be NEW’d. NEWing $ZTWORMHOLE is like NEWing <a class="reference external" href="https://docs.yottadb.com/ProgrammersGuide/isv.html#zgbldir">$ZGBLDIR</a> in that the NEW’d value is initialized with the value pushed on the stack (i.e. $ZTWORMHOLE retains its original value after the NEW). However, like other NEWs, YottaDB restores $ZTWORMHOLE’s value when the stack level pops.</p>
+<p>The ability to propagate a value of $ZTWORMHOLE set in a trigger was added in <a class="reference external" href="https://gitlab.com/YottaDB/DB/YDB/-/tags/r1.32">r1.32</a>.</p>
+<p>The following table summarizes the read/write permissions assigned to all trigger-related ISVs within trigger context and outside trigger context.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 16%" />
+<col style="width: 70%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Intrinsic Special Variable</p></th>
+<th class="head"><p>Within Trigger Context</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>$ETRAP</p></td>
+<td><p>Read/Write</p></td>
+<td><p>Set to ydb_trigger_etrap or the empty string when entering trigger context. For more information on using the $ETRAP mechanism for handling errors
+during trigger execution, refer to
+<a class="reference internal" href="triggers.html#err-handling-trigger-exec"><span class="std std-ref">Error Handling during Trigger Execution</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$REFERENCE</p></td>
+<td><p>Read Only</p></td>
+<td><p>Restored at the completion of a trigger.</p></td>
+</tr>
+<tr class="row-even"><td><p>$TEST</p></td>
+<td><p>Read Only</p></td>
+<td><p>Restored at the completion of a trigger.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$TLEVEL</p></td>
+<td><p>Read Only</p></td>
+<td><p>Always &gt;=1 in trigger code; must be the same as the completion of processing a trigger as it was at the start.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZTNAME</p></td>
+<td><p>Read Only</p></td>
+<td><p>Returns the trigger name.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZTDATA</p></td>
+<td><p>Read Only</p></td>
+<td><p>Shows prior state.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZTLEVEL</p></td>
+<td><p>Read Only</p></td>
+<td><p>Shows trigger nesting.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZTOLDVAL</p></td>
+<td><p>Read Only</p></td>
+<td><p>Shows the pre-update value.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZTRAP</p></td>
+<td><p>Read only - “”</p></td>
+<td><p>Must use $ETRAP in trigger code.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZTRIGGEROP</p></td>
+<td><p>Read Only</p></td>
+<td><p>Shows the triggering command.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZTUPDATE</p></td>
+<td><p>Read Only</p></td>
+<td><p>Lists modified pieces (if requested) for SET.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZTVALUE</p></td>
+<td><p>Read/Write</p></td>
+<td><p>Can change the eventual applied value for SET.</p></td>
+</tr>
+<tr class="row-even"><td><p>$ZTWORMHOLE</p></td>
+<td><p>Read/Write</p></td>
+<td><p>Holds application context because trigger code has no access to the local variable context.</p></td>
+</tr>
+<tr class="row-odd"><td><p>$ZTSLATE</p></td>
+<td><p>Read/Write</p></td>
+<td><p>Holds outermost transaction context for chained or nested triggers.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples of Trigger ISVs</strong></p>
+<p>The following examples are derived from the FIS Profile application.</p>
+<p>Nodes in ^ACN(CID,50) have TYPE in piece 1, CLS in piece 2, FEEPLN in piece 15 and EMPLNO in piece 31. Indexes are ^XACN(CLS,ACN,CID), ^XREF(“EMPLCTA”,EMPLNO,ACN,TYPE,CID) and ^XREF(“FEEPLN”,FEEPLN,CID) and use ACN from the first piece of ^ACN(CLS,99). These indices are maintained with four triggers: one invoked by a KILL or ZKill of an ^ACN(:,50) node and three invoked by SETs to different pieces of ^ACN(:,50) nodes. Note that ACN, CID, CLS and TYPE are required, whereas EMPLNO and FEEPLN can be null, which requires (in our convention) the use of $ZC(254) in indices. The triggerfile definitions are:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>+^ACN(cid=:,50) -zdelim=&quot;|&quot; -pieces=2 -commands=SET -xecute=&quot;Do ^SclsACN50&quot;
++^ACN(cid=:,50) -zdelim=&quot;|&quot; -pieces=1,31 -commands=SET -xecute=&quot;Do ^SemplnoTypeACN50&quot; +^ACN(cid=:,50) -zdelim=&quot;|&quot; -pieces=15 -commands=SET -xecute=&quot;Do ^SfeeplnACN50&quot;
++^ACN(cid=:,50) -commands=KILL,ZKill -xecute=&quot;Do ^KACN50&quot;
+</pre></div>
+</div>
+<p>The code in KACN50.m KILLs cross reference indices when the application deletes any ^ACN(:,50).</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>KACN50 ; KILL of entire ^ACN(:,50) node, e.g., from account deletion
+  ; Capture information
+  Set cls=$Piece($ZTOLD,&quot;|&quot;,2)                   ; CLS
+  Set emplno=$Piece($ZTOLD,&quot;|&quot;,31)
+  Set:&#39;$Length(emplno) emplno=$ZC(254)                ; EMPLNO
+  Set feepln=$Piece($ZTOLD,&quot;|&quot;,15)
+  Set:&#39;$L(feepln) feepln=$ZC(254)                     ; FEEPLN
+  Set type=$Piece($ZTOLD,&quot;|&quot;,1)                  ; TYPE
+  Set acn=$Piece(^ACN(cid,99),&quot;|&quot;,1)             ; ACN
+  Kill ^XACN(cls,acn,cid)
+  Kill ^XREF(&quot;EMPLCTA&quot;,emplno,acn,type,cid)
+  Kill ^XREF(&quot;FEEPLN&quot;,feepln,cid)
+  Quit
+</pre></div>
+</div>
+<p>The routine in SclsACN50.m creates cross references for a SET or a SET $PIECE() that modifies the second piece of ^ACN(:,50).</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>SClsACN50 ; Update to CLS in ^ACN(,50)
+ ; Capture information
+ Set oldcls=$Piece($ZTOLD,&quot;|&quot;,2)                ; Old CLS
+ Set cls=$Piece($ZTVAL,&quot;|&quot;,2)                   ; New CLS
+ Set acn=$Piece(^ACN(cid,99),&quot;|&quot;,1)             ; ACN
+ Set processMode=$Piece($ZTWORM,&quot;|&quot;,1)          ; Process
+ If processMode&lt;2 Kill ^XACN(oldcls,acn,cid)
+ Set ^XACN(cls,acn,cid)=&quot;&quot;
+ Quit
+</pre></div>
+</div>
+<p>Note that the example is written for clarity. Eliminating values that need not be assigned to temporary local variables produces:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>SclsACN50
+  S acn=$P(^ACN(cid,99),&quot;|&quot;,1)
+  I $P($ZTWORM,&quot;|&quot;,1)&lt;2 K ^XACN($P($ZTOLD,&quot;|&quot;,2),acn,cid)
+  S ^XACN($P($ZTVAL,&quot;|&quot;,2),acn,cid)=&quot;&quot;
+  Q
+</pre></div>
+</div>
+<p>Indeed, this index can simply be included in the (one line) triggerfile specification itself:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>+^ACN(cid=:,50) -zdelim=&quot;|&quot; -pieces=2 -commands=SET -xecute=&quot;S oldcls=$P($ZTOLD,&quot;&quot;|&quot;&quot;,2),acn=$P(^ACN(cid,99),&quot;&quot;|&quot;&quot;,1) K:$P($ZTWO,&quot;&quot;|&quot;&quot;,1)&lt;2 ^XACN(oldcls,acn,cid) S ^XACN($P($ZTVAL,&quot;&quot;|&quot;&quot;,2),acn,cid)=&quot;&quot;&quot;&quot;&quot;
+</pre></div>
+</div>
+<p>In the interest of readability most triggerfile definitions in this chapter are written as complete routines. The code in SemplnoTypeACN50.m handles changes to pieces 1 and 31 of ^ACN(:,50). Note that a SET to ^ACN(:,50) that modifies either or both pieces causes this trigger to execute just once, whereas two sequential SET $Piece() commands, to first modify one piece and then the other cause it to execute twice, at different times, once for each piece.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>EmplnoTypeACN50 ; Update to EMPLNO and/or TYPE in ^ACN(,50)
+ ; Capture information
+ Set oldemplno=$Piece($ZTOLD,&quot;|&quot;,31)
+ Set:&#39;$Length(oldemplno) oldemplno=$ZC(254)
+ Set emplno=$Piece($ZTVAL,&quot;|&quot;,31)
+ Set:&#39;$L(emplno) emplno=$ZC(254)
+ Set oldtype=$Piece($ZTOLD,&quot;|&quot;,1)
+ Set type=$Piece($ZTVAL,&quot;|&quot;,1)
+ Set acn=$Piece(^ACN(cid,99),&quot;|&quot;,1)
+ Set processMode=$Piece($ZTWORM,&quot;|&quot;,1)
+ If processMode&lt;2 Do
+ . Kill ^XREF(&quot;EMPLNO&quot;,oldemplno,acn,oldtype,cid)
+ . Set ^XREF(&quot;EMPLNO&quot;,emplno,acn,type,cid)=&quot;&quot;
+ Quit
+</pre></div>
+</div>
+<p>The code in SFeeplnACN50.m handles changes to piece 15.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>SFeeplnACN50 ; Update to FEEPLN in ^ACN(,50)
+  ; Capture information
+  Set oldfeepln=$Piece($ZTOLD,&quot;|&quot;,15)
+  Set:&#39;$Length(oldfeepln) oldfeepln=$ZC(254)
+  Set feepln=$Piece($ZTVAL,&quot;|&quot;,15)
+  Set:&#39;$Length(feepln) feepln=$ZC(254)
+  Set processMode=$Piece($ZTWORM,&quot;|&quot;,1)
+  If processMode&lt;2 Do
+  . Kill ^XREF(&quot;FEEPLN&quot;,oldfeepln,cid) Set ^XREF(&quot;FEEPLN&quot;,feepln,cid)=&quot;&quot;
+  Quit
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="functions.html" class="btn btn-neutral float-left" title="7. Functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ioproc.html" class="btn btn-neutral float-right" title="9. Input/Output Processing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017-2021, YottaDB LLC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+<hr/>
+<!-- DDG search widget,@author Juri Wornowitski,@version 2.0,@link https://www.plainlight.com/ddg --><div id="widdget" style="width:100%;margin:10px 0;"><style type="text/css">#widdget input {display:block;height:30px;padding:4px;outline:none;border:1px solid #8d8d8d;border-right:0;box-sizing:border-box;border-radius:3px 0 0 3px;width:calc(100% - 41px);font-size:15px;} #widdget button {float:left;cursor:pointer;width:43px;height:30px;color:#fff;background-image:linear-gradient(#7f72ca,#554492);border:0;border-radius:0 3px 3px 0;} #widdget button:active {background-image:linear-gradient(#002387,#002357);} #widdget button:focus {outline:none;}</style><form style="position:relative" onsubmit="this.elements[0].click();return false;"><div style="float:right;position:absolute;top:0;right:-2px;z-index:3"><button type="button" onclick="var v=this.parentElement.parentElement.elements[1].value;window.open('https://duckduckgo.com?q='+encodeURIComponent(v)+'+site%3Adocs.yottadb.com&kj=p');">&#128269;</button></div><input type="text" name="que" placeholder="Search documents with DuckDuckGo" /></form></div>
+ 
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

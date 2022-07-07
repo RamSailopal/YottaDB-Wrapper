@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>15. Database Encryption Extensions to the YottaDB External Interface &mdash; Programmer&#39;s Guide  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Appendix A: M Coding Standards - Do’s and Don’ts" href="appendix.html" />
+    <link rel="prev" title="14. Triggers" href="triggers.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html">
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+	  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+		      <input type="text" name="q" placeholder="Search" />
+		          <input type="hidden" name="check_keywords" value="yes" />
+			      <input type="hidden" name="area" value="default" />
+			        </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://yottadb.com/resources/documentation">Main YottaDB Documentation Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="man.html">About this Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">1. About YottaDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="langext.html">2. YottaDB Language Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devcycle.html">3. Development Cycle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opdebug.html">4. Operating and Debugging in Direct Mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="langfeat.html">5. General Language Features of M</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">6. Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">7. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isv.html">8. Intrinsic Special Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioproc.html">9. Input/Output Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utility.html">10. Utility Routines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extrout.html">11. Integrating External Routines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internatn.html">12. Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errproc.html">13. Error Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">14. Triggers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="encrypt.html#">15. Database Encryption Extensions to the YottaDB External Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix A: M Coding Standards - Do’s and Don’ts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">LICENSE</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Programmer's Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>15. Database Encryption Extensions to the YottaDB External Interface</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="triggers.html" class="btn btn-neutral float-left" title="14. Triggers" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="appendix.html" class="btn btn-neutral float-right" title="Appendix A: M Coding Standards - Do’s and Don’ts" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="database-encryption-extensions-to-the-yottadb-external-interface">
+<span id="index-0"></span><h1>15. Database Encryption Extensions to the YottaDB External Interface<a class="headerlink" href="encrypt.html#database-encryption-extensions-to-the-yottadb-external-interface" title="Permalink to this heading">¶</a></h1>
+<p>To support Database Encryption, YottaDB provides a reference implementation which resides in $ydb_dist/plugin/gtmcrypt.</p>
+<p>The reference implementation includes:</p>
+<ul class="simple">
+<li><p>A $ydb_dist/plugin/gtmcrypt sub-directory with all source files and scripts. The scripts include those needed to build/install libgtmcrypt.so and “helper” scripts, for example, add_db_key.sh (see below).</p></li>
+<li><p>The plugin interface that YottaDB expects is defined in gtmcrypt_interface.h. Never modify this file - it defines the interface that the plugin must provide.</p></li>
+<li><p>$ydb_dist/plugin/libgtmcrypt.so is the shared library containing the executables which is dynamically linked by YottaDB and which in turn calls the encryption packages. If the $ydb_dist/utf8 directory exists, then it should contain a symbolic link to ../plugin.</p></li>
+<li><p>Source code is provided in the file $ydb_dist/plugin/gtmcrypt/source.tar which includes build.sh and install.sh scripts to respectively compile and install libgtmcrypt.so from the source code.</p></li>
+</ul>
+<p>To support the implementation of a reference implementation, YottaDB provides additional C structure types (in the libyottadb.h file):</p>
+<ul class="simple">
+<li><p>gtmcrypt_key_t - a datatype that is a handle to a key. The YottaDB database engine itself does not manipulate keys. The plug-in keeps the keys, and provides handles to keys that the YottaDB database engine uses to refer to keys.</p></li>
+<li><p>xc_fileid_ptr_t - a pointer to a structure maintained by YottaDB to uniquely identify a file. Note that a file may have multiple names - not only as a consequence of absolute and relative path names, but also because of symbolic links and also because a file system can be mounted at more than one place in the file name hierarchy. YottaDB needs to be able to uniquely identify files.</p></li>
+</ul>
+<p>Although not required to be used by a customized plugin implementation, YottaDB provides (and the reference implementation uses) the following functions for uniquely identifying files:</p>
+<ul class="simple">
+<li><p>xc_status_t ydb_filename_to_id(xc_string_t *filename, xc_fileid_ptr_t *fileid) - function that takes a file name and provides the file id structure for that file.</p></li>
+<li><p>xc_status_t ydb_is_file_identical(xc_fileid_ptr_t fileid1, xc_fileid_ptr_t fileid2) - function that determines whether two file ids map to the same file.</p></li>
+<li><p>ydb_xcfileid_free(xc_fileid_ptr_t fileid) - function to release a file id structure.</p></li>
+</ul>
+<p>M, MUPIP and DSE processes dynamically link to the plugin interface functions that reside in the shared library. The functions serve as software “shims” to interface with an encryption library such as libmcrypt or libgpgme/libgcrypt.</p>
+<p>The plugin interface functions are:</p>
+<ul class="simple">
+<li><p>gtmcrypt_init()</p></li>
+<li><p>gtmcrypt_getkey_by_name()</p></li>
+<li><p>gtmcrypt_getkey_by_hash()</p></li>
+<li><p>gtmcrypt_hash_gen()</p></li>
+<li><p>gtmcrypt_encode()</p></li>
+<li><p>gtmcrypt_decode()</p></li>
+<li><p>gtmcrypt_close()</p></li>
+<li><p>and gtmcrypt_strerror()</p></li>
+</ul>
+<p>A YottaDB database consists of multiple database files, each of which has its own encryption key, although you can use the same key for multiple files. Thus, the gtmcrypt* functions are capable of managing multiple keys for multiple database files. Prototypes for these functions are in gtmcrypt_interface.h.</p>
+<p>The core plugin interface functions, all of which return a value of type ydb_status_t are:</p>
+<ul class="simple">
+<li><p>gtmcrypt_init() performs initialization. If the environment variable $ydb_passwd exists and has an empty string value, YottaDB calls gtmcrypt_init() before the first M program is loaded; otherwise it calls gtmcrypt_init() when it attempts the first operation on an encrypted database file.</p></li>
+<li><p>Generally, gtmcrypt_getkey_by_hash or, for MUPIP CREATE, gtmcrypt_getkey_by_name perform key acquisition, and place the keys where gtmcrypt_decode() and gtmcrypt_encode() can find them when they are called.</p></li>
+<li><p>Whenever YottaDB needs to decode a block of bytes, it calls gtmcrypt_decode() to decode the encrypted data. At the level at which YottaDB database encryption operates, it does not matter what the data is - numeric data, string data whether in M or UTF-8 mode and whether or not modified by a collation algorithm. Encryption and decryption simply operate on a series of bytes.</p></li>
+<li><p>Whenever YottaDB needs to encode a block of bytes, it calls gtmcrypt_encode() to encode the data.</p></li>
+<li><p>If encryption has been used (if gtmcrypt_init() was previously called and returned success), YottaDB calls gtmcrypt_close() at process exit and before generating a core file. gtmcrypt_close() must erase keys in memory to ensure that no cleartext keys are visible in the core file.</p></li>
+</ul>
+<p>More detailed descriptions follow.</p>
+<ul class="simple">
+<li><p>gtmcrypt_key_t *gtmcrypt_getkey_by_name(ydb_string_t *filename) - MUPIP CREATE uses this function to get the key for a database file. This function searches for the given filename in the memory key ring and returns a handle to its symmetric cipher key. If there is more than one entry for the given filename , the reference implementation returns the entry matching the last occurrence of that filename in the master key file.</p></li>
+<li><p>ydb_status_t gtmcrypt_hash_gen(gtmcrypt_key_t *key, ydb_string_t *hash) - MUPIP CREATE uses this function to generate a hash from the key then copies that hash into the database file header. The first parameter is a handle to the key and the second parameter points to 256 byte buffer. In the event the hash algorithm used provides hashes smaller than 256 bytes, gtmcrypt_hash_gen() must fill any unused space in the 256 byte buffer with zeros.</p></li>
+<li><p>gtmcrypt_key_t *gtmcrypt_getkey_by_hash(ydb_string_t *hash) - YottaDB uses this function at database file open time to obtain the correct key using its hash from the database file header. This function searches for the given hash in the memory key ring and returns a handle to the matching symmetric cipher key. MUPIP LOAD, MUPIP RESTORE, MUPIP EXTRACT, MUPIP JOURNAL and MUPIP BACKUP -BYTESTREAM all use this to find keys corresponding to the current or prior databases from which the files they use for input were derived.</p></li>
+<li><p>ydb_status_t gtmcrypt_encode(gtmcrypt_key_t *key, ydb_string_t *inbuf, ydb_string_t *outbuf) and ydb_status_t gtmcrypt_decode(gtmcrypt_key_t *key, ydb_string_t *inbuf, ydb_string_t *outbuf)- YottaDB uses these functions to encode and decode data. The first parameter is a handle to the symmetric cipher key, the second is a pointer to the block of data to encode or decode, and the third is a pointer to the resulting block of encoded or decoded data. Using the appropriate key (same key for a symmetric cipher), gtmcrypt_decode() must be able to decode any data buffer encoded by gtmcrypt_encode(), otherwise the encrypted data is rendered unrecoverable. As discussed earlier, YottaDB requires the encrypted and cleartext versions of a string to have the same length.</p></li>
+<li><p>char *gtmcrypt_strerror() - YottaDB uses this function to retrieve addtional error context from the plug-in after the plug-in returns an error status. This function returns a pointer to additional text related to the last error that occurred. YottaDB displays this text as part of an error report. In a case where an error has no additional context or description, this function returns a null string.</p></li>
+</ul>
+<p>The complete source code for reference implementations of these functions is provided, licensed under the same terms as YottaDB. You are at liberty to modify them to suit your specific YottaDB database encryption needs.</p>
+<p>For more information and examples, refer to <a class="reference external" href="../AdminOpsGuide/encryption.html">Database Encryption</a> in the Administration and Operations Guide.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="triggers.html" class="btn btn-neutral float-left" title="14. Triggers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="appendix.html" class="btn btn-neutral float-right" title="Appendix A: M Coding Standards - Do’s and Don’ts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017-2021, YottaDB LLC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+<hr/>
+<!-- DDG search widget,@author Juri Wornowitski,@version 2.0,@link https://www.plainlight.com/ddg --><div id="widdget" style="width:100%;margin:10px 0;"><style type="text/css">#widdget input {display:block;height:30px;padding:4px;outline:none;border:1px solid #8d8d8d;border-right:0;box-sizing:border-box;border-radius:3px 0 0 3px;width:calc(100% - 41px);font-size:15px;} #widdget button {float:left;cursor:pointer;width:43px;height:30px;color:#fff;background-image:linear-gradient(#7f72ca,#554492);border:0;border-radius:0 3px 3px 0;} #widdget button:active {background-image:linear-gradient(#002387,#002357);} #widdget button:focus {outline:none;}</style><form style="position:relative" onsubmit="this.elements[0].click();return false;"><div style="float:right;position:absolute;top:0;right:-2px;z-index:3"><button type="button" onclick="var v=this.parentElement.parentElement.elements[1].value;window.open('https://duckduckgo.com?q='+encodeURIComponent(v)+'+site%3Adocs.yottadb.com&kj=p');">&#128269;</button></div><input type="text" name="que" placeholder="Search documents with DuckDuckGo" /></form></div>
+ 
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

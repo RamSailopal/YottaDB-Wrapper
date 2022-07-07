@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>11. Integrating External Routines &mdash; Programmer&#39;s Guide  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="12. Internationalization" href="internatn.html" />
+    <link rel="prev" title="10. Utility Routines" href="utility.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html">
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+	  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+		      <input type="text" name="q" placeholder="Search" />
+		          <input type="hidden" name="check_keywords" value="yes" />
+			      <input type="hidden" name="area" value="default" />
+			        </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="https://yottadb.com/resources/documentation">Main YottaDB Documentation Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="man.html">About this Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">1. About YottaDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="langext.html">2. YottaDB Language Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devcycle.html">3. Development Cycle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opdebug.html">4. Operating and Debugging in Direct Mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="langfeat.html">5. General Language Features of M</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">6. Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">7. Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isv.html">8. Intrinsic Special Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioproc.html">9. Input/Output Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utility.html">10. Utility Routines</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="extrout.html#">11. Integrating External Routines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="extrout.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extrout.html#access-to-non-m-routines">Access to non-M Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extrout.html#creating-a-shareable-library">Creating a Shareable Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extrout.html#using-external-calls">Using External Calls</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="extrout.html#pre-allocation-of-output-parameters">Pre-allocation of Output Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extrout.html#callback-mechanism">Callback Mechanism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extrout.html#limitations-on-the-external-program">Limitations on the External Program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extrout.html#examples-of-using-external-calls">Examples of Using External Calls</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="extrout.html#calls-from-external-routines-call-ins">Calls from External Routines: Call-Ins</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="extrout.html#relevant-files-for-call-ins">Relevant Files for Call-Ins</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="extrout.html#libyottadb-h">libyottadb.h</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extrout.html#call-in-table">Call-In table</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="extrout.html#call-in-interface">Call-In Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="extrout.html#ydb-ci-tab-open-ydb-ci-tab-open-t">ydb_ci_tab_open() / ydb_ci_tab_open_t()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extrout.html#ydb-ci-tab-switch-ydb-ci-tab-switch-t">ydb_ci_tab_switch() / ydb_ci_tab_switch_t()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extrout.html#call-an-m-routine-from-c">Call an M Routine from C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extrout.html#print-error-messages">Print Error Messages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="extrout.html#building-standalone-programs">Building Standalone Programs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extrout.html#nested-call-ins">Nested Call-Ins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extrout.html#rules-to-follow-in-call-ins">Rules to Follow in Call-Ins</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="extrout.html#type-limits-for-call-ins-and-call-outs">Type Limits for Call-Ins and Call-Outs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="internatn.html">12. Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errproc.html">13. Error Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triggers.html">14. Triggers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encrypt.html">15. Database Encryption Extensions to the YottaDB External Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">Appendix A: M Coding Standards - Do’s and Don’ts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">LICENSE</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Programmer's Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>11. Integrating External Routines</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="utility.html" class="btn btn-neutral float-left" title="10. Utility Routines" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="internatn.html" class="btn btn-neutral float-right" title="12. Internationalization" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="integrating-external-routines">
+<span id="index-0"></span><h1><a class="toc-backref" href="extrout.html#id12">11. Integrating External Routines</a><a class="headerlink" href="extrout.html#integrating-external-routines" title="Permalink to this heading">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="extrout.html#integrating-external-routines" id="id12">11. Integrating External Routines</a></p>
+<ul>
+<li><p><a class="reference internal" href="extrout.html#introduction" id="id13">Introduction</a></p></li>
+<li><p><a class="reference internal" href="extrout.html#access-to-non-m-routines" id="id14">Access to non-M Routines</a></p></li>
+<li><p><a class="reference internal" href="extrout.html#creating-a-shareable-library" id="id15">Creating a Shareable Library</a></p></li>
+<li><p><a class="reference internal" href="extrout.html#using-external-calls" id="id16">Using External Calls</a></p>
+<ul>
+<li><p><a class="reference internal" href="extrout.html#pre-allocation-of-output-parameters" id="id17">Pre-allocation of Output Parameters</a></p></li>
+<li><p><a class="reference internal" href="extrout.html#callback-mechanism" id="id18">Callback Mechanism</a></p></li>
+<li><p><a class="reference internal" href="extrout.html#limitations-on-the-external-program" id="id19">Limitations on the External Program</a></p></li>
+<li><p><a class="reference internal" href="extrout.html#examples-of-using-external-calls" id="id20">Examples of Using External Calls</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="extrout.html#calls-from-external-routines-call-ins" id="id21">Calls from External Routines: Call-Ins</a></p>
+<ul>
+<li><p><a class="reference internal" href="extrout.html#relevant-files-for-call-ins" id="id22">Relevant Files for Call-Ins</a></p>
+<ul>
+<li><p><a class="reference internal" href="extrout.html#libyottadb-h" id="id23">libyottadb.h</a></p></li>
+<li><p><a class="reference internal" href="extrout.html#call-in-table" id="id24">Call-In table</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="extrout.html#call-in-interface" id="id25">Call-In Interface</a></p>
+<ul>
+<li><p><a class="reference internal" href="extrout.html#ydb-ci-tab-open-ydb-ci-tab-open-t" id="id26">ydb_ci_tab_open() / ydb_ci_tab_open_t()</a></p></li>
+<li><p><a class="reference internal" href="extrout.html#ydb-ci-tab-switch-ydb-ci-tab-switch-t" id="id27">ydb_ci_tab_switch() / ydb_ci_tab_switch_t()</a></p></li>
+<li><p><a class="reference internal" href="extrout.html#call-an-m-routine-from-c" id="id28">Call an M Routine from C</a></p>
+<ul>
+<li><p><a class="reference internal" href="extrout.html#ydb-ci" id="id29">ydb_ci</a></p></li>
+<li><p><a class="reference internal" href="extrout.html#ydb-ci-t" id="id30">ydb_ci_t</a></p></li>
+<li><p><a class="reference internal" href="extrout.html#ydb-cip" id="id31">ydb_cip</a></p></li>
+<li><p><a class="reference internal" href="extrout.html#ydb-cip-t" id="id32">ydb_cip_t</a></p></li>
+<li><p><a class="reference internal" href="extrout.html#examples-calling-yottadb-from-a-c-program" id="id33">Examples: Calling YottaDB from a C Program</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="extrout.html#print-error-messages" id="id34">Print Error Messages</a></p>
+<ul>
+<li><p><a class="reference internal" href="extrout.html#ydb-zstatus" id="id35">ydb_zstatus</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="extrout.html#building-standalone-programs" id="id36">Building Standalone Programs</a></p></li>
+<li><p><a class="reference internal" href="extrout.html#nested-call-ins" id="id37">Nested Call-Ins</a></p></li>
+<li><p><a class="reference internal" href="extrout.html#rules-to-follow-in-call-ins" id="id38">Rules to Follow in Call-Ins</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="extrout.html#type-limits-for-call-ins-and-call-outs" id="id39">Type Limits for Call-Ins and Call-Outs</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="introduction">
+<h2><a class="toc-backref" href="extrout.html#id13">Introduction</a><a class="headerlink" href="extrout.html#introduction" title="Permalink to this heading">¶</a></h2>
+<p>Application code written in M can call application code written in C (or which uses a C compatible call) and vice versa.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This C code shares the process address space with the YottaDB run-time library and M application code. Bugs in C code may result in difficult to diagnose failures to occur in places not obviously related to the cause of the failure.</p>
+</div>
+</section>
+<section id="access-to-non-m-routines">
+<h2><a class="toc-backref" href="extrout.html#id14">Access to non-M Routines</a><a class="headerlink" href="extrout.html#access-to-non-m-routines" title="Permalink to this heading">¶</a></h2>
+<p>In YottaDB, calls to C language routines may be made with the following syntax:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>DO &amp;[packagename.]name[^name][parameter-list]
+</pre></div>
+</div>
+<p>or as an expression element,</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$&amp;[packagename.]name[^name][parameter-list]
+</pre></div>
+</div>
+<p>Where packagename, like the name elements, is a valid M name. Because of the parsing conventions of M, the identifier between the ampersand (&amp;) and the optional parameter-list has precisely constrained punctuation - a later section describes how to transform this into a more richly punctuated name, should that be appropriate for the called function. While the intent of the syntax is to permit the name^name to match an M labelref, there is no semantic implication to any use of the up-arrow (^). For more information on M names, labelrefs and parameter-lists, refer to <a class="reference external" href="langfeat.html">Chapter 5: “General Language Features of M”</a>.</p>
+<p>Examples:</p>
+<p><a class="reference external" href="https://gitlab.com/YottaDB/Util/YDBZlib">YDBzlib</a> consists of an M module %ZLIB, which in turn calls <a class="reference external" href="http://zlib.net/">zlib</a>, to provide the following entryrefs:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$$compress2^%ZLIB(origstr,.compstr,level)
+$$uncompress^%ZLIB(compstr,.uncompstr)
+$$version^%ZLIB
+$$zlibversion^%ZLIB
+</pre></div>
+</div>
+<p>compress2 compresses origstr and returns the compressed string in compstr; level is the string passed to zlib as the compression level (-1 through 9, defaulting to -1 if not specified, which in turn instructs zlib to use its default compression).  uncompress expands compstr and provides the result in uncompstr.  Both compress2 and uncompress return the status returned by the underlying zlib code; 0 for a normal return.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>;Call external routine rtn1
+DO &amp;rtn1
+;Call int^exp in package &quot;mathpak&quot; with one parameter: the expression val/2
+DO &amp;mathpak.int^exp(val/2)
+;Call the routine sqrt with the value &quot;2&quot;
+WRITE $&amp;sqrt(2)
+;Call the routine get parms, with the parameter &quot;INPUT&quot; and the variable &quot;inval&quot;, passed by reference.
+DO &amp;getparms(&quot;INPUT&quot;,.inval)
+;Call program increment in package &quot;mathpak&quot; without specifying a value for the first argument and the variable &quot;outval&quot; passed by reference as the second argument. All arguments which do not specify a value translate to default values in the increment program.
+Do &amp;mathpak.increment(,.outval)
+</pre></div>
+</div>
+<p>The called routines follow the C calling conventions. They must be compiled as position independent code and linked as a shareable library.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As the M language is single-threaded, code in other languages called from M in processes where the initial language is M must not call back to M or call the YottaDB runtime system from multiple threads. Any such calls must use only the thread from which M code calls the non-M code. In practice, this means that calling out to single-threaded languages like Python is safe, calling to languages like C where threading is under program control requires external code to be appropriately written, and calling to languages like Go which are inherently multi-threaded is not supported. To write an application where calls from M to a language like Go are required, make Go the initial language of the processes, and call M code from Go code. That M code can then call Go code.</p>
+</div>
+</section>
+<section id="creating-a-shareable-library">
+<h2><a class="toc-backref" href="extrout.html#id15">Creating a Shareable Library</a><a class="headerlink" href="extrout.html#creating-a-shareable-library" title="Permalink to this heading">¶</a></h2>
+<p>Use the following commands to create a shareable library:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>% gcc -c -fPIC -I$ydb_dist increment.c decrement.c
+% gcc -o libcrement.so -shared increment.o decrement.o
+</pre></div>
+</div>
+</section>
+<section id="using-external-calls">
+<h2><a class="toc-backref" href="extrout.html#id16">Using External Calls</a><a class="headerlink" href="extrout.html#using-external-calls" title="Permalink to this heading">¶</a></h2>
+<p>The functions in programs increment and decrement are now available to YottaDB through the shareable library libcrement.so.</p>
+<p>YottaDB uses an “external call table” to map the typeless data of M into the typed data of C, and vice versa. The external call table has a first line containing the pathname of the shareable library file followed by one or more specification lines in the following format:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>entryref: return-value routine-name (parameter, parameter, ... ) [: SIGSAFE]
+</pre></div>
+</div>
+<p>The optional case-insensitive keyword SIGSAFE following the parameter list specifies that the external call does not create its own signal handlers. This allows YottaDB to avoid burdensome signal handler coordination for the external call. By default, YottaDB saves and restores signal setups for external calls.</p>
+<p>entryref is an M entryref, return-value is one of the legal types listed below, and parameters are in the format:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>direction:type [num]
+</pre></div>
+</div>
+<p>where [num] indicates a pre-allocation value explained later in this chapter.</p>
+<p>Legal directions are I, O, or IO for input, output, or input/output, respectively.</p>
+<p>The following table describes the legal types defined in the C header file $ydb_dist/libyottadb.h:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 14%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Legal Return Type</p></th>
+<th class="head"><p>Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ydb_char_t*</p></td>
+<td><p>Yes</p></td>
+<td><p>For passing a “C” style string - null terminated.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ydb_char_t**</p></td>
+<td><p>Yes</p></td>
+<td><p>For passing a pointer to a “C” style string.</p></td>
+</tr>
+<tr class="row-even"><td><p>ydb_double_t</p></td>
+<td><p>No</p></td>
+<td><p>Double-precision floating point number on 64-bit platforms.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ydb_double_t*</p></td>
+<td><p>Yes</p></td>
+<td><p>For passing a pointer to double-precision floating point numbers.</p></td>
+</tr>
+<tr class="row-even"><td><p>ydb_float_t</p></td>
+<td><p>No</p></td>
+<td><p>Floating point number.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ydb_float_t*</p></td>
+<td><p>Yes</p></td>
+<td><p>For passing a pointer to floating point numbers.</p></td>
+</tr>
+<tr class="row-even"><td><p>ydb_int_t</p></td>
+<td><p>Yes</p></td>
+<td><p>32-bit signed integer.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ydb_int_t*</p></td>
+<td><p>Yes</p></td>
+<td><p>For passing a pointer to signed integers.</p></td>
+</tr>
+<tr class="row-even"><td><p>ydb_long_t</p></td>
+<td><p>Yes</p></td>
+<td><p>32-bit signed integer on 32-bit platforms and 64-bit signed integer on 64-bit platforms.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ydb_long_t*</p></td>
+<td><p>Yes</p></td>
+<td><p>For passing a pointer to signed long [integers].</p></td>
+</tr>
+<tr class="row-even"><td><p>ydb_pointertofunc_t</p></td>
+<td><p>Yes</p></td>
+<td><p>For passing callback function pointers. For details see <a class="reference internal" href="extrout.html#callback-mech"><span class="std std-ref">Callback Mechanism</span></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ydb_pointertofunc_t*</p></td>
+<td><p>Yes</p></td>
+<td><p>For passing a pointer to callback function pointers.</p></td>
+</tr>
+<tr class="row-even"><td><p>ydb_status_t</p></td>
+<td><p>Yes</p></td>
+<td><p>Type int. If the function returns zero (0), then the call was successful.
+If it returns a non-zero value YottaDB will signal an error upon returning to M.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ydb_string_t*</p></td>
+<td><p>Yes</p></td>
+<td><p>For passing a structure in the form {int length;char *address}. Useful for moving
+blocks of memory to or from YottaDB.</p></td>
+</tr>
+<tr class="row-even"><td><p>ydb_uint_t</p></td>
+<td><p>Yes</p></td>
+<td><p>32-bit unsigned integer.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ydb_uint_t*</p></td>
+<td><p>Yes</p></td>
+<td><p>For passing a pointer to unsigned integers.</p></td>
+</tr>
+<tr class="row-even"><td><p>ydb_ulong_t</p></td>
+<td><p>Yes</p></td>
+<td><p>32-bit unsigned integer on 32-bit platforms and 64-bit signed integer on 64-bit platforms.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ydb_ulong_t*</p></td>
+<td><p>Yes</p></td>
+<td><p>For passing a pointer to unsigned long [integers].</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p>Yes</p></td>
+<td><p>Specifies that the function does not return a value.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If an external call’s function argument is defined in the external call table, YottaDB allows invoking that function without specifying a value of the argument. All non-trailing and output-only arguments which do not specify a value translate to the following default values in C:</p>
+<ul class="simple">
+<li><p>All numeric types: 0</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">ydb_char_t</span> <span class="pre">*</span></code> and <code class="code docutils literal notranslate"><span class="pre">ydb_char_t</span> <span class="pre">**</span></code>: Empty string</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">ydb_string_t</span> <span class="pre">*</span></code>: A structure with ‘length’ field matching the preallocation size and ‘address’ field being a NULL pointer.</p></li>
+</ul>
+</div>
+<p>Here is an example of an external call table:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>compress2   : ydb_status_t zlib_compress2(I:ydb_string_t*, O:ydb_string_t* [1048576], I:ydb_int_t)
+uncompress  : ydb_status_t zlib_uncompress(I:ydb_string_t*, O:ydb_string_t* [1048576])
+zlibVersion : ydb_status_t zlib_zlibVersion(O:ydb_char_t* [256])
+</pre></div>
+</div>
+<p>In the mathpak package example, the following invocation translate inval to the default value, that is, 0.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>YDB&gt;do <span class="p">&amp;</span>mathpak.increment<span class="o">(</span>,.outval<span class="o">)</span>
+</pre></div>
+</div>
+<p>If an external call’s function argument is defined in the external call table and that function is invoked without specifying the argument, ensure that the external call function appropriately handles the missing argument. As a good programming practice, always ensure that count of arguments defined in the external call table matches the function invocation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>YottaDB continues to support <code class="code docutils literal notranslate"><span class="pre">xc_*</span></code> equivalent types of <code class="code docutils literal notranslate"><span class="pre">ydb_*</span></code> for upward compatibility. <code class="code docutils literal notranslate"><span class="pre">gtmxc_types.h</span></code> explicitly marks the <code class="code docutils literal notranslate"><span class="pre">xc_*</span></code> equivalent types as deprecated.</p>
+</div>
+<ul class="simple">
+<li><p>Parameter-types that interface YottaDB with non-M code using C calling conventions must match the data-types on their target platforms. Note that most addresses on 64-bit platforms are 8 bytes long and require 8 byte alignment in structures whereas all addresses on 32-bit platforms are 4 bytes long and require 4-byte alignment in structures.</p></li>
+<li><p>Though strings with embedded NULL characters are sent as input to external routines, embedded NULL characters in output (or return value) strings of type ydb_char_t may cause string truncation because they are treated as terminators.</p></li>
+<li><p>If your interface uses ydb_long_t or ydb_ulong_t types but your interface code uses int or signed int types, failure to revise the types so they match on a 64-bit platform will cause the code to fail in unpleasant, potentially dangerous and hard to diagnose ways.</p></li>
+</ul>
+<p>The first parameter of each called routine is an int (for example, int argc in decrement.c and increment.c) that specifies the number of parameters passed. This parameter is implicit and only appears in the called routine. It does not appear in the call table specification, or in the M invocation. If there are no explicit parameters, the call table specification will have a zero (0) value because this value does not include itself in the count. If there are fewer actual parameters than formal parameters, the call is determined from the parameters specified by the values supplied by the M program. The remaining parameters are undefined. If there are more actual parameters than formal parameters, YottaDB reports an error.</p>
+<p>There may be only a single occurrence of the type ydb_status_t for each entryref.</p>
+<section id="pre-allocation-of-output-parameters">
+<h3><a class="toc-backref" href="extrout.html#id17">Pre-allocation of Output Parameters</a><a class="headerlink" href="extrout.html#pre-allocation-of-output-parameters" title="Permalink to this heading">¶</a></h3>
+<p>The definition of parameters passed by reference with direction output can include specification of a pre-allocation value. This is the number of units of memory that the user wants YottaDB to allocate before passing the parameter to the external routine. For example, in the case of type ydb_char_t *, the pre-allocation value would be the number of bytes to be allocated before the call to the external routine.</p>
+<p>Specification of a pre-allocation value should follow these rules:</p>
+<ul class="simple">
+<li><p>Pre-allocation is an unsigned integer value specifying the number of bytes to be allocated on the system heap with a pointer passed into the external call.</p></li>
+<li><p>Pre-allocating on a type with a direction of input or input/output results in a YottaDB error.</p></li>
+<li><p>Pre-allocation is meaningful only on types ydb_char_t * and ydb_string_t *. On all other types the pre-allocation value specified will be ignored and the parameter will be allocated a default value for that type. With ydb_string_t * arguments make sure to set the ‘length’ field appropriately before returning control to YottaDB. On return from the external call, YottaDB uses the value in the length field as the length of the returned value, in bytes.</p></li>
+<li><p>If the user does not specify any value, then the default pre-allocation value would be assigned to the parameter.</p></li>
+<li><p>Specification of pre-allocation for “scalar” types (parameters which are passed by value) is an error.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<blockquote>
+<div><p>Pre-allocation is optional for all output-only parameters except ydb_string_t * and ydb_char_t *. Pre-allocation yields better management of memory for the external call. When an external call exceeds its specified preallocation (ydb_string_t * or ydb_char_t * output), YottaDB produces the EXCEEDSPREALLOC error. In the case that the user allocates space for the character pointer inside a ydb_string_t * type output parameter, a length field longer than the specified preallocated size for the output parameter does not cause an EXCEEDSPREALLOC error.</p>
+</div></blockquote>
+</div>
+</section>
+<section id="callback-mechanism">
+<span id="callback-mech"></span><h3><a class="toc-backref" href="extrout.html#id18">Callback Mechanism</a><a class="headerlink" href="extrout.html#callback-mechanism" title="Permalink to this heading">¶</a></h3>
+<p>YottaDB exposes certain functions that are internal to the YottaDB runtime library for the external calls via a callback mechanism. While making an external call, YottaDB populates and exposes a table of function pointers containing addresses to call-back functions.</p>
+<p>Some of these callbacks (not all) can be linked at compilation time by including libyottadb.h. A fuller set can be discovered at runtime by a mechanism described after the table below.</p>
+<p>libyottadb.h includes definitions for the following entry points exported from libyottadb:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">ydb_hiber_start</span><span class="p">(</span><span class="n">ydb_uint_t</span><span class="w"> </span><span class="n">mssleep</span><span class="p">);</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">ydb_hiber_start_wait_any</span><span class="p">(</span><span class="n">ydb_uint_t</span><span class="w"> </span><span class="n">mssleep</span><span class="p">)</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">ydb_start_timer</span><span class="p">(</span><span class="n">ydb_tid_t</span><span class="w"> </span><span class="n">tid</span><span class="p">,</span><span class="w"> </span><span class="n">ydb_int_t</span><span class="w"> </span><span class="n">time_to_expir</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">handler</span><span class="p">)(),</span><span class="w"> </span><span class="n">ydb_int_t</span><span class="w"> </span><span class="n">hdata_len</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">hdata</span><span class="p">);</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">ydb_cancel_timer</span><span class="p">(</span><span class="n">ydb_tid_t</span><span class="w"> </span><span class="n">tid</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>where:</p>
+<ul class="simple">
+<li><p>mssleep - milliseconds to sleep</p></li>
+<li><p>tid - unique timer id value</p></li>
+<li><p>time_to_expir - milliseconds until timer drives given handler</p></li>
+<li><p>handler - function pointer to handler to be driven</p></li>
+<li><p>hdata_len - 0 or length of data to pass to handler as a parameter</p></li>
+<li><p>hdata - NULL or address of data to pass to handler as a parameter</p></li>
+</ul>
+<p>ydb_hiber_start() always sleeps until the time expires; ydb_hiber_start_wait_any() sleeps until the time expires or an interrupt by any signal (including another timer). ydb_start_timer() starts a timer but returns immediately (no sleeping) and drives the given handler when time expires unless the timer is canceled.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 13%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Index</p></th>
+<th class="head"><p>Function</p></th>
+<th class="head"><p>Argument</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>hiber_start</p></td>
+<td></td>
+<td></td>
+<td><p>sleep for a specified time</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>slp_time</p></td>
+<td><p>integer</p></td>
+<td><p>milliseconds to sleep</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>hiber_start_wait_any</p></td>
+<td></td>
+<td></td>
+<td><p>sleep for a specified time or until any interrupt, whichever comes first</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>slp_time</p></td>
+<td><p>integer</p></td>
+<td><p>milliseconds to sleep</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>start_timer</p></td>
+<td></td>
+<td></td>
+<td><p>start a timer and invoke a handler function when the timer expires</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>tid</p></td>
+<td><p>integer</p></td>
+<td><p>unique user specified identifier for this timer</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>time_to_expire</p></td>
+<td><p>integer</p></td>
+<td><p>milliseconds before handler is invoked</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>handler</p></td>
+<td><p>pointer to function</p></td>
+<td><p>specifies the entry of the handler function to invoke</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>hlen</p></td>
+<td><p>integer</p></td>
+<td><p>length of data to be passed via the hdata argument</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>hdata</p></td>
+<td><p>pointer to char</p></td>
+<td><p>data (if any) to pass to the handler function</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>cancel_timer</p></td>
+<td></td>
+<td></td>
+<td><p>stop a timer previously started with start_timer(), if it has not yet expired</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>tid</p></td>
+<td><p>integer</p></td>
+<td><p>unique user specified identifier of the timer to cancel</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>ydb_malloc</p></td>
+<td></td>
+<td></td>
+<td><p>allocates process memory from the heap</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>&lt;return-value&gt;</p></td>
+<td><p>pointer to void</p></td>
+<td><p>address of the allocated space</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>space needed</p></td>
+<td><p>32-bit platforms:
+32-bit unsigned
+integer</p>
+<p>64-bit platforms:
+64-bit unsigned
+integer</p>
+</td>
+<td><p>bytes of space to allocate. This has the same signature as the system malloc() call.</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>ydb_free</p></td>
+<td></td>
+<td></td>
+<td><p>return memory previously allocated with ydb_malloc()</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td><p>free_address</p></td>
+<td><p>pointer to void</p></td>
+<td><p>address of the previously allocated space</p></td>
+</tr>
+</tbody>
+</table>
+<p>The external routine can access and invoke a call-back function in any of the following mechanisms:</p>
+<ul class="simple">
+<li><p>While making an external call, YottaDB sets the environment variable GTM_CALLIN_START to point to a string containing the start address (decimal integer value) of the table described above. The external routine needs to read this environment variable, convert the string into an integer value and should index into the appropriate entry to call the appropriate YottaDB function.</p></li>
+<li><p>YottaDB also provides an input-only parameter type ydb_pointertofunc_t that can be used to obtain call-back function pointers via parameters in the external routine. If a parameter is specified as I:ydb_pointertofunc_t and if a numeric value (between 0-5) is passed for this parameter in M, YottaDB interprets this value as the index into the callback table and passes the appropriate callback function pointer to the external routine.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>YottaDB strongly discourages the use of signals, especially SIGALARM, in user written C functions. YottaDB assumes that it has complete control over any signals that occur and depends on that behavior for recovery if anything should go wrong. The use of exposed timer APIs should be considered for timer needs.</p>
+</div>
+</section>
+<section id="limitations-on-the-external-program">
+<h3><a class="toc-backref" href="extrout.html#id19">Limitations on the External Program</a><a class="headerlink" href="extrout.html#limitations-on-the-external-program" title="Permalink to this heading">¶</a></h3>
+<p>Since both YottaDB runtime environment and the external C functions execute in the same process space, the following restrictions apply to the external functions:</p>
+<ul class="simple">
+<li><p>YottaDB is designed to use signals and has signal handlers that must function for YottaDB to operate properly. The timer related call-backs should be used in place of any library or system call which uses SIGALRM such as sleep(). Use of signals by external call code may cause YottaDB to fail.</p></li>
+<li><p>Use of the YottaDB provided malloc and free, creates an integrated heap management system, which has a number of debugging tools. YottaDB recommends the usage of ydb_malloc/ydb_free in the external functions that provides better debugging capability in case memory management problems occur with external calls.</p></li>
+<li><p>Use of exit system call in external functions is strongly discouraged. Since YottaDB uses exit handlers to properly shutdown runtime environment and any active resources, the system call _exit should never be used in external functions.</p></li>
+<li><p>YottaDB uses timer signals so often that the likelihood of a system call being interrupted is high. So, all system calls in the external program can return EINTR if interrupted by a signal.</p></li>
+<li><p>Handler functions invoked with start_timer must not invoke services that are identified by the Operating System documentation as unsafe for signal handlers (or not identified as safe) - consult the system documentation or man pages for this information. Such services cause non-deterministic failures when they are interrupted by a function that then attempts to call them, wrongly assuming they are re-entrant.</p></li>
+</ul>
+<p>The ydb_stdout_stderr_adjust() function checks whether stdout (file descriptor 1) and stderr (file descriptor 2) are the same file. If they are the same file, the function routes writes to stdout instead of stderr. This ensures that output appears in the order in which it was written. Otherwise, owing to IO buffering, output can appear in an order different from that in which it was written. Application code that mixes C and M code, and explicitly redirects stdout or stderr should call this function as soon as possible after the redirection. Refer to the function definition in the <a class="reference external" href="../MultiLangProgGuide/cprogram.html#ydb-stdout-stderr-adjust-adjustt-fn">Multi-Language Programmer’s Guide</a>.</p>
+</section>
+<section id="examples-of-using-external-calls">
+<h3><a class="toc-backref" href="extrout.html#id20">Examples of Using External Calls</a><a class="headerlink" href="extrout.html#examples-of-using-external-calls" title="Permalink to this heading">¶</a></h3>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="nl">foo</span><span class="p">:</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">bar</span><span class="w"> </span><span class="p">(</span><span class="n">I</span><span class="o">:</span><span class="n">ydb_float_t</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">O</span><span class="o">:</span><span class="n">ydb_float_t</span><span class="o">*</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>There is one external call table for each package. The environment variable “ydb_xc” must name the external call table file for the default package. External call table files for packages other than the default must be identified by environment variables of the form “ydb_xc_name”.</p>
+<p>The first of the external call tables is the location of the shareable library. The location can include environment variable names.</p>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>% echo $ydb_xc_mathpak
+/user/joe/mathpak.xc
+% echo lib /usr/
+% cat mathpak.xc
+$lib/mathpak.so
+exp: ydb_status_t xexp(I:ydb_float_t*, O:ydb_float_t*)
+% cat exp.c
+...
+int xexp(count, invar, outvar)
+int count;
+float *invar;
+float *outvar;
+{
+ ...
+}
+% ydb
+...
+YDB&gt;d &amp;mathpak.exp(inval,.outval)
+YDB&gt;
+</pre></div>
+</div>
+<p>Example : For preallocation:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>% echo $ydb_xc_extcall
+/usr/joe/extcall.xc
+% cat extcall.xc
+/usr/lib/extcall.so
+prealloc: void ydb_pre_alloc_a(O:ydb_char_t *[12])
+% cat extcall.c
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &quot;libyottadb.h&quot;
+void ydb_pre_alloc_a (int count, char *arg_prealloca)
+{
+ strcpy(arg_prealloca, &quot;New Message&quot;);
+ return;
+}
+</pre></div>
+</div>
+<p>Example : for call-back mechanism</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>% echo $ydb_xc
+/usr/joe/callback.xc
+% cat /usr/joe/callback.xc
+$MYLIB/callback.so
+init:     void   init_callbacks()
+tstslp:  void   tst_sleep(I:ydb_long_t)
+strtmr: void   start_timer(I:ydb_long_t, I:ydb_long_t)
+% cat /usr/joe/callback.c
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+#include &quot;libyottadb.h&quot;
+
+void **functable;
+void (*setup_timer)(int , int , void (*)() , int , char *);
+void (*cancel_timer)(int );
+void (*sleep_interrupted)(int );
+void (*sleep_uninterrupted)(int );
+void* (*malloc_fn)(int);
+void (*free_fn)(void*);
+
+void  init_callbacks (int count)
+{
+   char *start_address;
+
+   start_address = (char *)getenv(&quot;GTM_CALLIN_START&quot;);
+
+   if (start_address == (char *)0)
+    {
+     fprintf(stderr,&quot;GTM_CALLIN_START is not set\n&quot;);
+     return;
+    }
+   functable = (void **)atoi(start_address);
+   if (functable == (void **)0)
+   {
+    perror(&quot;atoi : &quot;);
+    fprintf(stderr,&quot;addresses defined by GTM_CALLIN_START not a number\n&quot;);
+    return;
+   }
+   sleep_uninterrupted = (void (*)(int )) functable[0];
+   sleep_interrupted = (void (*)(int )) functable[1];
+   setup_timer = (void (*)(int , int, void (*)(), int, char *)) functable[2];
+   cancel_timer = (void (*)(int )) functable[3];
+
+   malloc_fn = (void* (*)(int)) functable[4];
+   free_fn = (void (*)(void*)) functable[5];
+
+   return;
+}
+
+void  sleep (int count, int time)
+{
+   (*sleep_uninterrupted)(time);
+}
+
+void timer_handler ()
+{
+   fprintf(stderr,&quot;Timer Handler called\n&quot;);
+   /* Do something */
+}
+
+void  start_timer (int count, int time_to_int, int time_to_sleep)
+{
+   (*setup_timer)((int )start_timer, time_to_int, timer_handler, 0, 0);
+   return;
+}
+void* xmalloc (int count)
+{
+  return (*malloc_fn)(count);
+}
+
+void  xfree(void* ptr)
+{
+  (*free_fn)(ptr);
+}
+</pre></div>
+</div>
+<p>Example:ydb_malloc/ydb_free callbacks using ydb_pointertofunc_t</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>% echo $ydb_xc
+/usr/joe/callback.xc
+% cat /usr/joe/callback.xc
+/usr/lib/callback.so
+init: void init_callbacks(I:ydb_pointertofunc_t, I:ydb_pointertofunc_t)
+% ydb
+YDB&gt; do &amp;.init(4,5)
+YDB&gt;
+% cat /usr/joe/callback.c
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &quot;libyottadb.h&quot;
+void* (*malloc_fn)(int);
+void (*free_fn)(void*);
+void init_callbacks(int count, void* (*m)(int), void (*f)(void*))
+{
+    malloc_fn = m;
+    free_fn = f;
+}
+</pre></div>
+</div>
+</section>
+</section>
+<section id="calls-from-external-routines-call-ins">
+<span id="calls-ext-rt-call-ins"></span><h2><a class="toc-backref" href="extrout.html#id21">Calls from External Routines: Call-Ins</a><a class="headerlink" href="extrout.html#calls-from-external-routines-call-ins" title="Permalink to this heading">¶</a></h2>
+<p>Call-In is a framework supported by YottaDB that allows a C/C++ program to invoke an M routine within the same process context. YottaDB provides a well-defined Call-In interface packaged as a run-time shared library that can be linked into an external C/C++ program.</p>
+<section id="relevant-files-for-call-ins">
+<h3><a class="toc-backref" href="extrout.html#id22">Relevant Files for Call-Ins</a><a class="headerlink" href="extrout.html#relevant-files-for-call-ins" title="Permalink to this heading">¶</a></h3>
+<p>To facilitate Call-Ins to M routines, the YottaDB distribution directory ($ydb_dist) contains the following files:</p>
+<ul class="simple">
+<li><p>libyottadb.so - A shared library that implements the YottaDB run-time system, including the Call-In API. If Call-Ins are used from a standalone C/C++ program, this library needs to be explicitly linked into the program. See <a class="reference internal" href="extrout.html#building-standalone-programs"><span class="std std-ref">Building Standalone Programs</span></a>, which describes the necessary linker options on each supported platforms.</p></li>
+<li><p>yottadb - The YottaDB startup program that dynamically links with libyottadb.so.</p></li>
+<li><p>libyottadb.h - A C-header file containing the declarations of Call-In API.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>.so is the recognized shared library file extension on most UNIX platforms.</p>
+</div>
+<p>The following sections describe the files relevant to using Call-Ins.</p>
+<section id="libyottadb-h">
+<h4><a class="toc-backref" href="extrout.html#id23">libyottadb.h</a><a class="headerlink" href="extrout.html#libyottadb-h" title="Permalink to this heading">¶</a></h4>
+<p>The header file provides signatures of all Call-In interface functions and definitions of those valid data types that can be passed from C to M. YottaDB strongly recommends that these types be used instead of native types (int, char, float, and so on), to avoid possible mismatch problems during parameter passing.</p>
+<p>libyottadb.h defines the following types that can be used in Call-Ins.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 82%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>void</p></td>
+<td><p>Used to express that there is no function return value</p></td>
+</tr>
+<tr class="row-odd"><td><p>ydb_int_t</p></td>
+<td><p>ydb_int_t has 32-bit length on all platforms.</p></td>
+</tr>
+<tr class="row-even"><td><p>ydb_int64_t</p></td>
+<td><p>ydb_int64_t has 64-bit length on 64-bit platforms, and is unsupported on 32-bit platforms.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ydb_uint_t</p></td>
+<td><p>ydb_uint_t has 32-bit length on all platforms</p></td>
+</tr>
+<tr class="row-even"><td><p>ydb_uint64_t</p></td>
+<td><p>ydb_uint64_t has 64-bit length on 64-bit platforms, and is unsupported on 32-bit platforms.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ydb_long_t</p></td>
+<td><p>ydb_long_t has 32-bit length on 32-bit platforms and 64-bit length on 64-bit platforms.
+It is much the same as the C language long type.</p></td>
+</tr>
+<tr class="row-even"><td><p>ydb_ulong_t</p></td>
+<td><p>ydb_ulong_t is much the same as the C language unsigned long type.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ydb_float_t</p></td>
+<td><p>floating point number</p></td>
+</tr>
+<tr class="row-even"><td><p>ydb_double_t</p></td>
+<td><p>Same as above but double precision.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ydb_long_t*</p></td>
+<td><p>Pointer to ydb_long_t. Good for returning integers.</p></td>
+</tr>
+<tr class="row-even"><td><p>ydb_ulong_t*</p></td>
+<td><p>Pointer to ydb_ulong_t. Good for returning unsigned integers.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ydb_string_t*</p></td>
+<td><p>Pointer to ydb_string_t described below. Used to move binary data in and out (in spite of its name). Also
+you can use it if the cost of doing strlen() on a ydb_char_t* is too high for your application.</p></td>
+</tr>
+<tr class="row-even"><td><p>ydb_char_t*</p></td>
+<td><p>Alias for char*. Useful for passing strings to and from YottaDB</p></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">ydb_long_t</span><span class="w"> </span><span class="n">length</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">ydb_char_t</span><span class="o">*</span><span class="w"> </span><span class="n">address</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="n">ydb_string_t</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The pointer types defined above are 32-bit addresses on all 32-bit platforms. For 64-bit platforms, ydb_string_t* is a 64-bit address.</p>
+<p>libyottadb.h also provides an input-only parameter type ydb_pointertofunc_t that can be used to obtain call-back function pointers via parameters in the external routine. If a parameter is specified as I:ydb_pointertofunc_t and if a numeric value (between 0-5) is passed for this parameter in M, YottaDB interprets this value as the index into the callback table and passes the appropriate callback function pointer to the external routine.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>YottaDB represents values that fit in 18 digits as numeric values, and values that require more than 18 digits as strings.</p>
+</div>
+<p>libyottadb.h also includes definitions for the following entry points exported from libyottadb:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">ydb_hiber_start</span><span class="p">(</span><span class="n">ydb_uint_t</span><span class="w"> </span><span class="n">mssleep</span><span class="p">);</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">ydb_hiber_start_wait_any</span><span class="p">(</span><span class="n">ydb_uint_t</span><span class="w"> </span><span class="n">mssleep</span><span class="p">)</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">ydb_start_timer</span><span class="p">(</span><span class="n">ydb_tid_t</span><span class="w"> </span><span class="n">tid</span><span class="p">,</span><span class="w"> </span><span class="n">ydb_int_t</span><span class="w"> </span><span class="n">time_to_expir</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">handler</span><span class="p">)(),</span><span class="w"> </span><span class="n">ydb_int_t</span><span class="w"> </span><span class="n">hdata_len</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">hdata</span><span class="p">);</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">ydb_cancel_timer</span><span class="p">(</span><span class="n">ydb_tid_t</span><span class="w"> </span><span class="n">tid</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>where:</p>
+<ul class="simple">
+<li><p>mssleep - milliseconds to sleep</p></li>
+<li><p>tid - unique timer id value</p></li>
+<li><p>time_to_expir - milliseconds until timer drives given handler</p></li>
+<li><p>handler - function pointer to handler to be driven</p></li>
+<li><p>hdata_len - 0 or length of data to pass to handler as a parameter</p></li>
+<li><p>hdata - NULL or address of data to pass to handler as a parameter</p></li>
+</ul>
+<p>ydb_hiber_start() always sleeps until the time expires; ydb_hiber_start_wait_any() sleeps until the time expires or an interrupt by any signal (including another timer). ydb_start_timer() starts a timer but returns immediately (no sleeping) and drives the given handler when time expires unless the timer is canceled.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>libyottadb.h continues to be upward compatible with gtmxc_types.h. gtmxc_types.h explicitly marks the xc_* equivalent types as deprecated.</p>
+</div>
+<p>ydb_int64_6 and ydb_uint64_t are supported on 64-bit platforms effective release <a class="reference external" href="https://gitlab.com/YottaDB/DB/YDB/-/tags/r1.30">r1.30.</a> and have no corresponding gtm_* type.</p>
+</section>
+<section id="call-in-table">
+<span id="id1"></span><h4><a class="toc-backref" href="extrout.html#id24">Call-In table</a><a class="headerlink" href="extrout.html#call-in-table" title="Permalink to this heading">¶</a></h4>
+<p>The Call-In table file is a text file that contains the signatures of all M label references that get called from C. In order to pass the typed C arguments to the type-less M formallist, either the environment variable ydb_ci must be defined to point to the Call-In table file path, or you can use the functions <code class="code docutils literal notranslate"><span class="pre">ydb_ci_tab_open()</span></code>/<code class="code docutils literal notranslate"><span class="pre">ydb_ci_tab_open_t()</span></code> with <code class="code docutils literal notranslate"><span class="pre">ydb_ci_tab_switch()</span></code>/<code class="code docutils literal notranslate"><span class="pre">ydb_ci_tab_switch_t()</span></code> to open and switch call-in tables. Usage for the functions to open and switch the tables is described below.</p>
+<p>Each signature must be specified separately in a single line. YottaDB reads this file and interprets each line according to the following convention (specifications within box brackets “[]”, are optional):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;c-call-name&gt; : &lt;ret-type&gt; &lt;label-ref&gt; ([&lt;direction&gt;:&lt;param-type&gt;,...])
+</pre></div>
+</div>
+<p>where,</p>
+<p>&lt;label-ref&gt;: is the entry point (that is a valid label reference) at which YottaDB starts executing the M routine being called-in</p>
+<p>&lt;c-call-name&gt;: is a unique C identifier that is actually used within C to refer to &lt;label-ref&gt;</p>
+<p>&lt;direction&gt;: is either I (input-only), O (output-only), or IO (input-output)</p>
+<p>&lt;ret-type&gt;: is the return type of &lt;label-ref&gt;</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since the return type is considered as an output-only (O) parameter, the only types allowed are pointer types and void. Void cannot be specified as parameter.</p>
+</div>
+<p>&lt;param-type&gt;: is a valid parameter type. Empty parentheses must be specified if no argument is passed to &lt;label-ref&gt;. The number of parameters DOES NOT have to match the number of parameters in the M function. Any parameters that are not supplied will be undefined in M. For example, your call-in table can map to an M function/procedure that takes 8 paramters, but the call-in could have only 2 parameters in the call-in table. That means that parameters 3-8 will be undefined when the M function/procedure is called.</p>
+<p>The &lt;direction&gt; indicates the type of operation that YottaDB performs on the parameter read-only (I), write-only (O), or read-write (IO). All O and IO parameters must be passed by reference, that is, as pointers since YottaDB writes to these locations. All pointers that are being passed to YottaDB must be pre-allocated. The following table details valid type specifications for each direction.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 85%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Directions</p></th>
+<th class="head"><p>Allowed Parameter Types</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>I</p></td>
+<td><p>ydb_int_t, ydb_int64_t, ydb_uint_t, ydb_uint64_t, ydb_long_t, ydb_ulong_t, ydb_float_t, ydb_double_t,
+ydb_int_t*, ydb_int64_t*, ydb_uint_t*, ydb_uint64_t*, ydb_long_t*, ydb_ulong_t*, ydb_float_t*, ydb_double_t*,
+ydb_char_t*, ydb_string_t*</p></td>
+</tr>
+<tr class="row-odd"><td><p>O/IO</p></td>
+<td><p>ydb_int_t*, ydb_int64_t*, ydb_uint_t*, ydb_uint64_t*
+ydb_long_t*, ydb_ulong_t*, ydb_float_t*, ydb_double_t*,_ydb_char_t*, ydb_string_t*</p></td>
+</tr>
+</tbody>
+</table>
+<p>Call-In tables support comments effective release <a class="reference external" href="https://gitlab.com/YottaDB/DB/YDB/-/tags/r1.30">r1.30.</a> YottaDB ignores text from a double slash (//) on a line to the end of the line.</p>
+<p>Here is an example of Call-In table (ydbaccess.ci) for _ydbaccess.m (see <a class="reference internal" href="extrout.html#call-ydb-from-c-prog"><span class="std std-ref">Examples: Calling YottaDB from a C Program</span></a>):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>get     : void get^%ydbaccess(I:ydb_char_t*, O:ydb_string_t*)
+kill    : void kill^%ydbaccess(I:ydb_char_t*)
+lock    : void lock^%ydbaccess(I:ydb_char_t*)
+order   : void order^%ydbaccess(I:ydb_char_t*, O:ydb_string_t*)
+query   : void query^%ydbaccess(I:ydb_char_t*, O:ydb_string_t*)
+set     : void set^%ydbaccess(I:ydb_char_t*, I:ydb_string_t*)
+xecute  : void xecute^%ydbaccess(I:ydb_char_t*, O:ydb_char_t*)
+</pre></div>
+</div>
+<p>Here is an example of Call-In table (ydbreturn.ci) for _ydbreturn.m (see <a class="reference internal" href="extrout.html#call-ydb-from-c-prog"><span class="std std-ref">Examples: Calling YottaDB from a C Program</span></a>):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>long    : ydb_long_t*   long^%ydbreturn(I:ydb_long_t)
+ulong   : ydb_ulong_t*  ulong^%ydbreturn(I:ydb_ulong_t)
+float   : ydb_float_t*  float^%ydbreturn(I:ydb_float_t)
+double  : ydb_double_t* double^%ydbreturn(I:ydb_double_t)
+char    : ydb_char_t*   char^%ydbreturn(I:ydb_char_t*)
+string  : ydb_string_t* string^%ydbreturn(I:ydb_string_t*)
+</pre></div>
+</div>
+</section>
+</section>
+<section id="call-in-interface">
+<span id="call-in-intf"></span><h3><a class="toc-backref" href="extrout.html#id25">Call-In Interface</a><a class="headerlink" href="extrout.html#call-in-interface" title="Permalink to this heading">¶</a></h3>
+<p>This section is further broken down into several subsections for an easy understanding of the Call-In interface. The section is concluded with several examples.</p>
+<section id="ydb-ci-tab-open-ydb-ci-tab-open-t">
+<h4><a class="toc-backref" href="extrout.html#id26">ydb_ci_tab_open() / ydb_ci_tab_open_t()</a><a class="headerlink" href="extrout.html#ydb-ci-tab-open-ydb-ci-tab-open-t" title="Permalink to this heading">¶</a></h4>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">ydb_ci_tab_open</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">fname</span><span class="p">,</span><span class="w"> </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="o">*</span><span class="n">ret_value</span><span class="p">)</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">ydb_ci_tab_open_t</span><span class="p">(</span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">tptoken</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">ydb_buffer_t</span><span class="w"> </span><span class="o">*</span><span class="n">errstr</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">fname</span><span class="p">,</span><span class="w"> </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="o">*</span><span class="n">ret_value</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Opens the call-in table contained in the file name <code class="code docutils literal notranslate"><span class="pre">fname</span></code>. Using the filled in <code class="code docutils literal notranslate"><span class="pre">ret_value</span></code> handle in a later <code class="code docutils literal notranslate"><span class="pre">ydb_ci_tab_switch()/ydb_ci_tab_switch_t()</span></code> call, one can switch to this call-in table as the currently active call-in table. All calls to <code class="code docutils literal notranslate"><span class="pre">ydb_cip()/ydb_cip_t()/ydb_ci()/ydb_ci_t()</span></code> use the currently active call-in table. This lets applications open any number of call-in tables across the lifetime of a process. The <code class="code docutils literal notranslate"><span class="pre">ydb_ci</span></code> environment variable, if set, points to the default call-in table that YottaDB uses unless the active call-in table is switched using <code class="code docutils literal notranslate"><span class="pre">ydb_ci_tab_switch()/ydb_ci_tab_switch_t()</span></code>. The call-in table pointed to by <code class="code docutils literal notranslate"><span class="pre">ydb_ci</span></code>, the default call-in table, need not be explicitly opened with <code class="code docutils literal notranslate"><span class="pre">ydb_ci_tab_open()/ydb_ci_tab_open_t()</span></code>.</p>
+<p>Returns:</p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">YDB_OK</span></code> if the open was successful and fills in a handle to the opened table in <code class="code docutils literal notranslate"><span class="pre">ret_value</span></code>; or</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">YDB_ERR_PARAMINVALID</span></code> if the input parameters <code class="code docutils literal notranslate"><span class="pre">fname</span></code> or <code class="code docutils literal notranslate"><span class="pre">ret_value</span></code> are NULL; or</p></li>
+<li><p>a negative error return code (for example, if the call-in table in the file had parse errors).</p></li>
+</ul>
+<p>See the <a class="reference external" href="../MultiLangProgGuide/programmingnotes.html#threads">Threads</a> section in the Multi-Language Programmer’s Guide for information on using the threaded (<code class="code docutils literal notranslate"><span class="pre">_t</span></code>) version of the code.</p>
+</section>
+<section id="ydb-ci-tab-switch-ydb-ci-tab-switch-t">
+<h4><a class="toc-backref" href="extrout.html#id27">ydb_ci_tab_switch() / ydb_ci_tab_switch_t()</a><a class="headerlink" href="extrout.html#ydb-ci-tab-switch-ydb-ci-tab-switch-t" title="Permalink to this heading">¶</a></h4>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">ydb_ci_tab_switch</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">new_handle</span><span class="p">,</span><span class="w"> </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="o">*</span><span class="n">ret_old_handle</span><span class="p">)</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">ydb_ci_tab_switch_t</span><span class="p">(</span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">tptoken</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">ydb_buffer_t</span><span class="w"> </span><span class="o">*</span><span class="n">errstr</span><span class="p">,</span><span class="w"> </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">new_handle</span><span class="p">,</span><span class="w"> </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="o">*</span><span class="n">ret_old_handle</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Switches the currently active call-in table to the handle <code class="code docutils literal notranslate"><span class="pre">new_handle</span></code> (returned by a previous call to <code class="code docutils literal notranslate"><span class="pre">ydb_ci_tab_open()/ydb_ci_tab_open_t()</span></code>) and fills in the previously active call-in table handle in <code class="code docutils literal notranslate"><span class="pre">*ret_old_handle</span></code>. An application that wishes to switch back to the previous call-in table at a later point would call <code class="code docutils literal notranslate"><span class="pre">ydb_ci_tab_switch()/ydb_ci_tab_switch_t()</span></code> again with <code class="code docutils literal notranslate"><span class="pre">*ret_old_handle</span></code> as the <code class="code docutils literal notranslate"><span class="pre">new_handle</span></code> parameter. The special value of NULL passed in <code class="code docutils literal notranslate"><span class="pre">new_handle</span></code> switches the active call-in table to the default call-in table (the call-in table pointed to by the <code class="code docutils literal notranslate"><span class="pre">ydb_ci</span></code> environment variable).</p>
+<p>Returns:</p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">YDB_OK</span></code> if the open was successful and fills in a handle to the opened table in <code class="code docutils literal notranslate"><span class="pre">ret_value</span></code>; or</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">YDB_ERR_PARAMINVALID</span></code> if the output parameter <code class="code docutils literal notranslate"><span class="pre">ret_old_handle</span></code> is NULL or if the input parameter <code class="code docutils literal notranslate"><span class="pre">new_handle</span></code> points to an invalid handle (i.e. not returned by a prior <code class="code docutils literal notranslate"><span class="pre">ydb_ci_tab_open()/ydb_ci_tab_open_t()</span></code>) call); or</p></li>
+<li><p>a negative error return code</p></li>
+</ul>
+<p>Note that application code using the <code class="code docutils literal notranslate"><span class="pre">ydb_cip()/ydb_cip_t()</span></code> functions provides YottaDB with a pointer to a <code class="code docutils literal notranslate"><span class="pre">ci_name_descriptor</span></code> structure that includes a handle. YottaDB uses the current call-in table to set the handle the first time that the associated function is called. Thereafter, the handle is immutable, and switching the call-in table leaves unchanged the mapping for functions whose handles have already been set. Use <code class="code docutils literal notranslate"><span class="pre">ydb_ci()/ydb_ci_t()</span></code> for application code that requires the called function to change when the call-in table changes.</p>
+<p>See the <a class="reference external" href="../MultiLangProgGuide/programmingnotes.html#threads">Threads</a> section in the Multi-Language Programmer’s Guide for information on using the threaded (<code class="code docutils literal notranslate"><span class="pre">_t</span></code>) version of the code.</p>
+</section>
+<section id="call-an-m-routine-from-c">
+<h4><a class="toc-backref" href="extrout.html#id28">Call an M Routine from C</a><a class="headerlink" href="extrout.html#call-an-m-routine-from-c" title="Permalink to this heading">¶</a></h4>
+<p>YottaDB provides 4 interfaces for calling a M routine from C. These are:</p>
+<ul class="simple">
+<li><p>ydb_ci</p></li>
+<li><p>ydb_ci_t</p></li>
+<li><p>ydb_cip</p></li>
+<li><p>ydb_cip_t</p></li>
+</ul>
+<p>ydb_cip and ydb_cip_t offer better performance on calls after the first one.</p>
+<p>While ydb_ci() and ydb_cip() are for single threaded applications, ydb_ci_t() and ydb_cip_t() are for multi-threaded applications that call M routines. See the <a class="reference external" href="../MultiLangProgGuide/programmingnotes.html#threads">Threads</a> section in the Multi-Language Programmer’s Guide for details.</p>
+<section id="ydb-ci">
+<span id="ydb-ci-intf"></span><h5><a class="toc-backref" href="extrout.html#id29">ydb_ci</a><a class="headerlink" href="extrout.html#ydb-ci" title="Permalink to this heading">¶</a></h5>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">ydb_status_t</span><span class="w"> </span><span class="nf">ydb_ci</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ydb_char_t</span><span class="o">*</span><span class="w"> </span><span class="n">c_call_name</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The variable argument function ydb_ci() is the interface that actually invokes a specified M routine and returns the results via parameters. The ydb_ci() call must be in the following format:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ydb_ci</span><span class="p">(</span><span class="o">&lt;</span><span class="n">c_call_name</span><span class="o">&gt;</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="n">ret_val</span><span class="p">]</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="n">arg1</span><span class="p">]</span><span class="w"> </span><span class="p">...);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>First argument: c_call_name, a null-terminated C character string indicating the alias name for the corresponding &lt;lab-ref&gt; entry in the Call-In table.</p>
+<p>Second argument (only to be supplied if &lt;ret-type&gt; is not void): ret_val, a pre-allocated pointer through which YottaDB returns the value of QUIT argument from the (extrinsic) M routine. ret_val must be the same type as specified for &lt;ret-type&gt; in the Call-In table entry.</p>
+<p>List of arguments to be passed to the M routine’s formallist: the number of arguments and the type of each argument must match the number of parameters, and parameter types specified in the corresponding Call-In table entry. <strong>Note that passing the same number of arguments as the number of arguments in the Call-in table can cause undefined behavior, as the remaining arguments are picked up from uninitialized memory locations in the C stack!</strong> All pointer arguments must be pre-allocated. YottaDB assumes that any pointer, which is passed for O/IO-parameter points to valid write-able memory.</p>
+<p>The status value returned by ydb_ci() indicates the YottaDB status code: zero (0) if successful, or a non-zero error code on failure. The error string corresponding to the failure code can be read into a buffer by immediately calling ydb_zstatus(). For more details, see the <a class="reference internal" href="extrout.html#ydb-zstatus"><span class="std std-ref">ydb_zstatus</span></a> section below.</p>
+</section>
+<section id="ydb-ci-t">
+<span id="ydb-ci-t-intf"></span><h5><a class="toc-backref" href="extrout.html#id30">ydb_ci_t</a><a class="headerlink" href="extrout.html#ydb-ci-t" title="Permalink to this heading">¶</a></h5>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">ydb_ci_t</span><span class="p">(</span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">tptoken</span><span class="p">,</span><span class="w">  </span><span class="n">ydb_buffer_t</span><span class="w"> </span><span class="o">*</span><span class="n">errstr</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">c_rtn_name</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The function ydb_ci_t() is an interface for a multi-threaded application to invoke an M routine..</p>
+<p>The ydb_ci_t() call must be in the following format:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">status</span><span class="o">=</span><span class="w"> </span><span class="n">ydb_ci_t</span><span class="p">(</span><span class="w"> </span><span class="o">&lt;</span><span class="n">tptoken</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="o">&lt;</span><span class="n">errstrptr</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="o">&lt;</span><span class="n">ci_rtn_name</span><span class="o">&gt;</span><span class="w"> </span><span class="p">[,</span><span class="n">ret_val</span><span class="p">]</span><span class="w"> </span><span class="p">[,</span><span class="n">arg1</span><span class="p">]...);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>First argument: tptoken, a unique transaction processing token that refers to the active transaction.</p>
+<p>Second argument: errstr as as <a class="reference external" href="https://docs.yottadb.com/MultiLangProgGuide/cprogram.html#ydb-buffer-t">ydb_buffer_t</a> structure.</p>
+<p>Third argument: ci_rtn_name, a null-terminated C character string indicating the alias name for the corresponding &lt;lab-ref&gt; entry in the Call-In table.</p>
+<p>ydb_ci_t() works in the same way and returns the same values as ydb_ci().</p>
+</section>
+<section id="ydb-cip">
+<span id="ydb-cip-intf"></span><h5><a class="toc-backref" href="extrout.html#id31">ydb_cip</a><a class="headerlink" href="extrout.html#ydb-cip" title="Permalink to this heading">¶</a></h5>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">ydb_status_t</span><span class="w"> </span><span class="nf">ydb_cip</span><span class="p">(</span><span class="n">ci_name_descriptor</span><span class="w"> </span><span class="o">*</span><span class="n">ci_info</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The variable argument function ydb_cip() is the interface that invokes the specified M routine and returns the results via parameters.</p>
+<p>ci_name_descriptor has the following structure:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">ydb_string_t</span><span class="w"> </span><span class="n">rtn_name</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">handle</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="n">ci_name_descriptor</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>rtn_name is a C character string indicating the corresponding &lt;lab-ref&gt; entry in the Call-In table.</p>
+<p>The <code class="code docutils literal notranslate"><span class="pre">handle</span></code> is YottaDB private information that YottaDB expects to be initialized to NULL before the first <code class="code docutils literal notranslate"><span class="pre">ydb_cip()</span></code> call using this <code class="code docutils literal notranslate"><span class="pre">ci_name_descriptor</span></code> structure. YottaDB initializes this field in the first call-in and uses this cached information on future <code class="code docutils literal notranslate"><span class="pre">ydb_cip()</span></code> calls to avoid a lookup of the routine name (compared to a <code class="code docutils literal notranslate"><span class="pre">ydb_ci()</span></code> call where routine name lookup happens on all calls). This <code class="code docutils literal notranslate"><span class="pre">handle</span></code> must be provided unmodified to YottaDB on subsequent calls. If application code modifies it, it will corrupt the address space of the process, and potentially cause just about any bad behavior that it is possible for the process to cause, including but not limited to process death, database damage and security violations.</p>
+<p>The ydb_cip() call must follow the following format:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ydb_cip</span><span class="p">(</span><span class="o">&lt;</span><span class="n">ci_name_descriptor</span><span class="o">&gt;</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="n">ret_val</span><span class="p">]</span><span class="w"> </span><span class="p">[,</span><span class="w"> </span><span class="n">arg1</span><span class="p">]</span><span class="w"> </span><span class="p">...);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>First argument: ci_name_descriptor, as described above, within which rtn_name indicates the alias name for the corresponding &lt;lab-ref&gt; entry in the Call-In table.</p>
+<p>Second argument (only to be supplied if &lt;ret-type&gt; is not void): ret_val, a pre-allocated pointer through which YottaDB returns the value of QUIT argument from the (extrinsic) M routine. ret_val must be the same type as specified for &lt;ret-type&gt; in the Call-In table entry.</p>
+<p>List of arguments to be passed to the M routine’s formallist: the number of arguments and the type of each argument must match the number of parameters, and parameter types specified in the corresponding Call-In table entry. <strong>Note that passing the same number of arguments as the number of arguments in the Call-in table can cause undefined behavior, as the remaining arguments are picked up from uninitialized memory locations in the C stack!</strong> All pointer arguments must be pre-allocated. YottaDB assumes that any pointer, which is passed for O/IO-parameter points to valid write-able memory.</p>
+<p>The status value returned by ydb_cip() indicates the YottaDB status code: zero (0) if successful, or a non-zero error code on failure. The error message corresponding to the failure code can be read into a buffer by immediately calling ydb_zstatus().</p>
+</section>
+<section id="ydb-cip-t">
+<span id="ydb-cip-t-intf"></span><h5><a class="toc-backref" href="extrout.html#id32">ydb_cip_t</a><a class="headerlink" href="extrout.html#ydb-cip-t" title="Permalink to this heading">¶</a></h5>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">ydb_cip_t</span><span class="p">(</span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">tptoken</span><span class="p">,</span><span class="w"> </span><span class="n">ydb_buffer_t</span><span class="w"> </span><span class="o">*</span><span class="n">errstr</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">c_rtn_name</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The function ydb_cip_t is an interface for a multi-threaded application to invoke an M routine.</p>
+<p>The ydb_cip_t() call must follow the following format:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ydb_cip_t</span><span class="p">(</span><span class="o">&lt;</span><span class="n">tptoken</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="o">&lt;</span><span class="n">errstrptr</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="o">&lt;</span><span class="n">ci_name_descriptor</span><span class="o">&gt;</span><span class="w"> </span><span class="p">[,</span><span class="n">ret_val</span><span class="p">]</span><span class="w"> </span><span class="p">[,</span><span class="n">arg1</span><span class="p">]</span><span class="w"> </span><span class="p">...);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>First argument: tptoken, a unique transaction processing token that refers to the active transaction.</p>
+<p>Second argument: errstr as as <a class="reference external" href="https://docs.yottadb.com/MultiLangProgGuide/cprogram.html#ydb-buffer-t">ydb_buffer_t</a> structure.</p>
+<p>Third argument: ci_rtn_name, a null-terminated C character string indicating the alias name for the corresponding &lt;lab-ref&gt; entry in the Call-In table.</p>
+<p>ydb_cip_t() works in the same way and returns the same values as ydb_cip().</p>
+</section>
+<section id="examples-calling-yottadb-from-a-c-program">
+<span id="call-ydb-from-c-prog"></span><h5><a class="toc-backref" href="extrout.html#id33">Examples: Calling YottaDB from a C Program</a><a class="headerlink" href="extrout.html#examples-calling-yottadb-from-a-c-program" title="Permalink to this heading">¶</a></h5>
+<p>Supplied are three examples of C programs that use call-ins to invoke YottaDB. The examples are linked below. To run the examples, download the three files for each row and follow the compiling and linking instructions in the comments of the C program, or see the script below.</p>
+<table class="colwidths-given docutils align-default" id="id11">
+<caption><span class="caption-text">Calling YottaDB from a C Program</span><a class="headerlink" href="extrout.html#id11" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>C Program</p></th>
+<th class="head"><p>Call-in Table</p></th>
+<th class="head"><p>M Program</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://gitlab.com/YottaDB/DB/YDBTest/-/raw/master/call_ins/inref/ydbaccess_ci.c">ydbaccess_ci.c</a></p></td>
+<td><p><a class="reference external" href="https://gitlab.com/YottaDB/DB/YDBTest/-/raw/master/call_ins/inref/ydbaccess.ci">ydbaccess.ci</a></p></td>
+<td><p><a class="reference external" href="https://gitlab.com/YottaDB/DB/YDBTest/-/raw/master/call_ins/inref/_ydbaccess.m">_ydbaccess.m</a></p></td>
+<td><p>Show how to use ydb_ci</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://gitlab.com/YottaDB/DB/YDBTest/-/raw/master/call_ins/inref/ydbaccess_cip.c">ydbaccess_cip.c</a></p></td>
+<td><p><a class="reference external" href="https://gitlab.com/YottaDB/DB/YDBTest/-/raw/master/call_ins/inref/ydbaccess.ci">ydbaccess.ci</a></p></td>
+<td><p><a class="reference external" href="https://gitlab.com/YottaDB/DB/YDBTest/-/raw/master/call_ins/inref/_ydbaccess.m">_ydbaccess.m</a></p></td>
+<td><p>Show how to use ydb_cip</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://gitlab.com/YottaDB/DB/YDBTest/-/raw/master/call_ins/inref/ydbreturn_ci.c">ydbreturn_ci.c</a></p></td>
+<td><p><a class="reference external" href="https://gitlab.com/YottaDB/DB/YDBTest/-/raw/master/call_ins/inref/ydbreturn.ci">ydbreturn.ci</a></p></td>
+<td><p><a class="reference external" href="https://gitlab.com/YottaDB/DB/YDBTest/-/raw/master/call_ins/inref/_ydbreturn.m">_ydbreturn.m</a></p></td>
+<td><p>Show how to use ydb_ci with M extrinsic functions that return data.</p></td>
+</tr>
+</tbody>
+</table>
+<p>You can also compile and run all the samples by running this script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nb">source</span> <span class="sb">`</span>pkg-config --variable<span class="o">=</span>prefix yottadb<span class="sb">`</span>/ydb_env_unset
+<span class="nb">export</span> <span class="nv">ydb_dir</span><span class="o">=</span><span class="nv">$PWD</span>/db
+<span class="nb">source</span> <span class="sb">`</span>pkg-config --variable<span class="o">=</span>prefix yottadb<span class="sb">`</span>/ydb_env_set
+
+cc -Wall -g ydbaccess_ci.c <span class="k">$(</span>pkg-config --cflags yottadb<span class="k">)</span> -o ydbaccess_ci <span class="k">$(</span>pkg-config --libs yottadb<span class="k">)</span>
+<span class="nv">ydb_routines</span><span class="o">=</span><span class="s2">&quot;. </span><span class="nv">$ydb_routines</span><span class="s2">&quot;</span> ./ydbaccess_ci
+
+<span class="nb">echo</span>
+
+cc -Wall -g ydbaccess_cip.c <span class="k">$(</span>pkg-config --cflags yottadb<span class="k">)</span> -o ydbaccess_cip <span class="k">$(</span>pkg-config --libs yottadb<span class="k">)</span>
+<span class="nv">ydb_routines</span><span class="o">=</span><span class="s2">&quot;. </span><span class="nv">$ydb_routines</span><span class="s2">&quot;</span> ./ydbaccess_cip
+
+<span class="nb">echo</span>
+
+cc -Wall -g ydbreturn_ci.c <span class="k">$(</span>pkg-config --cflags yottadb<span class="k">)</span> -o ydbreturn_ci <span class="k">$(</span>pkg-config --libs yottadb<span class="k">)</span>
+<span class="nv">ydb_routines</span><span class="o">=</span><span class="s2">&quot;. </span><span class="nv">$ydb_routines</span><span class="s2">&quot;</span> ./ydbreturn_ci
+</pre></div>
+</div>
+</section>
+</section>
+<section id="print-error-messages">
+<h4><a class="toc-backref" href="extrout.html#id34">Print Error Messages</a><a class="headerlink" href="extrout.html#print-error-messages" title="Permalink to this heading">¶</a></h4>
+<section id="ydb-zstatus">
+<span id="id8"></span><h5><a class="toc-backref" href="extrout.html#id35">ydb_zstatus</a><a class="headerlink" href="extrout.html#ydb-zstatus" title="Permalink to this heading">¶</a></h5>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">ydb_zstatus</span><span class="w"> </span><span class="p">(</span><span class="n">ydb_char_t</span><span class="o">*</span><span class="w"> </span><span class="n">msg_buffer</span><span class="p">,</span><span class="w"> </span><span class="n">ydb_long_t</span><span class="w"> </span><span class="n">buf_len</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This function returns the null-terminated $ZSTATUS message of the last failure via the buffer pointed by msg_buffer of size buf_len. The message is truncated to size buf_len if it does not fit into the buffer. ydb_zstatus() is useful if the external application needs the text message corresponding to the last YottaDB failure. A buffer of 2048 is sufficient to fit in any YottaDB message.</p>
+<p>Effective release <a class="reference external" href="https://gitlab.com/YottaDB/DB/YDB/-/tags/r1.30">r1.30.</a>, ydb_zstatus() has an <code class="code docutils literal notranslate"><span class="pre">int</span></code> return value with a value of YDB_ERR_INVSTRLEN if the buffer supplied is not large enough to hold the message and YDB_OK otherwise. ydb_zstatus() copies what can be copied to the buffer (including a null terminator byte) if the length is non-zero.</p>
+</section>
+</section>
+</section>
+<section id="building-standalone-programs">
+<span id="id10"></span><h3><a class="toc-backref" href="extrout.html#id36">Building Standalone Programs</a><a class="headerlink" href="extrout.html#building-standalone-programs" title="Permalink to this heading">¶</a></h3>
+<p>All external C functions that use call-ins should include the header file libyottadb.h that defines various types and provides signatures of call-in functions. To avoid potential size mismatches with the parameter types, YottaDB strongly recommends that ydb *t types defined in libyottadb.h be used instead of the native types (int, float, char, etc).</p>
+<p>To use call-ins from a standalone C program, it is necessary that the YottaDB runtime library (libyottadb.so) is explicitly linked into the program. If call-ins are used from an External Call function (which in turn was called from YottaDB through the existing external call mechanism), the External Call library does not need to be linked explicitly with libyottadb.so since YottaDB would have already loaded it.</p>
+<p>The following section describes compiler and linker options that must be used for call-ins to work from a standalone C/C++ program.</p>
+<ul class="simple">
+<li><p>Compiler: -I$ydb_dist</p></li>
+<li><p>Linker: -L$ydb_dist -lyottadb -rpath $ydb_dist</p></li>
+<li><p>YottaDB advises that the C/C++ compiler front-end be used as the Linker to avoid specifying the system startup routines on the ld command. The compile can pass linker options to ld using -W option (for example, cc -Wl, -R, $ydb_dist). For more details on these options, refer to manual page of the C compiler (<a class="reference external" href="https://gcc.gnu.org">gcc</a> or <a class="reference external" href="https://clang.llvm.org">clang</a>).</p></li>
+</ul>
+</section>
+<section id="nested-call-ins">
+<h3><a class="toc-backref" href="extrout.html#id37">Nested Call-Ins</a><a class="headerlink" href="extrout.html#nested-call-ins" title="Permalink to this heading">¶</a></h3>
+<p>Call-ins can be nested by making an external call function in-turn call back into YottaDB. Each ydb_ci() called from an External Call library creates a call-in base frame at $ZLEVEL 1 and executes the M routine at $ZLEVEL 2. The nested call-in stack unwinds automatically when the External Call function returns to YottaDB.</p>
+<p>YottaDB currently allows up to 10 levels of nesting. YottaDB reports the error YDB-E-CIMAXLEVELS when the nesting reaches its limit.</p>
+<p>Following are the YottaDB commands, Intrinsic Special Variables, and functions whose behavior changes in the context of every new nested call-in environment.</p>
+<p>ZGOTO 0 (zero) returns to the processing of the invoking non-M routine as does ZGOTO 1 (one) with no entryref, while ZGOTO 1:entryref replaces the originally invoked M routine and continues M execution.</p>
+<p>$ZTRAP/$ETRAP NEW’d at level 1.</p>
+<p>$ZLEVEL initializes to one (1), and increments for every new stack level.</p>
+<p>$STACK initializes to zero (0), and increments for every new stack level.</p>
+<p>$ESTACK NEW’d at level one (1).</p>
+<p>$ECODE/$STACK() initialized to null at level one (1).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>After a nested call-in environment exits and the external call C function returns to M, the above ISVs and Functions restore their old values.</p>
+</div>
+</section>
+<section id="rules-to-follow-in-call-ins">
+<span id="rules-call-ins"></span><h3><a class="toc-backref" href="extrout.html#id38">Rules to Follow in Call-Ins</a><a class="headerlink" href="extrout.html#rules-to-follow-in-call-ins" title="Permalink to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>External calls must not be fenced with TSTART/TCOMMIT if the external routine calls back into yottadb using the call-in mechanism.</p></li>
+<li><p>The external application should never call exit() unless it has called ydb_exit() previously. YottaDB internally installs an exit handler that should never be bypassed.</p></li>
+<li><p>The external application should never use any signals when YottaDB is active since YottaDB reserves them for its internal use. YottaDB provides the ability to handle SIGUSR1 within M (see <a class="reference internal" href="isv.html#zinterrupt-isv"><span class="std std-ref">$ZINTERRUPT</span></a> for more information). An interface is provided by YottaDB for timers.</p></li>
+<li><p>YottaDB recommends the use of ydb_malloc() and ydb_free() for memory management by C code that executes in a YottaDB process space for enhanced performance and improved debugging. Always use ydb_malloc() to allocate returns for pointer types to prevent memory leaks.</p></li>
+<li><p>YottaDB performs device input using the read() system service. UNIX documentation recommends against mixing this type of input with buffered input services in the fgets() family and ignoring this recommendation is likely to cause a loss of input that is difficult to diagnose and understand.</p></li>
+</ol>
+</section>
+</section>
+<section id="type-limits-for-call-ins-and-call-outs">
+<h2><a class="toc-backref" href="extrout.html#id39">Type Limits for Call-Ins and Call-Outs</a><a class="headerlink" href="extrout.html#type-limits-for-call-ins-and-call-outs" title="Permalink to this heading">¶</a></h2>
+<p>Depending on the direction (I, O, or IO) of a particular type, both call-ins and call-outs may transfer a value in two directions as follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Call-out: YottaDB -&gt; C -&gt; YottaDB       Call-in:     C -&gt; YottaDB -&gt; C
+            |        |       |                        |      |       |
+            &#39;--------&#39;-------&#39;                        &#39;------&#39;-------&#39;
+               1     2                                   2     1
+</pre></div>
+</div>
+<p>In the following table, the YottaDB-&gt;C limit applies to 1 and the C-&gt;YottaDB limit applies to 2. In other words, YottaDB-&gt;C applies to I direction for call-outs and O direction for call-ins and C-&gt;YottaDB applies to I direction for call-ins and O direction for call-outs.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 12%" />
+<col style="width: 18%" />
+<col style="width: 16%" />
+<col style="width: 24%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head" colspan="2"><p>YottaDB-&gt;C</p></th>
+<th class="head" colspan="2"><p>C-&gt;YottaDB</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Type</strong></p></td>
+<td><p><strong>Precision</strong></p></td>
+<td><p><strong>Range</strong></p></td>
+<td><p><strong>Precision</strong></p></td>
+<td><p><strong>Range</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>ydb_int_t, ydb_int_t *</p></td>
+<td><p>Full</p></td>
+<td><p>[-2^31+1, 2^31-1]</p></td>
+<td><p>Full</p></td>
+<td><p>[-2^31, 2^31-1]</p></td>
+</tr>
+<tr class="row-even"><td><p>ydb_uint_t, ydb_uint_t *</p></td>
+<td><p>Full</p></td>
+<td><p>[0, 2^32-1]</p></td>
+<td><p>Full</p></td>
+<td><p>[0, 2^32-1]</p></td>
+</tr>
+<tr class="row-odd"><td><p>ydb_long_t, ydb_long_t * (64-bit)</p></td>
+<td><p>18 digits</p></td>
+<td><p>[-2^63+1, 2^63-1]</p></td>
+<td><p>18 digits</p></td>
+<td><p>[-2^63, 2^63-1]</p></td>
+</tr>
+<tr class="row-even"><td><p>ydb_long_t, ydb_long_t * (32-bit)</p></td>
+<td><p>Full</p></td>
+<td><p>[-2^31+1, 2^31-1]</p></td>
+<td><p>Full</p></td>
+<td><p>[-2^31, 2^31-1]</p></td>
+</tr>
+<tr class="row-odd"><td><p>ydb_ulong_t, ydb_ulong_t * (64-bit)</p></td>
+<td><p>18 digits</p></td>
+<td><p>[0, 2^64-1]</p></td>
+<td><p>18 digits</p></td>
+<td><p>[0, 2^64-1]</p></td>
+</tr>
+<tr class="row-even"><td><p>ydb_ulong_t, ydb_ulong_t * (32-bit)</p></td>
+<td><p>Full</p></td>
+<td><p>[0, 2^32-1]</p></td>
+<td><p>Full</p></td>
+<td><p>[0, 2^32-1]</p></td>
+</tr>
+<tr class="row-odd"><td><p>ydb_float_t, ydb_float_t *</p></td>
+<td><p>6-9 digits</p></td>
+<td><p>[1E-43, 3.4028235E38]</p></td>
+<td><p>6 digits</p></td>
+<td><p>[1E-43, 3.4028235E38]</p></td>
+</tr>
+<tr class="row-even"><td><p>ydb_double_t, ydb_double_t *</p></td>
+<td><p>15-17 digits</p></td>
+<td><p>[1E-43, 1E47]</p></td>
+<td><p>15 digits</p></td>
+<td><p>[1E-43, 1E47]</p></td>
+</tr>
+<tr class="row-odd"><td><p>ydb_char_t *</p></td>
+<td><p>N/A</p></td>
+<td><p>[“”, 1MiB]</p></td>
+<td><p>N/A</p></td>
+<td><p>[“”, 1MiB]</p></td>
+</tr>
+<tr class="row-even"><td><p>ydb_char_t **</p></td>
+<td><p>N/A</p></td>
+<td><p>[“”, 1MiB]</p></td>
+<td><p>N/A</p></td>
+<td><p>[“”, 1MiB]</p></td>
+</tr>
+<tr class="row-odd"><td><p>ydb_string_t *</p></td>
+<td><p>N/A</p></td>
+<td><p>[“”, 1MiB]</p></td>
+<td><p>N/A</p></td>
+<td><p>[“”, 1MiB]</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ydb_char_t ** is not supported for call-ins but they are included for IO and O direction usage with call-outs. For call-out use of ydb_char_t * and ydb_string_t *, the specification in the interface definition for preallocation sets the range for IO and O, with a maximum of 1MiB.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Call-ins where the return value is a string check for buffer overflows (where possible) and return an error if the return area is not large enough. Note that for string parameters, use of the <code class="code docutils literal notranslate"><span class="pre">ydb_string_t</span></code> type is highly recommended as it enables checking for buffer overflows. A <code class="code docutils literal notranslate"><span class="pre">char</span> <span class="pre">*</span></code> type does not enable such checks and is best avoided.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="utility.html" class="btn btn-neutral float-left" title="10. Utility Routines" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="internatn.html" class="btn btn-neutral float-right" title="12. Internationalization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017-2021, YottaDB LLC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+<hr/>
+<!-- DDG search widget,@author Juri Wornowitski,@version 2.0,@link https://www.plainlight.com/ddg --><div id="widdget" style="width:100%;margin:10px 0;"><style type="text/css">#widdget input {display:block;height:30px;padding:4px;outline:none;border:1px solid #8d8d8d;border-right:0;box-sizing:border-box;border-radius:3px 0 0 3px;width:calc(100% - 41px);font-size:15px;} #widdget button {float:left;cursor:pointer;width:43px;height:30px;color:#fff;background-image:linear-gradient(#7f72ca,#554492);border:0;border-radius:0 3px 3px 0;} #widdget button:active {background-image:linear-gradient(#002387,#002357);} #widdget button:focus {outline:none;}</style><form style="position:relative" onsubmit="this.elements[0].click();return false;"><div style="float:right;position:absolute;top:0;right:-2px;z-index:3"><button type="button" onclick="var v=this.parentElement.parentElement.elements[1].value;window.open('https://duckduckgo.com?q='+encodeURIComponent(v)+'+site%3Adocs.yottadb.com&kj=p');">&#128269;</button></div><input type="text" name="que" placeholder="Search documents with DuckDuckGo" /></form></div>
+ 
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

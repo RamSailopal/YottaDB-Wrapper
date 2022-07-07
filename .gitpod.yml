@@ -1,6 +1,6 @@
 tasks:
   - name: "Run docker container"
-    command: docker run --rm --name yottadb -it -p 7681:7681 -v "$PWD/code:/home/yottadb" --entrypoint /home/yottadb/entrypoint.sh -it docker.io/yottadb/yottadb-base 
+    command: docker run --rm --name yottadb -it -p 7681:7681 -p 8081:80 -v "$PWD/code:/home/yottadb" -v "$PWD/web:/var/www/html" --entrypoint /home/yottadb/entrypoint.sh -it docker.io/yottadb/yottadb-base 
 
   - name: "Run YottaDB container terminal"
     command:  sleep 60 && docker exec -it yottadb /bin/bash

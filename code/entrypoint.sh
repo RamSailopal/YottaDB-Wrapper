@@ -22,5 +22,5 @@ cp /home/yottadb/ydb /usr/local/bin
 chown -R www-data.www-data /var/www/html
 service apache2 start
 ydb -s
-ttyd -c "test:test" bash
+ttyd -c "test:test" "source ~/.bash_profile && bash"
 

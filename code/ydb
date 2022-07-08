@@ -1,4 +1,66 @@
 #!/bin/bash
+help() {
+        echo -e "Alias help\n"
+	echo "ydb-help - List of YottaDB aliases"
+	echo "ydb-start - YottaDB interactive command line"
+	echo "ydb-search - Search YottaDB documentation"
+	echo "ydb-edit - Edit YottaDB routines"
+        echo "ydb-rlist - List YottaDB routines"
+        echo "ydb-glist - List YottaDB globals"
+	echo "ydb-gview - View YottaDB global"
+	exit
+}
+setup() {
+        grep -q "alias ydb-help" ~/.bash_profile || echo 'alias ydb-help="ydb -a"' >>  ~/.bash_profile
+        grep -q "alias ydb-start" ~/.bash_profile || echo 'alias ydb-start="ydb"' >>  ~/.bash_profile
+        grep -q "alias ydb-edit" ~/.bash_profile || echo 'alias ydb-edit="ydb -e"' >>  ~/.bash_profile
+        grep -q "alias ydb-rlist" ~/.bash_profile || echo 'alias ydb-rlist="ydb -l"' >>  ~/.bash_profile
+        grep -q "alias ydb-glist" ~/.bash_profile || echo 'alias ydb-glist="ydb -g"' >>  ~/.bash_profile
+        grep -q "alias ydb-gview" ~/.bash_profile || echo 'alias ydb-gview="ydb -v"' >>  ~/.bash_profile
+	echo -e "Alias' have been set up\n\n"
+	echo -e "\n\nPlease reload your shell for the changes to take effect\n\n"
+        help
+	exit
+}
+glblist() {
+            echo -e "GLobal List\n"
+	    export ydb_gbldir="/data/r1.34_x86_64/g/yottadb.gld"
+	    glbs="$((echo "D ^%GD";echo "*";echo "H") | /opt/yottadb/current/ydb | awk '/^\^/ { for(i=1;i<=NF;i++) { cnt++;print cnt" "$i } } ')"
+            echo "$glbs"
+            exit
+}
+routlist() {
+ 	   export ydb_gbldir="/data/r1.34_x86_64/g/yottadb.gld"
+	   source /opt/yottadb/current/ydb_env_set
+           echo -e "Routine List\n"
+	   routs=$((echo "D ^%RD";echo "*";echo "";echo "H") | /opt/yottadb/current/ydb | awk 'BEGIN { cnt=0 } !/^Routine/&&!/^YDB>/&&!/^$/&&!/^Total of/ { for (i=1;i<=NF;i++) { cnt++;print cnt" "$i } }')
+	   echo "$routs"
+}
+glbview() {
+
+	   if [[ "$1" == "" ]]
+           then
+                echo "Please pass a global name as a parameter i.e. myglobal"
+                exit
+           fi
+           export ydb_gbldir="/data/r1.34_x86_64/g/yottadb.gld"
+           source /opt/yottadb/current/ydb_env_set
+           glbal="$1"
+	   (echo "D ^%G";echo "";echo "$glbal";) | /opt/yottadb/current/ydb
+           exit
+}
+routedit() {
+           if [[ "$1" == "" ]]
+	   then
+		echo "Please pass a routine name as a parameter i.e. myroutine"
+		exit
+	   fi
+           export ydb_gbldir="/data/r1.34_x86_64/g/yottadb.gld"
+           source /opt/yottadb/current/ydb_env_set
+           routine="$1"
+	   find $(sed -n 's/[)]//;s/[(]//;s/[*]/ /p;' <<< $ydb_routines) -name "$routine.m" -exec vi '{}' \;
+	   /opt/yottadb/current/ydb <<< "ZL \"$routine.m\""
+}
 mens() {
 	if [[ "$1" != "1" ]]
 	then
@@ -221,7 +283,7 @@ mens() {
 		exit
 	fi
 }
-while getopts "n h " o; do
+while getopts "n h l e a g v s " o; do
     case "${o}" in
         n)
 		    source /opt/yottadb/current/ydb_env_set
@@ -234,8 +296,28 @@ while getopts "n h " o; do
             echo -e "\nEnter -n to bypass the YottaDB banner\n"
             exit
             ;;
+        l)  
+            routlist
+            exit
+            ;;
+        e)
+            routedit "$2"
+            ;;
+        a)
+            help
+            ;;
+        g)
+	    glblist
+            ;;
+        v)
+            glbview "$2"
+            ;;
+        s)
+            setup
+            ;;
         *)
             mens
+            ;;
     esac
 done
 mens

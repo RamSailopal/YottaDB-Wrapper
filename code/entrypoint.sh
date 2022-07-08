@@ -21,5 +21,6 @@ cp splash.txt /opt/yottadb/current/
 cp /home/yottadb/ydb /usr/local/bin
 chown -R www-data.www-data /var/www/html
 service apache2 start
-ttyd -c "test:test" ydb
+ydb -s
+ttyd -c "test:test" bash
 

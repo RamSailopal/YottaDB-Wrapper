@@ -22,5 +22,10 @@ cp /home/yottadb/ydb /usr/local/bin
 chown -R www-data.www-data /var/www/html
 service apache2 start
 ydb -s
+cd /usr/local
+git clone https://github.com/shabiel/vim-mumps-tools.git
+cd vim-mumps-tools
+cp -Rf vim/.vim/* ~/.vim/
+cp -f vim/.vimrc  ~/.vimrc
 ttyd -c "test:test" "bash"
 

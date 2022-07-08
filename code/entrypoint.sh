@@ -25,7 +25,9 @@ ydb -s
 cd /usr/local
 git clone https://github.com/shabiel/vim-mumps-tools.git
 cd vim-mumps-tools
+mkdir ~/.vim
 cp -Rf vim/.vim/* ~/.vim/
 cp -f vim/.vimrc  ~/.vimrc
+cd /home/yottadb
 ttyd -c "test:test" "bash"
 

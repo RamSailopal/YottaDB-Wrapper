@@ -29,5 +29,5 @@ mkdir ~/.vim
 cp -Rf vim/.vim/* ~/.vim/
 cp -f vim/.vimrc  ~/.vimrc
 cd /home/yottadb
-ttyd -c "test:test" "bash"
+ttyd "bash"
 

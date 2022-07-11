@@ -27,3 +27,22 @@ Enter the following credentials:
 username:  **test**
 
 password:  **test**
+
+# Command line
+
+The ncurses utility has also been "sub-divided" into a number of separate commands:
+
+**ydb-help - List of YottaDB aliases**
+
+**ydb-start - YottaDB interactive command line**
+
+**ydb-search - Search YottaDB documentation**
+
+**ydb-edit - Edit YottaDB routines**
+
+**ydb-rlist - List YottaDB routines**
+
+**ydb-glist - List YottaDB globals**
+
+**ydb-gview - View YottaDB global**
+

@@ -48,7 +48,6 @@ help() {
         echo "ydb-rlist - List YottaDB routines"
         echo "ydb-glist - List YottaDB globals"
 	echo "ydb-gview - View YottaDB global"
-        echo "ydb-docs - Search YottaDB Documentation"
 	exit
 }
 setup() {
@@ -58,7 +57,7 @@ setup() {
         grep -q "alias ydb-rlist" ~/.bashrc || echo 'alias ydb-rlist="ydb -l"' >>  ~/.bashrc
         grep -q "alias ydb-glist" ~/.bashrc || echo 'alias ydb-glist="ydb -g"' >>  ~/.bashrc
         grep -q "alias ydb-gview" ~/.bashrc || echo 'alias ydb-gview="ydb -v"' >>  ~/.bashrc
-        grep -q "alias ydb-docs" ~/.bashrc || echo 'alias ydb-docs="ydb -d"' >>  ~/.bashrc
+        grep -q "alias ydb-search" ~/.bashrc || echo 'alias ydb-search="ydb -d"' >>  ~/.bashrc
 	echo -e "Alias' have been set up\n\n"
 	echo -e "\n\nPlease reload your shell for the changes to take effect\n\n"
         help

@@ -5,6 +5,7 @@ docs() {
 		echo "Please enter the keyword to search the documentation for"
 		exit
 	fi
+        resp="$1"
  	srch=$(/opt/yottadb/current/ydb <<< "D SEARCH^HELPPROC(\"$resp\")" |  awk '!/^YDB>/&&!/^$/ { print }')
         srchcnt=$(/opt/yottadb/current/ydb <<< "D SEARCH^HELPPROC(\"$resp\")" |  awk '!/^YDB>/&&!/^$/ { print }' | wc -l)
         resp1="1"
@@ -37,6 +38,7 @@ docs() {
                    dialog --exit-label Continue --msgbox "$info" 50 100
               fi
         done
+	exit
 
 }
 help() {

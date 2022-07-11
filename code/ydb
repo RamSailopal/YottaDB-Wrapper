@@ -1,4 +1,44 @@
 #!/bin/bash
+docs() {
+	if [[ "$1" == "" ]]
+	then
+		echo "Please enter the keyword to search the documentation for"
+		exit
+	fi
+ 	srch=$(/opt/yottadb/current/ydb <<< "D SEARCH^HELPPROC(\"$resp\")" |  awk '!/^YDB>/&&!/^$/ { print }')
+        srchcnt=$(/opt/yottadb/current/ydb <<< "D SEARCH^HELPPROC(\"$resp\")" |  awk '!/^YDB>/&&!/^$/ { print }' | wc -l)
+        resp1="1"
+        while [[ $resp1 != "" ]]
+        do
+              resp1=$(dialog --menu "Select a topic:" 10 100 $srchcnt $srch  2>&1 >/dev/tty)
+              srchsel=$(awk -v resp=$resp1 '$1==resp { sub("%","_",$2);print $2 }' <<< "$srch")
+              srchsel1=$(awk -F "->" '{ print $1 }' <<< "$srchsel")
+              srchsel2=$(awk -F "->" '{ print $2 }' <<< "$srchsel")
+              srchsel3=$(awk -F "->" '{ print $3 }' <<< "$srchsel")
+              srchsel4=$(awk -F "->" '{ print $4 }' <<< "$srchsel")
+              srchsel5=$(awk -F "->" '{ print $5 }' <<< "$srchsel")
+              if [[ "$srchsel2" == "" ]]
+              then
+                   info=$(/opt/yottadb/current/ydb <<< "D PROCINFO^HELPPROC(\"$srchsel1\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\")" |  awk '!/^YDB>/ { print }')
+              elif [[ "$srchsel3" == "" ]]
+              then
+                   info=$(/opt/yottadb/current/ydb <<< "D PROCINFO^HELPPROC(\"$srchsel1\",\"s\",\"$srchsel2\",\"\",\"\",\"\",\"\",\"\",\"\")" |  awk '!/^YDB>/ { print }')
+              elif [[ "$srchsel4" == "" ]]
+              then
+                   info=$(/opt/yottadb/current/ydb <<< "D PROCINFO^HELPPROC(\"$srchsel1\",\"s\",\"$srchsel2\",\"s\",\"$srchsel3\",\"\",\"\",\"\",\"\")" |  awk '!/^YDB>/ { print }')
+              elif [[ "$srchsel5" == "" ]]
+              then
+                   info=$(/opt/yottadb/current/ydb <<< "D PROCINFO^HELPPROC(\"$srchsel1\",\"s\",\"$srchsel2\",\"s\",\"$srchsel3\",\"s\",\"$srchsel4\",\"\",\"\")" |  awk '!/^YDB>/ { print }')
+              else
+                   info=$(/opt/yottadb/current/ydb <<< "D PROCINFO^HELPPROC(\"$srchsel1\",\"s\",\"$srchsel2\",\"s\",\"$srchsel3\",\"s\",\"$srchsel4\",\"s\",\"$srchsel5\")" |  awk '!/^YDB>/ { print }')
+              fi
+              if [[ "$info" != "" ]]
+              then
+                   dialog --exit-label Continue --msgbox "$info" 50 100
+              fi
+        done
+
+}
 help() {
         echo -e "Alias help\n"
 	echo "ydb-help - List of YottaDB aliases"
@@ -8,6 +48,7 @@ help() {
         echo "ydb-rlist - List YottaDB routines"
         echo "ydb-glist - List YottaDB globals"
 	echo "ydb-gview - View YottaDB global"
+        echo "ydb-docs - Search YottaDB Documentation"
 	exit
 }
 setup() {
@@ -17,6 +58,7 @@ setup() {
         grep -q "alias ydb-rlist" ~/.bashrc || echo 'alias ydb-rlist="ydb -l"' >>  ~/.bashrc
         grep -q "alias ydb-glist" ~/.bashrc || echo 'alias ydb-glist="ydb -g"' >>  ~/.bashrc
         grep -q "alias ydb-gview" ~/.bashrc || echo 'alias ydb-gview="ydb -v"' >>  ~/.bashrc
+        grep -q "alias ydb-docs" ~/.bashrc || echo 'alias ydb-docs="ydb -d"' >>  ~/.bashrc
 	echo -e "Alias' have been set up\n\n"
 	echo -e "\n\nPlease reload your shell for the changes to take effect\n\n"
         help
@@ -285,7 +327,7 @@ mens() {
 		exit
 	fi
 }
-while getopts "n h l e a g v s " o; do
+while getopts "n h l e a g v s d " o; do
     case "${o}" in
         n)
 		    source /opt/yottadb/current/ydb_env_set
@@ -316,6 +358,9 @@ while getopts "n h l e a g v s " o; do
             ;;
         s)
             setup
+            ;;
+        d)
+            docs "$2"
             ;;
         *)
             mens
